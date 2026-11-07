@@ -1,0 +1,8 @@
+# run output -- issue #613
+# harness: runner/repro_pending/repro_sse.py
+# capture kind: console transcript
+# source: repro/logs/613.txt
+# diagnostic text used for coding came from: runtime capture
+# ------------------------------------------------------------------
+RAISED:HTTPStatusError:Client error '401 Unauthorized' for url 'http://127.0.0.1:9211/sse'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401

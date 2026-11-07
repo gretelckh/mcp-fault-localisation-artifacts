@@ -1,0 +1,8 @@
+# run output -- issue #3557
+# harness: repro_cases.py::case_jsonrpc_code
+# capture kind: client return payload
+# source: analysis workbook, column "完整报错文本"
+# diagnostic text used for coding came from: the issue report
+# ------------------------------------------------------------------
+status=400
+{"jsonrpc":"2.0","id":null,"error":{"code":-32602,"message":"Validation error: 4 validation errors for union[JSONRPCRequest,JSONRPCNotification,JSONRPCResponse,JSONRPCError]\nJSONRPCRequest\n  Input should be a valid dictionary or instance

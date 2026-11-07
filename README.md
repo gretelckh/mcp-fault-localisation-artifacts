@@ -8,7 +8,7 @@ promises in its data-availability statement:
 |---|---|---|
 | 1 | Screening record of all 1,343 mined issues | `data/screening_1343.csv`, `data/screening_funnel.csv` |
 | 2 | The active dataset of 339 real bugs, with labels | `data/active_bugs_339.csv`, `data/evidence_class_339.csv` |
-| 3 | Reproduction scripts + captured console output for the 72 reproduced bugs | `repro/runner/`, `repro/captures/`, `repro/logs/` |
+| 3 | Reproduction scripts + the output captured from each of the 72 runs | `repro/runner/`, `repro/run_output/`, `repro/captures/` |
 | 4 | Per-bug evidence classification | `data/evidence_class_339.csv`, `data/blocking_gaps_83.csv` |
 | 5 | LLM prompts and raw model output | `llm/prompts.md`, `llm/outputs/` |
 
@@ -28,7 +28,7 @@ python scripts/verify_numbers.py
 ```
 
 The script recomputes **every number in the paper** from the files in this repository and prints
-them next to the value printed in the manuscript — 73 checks, all of which should read `ok`.
+them next to the value printed in the manuscript — 78 checks, all of which should read `ok`.
 The last line reads `All checks passed ...` if the artefact and the paper agree.
 
 If you only want to look at one thing, open `data/active_bugs_339.csv` in Excel or pandas and
@@ -83,6 +83,12 @@ The class definitions are in `docs/02_codebook.md`.
 self-contained record: the trigger that was run, what the reporter described, the output that was
 captured, the layer analysis, and a provenance table saying where each field came from. Sections
 for the raw payload and the console dump appear only where the run kept one.
+
+`repro/run_output/issue_XXXX.txt` — **one file per reproduced bug** (72 files), the shortest way to
+see what a run actually printed. Six header lines say which harness ran, what kind of capture this
+is, and where the text came from; the body is the output, verbatim. 18 files carry the full console
+transcript, 5 carry a traceback excerpt, and 49 carry the return payload the client received. Paths
+and account names inside the text are redacted to `<user>` / `<python-env>`.
 
 `repro/captures_index.csv` — one row per bug, saying which kinds of evidence exist for it
 (trigger 72/72, error text 63, raw payload 54, console dump 18). Read this before concluding that

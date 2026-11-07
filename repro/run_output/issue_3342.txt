@@ -1,0 +1,7 @@
+# run output -- issue #3342
+# harness: repro_cases.py::b_3342
+# capture kind: client return payload
+# source: analysis workbook, column "完整报错文本"
+# diagnostic text used for coding came from: runtime capture
+# ------------------------------------------------------------------
+RAISED:MCPError:Internal server error

@@ -1,0 +1,9 @@
+# run output -- issue #3573
+# harness: repro_cases.py::b_iterator_meta
+# capture kind: client return payload
+# source: analysis workbook, column "完整报错文本"
+# diagnostic text used for coding came from: the issue report
+# ------------------------------------------------------------------
+RAISED-AT-REG:PydanticSchemaGenerationError:Unable to generate pydantic-core schema for typing.Iterator[int]. Set `arbitrary_types_allowed=True` in the model_config to ignore this error or implement `__get_pydantic_core_schema__` on your type to fully support it.
+
+If you got this error by calling ha

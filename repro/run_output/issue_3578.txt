@@ -1,0 +1,7 @@
+# run output -- issue #3578
+# harness: repro_cases.py::b_duplicate_tool
+# capture kind: client return payload
+# source: analysis workbook, column "完整报错文本"
+# diagnostic text used for coding came from: the issue report
+# ------------------------------------------------------------------
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-dup', 'version': ''}} content=[TextContent(type='text', text='2', annotations=None, meta=None)] structured_content={'result': 2} is_error=False result_type='complete'

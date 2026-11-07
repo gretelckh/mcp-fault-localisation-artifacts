@@ -1,0 +1,12 @@
+# run output -- issue #3240
+# harness: runner/repro_pending/repro_oauth_lifecycle.py::test_3240
+# capture kind: console transcript
+# source: repro/logs/3240.txt
+# diagnostic text used for coding came from: runtime capture
+# ------------------------------------------------------------------
+VERDICT=REPRO
+CATEGORY=pushed-server
+AS mounted under: http://127.0.0.1:9999/auth  (token endpoint should be /auth/token)
+POST /token paths actually hit: ['/token']
+refresh request path: /token
+final status: 404  error: None

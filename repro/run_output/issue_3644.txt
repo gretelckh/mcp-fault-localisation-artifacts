@@ -1,0 +1,11 @@
+# run output -- issue #3644
+# harness: repro_cases.py::case_outputschema_mode
+# capture kind: client return payload
+# source: analysis workbook, column "完整报错文本"
+# diagnostic text used for coding came from: none (run returned normally)
+# ------------------------------------------------------------------
+is_error=False
+advertised_outputSchema={"properties": {"fullTitle": {"title": "Fulltitle", "type": "string"}}, "required": ["fullTitle"], "title": "Out", "type": "object"}
+RAISED:RuntimeError:Invalid structured content returned by tool get: 'fullTitle' is a required property
+
+Failed validating 'requ

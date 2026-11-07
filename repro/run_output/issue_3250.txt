@@ -1,0 +1,14 @@
+# run output -- issue #3250
+# harness: runner/repro_pending/repro_oauth_lifecycle.py::test_3250
+# capture kind: console transcript
+# source: repro/logs/3250.txt
+# diagnostic text used for coding came from: runtime capture
+# ------------------------------------------------------------------
+VERDICT=REPRO
+CATEGORY=silent
+stored token: access=at-stale, expires_in=-3600 (already expired)
+after _initialize: current_tokens=True token_expiry_time=None
+is_token_valid() -> True   (expected False for an expired token)
+Authorization actually sent: Bearer at-stale
+refresh (grant_type=refresh_token) requests: 0   (expected >=1)
+final status: 200

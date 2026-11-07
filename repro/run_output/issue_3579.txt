@@ -1,0 +1,7 @@
+# run output -- issue #3579
+# harness: repro_cases.py::b_empty_server
+# capture kind: client return payload
+# source: analysis workbook, column "完整报错文本"
+# diagnostic text used for coding came from: none (run returned normally)
+# ------------------------------------------------------------------
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-empty', 'version': ''}} content=[TextContent(type='text', text='Unknown tool: nonexistent', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'

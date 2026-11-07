@@ -1,0 +1,18 @@
+# run output -- issue #3384
+# harness: attempt_repro_external.py::issue#3384
+# capture kind: traceback excerpt
+# source: analysis workbook, column "完整报错文本"
+# diagnostic text used for coding came from: runtime capture
+# ------------------------------------------------------------------
+KeyError: <mcp.client.session.ClientSession object at 0x000002722FA5C050>
+---
+recent call last):
+      |   File "<user>\AppData\Local\Temp\mcp_repro_e7ar47p5\b3384\repro_snippet.py", line 45, in main
+      |     await group.connect_with_session(INFO, client.session)
+      |   File "<python-env>", line 291, in connect_with_session
+      |     await self._aggregate_components(server_info, session)
+      |   File "<python-env>", line 420, in _aggregate_components
+      |     del self._session_exit_stacks[session]  # pragma: no cover
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+      | KeyError: <mcp.client.session.ClientSession object at 0x000002722FA5C050>
+      +------------------------------------

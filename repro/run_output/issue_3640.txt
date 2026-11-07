@@ -1,0 +1,8 @@
+# run output -- issue #3640
+# harness: repro_cases.py::b_capabilities_drop
+# capture kind: client return payload
+# source: analysis workbook, column "完整报错文本"
+# diagnostic text used for coding came from: none (run returned normally)
+# ------------------------------------------------------------------
+is_error=False
+advertised_capabilities=experimental=None logging=None prompts=PromptsCapability(list_changed=True) resources=ResourcesCapability(subscribe=True, list_changed=True) tools=ToolsCapability(list_changed=True) completions=None extensions=None tasks=None

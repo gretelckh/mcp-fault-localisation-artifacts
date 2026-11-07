@@ -141,6 +141,28 @@ def main():
         if "## 1. What was run" not in s or "## 4. Why it happens" not in s:
             missing.append(r["issue"])
     check("captures missing their mandatory sections", len(missing), 0)
+    # one run-output file per reproduced bug, each with its provenance header
+    outdir = os.path.join(ROOT, "repro", "run_output")
+    names = sorted(os.listdir(outdir)) if os.path.isdir(outdir) else []
+    kinds = {"console transcript": 0, "traceback excerpt": 0, "client return payload": 0}
+    bad = []
+    for r in idx:
+        p = os.path.join(outdir, "issue_%04d.txt" % int(r["issue"].lstrip("#")))
+        if not os.path.exists(p):
+            bad.append(r["issue"])
+            continue
+        s = open(p, encoding="utf-8").read()
+        if "# capture kind: " not in s or "# source: " not in s:
+            bad.append(r["issue"])
+            continue
+        k = [l for l in s.splitlines() if l.startswith("# capture kind: ")][0].split(": ", 1)[1]
+        if k in kinds:
+            kinds[k] += 1
+    check("per-bug run-output files", len(names), 72)
+    check("run-output files carrying a provenance header", 72 - len(bad), 72)
+    check("  console transcripts", kinds["console transcript"], 18)
+    check("  traceback excerpts", kinds["traceback excerpt"], 5)
+    check("  client return payloads", kinds["client return payload"], 49)
 
     print()
     if FAIL:

@@ -1,0 +1,8 @@
+# run output -- issue #3643
+# harness: repro_cases.py::b_userlist_prompt
+# capture kind: client return payload
+# source: analysis workbook, column "完整报错文本"
+# diagnostic text used for coding came from: none (run returned normally)
+# ------------------------------------------------------------------
+is_error=False
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-ulist', 'version': ''}} description='' messages=[PromptMessage(role='user', content=TextContent(type='text', text='"[PromptMessage(role=\'user\', content=TextContent(type=\'text\', text=\'hi bob\', annotations=None, meta=None)

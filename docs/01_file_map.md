@@ -20,6 +20,7 @@ mcp-fault-artifacts/
 │   ├── runner/                    the harness + the case definitions (5 files)
 │   ├── captures/issue_XXXX.txt    72 files · one per reproduced bug: trigger, captured output, layer analysis
 │   ├── captures_index.csv         72 rows · which kinds of evidence exist for which bug
+│   ├── run_output/issue_XXXX.txt  72 files · one per bug: what that run printed, verbatim
 │   ├── raw/                       54 files · the raw payload each run wrote to disk
 │   ├── raw_map.csv                54 rows · issue number → raw payload file name
 │   ├── logs/NNNN.txt              41 files · console dumps (18 of them belong to the 72)
@@ -42,7 +43,7 @@ mcp-fault-artifacts/
 │   ├── 06_data_dictionary.md      column-by-column reference
 │   └── 07_results_snapshot.md     all headline numbers on one page
 └── scripts/
-    └── verify_numbers.py          73 checks, no dependencies
+    └── verify_numbers.py          78 checks, no dependencies
 ```
 
 ## Where to look for a given question
@@ -50,7 +51,7 @@ mcp-fault-artifacts/
 | Question | File |
 |---|---|
 | Is issue #1234 in the dataset, and what is it? | `data/active_bugs_339.csv`, column `issue` |
-| What happened when you ran #1234? | `repro/captures/issue_1234.txt` |
+| What happened when you ran #1234? | `repro/run_output/issue_1234.txt` (output) · `repro/captures/issue_1234.txt` (full record) |
 | Which bugs have a console log / raw payload? | `repro/captures_index.csv` |
 | Why is #1234 not in the 72? | `data/active_bugs_339.csv`, column `not_reproduced_reason`; `repro/attempt_log.csv` |
 | How do you decide a bug originates in Transport? | `docs/02_codebook.md`, rules R1–R6 |

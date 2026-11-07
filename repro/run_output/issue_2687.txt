@@ -1,0 +1,12 @@
+# run output -- issue #2687
+# harness: runner/repro_pending/repro_oauth_logic.py::test_2687
+# capture kind: console transcript
+# source: repro/logs/2687.txt
+# diagnostic text used for coding came from: none (run returned normally)
+# ------------------------------------------------------------------
+VERDICT=REPRO
+CATEGORY=single-layer
+a.redirect_uris=[AnyUrl('https://x/cb')]
+b.redirect_uris=[AnyHttpUrl('https://x/cb')]
+a.redirect_uris == b.redirect_uris : False
+a == b : False

@@ -1,0 +1,10 @@
+# run output -- issue #2260
+# harness: runner/repro_pending/repro_oauth_logic.py::test_2260
+# capture kind: console transcript
+# source: repro/logs/2260.txt
+# diagnostic text used for coding came from: runtime capture
+# ------------------------------------------------------------------
+VERDICT=REPRO
+CATEGORY=single-layer
+token_endpoint_auth_methods_supported = ['client_secret_post', 'client_secret_basic']
+Expected: include "none" for public clients; Actual: hardcoded [client_secret_post, client_secret_basic]

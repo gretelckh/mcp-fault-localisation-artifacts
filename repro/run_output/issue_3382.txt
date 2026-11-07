@@ -1,0 +1,11 @@
+# run output -- issue #3382
+# harness: attempt_repro_external.py::issue#3382
+# capture kind: console transcript
+# source: repro/logs/3382.txt
+# diagnostic text used for coding came from: runtime capture
+# ------------------------------------------------------------------
+VERDICT=OBS
+CATEGORY=observation/scenario-specific
+first request: cancelled mid-flow by wait_for (timeout)
+second request after cancellation: status=200
+context.lock: <anyio._backends._asyncio.Lock object at 0x00000253ADDEDF30>

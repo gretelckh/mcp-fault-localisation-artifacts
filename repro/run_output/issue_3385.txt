@@ -1,0 +1,13 @@
+# run output -- issue #3385
+# harness: repro_cases.py::b_3385
+# capture kind: client return payload
+# source: analysis workbook, column "完整报错文本"
+# diagnostic text used for coding came from: runtime capture
+# ------------------------------------------------------------------
+RAISED:RuntimeError:Invalid structured content returned by tool inf: None is not of type 'number'
+
+Failed validating 'type' in schema['properties']['result']:
+    {'title': 'Result', 'type': 'number'}
+
+On instance['result']:
+    None

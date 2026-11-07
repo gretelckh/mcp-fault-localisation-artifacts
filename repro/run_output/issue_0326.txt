@@ -1,0 +1,21 @@
+# run output -- issue #326
+# harness: attempt_repro_external.py::issue#326
+# capture kind: traceback excerpt
+# source: analysis workbook, column "完整报错文本"
+# diagnostic text used for coding came from: runtime capture
+# ------------------------------------------------------------------
+MCPError: Connection closed
+---
+lize
+      |     result = await self.send_request(
+      |              ^^^^^^^^^^^^^^^^^^^^^^^^
+      |     ...<9 lines>...
+      |     )
+      |     ^
+      |   File "<python-env>", line 586, in send_request
+      |     raw = await self._dispatcher.send_raw_request(method, data.get("params"), opts)
+      |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      |   File "<python-env>", line 444, in send_raw_request
+      |     raise MCPError(code=outcome.code, message=outcome.message, data=outcome.data)
+      | mcp.shared.exceptions.MCPError: Connection closed
+      +------------------------------------

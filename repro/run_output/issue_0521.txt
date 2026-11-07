@@ -1,0 +1,9 @@
+# run output -- issue #521
+# harness: runner/repro_pending/repro_cancelscope.py
+# capture kind: console transcript
+# source: repro/logs/521.txt
+# diagnostic text used for coding came from: runtime capture
+# ------------------------------------------------------------------
+4 clients connected OK
+scenario=cross-task entry/exit (each client in its own close task)
+RUN EXC: CancelledError: Cancelled by cancel scope 208addfd940

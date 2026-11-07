@@ -1,0 +1,9 @@
+# run output -- issue #577
+# harness: runner/repro_pending/repro_cancelscope.py
+# capture kind: console transcript
+# source: repro/logs/577.txt
+# diagnostic text used for coding came from: runtime capture
+# ------------------------------------------------------------------
+4 clients connected OK
+scenario=out-of-order cross-task cleanup [2,0,3,1]
+RUN EXC: CancelledError: Cancelled by cancel scope 140d930aa40

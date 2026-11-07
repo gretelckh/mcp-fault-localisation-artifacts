@@ -3,12 +3,18 @@
 ## The short version
 
 1. Take an issue number from `../data/active_bugs_339.csv` where `reproduction_status = reproduced`.
-2. Open `captures/issue_XXXX.txt`. It is a self-contained record: the trigger that was run, what the
-   reporter described, the output that was captured, and the layer analysis.
+2. Open `run_output/issue_XXXX.txt` for what the run printed, or `captures/issue_XXXX.txt` for the
+   self-contained record: the trigger that was run, what the reporter described, the output that was
+   captured, and the layer analysis.
 3. Use `captures_index.csv` if you want to see, at a glance, which of the 72 bugs have which kinds
    of evidence.
 4. If you want to know why a *different* bug was not reproduced, look it up in
    `../data/active_bugs_339.csv` (`not_reproduced_reason`) and in `attempt_log.csv`.
+
+`run_output/` holds one file per reproduced bug (72). Its first six lines are a header — harness,
+kind of capture, source of the text, and where the diagnostic came from — and everything below is
+the output, verbatim. 18 files carry a console transcript, 5 a traceback excerpt, 49 the return
+payload the client received.
 
 ## Anatomy of a capture
 
