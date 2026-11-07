@@ -1,15 +1,101 @@
 # issue: #3434
 # origin_layer: Server
+# exposure_channel: pushed-to-Server
 # evidence_class: pushed-to-server
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: runtime
 # harness_entry: attempt_repro_targeted.py::issue#3434
-# defect_captured: False
+# console_log: not retained
+# raw_payload: raw/real_3434.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `attempt_repro_targeted.py::issue#3434`
+
+Trigger code:
+
+```python
+import anyio
+
+from mcp import Client
+from mcp.server.mcpserver import Context, MCPServer
+
+server = MCPServer("callback-repro")
+
+
+@server.tool()
+async def work(context: Context) -> str:
+    await context.report_progress(1, 1)
+    return "done"
+
+
+async def broken_progress(progress: float, total: float | None, message: str | None) -> None:
+    raise RuntimeError("consumer failed")
+
+
+async def main() -> None:
+    async with Client(server, mode="2026-07-28") as client:
+        result = await client.call_tool("work", progress_callback=broken_progress)
+        print(result.content[0].text)
+
+
+anyio.run(main)
+```
+
+## 2. What the reporter described
+
+机械重放 issue 正文 python 片段 -> 命中该 issue 自身报错
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
+UnexpectedToolError: Error executing tool work
+---
+Traceback (most recent call last):
+  File "...\mcp\server\mcpserver\server.py", line 433, in _handle_call_tool
+    return await self._tool_manager.call_tool(...)
+  File "...\mcp\server\mcpserver\server.py", line 539, in call_tool
+  File "...\mcp\server\mcpserver\tools\tool_manager.py", line 87, in call_tool
+  File "...\mcp\server\mcpserver\tools\base.py", line 210, in run
+    raise UnexpectedToolError(f"Error executing tool {self.name}") from exc
+mcp.server.mcpserver.exceptions.UnexpectedToolError: Error executing tool work
+
+direct cause: RuntimeError: consumer failed
+  (raised inside the client progress_callback; crosses the in-process DirectDispatcher
+   back into server tool execution instead of being logged and swallowed)
+expected: print "done"; actual: tool fails with UnexpectedToolError.
+```
+
+## 4. Why it happens
+
+`Client(server)` 走 in-process `DirectDispatcher`；客户端 progress_callback 抛 `RuntimeError: consumer failed` 时异常穿透回服务端工具执行，本应返回 `done` 的工具失败为 `UnexpectedToolError: Error executing tool work`（mcp/server/mcpserver/tools/base.py:210），真实 cause 被通用化掩蔽。源是调用方回调（Client 侧），报告层却是 Server，属层错位 + 掩蔽。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Server |
+| Exposure channel | `pushed-to-Server` |
+| Evidence class | `pushed-to-server` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `attempt_repro_targeted.py::issue#3434` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_3434.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3434', 'version': ''}} content=[TextContent(type='text', text='1', annotations=None, meta=None)] structured_content={'result': 1} is_error=False result_type='complete'
+```
 
-## raw payload written by the run (raw/real_3434.txt)
+## C. Raw payload (raw/real_3434.txt)
 
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3434', 'version': ''}} content=[TextContent(type='text', text='1', annotations=None, meta=None)] structured_content={'result': 1} is_error=False result_type='complete'
+```

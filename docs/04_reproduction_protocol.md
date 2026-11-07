@@ -17,7 +17,7 @@ A bug is **not** marked as fixed, or as a non-bug, when reproduction fails. It i
 | SDK | `mcp 2.2.0` (Python), the version the study is pinned to |
 | Transport | Streamable HTTP (the production transport), plus SSE and stdio for the cases that need them |
 | Python | CPython 3.12 |
-| OS | Linux x86-64 |
+| OS | Windows x86-64 |
 | Server process | uvicorn, one process per case, port assigned by the OS |
 | Client | the SDK's own client, driven by the harness |
 
@@ -46,10 +46,29 @@ Each run captures:
 
 | Item | Count | Content |
 |---|---:|---|
-| `captures/issue_XXXX.txt` | 72 | one per reproduced bug: header + captured return value or exception + the raw payload and console log where the run wrote one |
-| `logs/NNNN.txt` | 41 | the console log as the harness wrote it, including runs that did not reproduce |
+| `captures/issue_XXXX.txt` | 72 | one per reproduced bug: trigger, reporter description, captured output, layer analysis, provenance table |
+| `captures_index.csv` | 72 | one row per bug: which kinds of evidence exist for it |
+| `raw/` | 54 | the raw payload the run wrote to disk |
+| `raw_map.csv` | 54 | issue number → raw payload file |
+| `logs/NNNN.txt` | 41 | console dumps as the harness wrote them, including runs that did not reproduce (18 belong to the 72) |
 | `repro_verdicts_72.csv` | 72 | verdict table: origin layer, evidence class, evidence tier, error vs silent, path to the capture |
 | `attempt_log.csv` | 350 | every attempt the harness recorded: 49 `done` (reproduced) and 301 `limited` (attempted, obstacle recorded) |
+
+### How complete is the evidence, bug by bug
+
+The four kinds of evidence were not collected by the same mechanism, so they do not cover the same
+set of bugs. `captures_index.csv` states this per bug rather than leaving the reader to guess:
+
+| Evidence | Bugs with it | Why the others do not have it |
+|---|---:|---|
+| Trigger code or reproduction recipe | 72 | required to run the case at all |
+| Error text | 63 | 49 captured at runtime, 14 quoted from the issue body because our replay did not raise it again, 9 are silent failures with no diagnostic |
+| Raw payload on disk | 54 | the per-bug dump was added after the first batch had been run |
+| Console dump | 18 | the separate log dump was added later still |
+| Runner progress record | 54 | a few cases were driven by standalone scripts that did not write to the progress file |
+
+No cell is filled in by inference. Where a source does not exist, the section is absent from the
+capture and the corresponding column says `no`.
 
 The attempt log is the honest part of the package: it shows the failures as failures, with the
 reason. Its 350 rows are 350 distinct issues — 49 recorded `done` and 301 `limited`. It includes

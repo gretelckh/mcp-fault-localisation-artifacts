@@ -1,15 +1,63 @@
 # issue: #110
 # origin_layer: Client
+# exposure_channel: pushed-to-Server
 # evidence_class: pushed-to-server
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: runtime
 # harness_entry: repro_cases.py::b_110
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_110.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `repro_cases.py::b_110`
+
+Trigger, as recorded during the study:
+
+```text
+call_tool(bad, {})
+```
+
+## 2. What the reporter described
+
+#110 non-UTF-8 server output -> generic error
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-110', 'version': ''}} content=[TextContent(type='text', text='Error executing tool bad', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+```
 
-## raw payload written by the run (raw/real_110.txt)
+## 4. Why it happens
 
+Server 返回非 UTF-8 字节，客户端 JSON 解码失败，但真实根因（字节解码错误）被 SDK 通用化成 `Error executing tool bad` 在 Server 工具分派层报出。源是 Client 层，报告层却是 Server，属层错位。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `pushed-to-Server` |
+| Evidence class | `pushed-to-server` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `repro_cases.py::b_110` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_110.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-110', 'version': ''}} content=[TextContent(type='text', text='Error executing tool bad', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+```
+
+## C. Raw payload (raw/real_110.txt)
+
+```
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-110', 'version': ''}} content=[TextContent(type='text', text='Error executing tool bad', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+```

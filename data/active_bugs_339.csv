@@ -41,7 +41,7 @@ ents.py"", line 725, in run_until_complete
     ...<4 lines>...
         }
     )
-  File ""C:\Users\<user>\AppData\Local\anaconda3\Lib\site-packages\pydantic\main.py"", line 250, in __init__
+  File ""<python-env>\Lib\site-packages\pydantic\main.py"", line 250, in __init__
     validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
 pydantic_core._pydantic_core.ValidationError: 1 validation error for StdioServerParameters
 env.GITHUB_PERSONAL_ACCESS_TOKEN
@@ -351,10 +351,10 @@ lize
       |     ...<9 lines>...
       |     )
       |     ^
-      |   File ""C:\Users\<user>\AppData\Local\anaconda3\Lib\site-packages\mcp\client\session.py"", line 586, in send_request
+      |   File ""<python-env>\Lib\site-packages\mcp\client\session.py"", line 586, in send_request
       |     raw = await self._dispatcher.send_raw_request(method, data.get(""params""), opts)
       |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-      |   File ""C:\Users\<user>\AppData\Local\anaconda3\Lib\site-packages\mcp\shared\jsonrpc_dispatcher.py"", line 444, in send_raw_request
+      |   File ""<python-env>\Lib\site-packages\mcp\shared\jsonrpc_dispatcher.py"", line 444, in send_raw_request
       |     raise MCPError(code=outcome.code, message=outcome.message, data=outcome.data)
       | mcp.shared.exceptions.MCPError: Connection closed
       +------------------------------------",`env` 设为非 None（如 `{}`）时子进程丢失 PATH，npx 起不来，SDK 只在 `jsonrpc_dispatcher.send_raw_request` 抛 `MCPError: Connection closed`，真实原因（子进程启动失败）被吞掉。症状可复现，根因是 env 覆盖整份环境，属 caller-exception。,MCP client with npx not working when env parameter of StdioServerParameters is set,,,Transport,1,327
@@ -406,7 +406,7 @@ Traceback (most recent call last):
  File ""G:\projects\mcp-exp\minimal_client.py"", line 74, in call_list_resources
  response = await self.session.list_resources()
  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- File ""C:\ProgramData\Anaconda3\envs\py3128\Lib\site-packages\mcp\client\se",Server,一致,未决,,
+ File ""<python-env>\envs\py3128\Lib\site-packages\mcp\client\se",Server,一致,未决,,
 50,BUG-0398,#398,https://github.com/modelcontextprotocol/python-sdk/issues/398,Connect to MCP Server with SSE  Invalid transport type: undefined,closed,2025-03-31T10:41:55Z,Host,not_exercised_not_inferable,expert,,not_reproduced__error_text_present,B,issue正文,no defect captured by this trigger (clean success); scenario not exercised,,,,,,"Error: Invalid transport type: undefined .Anyone helps me?
 
 ![Image](https://github.com/user-attachments/assets/8fd5f1b6-db3d-4b52-bcd2-93a22dee74dc)
@@ -938,14 +938,14 @@ if __name__ == ""__main__"":
 ---
 d, data.get(""params""), opts)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File ""C:\Users\<user>\AppData\Local\anaconda3\Lib\site-packages\mcp\shared\jsonrpc_dispatcher.py"", line 403, in send_raw_request
+  File ""<python-env>\Lib\site-packages\mcp\shared\jsonrpc_dispatcher.py"", line 403, in send_raw_request
     outcome = await receive.receive()
               ^^^^^^^^^^^^^^^^^^^^^^^
-  File ""C:\Users\<user>\AppData\Local\anaconda3\Lib\site-packages\anyio\streams\memory.py"", line 119, in receive
+  File ""<python-env>\Lib\site-packages\anyio\streams\memory.py"", line 119, in receive
     await receive_event.wait()
-  File ""C:\Users\<user>\AppData\Local\anaconda3\Lib\site-packages\anyio\_backends\_asyncio.py"", line 1774, in wait
+  File ""<python-env>\Lib\site-packages\anyio\_backends\_asyncio.py"", line 1774, in wait
     await self._event.wait()
-  File ""C:\Users\<user>\AppData\Local\anaconda3\Lib\asyncio\locks.py"", line 213, in wait
+  File ""<python-env>\Lib\asyncio\locks.py"", line 213, in wait
     await fut
 asyncio.exceptions.CancelledError: Cancelled by cancel scope 1d11e8d5160",远程 streamable-http 服务端不可用时，`ClientSessionGroup` 未正确处理连接失败，cancel scope 归属错乱，抛 `RuntimeError: Attempted to exit cancel scope in a different task than it was entered in`。与 #922 同源，属 caller-exception（会话组的 cancel-scope 生命周期缺陷）。,"r object streamablehttp_client at 0xffffa53755d0>
  + Exception Group Traceback (most recent call last):
@@ -2239,15 +2239,15 @@ async def main():
         prin","RuntimeError: Attempted to acquire an already held Lock
 ---
 ^^^^^^^
-  File ""C:\Users\<user>\AppData\Local\anaconda3\Lib\site-packages\mcp\shared\_httpx_utils.py"", line 205, in async_auth_flow
+  File ""<python-env>\Lib\site-packages\mcp\shared\_httpx_utils.py"", line 205, in async_auth_flow
     outgoing = await flow.__anext__()
                ^^^^^^^^^^^^^^^^^^^^^^
-  File ""C:\Users\<user>\AppData\Local\anaconda3\Lib\site-packages\mcp\client\auth\oauth2.py"", line 606, in _auth_flow
+  File ""<python-env>\Lib\site-packages\mcp\client\auth\oauth2.py"", line 606, in _auth_flow
     async with self.context.lock:
                ^^^^^^^^^^^^^^^^^
-  File ""C:\Users\<user>\AppData\Local\anaconda3\Lib\site-packages\anyio\_core\_synchronization.py"", line 156, in __aenter__
+  File ""<python-env>\Lib\site-packages\anyio\_core\_synchronization.py"", line 156, in __aenter__
     await self.acquire()
-  File ""C:\Users\<user>\AppData\Local\anaconda3\Lib\site-packages\anyio\_backends\_asyncio.py"", line 1807, in acquire
+  File ""<python-env>\Lib\site-packages\anyio\_backends\_asyncio.py"", line 1807, in acquire
     raise RuntimeError(""Attempted to acquire an already held Lock"")
 RuntimeError: Attempted to acquire an already held Lock",`OAuthClientProvider.async_auth_flow` 用 `async with self.context.lock` 跨 `yield` 持锁，httpx 在另一 task 关闭 flow 时释放锁失败，锁被永久毒化，后续请求抛 `RuntimeError: Attempted to acquire an already held Lock`。属 caller-exception（认证锁生命周期缺陷）。,"exception=RuntimeError('The current task is not holding this lock')>
 Traceback (most recent call last):
@@ -2280,9 +2280,9 @@ anyio.run(main)","KeyError: <mcp.client.session.ClientSession object at 0x000002
 recent call last):
       |   File ""C:\Users\<user>\AppData\Local\Temp\mcp_repro_e7ar47p5\b3384\repro_snippet.py"", line 45, in main
       |     await group.connect_with_session(INFO, client.session)
-      |   File ""C:\Users\<user>\AppData\Local\anaconda3\Lib\site-packages\mcp\client\session_group.py"", line 291, in connect_with_session
+      |   File ""<python-env>\Lib\site-packages\mcp\client\session_group.py"", line 291, in connect_with_session
       |     await self._aggregate_components(server_info, session)
-      |   File ""C:\Users\<user>\AppData\Local\anaconda3\Lib\site-packages\mcp\client\session_group.py"", line 420, in _aggregate_components
+      |   File ""<python-env>\Lib\site-packages\mcp\client\session_group.py"", line 420, in _aggregate_components
       |     del self._session_exit_stacks[session]  # pragma: no cover
       |         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
       | KeyError: <mcp.client.session.ClientSession object at 0x000002722FA5C050>

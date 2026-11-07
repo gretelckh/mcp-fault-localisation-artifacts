@@ -1,13 +1,32 @@
 # issue: #3385
 # origin_layer: Server
+# exposure_channel: single-layer-correct
 # evidence_class: single-layer-correct
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: runtime
 # harness_entry: repro_cases.py::b_3385
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_3385.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `repro_cases.py::b_3385`
+
+Trigger, as recorded during the study:
+
+```text
+call_tool(inf, {})
+```
+
+## 2. What the reporter described
+
+#3385 non-finite float -> invalid JSON in text content
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
 RAISED:RuntimeError:Invalid structured content returned by tool inf: None is not of type 'number'
 
 Failed validating 'type' in schema['properties']['result']:
@@ -15,9 +34,31 @@ Failed validating 'type' in schema['properties']['result']:
 
 On instance['result']:
     None
+```
 
-## raw payload written by the run (raw/real_3385.txt)
+## 4. Why it happens
 
+工具返回非有限浮点数 `inf` 导致 text content 无效 JSON，结构化校验失败。报在 Server 层（正确），是输出序列化/校验问题。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Server |
+| Exposure channel | `single-layer-correct` |
+| Evidence class | `single-layer-correct` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `repro_cases.py::b_3385` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_3385.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
 RAISED:RuntimeError:Invalid structured content returned by tool inf: None is not of type 'number'
 
 Failed validating 'type' in schema['properties']['result']:
@@ -25,3 +66,16 @@ Failed validating 'type' in schema['properties']['result']:
 
 On instance['result']:
     None
+```
+
+## C. Raw payload (raw/real_3385.txt)
+
+```
+RAISED:RuntimeError:Invalid structured content returned by tool inf: None is not of type 'number'
+
+Failed validating 'type' in schema['properties']['result']:
+    {'title': 'Result', 'type': 'number'}
+
+On instance['result']:
+    None
+```

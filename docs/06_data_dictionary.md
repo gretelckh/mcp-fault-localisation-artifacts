@@ -114,6 +114,38 @@ The 83 bugs whose reports carry no analysable error (tiers C and D of the 267 no
 
 ---
 
+## `repro/captures_index.csv` (n = 72)
+
+One row per reproduced bug, stating what evidence exists for it. Use it to check a capture against
+the record, or to see which bugs have a console dump before going looking for one.
+
+| column | meaning |
+|---|---|
+| `issue` | issue number |
+| `origin_layer` | ground-truth layer |
+| `exposure_channel` | raw channel name (the codebook's R1–R6 output) |
+| `evidence_class` | class under the paper's names |
+| `evidence_tier` | A–D |
+| `error_text_source` | `runtime` (our run produced it), `issue text` (quoted from the report), `none` (no diagnostic) |
+| `has_error_text` | `yes` for 63 of 72 |
+| `has_trigger_code` | `yes` for all 72 |
+| `section3_chars` | length of the captured text in the capture file, 0 if empty |
+| `has_console_log` | `yes` for 18 |
+| `has_raw_payload` | `yes` for 54 |
+| `has_harness_record` | `yes` for 54 — the runner's progress file has an entry |
+| `harness_entry` | `file.py::case` in `repro/runner/`, where the harness has one |
+
+---
+
+## `repro/raw_map.csv` (n = 54)
+
+| column | meaning |
+|---|---|
+| `issue` | issue number |
+| `raw_file` | file name under `repro/raw/` that holds this bug's payload. Most are `real_<n>.txt`; the 18 hand-built replays are named after the scenario they exercise (`real_r_<scenario>.txt`) |
+
+---
+
 ## `repro/repro_verdicts_72.csv` (n = 72)
 
 | column | meaning |

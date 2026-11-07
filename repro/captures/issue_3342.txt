@@ -1,15 +1,63 @@
 # issue: #3342
 # origin_layer: Server
+# exposure_channel: single-layer-correct
 # evidence_class: single-layer-correct
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: runtime
 # harness_entry: repro_cases.py::b_3342
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_3342.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `repro_cases.py::b_3342`
+
+Trigger, as recorded during the study:
+
+```text
+get_prompt(p, {})
+```
+
+## 2. What the reporter described
+
+#3342 prompt validation traceback
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
 RAISED:MCPError:Internal server error
+```
 
-## raw payload written by the run (raw/real_3342.txt)
+## 4. Why it happens
 
+prompt 校验错误被压成笼统 `MCPError: Internal server error`，真实校验细节丢失。报在 Server 层（正确），但错误信息被简化。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Server |
+| Exposure channel | `single-layer-correct` |
+| Evidence class | `single-layer-correct` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `repro_cases.py::b_3342` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_3342.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
 RAISED:MCPError:Internal server error
+```
+
+## C. Raw payload (raw/real_3342.txt)
+
+```
+RAISED:MCPError:Internal server error
+```

@@ -1,15 +1,90 @@
 # issue: #3384
 # origin_layer: Client
+# exposure_channel: caller-exception
 # evidence_class: caller-exception
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: runtime
 # harness_entry: attempt_repro_external.py::issue#3384
-# defect_captured: False
+# console_log: not retained
+# raw_payload: raw/real_3384.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `attempt_repro_external.py::issue#3384`
+
+Trigger code:
+
+```python
+import anyio
+import mcp_types as types
+from mcp.client.client import Client
+from mcp.client.session_group import ClientSessionGroup
+from mcp.server.mcpserver import MCPServer
+
+INFO = types.Implementation(name="empty", version="1.0")
+
+
+async def main() -> None:
+    # A server that registers no tools, no resources and no prompts.
+    async with Client(MCPServer("empty")) as client:
+        group = ClientSessionGroup()
+        await group.connect_with_session(INFO, client.session)
+
+
+anyio.run(main)
+```
+
+## 2. What the reporter described
+
+机械重放 issue 正文 python 片段 -> 命中该 issue 自身报错
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
+KeyError: <mcp.client.session.ClientSession object at 0x000002722FA5C050>
+---
+recent call last):
+      |   File "C:\Users\<user>\AppData\Local\Temp\mcp_repro_e7ar47p5\b3384\repro_snippet.py", line 45, in main
+      |     await group.connect_with_session(INFO, client.session)
+      |   File "<python-env>\Lib\site-packages\mcp\client\session_group.py", line 291, in connect_with_session
+      |     await self._aggregate_components(server_info, session)
+      |   File "<python-env>\Lib\site-packages\mcp\client\session_group.py", line 420, in _aggregate_components
+      |     del self._session_exit_stacks[session]  # pragma: no cover
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+      | KeyError: <mcp.client.session.ClientSession object at 0x000002722FA5C050>
+      +------------------------------------
+```
+
+## 4. Why it happens
+
+服务器不暴露任何 tools/resources/prompts 时，`ClientSessionGroup._aggregate_components` 对未注册的 session 执行 `del self._session_exit_stacks[session]`，抛 `KeyError: <ClientSession object>`（session_group.py:420）。属 caller-exception（空组件注册路径缺陷）。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `caller-exception` |
+| Evidence class | `caller-exception` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `attempt_repro_external.py::issue#3384` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_3384.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3384', 'version': ''}} content=[TextContent(type='text', text='pong', annotations=None, meta=None)] structured_content={'result': 'pong'} is_error=False result_type='complete'
+```
 
-## raw payload written by the run (raw/real_3384.txt)
+## C. Raw payload (raw/real_3384.txt)
 
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3384', 'version': ''}} content=[TextContent(type='text', text='pong', annotations=None, meta=None)] structured_content={'result': 'pong'} is_error=False result_type='complete'
+```

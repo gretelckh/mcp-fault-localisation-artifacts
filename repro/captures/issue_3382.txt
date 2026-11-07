@@ -1,19 +1,111 @@
 # issue: #3382
 # origin_layer: Client
+# exposure_channel: caller-exception
 # evidence_class: caller-exception
 # evidence_tier: A
-# transport: n/a
+# evidence_source: runtime
 # harness_entry: attempt_repro_external.py::issue#3382
-# defect_captured: 
+# console_log: logs/3382.txt
+# raw_payload: not retained
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `attempt_repro_external.py::issue#3382`
+
+Trigger code:
+
+```python
+import asyncio
+import httpx2
+from mcp.client.auth.oauth2 import OAuthClientProvider
+from mcp.shared.auth import OAuthClientMetadata
+
+
+class MemStorage:
+    async def get_tokens(self): return None
+    async def set_tokens(self, tokens): pass
+    async def get_client_info(self): return None
+    async def set_client_info(self, client_info): pass
+
+
+async def main():
+    provider = OAuthClientProvider(
+        server_url="https://example.invalid/mcp",
+        client_metadata=OAuthClientMetadata(redirect_uris=["http://localhost:1/callback"]),
+        storage=MemStorage(),
+    )
+
+    # Task A: advance the flow. With no stored tokens it suspends at
+    # `response = yield request`, still inside `async with context.lock`.
+    flow = provider.async_auth_flow(httpx2.Request("POST", "https://example.invalid/mcp"))
+    await flow.asend(None)
+
+    # Task B: httpx tears the stream down from a different task on
+    # cancellation, closing the generator there.
+    try:
+        await asyncio.get_running_loop().create_task(flow.aclose())
+    except RuntimeError as exc:
+        print(f"aclose raised: {exc!r}")            # <- fires
+
+    print("lock still held:", provider.context.lock.locked())   # True
+
+    # The "reconnect" — blocks forever at line 582:
+    flow2 = provider.async_auth_flow(httpx2.Request("POST", "https://example.invalid/mcp"))
+    try:
+        await asyncio.wait_for(flow2.asend(None), timeout=2)
+        print("second flow proceeds")
+    except asyncio.TimeoutError:
+        prin
+```
+
+## 2. What the reporter described
+
+机械重放 issue 正文 python 片段 -> 命中该 issue 自身报错
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
 RuntimeError: Attempted to acquire an already held Lock
+---
+^^^^^^^
+  File "<python-env>\Lib\site-packages\mcp\shared\_httpx_utils.py", line 205, in async_auth_flow
+    outgoing = await flow.__anext__()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>\Lib\site-packages\mcp\client\auth\oauth2.py", line 606, in _auth_flow
+    async with self.context.lock:
+               ^^^^^^^^^^^^^^^^^
+  File "<python-env>\Lib\site-packages\anyio\_core\_synchronization.py", line 156, in __aenter__
+    await self.acquire()
+  File "<python-env>\Lib\site-packages\anyio\_backends\_asyncio.py", line 1807, in acquire
+    raise RuntimeError("Attempted to acquire an already held Lock")
+RuntimeError: Attempted to acquire an already held Lock
+```
 
-## console log (logs/3382.txt)
+## 4. Why it happens
 
+`OAuthClientProvider.async_auth_flow` 用 `async with self.context.lock` 跨 `yield` 持锁，httpx 在另一 task 关闭 flow 时释放锁失败，锁被永久毒化，后续请求抛 `RuntimeError: Attempted to acquire an already held Lock`。属 caller-exception（认证锁生命周期缺陷）。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `caller-exception` |
+| Evidence class | `caller-exception` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `attempt_repro_external.py::issue#3382` |
+| Console log retained | yes (`logs/3382.txt`) |
+| Raw payload retained | no |
+
+## B. Raw console log (logs/3382.txt)
+
+```
 VERDICT=OBS
 CATEGORY=observation/scenario-specific
 first request: cancelled mid-flow by wait_for (timeout)
 second request after cancellation: status=200
 context.lock: <anyio._backends._asyncio.Lock object at 0x00000253ADDEDF30>
+```

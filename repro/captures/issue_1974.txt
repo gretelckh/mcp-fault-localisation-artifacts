@@ -1,15 +1,63 @@
 # issue: #1974
 # origin_layer: Server
+# exposure_channel: registration
 # evidence_class: registration-time
 # evidence_tier: A
-# transport: streamable-http/registration
+# evidence_source: runtime
 # harness_entry: repro_cases.py::b_1974
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_1974.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `repro_cases.py::b_1974`
+
+Trigger, as recorded during the study:
+
+```text
+list_tools(, {})
+```
+
+## 2. What the reporter described
+
+#1974 find_context_parameter fails on callable class
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
 RAISED-AT-REG:AttributeError:'Handler' object has no attribute '__name__'
+```
 
-## raw payload written by the run (raw/real_1974.txt)
+## 4. Why it happens
 
+`find_context_parameter` 对 callable class 失败，注册时抛 AttributeError（Handler 无 __name__）。注册期错误：server 无法构建。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Server |
+| Exposure channel | `registration` |
+| Evidence class | `registration-time` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `repro_cases.py::b_1974` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_1974.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
 RAISED-AT-REG:AttributeError:'Handler' object has no attribute '__name__'
+```
+
+## C. Raw payload (raw/real_1974.txt)
+
+```
+RAISED-AT-REG:AttributeError:'Handler' object has no attribute '__name__'
+```

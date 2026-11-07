@@ -1,15 +1,63 @@
 # issue: #2422
 # origin_layer: Server
+# exposure_channel: single-layer-correct
 # evidence_class: single-layer-correct
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: runtime
 # harness_entry: repro_cases.py::b_2422
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_2422.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `repro_cases.py::b_2422`
+
+Trigger, as recorded during the study:
+
+```text
+call_tool(no_such_tool, {})
+```
+
+## 2. What the reporter described
+
+#2422 ToolNotFoundError vs ToolError
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-2422', 'version': ''}} content=[TextContent(type='text', text='Unknown tool: no_such_tool', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+```
 
-## raw payload written by the run (raw/real_2422.txt)
+## 4. Why it happens
 
+工具不存在时应抛专用 `ToolNotFoundError`，实际抛笼统 `ToolError`，错误分类粒度不足。报在 Server 层（正确），但异常类型不精准。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Server |
+| Exposure channel | `single-layer-correct` |
+| Evidence class | `single-layer-correct` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `repro_cases.py::b_2422` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_2422.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-2422', 'version': ''}} content=[TextContent(type='text', text='Unknown tool: no_such_tool', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+```
+
+## C. Raw payload (raw/real_2422.txt)
+
+```
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-2422', 'version': ''}} content=[TextContent(type='text', text='Unknown tool: no_such_tool', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+```

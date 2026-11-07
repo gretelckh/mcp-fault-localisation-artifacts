@@ -1,15 +1,95 @@
 # issue: #326
 # origin_layer: Host
+# exposure_channel: caller-exception
 # evidence_class: caller-exception
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: runtime
 # harness_entry: attempt_repro_external.py::issue#326
-# defect_captured: 
+# console_log: not retained
+# raw_payload: raw/real_326.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `attempt_repro_external.py::issue#326`
+
+Trigger code:
+
+```python
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+
+server_params = StdioServerParameters(
+        command="npx",
+        args=["-y", "@modelcontextprotocol/server-filesystem", "/home"],
+        env={} # fail
+        # env=None # no fail
+)
+
+async def run():
+        async with stdio_client(server_params) as (read, write):
+                async with ClientSession(read, write) as session:
+                        await session.initialize()
+                        tools = await session.list_tools()
+
+if __name__ == "__main__":
+        import asyncio
+        asyncio.run(run())
+```
+
+## 2. What the reporter described
+
+机械重放 issue 正文 python 片段 -> 命中该 issue 自身报错
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
+MCPError: Connection closed
+---
+lize
+      |     result = await self.send_request(
+      |              ^^^^^^^^^^^^^^^^^^^^^^^^
+      |     ...<9 lines>...
+      |     )
+      |     ^
+      |   File "<python-env>\Lib\site-packages\mcp\client\session.py", line 586, in send_request
+      |     raw = await self._dispatcher.send_raw_request(method, data.get("params"), opts)
+      |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      |   File "<python-env>\Lib\site-packages\mcp\shared\jsonrpc_dispatcher.py", line 444, in send_raw_request
+      |     raise MCPError(code=outcome.code, message=outcome.message, data=outcome.data)
+      | mcp.shared.exceptions.MCPError: Connection closed
+      +------------------------------------
+```
+
+## 4. Why it happens
+
+`env` 设为非 None（如 `{}`）时子进程丢失 PATH，npx 起不来，SDK 只在 `jsonrpc_dispatcher.send_raw_request` 抛 `MCPError: Connection closed`，真实原因（子进程启动失败）被吞掉。症状可复现，根因是 env 覆盖整份环境，属 caller-exception。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Host |
+| Exposure channel | `caller-exception` |
+| Evidence class | `caller-exception` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `attempt_repro_external.py::issue#326` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_326.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-326', 'version': ''}} content=[TextContent(type='text', text='pong', annotations=None, meta=None)] structured_content={'result': 'pong'} is_error=False result_type='complete'
+```
 
-## raw payload written by the run (raw/real_326.txt)
+## C. Raw payload (raw/real_326.txt)
 
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-326', 'version': ''}} content=[TextContent(type='text', text='pong', annotations=None, meta=None)] structured_content={'result': 'pong'} is_error=False result_type='complete'
+```

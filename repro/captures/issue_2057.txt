@@ -1,17 +1,64 @@
 # issue: #2057
 # origin_layer: Client
+# exposure_channel: silent
 # evidence_class: silent
 # evidence_tier: D
-# transport: streamable-http/raw-post
+# evidence_source: none
 # harness_entry: repro_cases.py::b_proto
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_2057.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `repro_cases.py::b_proto`
+
+Trigger, as recorded during the study:
+
+```text
+raw_post(tools/list, {'body': {'jsonrpc': '2.0', 'method': 'tools/list', 'id': None, 'params': {}}})
+```
+
+## 2. What the reporter described
+
+#2057 id:null silently misclassified as notification
+
+## 3. What we captured
+
+No error was raised (evidence tier D). The call finished; the defect shows up in
+what came back, not in a diagnostic:
+
+```
 HTTP 202
+```
 
+## 4. Why it happens
 
-## raw payload written by the run (raw/real_2057.txt)
+`id:null` 的 JSON-RPC 消息被当作 notification 静默接受（HTTP 202），未按规范拒绝。逻辑错误无任何报错标志，属静默失效。
 
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `silent` |
+| Evidence class | `silent` |
+| Evidence tier | D |
+| Error text came from | none |
+| Harness entry | `repro_cases.py::b_proto` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_2057.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
 HTTP 202
+```
 
+## C. Raw payload (raw/real_2057.txt)
+
+```
+HTTP 202
+```

@@ -1,19 +1,69 @@
 # issue: #3573
 # origin_layer: Server
+# exposure_channel: registration
 # evidence_class: registration-time
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: issue text
 # harness_entry: repro_cases.py::b_iterator_meta
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_r_iterator_meta_fail.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
-verified (run_real_http*.py) - see raw/real_r_iterator_meta_fail.txt
+Harness entry: `repro_cases.py::b_iterator_meta`
 
-## raw payload (raw/real_r_iterator_meta_fail.txt)
+Trigger, as recorded during the study:
 
+```text
+call_tool(gen, {})
+```
+
+## 2. What the reporter described
+
+-> Iterator annotation raises PydanticSchemaGenerationError at registration [bug #3573]
+
+## 3. What we captured
+
+Quoted from the issue report; our replay did not raise it again (evidence tier A).
+
+```
+RAISED-AT-REG:PydanticSchemaGenerationError:Unable to generate pydantic-core schema for typing.Iterator[int]. Set `arbitrary_types_allowed=True` in the model_config to ignore this error or implement `__get_pydantic_core_schema__` on your type to fully support it.
+
+If you got this error by calling ha
+```
+
+## 4. Why it happens
+
+`-> Iterator` 注解触发 PydanticSchemaGenerationError，注册时失败。注册期错误：server 无法构建。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Server |
+| Exposure channel | `registration` |
+| Evidence class | `registration-time` |
+| Evidence tier | A |
+| Error text came from | issue text |
+| Harness entry | `repro_cases.py::b_iterator_meta` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_r_iterator_meta_fail.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
+verified (run_real_http*.py) - see real_r_iterator_meta_fail.txt
+```
+
+## C. Raw payload (raw/real_r_iterator_meta_fail.txt)
+
+```
 RAISED-AT-REG:PydanticSchemaGenerationError:Unable to generate pydantic-core schema for typing.Iterator[int]. Set `arbitrary_types_allowed=True` in the model_config to ignore this error or implement `__get_pydantic_core_schema__` on your type to fully support it.
 
 If you got this error by calling handler(<some type>) within `__get_pydantic_core_schema__` then you likely need to call `handler.generate_schema(<some type>)` since we do not call `__get_pydantic_core_schema__` on `<some type>` otherwise to avoid infinite recursion.
 
 For further information visit https://errors.pydantic.dev/2.12/u/schema-for-unknown-type
+```

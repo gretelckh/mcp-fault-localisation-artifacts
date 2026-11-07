@@ -11,9 +11,10 @@ the issue's own label, or any other bug.
 | P3 same, with the analyst note appended | Study A, `analyst` arm | 24 |
 | P4 reporter-claim + origin-layer, full issue report | Study B | 200 |
 
-Model: DeepSeek-V4-Flash (FP8) served through an OpenAI-compatible inference proxy. The proxy is
-identified only as "the institutional API proxy" here so that the artefact stays anonymous; the
-endpoint, the model name and the decoding settings are otherwise exactly those used in the study.
+Model: DeepSeek-V4-Flash (FP8) served through an OpenAI-compatible inference proxy. The endpoint is
+referred to here as "the institutional API proxy" because it is an internal service that is not
+reachable from outside; the model name, the request format and the decoding settings are otherwise
+exactly those used in the study.
 
 ---
 

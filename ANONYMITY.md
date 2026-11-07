@@ -1,7 +1,8 @@
-# Anonymity statement
+# Redaction statement
 
-This repository accompanies a manuscript submitted for **double-blind review**. It was prepared so
-that a reviewer can check every number without learning who wrote it.
+This repository accompanies a manuscript submitted to *Information and Software Technology*. It is
+released under the authors' own GitHub account, so the file is **not** an anonymity device: it
+records what was redacted from the raw material before release, and why.
 
 ## What was removed
 
@@ -10,6 +11,7 @@ that a reviewer can check every number without learning who wrote it.
 | Author names, affiliations, grant numbers | never written into the artefact | — |
 | Absolute local paths (`C:\Users\<name>\...`, `/home/<name>/...`) | replaced with `<user>` | console logs, captured tracebacks, harness output |
 | Machine account names embedded in tracebacks (`C:\Users\<acct>~1\...`) | replaced with `<user>` | captured tracebacks |
+| The local Python environment path (`...\AppData\Local\anaconda3`, `...\ProgramData\Anaconda3\envs\<env>`) | replaced with `<python-env>` | captured tracebacks, including one pasted by a reporter in issue #396 |
 | The name of the institution that hosted the inference endpoint | replaced with *the institutional API proxy* | LLM experiment notes |
 | E-mail addresses found in issue bodies | replaced with `<email-redacted>` | issue excerpts |
 | Git author identity | commits are made with a neutral identity, no `Co-authored-by` trailer | `.git` |
@@ -34,5 +36,7 @@ grep -rInE "Users\\\\[A-Za-z]|/home/[a-z]|/Users/[A-Za-z]|\.(edu|ac\.[a-z]{2})\b
 
 This should return nothing. The same check was run on the released files before packaging.
 
-If you believe something in this repository still identifies the authors, please say so in the
-review — the repository can be amended before publication.
+Redaction here protects the **reporters** whose pasted tracebacks contained their own machine paths,
+and it keeps one author's local environment path out of the released captures. It does not hide the
+authors' identity, which the repository does not attempt. If you find a path that still resolves to
+a real machine, please say so — the repository can be amended before publication.

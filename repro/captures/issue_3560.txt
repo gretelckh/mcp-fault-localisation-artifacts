@@ -1,15 +1,63 @@
 # issue: #3560
 # origin_layer: Transport
+# exposure_channel: caller-exception
 # evidence_class: caller-exception
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: issue text
 # harness_entry: repro_cases.py::b_slow_timeout
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_r_tool_timeout.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
-verified (run_real_http*.py) - see raw/real_r_tool_timeout.txt
+Harness entry: `repro_cases.py::b_slow_timeout`
 
-## raw payload (raw/real_r_tool_timeout.txt)
+Trigger, as recorded during the study:
 
+```text
+call_tool(slow, {'x': 1})
+```
+
+## 2. What the reporter described
+
+no default timeout -> slow tool blocks the caller, no error flag [bug #3560]
+
+## 3. What we captured
+
+Quoted from the issue report; our replay did not raise it again (evidence tier A).
+
+```
 RAISED:ExceptionGroup:unhandled errors in a TaskGroup (1 sub-exception)
+```
+
+## 4. Why it happens
+
+慢工具无默认超时，阻塞调用方，抛出 `ExceptionGroup`。Transport 层超时以调用方裸异常暴露，属调用方裸抛通道。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Transport |
+| Exposure channel | `caller-exception` |
+| Evidence class | `caller-exception` |
+| Evidence tier | A |
+| Error text came from | issue text |
+| Harness entry | `repro_cases.py::b_slow_timeout` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_r_tool_timeout.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
+verified (run_real_http*.py) - see real_r_tool_timeout.txt
+```
+
+## C. Raw payload (raw/real_r_tool_timeout.txt)
+
+```
+RAISED:ExceptionGroup:unhandled errors in a TaskGroup (1 sub-exception)
+```

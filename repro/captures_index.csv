@@ -1,0 +1,73 @@
+issue,origin_layer,exposure_channel,evidence_class,evidence_tier,error_text_source,has_error_text,has_trigger_code,section3_chars,has_console_log,has_raw_payload,has_harness_record,harness_entry
+#76,Server,caller-exception,caller-exception,A,runtime,yes,yes,832,no,yes,yes,attempt_repro_external.py::issue#76
+#79,Client,caller-exception,caller-exception,A,runtime,yes,yes,50,yes,no,no,runner/repro_pending/repro_79.py
+#110,Client,pushed-to-Server,pushed-to-server,A,runtime,yes,yes,238,no,yes,yes,repro_cases.py::b_110
+#234,Server,single-layer-correct,single-layer-correct,B,runtime,yes,yes,240,no,yes,yes,repro_cases.py::b_234
+#244,Server,registration,registration-time,A,runtime,yes,yes,186,no,yes,yes,repro_cases.py::b_244
+#326,Host,caller-exception,caller-exception,A,runtime,yes,yes,769,no,yes,yes,attempt_repro_external.py::issue#326
+#348,Server,single-layer-genericised,single-layer-masked,B,runtime,yes,yes,238,no,yes,yes,repro_cases.py::b_348
+#409,Client,caller-exception,caller-exception,A,runtime,yes,yes,174,yes,no,no,runner/repro_pending/repro_json.py
+#417,Server,single-layer-genericised,single-layer-masked,B,runtime,yes,yes,239,no,yes,yes,repro_cases.py::b_417
+#507,Transport,caller-exception,caller-exception,A,runtime,yes,yes,87,yes,no,no,runner/repro_pending/repro_sse.py
+#521,Client,caller-exception,caller-exception,A,runtime,yes,yes,50,yes,no,no,runner/repro_pending/repro_cancelscope.py
+#577,Client,caller-exception,caller-exception,A,runtime,yes,yes,50,yes,no,no,runner/repro_pending/repro_cancelscope.py
+#613,Transport,caller-exception,caller-exception,A,runtime,yes,yes,90,yes,no,no,runner/repro_pending/repro_sse.py
+#698,Server,single-layer-genericised,single-layer-masked,A,runtime,yes,yes,239,no,yes,yes,repro_cases.py::b_698
+#743,Server,single-layer-genericised,single-layer-masked,A,runtime,yes,yes,239,no,yes,yes,repro_cases.py::b_743
+#891,Server,single-layer-genericised,single-layer-masked,B,runtime,yes,yes,236,no,yes,yes,repro_cases.py::b_891
+#915,Client,caller-exception,caller-exception,A,runtime,yes,yes,733,no,yes,yes,attempt_repro_external.py::issue#915
+#922,Client,caller-exception,caller-exception,A,runtime,yes,yes,93,yes,no,no,runner/repro_pending/repro_cancelscope.py
+#1060,Server,single-layer-genericised,single-layer-masked,A,runtime,yes,yes,239,no,yes,yes,repro_cases.py::b_1060
+#1313,Client,caller-exception,caller-exception,A,runtime,yes,yes,147,yes,no,no,runner/repro_pending/repro_json.py
+#1361,Client,pushed-to-Server,pushed-to-server,A,runtime,yes,yes,240,no,yes,yes,repro_cases.py::b_1361
+#1579,Server,single-layer-correct,single-layer-correct,A,runtime,yes,yes,48,no,yes,yes,repro_cases.py::b_1579
+#1702,Server,single-layer-genericised,single-layer-masked,B,runtime,yes,yes,244,no,yes,yes,repro_cases.py::b_1702
+#1974,Server,registration,registration-time,A,runtime,yes,yes,73,no,yes,yes,repro_cases.py::b_1974
+#2057,Client,silent,silent,D,none,no,yes,9,no,yes,yes,repro_cases.py::b_proto
+#2114,Client,pushed-to-Server,pushed-to-server,A,runtime,yes,yes,240,no,yes,yes,repro_cases.py::b_2114
+#2153,Server,single-layer-genericised,single-layer-masked,A,runtime,yes,yes,240,no,yes,yes,repro_cases.py::b_2153
+#2216,Client,single-layer-correct,single-layer-correct,A,runtime,yes,yes,109,yes,no,no,runner/repro_pending/repro_oauth_logic.py::test_2216
+#2260,Client,single-layer-correct,single-layer-correct,B,runtime,yes,yes,85,yes,no,no,runner/repro_pending/repro_oauth_logic.py::test_2260
+#2386,Server,single-layer-genericised,single-layer-masked,A,runtime,yes,yes,240,no,yes,yes,repro_cases.py::b_2386
+#2422,Server,single-layer-correct,single-layer-correct,A,runtime,yes,yes,241,no,yes,yes,repro_cases.py::b_2422
+#2431,Server,single-layer-genericised,single-layer-masked,A,runtime,yes,yes,240,no,yes,yes,repro_cases.py::b_2431
+#2539,Server,silent,silent,B,issue text,yes,yes,246,no,yes,yes,repro_cases.py::b_2539
+#2618,Transport,silent,silent,B,issue text,yes,yes,298,no,yes,yes,repro_cases.py::b_proto
+#2687,Client,single-layer-correct,single-layer-correct,D,none,no,yes,54,yes,no,no,runner/repro_pending/repro_oauth_logic.py::test_2687
+#2727,Transport,caller-exception,caller-exception,A,runtime,yes,yes,101,yes,no,no,runner/repro_pending/repro_2727.py
+#2741,Transport,pushed-to-Server,pushed-to-server,A,runtime,yes,yes,240,no,yes,yes,repro_cases.py::b_2741
+#2770,Server,single-layer-genericised,single-layer-masked,A,runtime,yes,yes,240,no,yes,yes,repro_cases.py::b_2770
+#3067,Server,silent,silent,D,none,no,yes,226,no,yes,yes,repro_cases.py::b_3067
+#3099,Server,single-layer-genericised,single-layer-masked,A,runtime,yes,yes,239,no,yes,yes,repro_cases.py::b_3099
+#3103,Client,single-layer-genericised,single-layer-masked,B,runtime,yes,yes,107,yes,no,no,runner/repro_pending/repro_oauth_flow.py::test_3103
+#3209,Client,silent,silent,A,runtime,yes,yes,117,yes,no,no,runner/repro_pending/repro_oauth_lifecycle.py::test_3209
+#3240,Client,caller-exception,caller-exception,B,runtime,yes,yes,119,yes,no,no,runner/repro_pending/repro_oauth_lifecycle.py::test_3240
+#3250,Client,silent,silent,B,runtime,yes,yes,161,yes,no,no,runner/repro_pending/repro_oauth_lifecycle.py::test_3250
+#3266,Server,single-layer-genericised,single-layer-masked,B,runtime,yes,yes,240,no,yes,yes,repro_cases.py::b_3266
+#3341,Server,single-layer-correct,single-layer-correct,A,runtime,yes,yes,233,no,yes,yes,repro_cases.py::b_3341
+#3342,Server,single-layer-correct,single-layer-correct,A,runtime,yes,yes,37,no,yes,yes,repro_cases.py::b_3342
+#3351,Server,single-layer-correct,single-layer-correct,A,runtime,yes,yes,300,no,yes,yes,repro_cases.py::b_3351
+#3382,Client,caller-exception,caller-exception,A,runtime,yes,yes,735,yes,no,no,attempt_repro_external.py::issue#3382
+#3384,Client,caller-exception,caller-exception,A,runtime,yes,yes,813,no,yes,yes,attempt_repro_external.py::issue#3384
+#3385,Server,single-layer-correct,single-layer-correct,A,runtime,yes,yes,233,no,yes,yes,repro_cases.py::b_3385
+#3434,Server,pushed-to-Server,pushed-to-server,A,runtime,yes,yes,855,no,yes,yes,attempt_repro_targeted.py::issue#3434
+#3549,Server,silent,silent,C,none,no,yes,232,no,yes,yes,repro_cases.py::b_race_lost_update
+#3554,Server,single-layer-genericised,single-layer-masked,A,issue text,yes,yes,246,no,yes,yes,repro_cases.py::b_bytes_output
+#3556,Transport,caller-exception,caller-exception,A,issue text,yes,yes,71,no,yes,yes,repro_cases.py::b_terminate_reinit
+#3557,Transport,caller-exception,caller-exception,A,issue text,yes,yes,251,no,yes,yes,repro_cases.py::case_jsonrpc_code
+#3560,Transport,caller-exception,caller-exception,A,issue text,yes,yes,71,no,yes,yes,repro_cases.py::b_slow_timeout
+#3566,Client,single-layer-correct,single-layer-correct,A,runtime,yes,yes,154,yes,no,no,runner/repro_pending/repro_oauth_logic.py::test_3566
+#3569,Server,single-layer-genericised,single-layer-masked,A,issue text,yes,yes,244,no,yes,yes,repro_cases.py::b_perm_raise
+#3572,Host,pushed-to-Server,pushed-to-server,A,issue text,yes,yes,300,no,yes,yes,repro_cases.py::b_validation_echo
+#3573,Server,registration,registration-time,A,issue text,yes,yes,300,no,yes,yes,repro_cases.py::b_iterator_meta
+#3578,Server,silent,silent,A,issue text,yes,yes,225,no,yes,yes,repro_cases.py::b_duplicate_tool
+#3579,Host,pushed-to-Server,pushed-to-server,D,none,no,yes,241,no,yes,yes,repro_cases.py::b_empty_server
+#3585,Server,silent,silent,D,none,no,yes,245,no,yes,yes,repro_cases.py::b_media_mime
+#3586,Server,single-layer-genericised,single-layer-masked,A,issue text,yes,yes,242,no,yes,yes,repro_cases.py::b_nontool_exc
+#3592,Server,silent,silent,B,issue text,yes,yes,274,no,yes,yes,repro_cases.py::b_unregistered_result
+#3637,Host,pushed-to-Server,pushed-to-server,B,issue text,yes,yes,300,no,yes,yes,repro_cases.py::b_flat_argument
+#3640,Server,silent,silent,D,none,no,yes,264,no,yes,yes,repro_cases.py::b_capabilities_drop
+#3643,Server,silent,silent,D,none,no,yes,300,no,yes,yes,repro_cases.py::b_userlist_prompt
+#3644,Server,single-layer-correct,single-layer-correct,D,none,no,yes,300,no,yes,yes,repro_cases.py::case_outputschema_mode
+#3646,Host,silent,silent,B,issue text,yes,yes,215,no,yes,yes,repro_cases.py::case_extra_arg
+#3656,Server,single-layer-genericised,single-layer-masked,A,runtime,yes,yes,237,no,yes,yes,repro_cases.py::b_3656

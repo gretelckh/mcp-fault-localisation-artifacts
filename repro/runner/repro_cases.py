@@ -1925,7 +1925,7 @@ BATCHES = {
 # These are the 18 confirmed-reproducible bugs (mcp 2.2.0 + streamable-HTTP).
 #
 # ⚠️【溯源索引 · 18 条 VERIFIED 的代码位置 —— 下次直接看这里，勿再找不到】
-#   每条 verified 的复现代码都标注了【文件::函数】。证据文件在 data/real_raw/real_r_*.txt，
+#   每条 verified 的复现代码都标注了【文件::函数】。证据文件在 repro/raw/real_r_*.txt，
 #   索引在 data/real_index.json。这些是数据重构前(run_real_http*.py)已复现的 18 条去重 issue。
 #   - #3549  Server   run_real_http2.py::case_race        call_tool(inc)         -> real_r_race_lost_update.txt
 #   - #3637  Host     run_real_http2.py::case_flat        call_tool(summarize)  -> real_r_flat_argument.txt

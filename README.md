@@ -1,7 +1,8 @@
 # Review artefact — *Why Is It So Hard to Localize Bugs in MCP Pipelines?*
 
-Anonymous artefact package submitted for double-blind review. It contains the five things the
-manuscript promises in its data-availability statement:
+Artefact package accompanying the manuscript *Why Is It So Hard to Localize Bugs in MCP
+Pipelines?*, released under the authors' GitHub account. It contains the five things the manuscript
+promises in its data-availability statement:
 
 | # | What the paper promises | Where it is |
 |---|---|---|
@@ -27,7 +28,7 @@ python scripts/verify_numbers.py
 ```
 
 The script recomputes **every number in the paper** from the files in this repository and prints
-them next to the value printed in the manuscript — 64 checks, all of which should read `ok`.
+them next to the value printed in the manuscript — 73 checks, all of which should read `ok`.
 The last line reads `All checks passed ...` if the artefact and the paper agree.
 
 If you only want to look at one thing, open `data/active_bugs_339.csv` in Excel or pandas and
@@ -78,12 +79,17 @@ The class definitions are in `docs/02_codebook.md`.
   official client, invokes the tool and captures whatever comes back (return object or exception).
 * `run_real_http.py`, `run_real_http2.py` — transport-level and interactive replays.
 
-`repro/captures/issue_XXXX.txt` — **one file per reproduced bug** (72 files). Each has a short
-header (origin layer, evidence class, transport, harness entry) followed by the captured return
-value or exception, and, where the run also wrote one, the raw payload and the console log.
+`repro/captures/issue_XXXX.txt` — **one file per reproduced bug** (72 files). Each is a
+self-contained record: the trigger that was run, what the reporter described, the output that was
+captured, the layer analysis, and a provenance table saying where each field came from. Sections
+for the raw payload and the console dump appear only where the run kept one.
 
-`repro/logs/` — the console logs exactly as the harness wrote them (41 runs, including runs that
-did not reproduce the defect).
+`repro/captures_index.csv` — one row per bug, saying which kinds of evidence exist for it
+(trigger 72/72, error text 63, raw payload 54, console dump 18). Read this before concluding that
+something is missing: the four kinds were collected by different mechanisms at different times.
+
+`repro/logs/` — the console dumps exactly as the harness wrote them (41 runs, 18 of them belonging
+to the reproduced set; the rest are attempts that did not reproduce).
 
 `repro/repro_verdicts_72.csv` — the verdict table: issue, origin layer, evidence class, evidence
 tier, whether an error was raised or the call returned silently, and the path to the capture.
@@ -192,13 +198,14 @@ gives the full list.
 
 ---
 
-## 7. Licence and anonymity
+## 7. Licence and redaction
 
 Code (`repro/`, `llm/*.py`, `scripts/`) — MIT, see `LICENSE`.
 Data and documentation (`data/`, `llm/outputs/`, `docs/`) — CC BY 4.0, see `LICENSE-DATA`.
 The underlying issue text belongs to its authors on GitHub and is reproduced here under the
 GitHub Terms of Service for the purpose of review.
 
-The repository was prepared so that it contains no author name, affiliation, grant number or local
-path. See `ANONYMITY.md` for the checklist that was applied. A permanent DOI will be minted after
+Local machine paths and e-mail addresses found in captured tracebacks and issue text were redacted
+before release; see `ANONYMITY.md` for the rules applied and a check a reader can re-run. The
+authors' identity is not concealed by this repository. A permanent DOI will be minted after
 acceptance.

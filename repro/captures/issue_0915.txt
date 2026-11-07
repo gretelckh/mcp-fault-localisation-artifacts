@@ -1,15 +1,91 @@
 # issue: #915
 # origin_layer: Client
+# exposure_channel: caller-exception
 # evidence_class: caller-exception
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: runtime
 # harness_entry: attempt_repro_external.py::issue#915
-# defect_captured: 
+# console_log: not retained
+# raw_payload: raw/real_915.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `attempt_repro_external.py::issue#915`
+
+Trigger code:
+
+```python
+import asyncio
+
+from mcp.client.session_group import ClientSessionGroup, StreamableHttpParameters
+
+
+async def main():
+    async with ClientSessionGroup() as client_session_group:
+        server_params = StreamableHttpParameters(url="http://localhost:3001/mcp/")
+        try:
+            await client_session_group.connect_to_server(server_params)
+        except Exception:
+            print("this is never reached")
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+## 2. What the reporter described
+
+机械重放 issue 正文 python 片段 -> 命中该 issue 自身报错
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
+CancelledError: Cancelled by cancel scope 1d11e8d5160
+---
+d, data.get("params"), opts)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>\Lib\site-packages\mcp\shared\jsonrpc_dispatcher.py", line 403, in send_raw_request
+    outcome = await receive.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>\Lib\site-packages\anyio\streams\memory.py", line 119, in receive
+    await receive_event.wait()
+  File "<python-env>\Lib\site-packages\anyio\_backends\_asyncio.py", line 1774, in wait
+    await self._event.wait()
+  File "<python-env>\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError: Cancelled by cancel scope 1d11e8d5160
+```
+
+## 4. Why it happens
+
+远程 streamable-http 服务端不可用时，`ClientSessionGroup` 未正确处理连接失败，cancel scope 归属错乱，抛 `RuntimeError: Attempted to exit cancel scope in a different task than it was entered in`。与 #922 同源，属 caller-exception（会话组的 cancel-scope 生命周期缺陷）。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `caller-exception` |
+| Evidence class | `caller-exception` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `attempt_repro_external.py::issue#915` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_915.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-915', 'version': ''}} content=[TextContent(type='text', text='pong', annotations=None, meta=None)] structured_content={'result': 'pong'} is_error=False result_type='complete'
+```
 
-## raw payload written by the run (raw/real_915.txt)
+## C. Raw payload (raw/real_915.txt)
 
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-915', 'version': ''}} content=[TextContent(type='text', text='pong', annotations=None, meta=None)] structured_content={'result': 'pong'} is_error=False result_type='complete'
+```

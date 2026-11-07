@@ -1,15 +1,64 @@
 # issue: #3585
 # origin_layer: Server
+# exposure_channel: silent
 # evidence_class: silent
 # evidence_tier: D
-# transport: streamable-http
+# evidence_source: none
 # harness_entry: repro_cases.py::b_media_mime
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_r_media_unregistered_mime.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
-verified (run_real_http*.py) - see raw/real_r_media_unregistered_mime.txt
+Harness entry: `repro_cases.py::b_media_mime`
 
-## raw payload (raw/real_r_media_unregistered_mime.txt)
+Trigger, as recorded during the study:
 
+```text
+call_tool(get_image, {'format_': 'jpg'})
+```
+
+## 2. What the reporter described
+
+format= emits unregistered MIME type (image/jpg) [bug #3585]
+
+## 3. What we captured
+
+No error was raised (evidence tier D). The call finished; the defect shows up in
+what came back, not in a diagnostic:
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-media', 'version': ''}} content=[TextContent(type='text', text='image/jpg', annotations=None, meta=None)] structured_content={'result': 'image/jpg'} is_error=False result_type='complete'
+```
+
+## 4. Why it happens
+
+`format=` 输出未注册的 MIME 类型 `image/jpg`，is_error=False。非规范媒体类型被静默接受，属静默失效。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Server |
+| Exposure channel | `silent` |
+| Evidence class | `silent` |
+| Evidence tier | D |
+| Error text came from | none |
+| Harness entry | `repro_cases.py::b_media_mime` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_r_media_unregistered_mime.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
+verified (run_real_http*.py) - see real_r_media_unregistered_mime.txt
+```
+
+## C. Raw payload (raw/real_r_media_unregistered_mime.txt)
+
+```
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-media', 'version': ''}} content=[TextContent(type='text', text='image/jpg', annotations=None, meta=None)] structured_content={'result': 'image/jpg'} is_error=False result_type='complete'
+```

@@ -1,20 +1,59 @@
 # issue: #3240
 # origin_layer: Client
+# exposure_channel: caller-exception
 # evidence_class: caller-exception
 # evidence_tier: B
-# transport: n/a
+# evidence_source: runtime
 # harness_entry: runner/repro_pending/repro_oauth_lifecycle.py::test_3240
-# defect_captured: 
+# console_log: logs/3240.txt
+# raw_payload: not retained
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `runner/repro_pending/repro_oauth_lifecycle.py::test_3240`
 
+Trigger, as recorded during the study:
 
-## console log (logs/3240.txt)
+```text
+授权服务器挂在路径下(http://127.0.0.1:9999/auth)，进程重启、尚未发现 metadata 时触发 refresh
+```
 
+## 2. What the reporter described
+
+refresh 端点只认 oauth_metadata.token_endpoint，否则退回 urljoin(origin, '/token')；重启后 metadata 尚未发现，于是 refresh POST 打到根路径 /token（应为 /auth/token），404 刷新失败并把裸 HTTP 404 泄漏给调用方
+
+## 3. What we captured
+
+Captured in our run (evidence tier B).
+
+```
+AS mounted under /auth; refresh POST hit '/token' (expected '/auth/token'); final status=404, no MCP-layer error raised
+```
+
+## 4. Why it happens
+
+refresh 端点解析只认 `oauth_metadata.token_endpoint`，否则退回 `urljoin(origin, '/token')`；进程重启、metadata 尚未发现时，授权服务器挂在 `/auth` 路径下的 refresh 被打到根路径 `/token`，404 刷新失败并把裸 HTTP 404 直接泄漏给调用方，属 caller-exception（端点解析缺陷）。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `caller-exception` |
+| Evidence class | `caller-exception` |
+| Evidence tier | B |
+| Error text came from | runtime |
+| Harness entry | `runner/repro_pending/repro_oauth_lifecycle.py::test_3240` |
+| Console log retained | yes (`logs/3240.txt`) |
+| Raw payload retained | no |
+
+## B. Raw console log (logs/3240.txt)
+
+```
 VERDICT=REPRO
 CATEGORY=pushed-server
 AS mounted under: http://127.0.0.1:9999/auth  (token endpoint should be /auth/token)
 POST /token paths actually hit: ['/token']
 refresh request path: /token
 final status: 404  error: None
+```

@@ -1,16 +1,66 @@
 # issue: #3549
 # origin_layer: Server
+# exposure_channel: silent
 # evidence_class: silent
 # evidence_tier: C
-# transport: streamable-http
+# evidence_source: none
 # harness_entry: repro_cases.py::b_race_lost_update
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_r_race_lost_update.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
-verified (run_real_http*.py) - see raw/real_r_race_lost_update.txt
+Harness entry: `repro_cases.py::b_race_lost_update`
 
-## raw payload (raw/real_r_race_lost_update.txt)
+Trigger, as recorded during the study:
 
+```text
+call_tool(inc, {})
+```
+
+## 2. What the reporter described
+
+parallel tool calls mutate shared state; lost update (final<count) is silent [bug #3549]
+
+## 3. What we captured
+
+No error was raised (evidence tier C). The call finished; the defect shows up in
+what came back, not in a diagnostic:
+
+```
 final_after_20_concurrent_calls={'result': 1} n_calls=20 is_error=False
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-race', 'version': ''}} content=[TextContent(type='text', text='1', annotations=None, meta=None)] stru
+```
+
+## 4. Why it happens
+
+20 个并发调用共享状态导致丢失更新（final=1，应=20），is_error=False。并发竞态结果错误但无报错，属静默失效。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Server |
+| Exposure channel | `silent` |
+| Evidence class | `silent` |
+| Evidence tier | C |
+| Error text came from | none |
+| Harness entry | `repro_cases.py::b_race_lost_update` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_r_race_lost_update.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
+verified (run_real_http*.py) - see real_r_race_lost_update.txt
+```
+
+## C. Raw payload (raw/real_r_race_lost_update.txt)
+
+```
+final_after_20_concurrent_calls={'result': 1} n_calls=20 is_error=False
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-race', 'version': ''}} content=[TextContent(type='text', text='1', annotations=None, meta=None)] stru
+```

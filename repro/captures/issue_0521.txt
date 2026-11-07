@@ -1,17 +1,56 @@
 # issue: #521
 # origin_layer: Client
+# exposure_channel: caller-exception
 # evidence_class: caller-exception
 # evidence_tier: A
-# transport: n/a
+# evidence_source: runtime
 # harness_entry: runner/repro_pending/repro_cancelscope.py
-# defect_captured: 
+# console_log: logs/521.txt
+# raw_payload: not retained
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `runner/repro_pending/repro_cancelscope.py`
 
+Trigger, as recorded during the study:
 
-## console log (logs/521.txt)
+```text
+4个Client连接后,每个Client在独立asyncio任务中exit
+```
 
+## 2. What the reporter described
+
+多个 MCPClient 跨任务 entry/exit，transport 的 cancel scope 跨任务管理失效，抛 CancelledError: Cancelled by cancel scope
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
+RUN EXC: CancelledError: Cancelled by cancel scope
+```
+
+## 4. Why it happens
+
+多个 MCPClient 跨任务 entry/exit，transport 的 cancel scope 归属错乱，抛出 `CancelledError: Cancelled by cancel scope`。以裸异常暴露在调用方，属 caller-exception。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `caller-exception` |
+| Evidence class | `caller-exception` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `runner/repro_pending/repro_cancelscope.py` |
+| Console log retained | yes (`logs/521.txt`) |
+| Raw payload retained | no |
+
+## B. Raw console log (logs/521.txt)
+
+```
 4 clients connected OK
 scenario=cross-task entry/exit (each client in its own close task)
 RUN EXC: CancelledError: Cancelled by cancel scope 208addfd940
+```

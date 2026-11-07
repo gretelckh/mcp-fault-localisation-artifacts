@@ -1,17 +1,55 @@
 # issue: #3209
 # origin_layer: Client
+# exposure_channel: silent
 # evidence_class: silent
 # evidence_tier: A
-# transport: n/a
+# evidence_source: runtime
 # harness_entry: runner/repro_pending/repro_oauth_lifecycle.py::test_3209
-# defect_captured: 
+# console_log: logs/3209.txt
+# raw_payload: not retained
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `runner/repro_pending/repro_oauth_lifecycle.py::test_3209`
 
+Trigger, as recorded during the study:
 
-## console log (logs/3209.txt)
+```text
+同一 OAuthClientProvider 上并发 3 个 GET /mcp（/mcp 各 sleep 0.3s）
+```
 
+## 2. What the reporter described
+
+context.lock(anyio.Lock) 在 _auth_flow 中包住整个流程，包括 `response = yield request`，直到响应返回才释放；并发请求被完全串行化，长连接 SSE 流会独占锁并阻塞其它请求，且不抛任何错误
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
+3 concurrent GET /mcp: elapsed 0.624/0.935/1.247s (fully serialised; parallel would be ~0.3s), total 1.248s, 0 errors
+```
+
+## 4. Why it happens
+
+`_auth_flow` 用 `async with self.context.lock`（anyio.Lock）包住整个流程，包括 `response = yield request`，锁要等响应返回才释放；同一 provider 上的并发请求被完全串行化（实测 3 并发 0.62/0.94/1.25s），长连接 SSE 流会独占锁阻塞其它请求，且不抛任何异常，属静默失效。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `silent` |
+| Evidence class | `silent` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `runner/repro_pending/repro_oauth_lifecycle.py::test_3209` |
+| Console log retained | yes (`logs/3209.txt`) |
+| Raw payload retained | no |
+
+## B. Raw console log (logs/3209.txt)
+
+```
 VERDICT=REPRO
 CATEGORY=silent
 three concurrent GET /mcp through ONE provider; /mcp sleeps 0.3s:
@@ -21,3 +59,4 @@ three concurrent GET /mcp through ONE provider; /mcp sleeps 0.3s:
 elapsed sorted: [0.624, 0.935, 1.247]
 total wall clock: 1.248s  (parallel ~0.3s / serialised ~0.9s)
 unauthenticated /mcp hits (i.e. each caller re-ran the full flow): 1
+```

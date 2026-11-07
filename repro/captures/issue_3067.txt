@@ -1,15 +1,64 @@
 # issue: #3067
 # origin_layer: Server
+# exposure_channel: silent
 # evidence_class: silent
 # evidence_tier: D
-# transport: streamable-http
+# evidence_source: none
 # harness_entry: repro_cases.py::b_3067
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_3067.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `repro_cases.py::b_3067`
+
+Trigger, as recorded during the study:
+
+```text
+call_tool(add, {'a': 1, 'b': 2, 'typo': 9})
+```
+
+## 2. What the reporter described
+
+#3067 unknown/misspelled args silently ignored
+
+## 3. What we captured
+
+No error was raised (evidence tier D). The call finished; the defect shows up in
+what came back, not in a diagnostic:
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3067', 'version': ''}} content=[TextContent(type='text', text='3', annotations=None, meta=None)] structured_content={'result': 3} is_error=False result_type='complete'
+```
 
-## raw payload written by the run (raw/real_3067.txt)
+## 4. Why it happens
 
+`call_tool(add,{a:1,b:2,typo:9})` 返回 3 无报错，拼错的额外参数被静默丢弃（extra=ignore）。输入错误被无声吞掉，属静默失效。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Server |
+| Exposure channel | `silent` |
+| Evidence class | `silent` |
+| Evidence tier | D |
+| Error text came from | none |
+| Harness entry | `repro_cases.py::b_3067` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_3067.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3067', 'version': ''}} content=[TextContent(type='text', text='3', annotations=None, meta=None)] structured_content={'result': 3} is_error=False result_type='complete'
+```
+
+## C. Raw payload (raw/real_3067.txt)
+
+```
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3067', 'version': ''}} content=[TextContent(type='text', text='3', annotations=None, meta=None)] structured_content={'result': 3} is_error=False result_type='complete'
+```

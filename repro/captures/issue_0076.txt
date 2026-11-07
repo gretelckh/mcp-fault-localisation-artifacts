@@ -1,15 +1,110 @@
 # issue: #76
 # origin_layer: Server
+# exposure_channel: caller-exception
 # evidence_class: caller-exception
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: runtime
 # harness_entry: attempt_repro_external.py::issue#76
-# defect_captured: 
+# console_log: not retained
+# raw_payload: raw/real_76.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `attempt_repro_external.py::issue#76`
+
+Trigger code:
+
+```python
+import os
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+import dotenv
+
+dotenv.load_dotenv()
+
+async def main():
+    server_params = StdioServerParameters(
+        command="npx",
+        args=["-y", "@modelcontextprotocol/server-github"],
+        env={
+            "GITHUB_PERSONAL_ACCESS_TOKEN": os.getenv("GITHUB_PERSONAL_ACCESS_TOKEN"),
+            "PATH": os.getenv("PATH")
+        }
+    )
+
+    async with stdio_client(server_params) as (read, write):
+        async with ClientSession(read, write) as session:
+            # Initialize the connection
+            await session.initialize()
+
+            # Example: Call tool to list repositories
+            repos = await session.call_tool(
+                "search_repositories",
+                arguments={"query": "user:adhikasp"}
+            )
+            print("Repositories:", repos)
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(main())
+```
+
+## 2. What the reporter described
+
+机械重放 issue 正文 python 片段 -> 命中该 issue 自身报错
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
+ValidationError: 1 validation error for StdioServerParameters
+---
+ents.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\Users\<user>\AppData\Local\Temp\mcp_repro_e7ar47p5\b76\repro_snippet.py", line 40, in main
+    server_params = StdioServerParameters(
+        command="npx",
+    ...<4 lines>...
+        }
+    )
+  File "<python-env>\Lib\site-packages\pydantic\main.py", line 250, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for StdioServerParameters
+env.GITHUB_PERSONAL_ACCESS_TOKEN
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.12/v/string_type
+```
+
+## 4. Why it happens
+
+传 `env={GITHUB_PERSONAL_ACCESS_TOKEN: os.getenv(...)}` 时值为 None，`StdioServerParameters` 的严格 Pydantic 校验直接抛 `ValidationError: env.GITHUB_PERSONAL_ACCESS_TOKEN Input should be a valid string`。配置错误本可给出可读提示，却以底层校验异常裸抛给调用方，属 caller-exception。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Server |
+| Exposure channel | `caller-exception` |
+| Evidence class | `caller-exception` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `attempt_repro_external.py::issue#76` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_76.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-76', 'version': ''}} content=[TextContent(type='text', text='pong', annotations=None, meta=None)] structured_content={'result': 'pong'} is_error=False result_type='complete'
+```
 
-## raw payload written by the run (raw/real_76.txt)
+## C. Raw payload (raw/real_76.txt)
 
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-76', 'version': ''}} content=[TextContent(type='text', text='pong', annotations=None, meta=None)] structured_content={'result': 'pong'} is_error=False result_type='complete'
+```

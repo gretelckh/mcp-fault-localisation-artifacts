@@ -1,17 +1,55 @@
 # issue: #3250
 # origin_layer: Client
+# exposure_channel: silent
 # evidence_class: silent
 # evidence_tier: B
-# transport: n/a
+# evidence_source: runtime
 # harness_entry: runner/repro_pending/repro_oauth_lifecycle.py::test_3250
-# defect_captured: 
+# console_log: logs/3250.txt
+# raw_payload: not retained
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `runner/repro_pending/repro_oauth_lifecycle.py::test_3250`
 
+Trigger, as recorded during the study:
 
-## console log (logs/3250.txt)
+```text
+storage 预置已过期 token(expires_in=-3600)+refresh_token，模拟进程重启后发第一个请求
+```
 
+## 2. What the reporter described
+
+_initialize() 只从 storage 恢复 current_tokens/client_info，从不调用 update_token_expiry()，token_expiry_time 保持 None；is_token_valid() 因 `not self.token_expiry_time` 把过期 token 判为有效，于是直接发出陈旧 Bearer，且全程 0 次 refresh —— 透明刷新在重启后失效
+
+## 3. What we captured
+
+Captured in our run (evidence tier B).
+
+```
+after _initialize: token_expiry_time=None; is_token_valid()=True (token expired 1h ago); Authorization sent=Bearer at-stale; refresh requests=0; final status=200
+```
+
+## 4. Why it happens
+
+进程重启后 `OAuthClientProvider._initialize()` 只从 storage 恢复 `current_tokens`/`client_info`，从不调用 `update_token_expiry()`，`token_expiry_time` 保持 None；`is_token_valid()` 因 `not self.token_expiry_time` 把早已过期的 token 判为有效，于是发出陈旧 Bearer 且 0 次 refresh。陈旧凭据的失效没有任何报错标志，属静默失效（透明刷新失效）。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `silent` |
+| Evidence class | `silent` |
+| Evidence tier | B |
+| Error text came from | runtime |
+| Harness entry | `runner/repro_pending/repro_oauth_lifecycle.py::test_3250` |
+| Console log retained | yes (`logs/3250.txt`) |
+| Raw payload retained | no |
+
+## B. Raw console log (logs/3250.txt)
+
+```
 VERDICT=REPRO
 CATEGORY=silent
 stored token: access=at-stale, expires_in=-3600 (already expired)
@@ -20,3 +58,4 @@ is_token_valid() -> True   (expected False for an expired token)
 Authorization actually sent: Bearer at-stale
 refresh (grant_type=refresh_token) requests: 0   (expected >=1)
 final status: 200
+```

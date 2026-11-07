@@ -1,26 +1,71 @@
 # issue: #2618
 # origin_layer: Transport
+# exposure_channel: silent
 # evidence_class: silent
 # evidence_tier: B
-# transport: streamable-http/raw-post
+# evidence_source: issue text
 # harness_entry: repro_cases.py::b_proto
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_2618.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `repro_cases.py::b_proto`
+
+Trigger, as recorded during the study:
+
+```text
+raw_post(initialize, {'body': {'jsonrpc': '2.0', 'id': 1, 'method': 'initialize', 'params': {'protocolVersion': '2024-11-05', 'capabilities': {}, 'clientInfo': {'name': 'probe', 'version': '1.0'}}}, 'headers': {'MCP-Protocol-Version': '2025-06-18'}})
+```
+
+## 2. What the reporter described
+
+#2618 mismatched MCP-Protocol-Version header vs body protocolVersion
+
+## 3. What we captured
+
+Quoted from the issue report; our replay did not raise it again (evidence tier B).
+
+```
+HTTP 200
+event: message
+
+data: {"jsonrpc":"2.0","id":1,"result":{"capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"listChanged":false,"subscribe":false},"tools":{"listChanged":false}},"protocolVersion":"2024-11-05","serverInfo":{"name":"real-proto","version":""}}}
+```
+
+## 4. Why it happens
+
+`MCP-Protocol-Version` header 与 body 的 `protocolVersion` 不一致，但服务端按 body 协商返回 HTTP 200，未校验 header。协议错配被静默接受，属静默失效。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Transport |
+| Exposure channel | `silent` |
+| Evidence class | `silent` |
+| Evidence tier | B |
+| Error text came from | issue text |
+| Harness entry | `repro_cases.py::b_proto` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_2618.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
 HTTP 200
 event: message
 data: {"jsonrpc":"2.0","id":1,"result":{"capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"listChanged":false,"subscribe":false},"tools":{"listChanged":false}},"protocolVersion":"2024-11-05","serverInfo":{"name":"real-proto","version":""}}}
+```
 
+## C. Raw payload (raw/real_2618.txt)
 
-
-## raw payload written by the run (raw/real_2618.txt)
-
+```
 HTTP 200
 event: message
 
 data: {"jsonrpc":"2.0","id":1,"result":{"capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"listChanged":false,"subscribe":false},"tools":{"listChanged":false}},"protocolVersion":"2024-11-05","serverInfo":{"name":"real-proto","version":""}}}
-
-
-
-
+```

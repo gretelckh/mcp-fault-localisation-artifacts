@@ -120,6 +120,28 @@ def main():
     check("attempt log rows", len(load("repro/attempt_log.csv")), 350)
     check("verdict rows", len(load("repro/repro_verdicts_72.csv")), 72)
 
+    print("\n== 9. Evidence coverage, bug by bug ==")
+    idx = load("repro/captures_index.csv")
+    check("index rows", len(idx), 72)
+    check("bugs with a trigger or reproduction recipe", sum(1 for r in idx if r["has_trigger_code"] == "yes"), 72)
+    check("bugs with an error text", sum(1 for r in idx if r["has_error_text"] == "yes"), 63)
+    check("  of which captured at runtime", sum(1 for r in idx if r["error_text_source"] == "runtime"), 49)
+    check("  of which quoted from the issue", sum(1 for r in idx if r["error_text_source"] == "issue text"), 14)
+    check("  of which silent (no diagnostic)", sum(1 for r in idx if r["error_text_source"] == "none"), 9)
+    check("bugs with a raw payload", sum(1 for r in idx if r["has_raw_payload"] == "yes"), 54)
+    check("bugs with a console dump", sum(1 for r in idx if r["has_console_log"] == "yes"), 18)
+    # every capture must actually carry the sections its index row advertises
+    missing = []
+    for r in idx:
+        p = os.path.join(ROOT, "repro", "captures", "issue_%04d.txt" % int(r["issue"].lstrip("#")))
+        if not os.path.exists(p):
+            missing.append(r["issue"])
+            continue
+        s = open(p, encoding="utf-8").read()
+        if "## 1. What was run" not in s or "## 4. Why it happens" not in s:
+            missing.append(r["issue"])
+    check("captures missing their mandatory sections", len(missing), 0)
+
     print()
     if FAIL:
         print("FAILED %d check(s): %s" % (len(FAIL), ", ".join(FAIL)))

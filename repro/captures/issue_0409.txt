@@ -1,18 +1,57 @@
 # issue: #409
 # origin_layer: Client
+# exposure_channel: caller-exception
 # evidence_class: caller-exception
 # evidence_tier: A
-# transport: n/a
+# evidence_source: runtime
 # harness_entry: runner/repro_pending/repro_json.py
-# defect_captured: 
+# console_log: logs/409.txt
+# raw_payload: not retained
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `runner/repro_pending/repro_json.py`
 
+Trigger, as recorded during the study:
 
-## console log (logs/409.txt)
+```text
+自定义 streamable-http 服务器对 tools/list 返回 200 + Content-Type:application/json 但 body 非 JSON（'Error: type error in handler'）
+```
 
+## 2. What the reporter described
+
+客户端解析 marked application/json 但实际非 JSON 的响应体，抛出 MCPError: Failed to parse JSON response（原 issue 为裸 SyntaxError，2.2.0 已包装为 MCPError）
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
+list_tools RAISED:MCPError:Failed to parse JSON response: 1 validation error ... Invalid JSON: expected value at line 1 column 1 [input_value=b'Error: type error in handler']
+```
+
+## 4. Why it happens
+
+服务器对 tools/list 返回 200 + `Content-Type: application/json`，但 body 实际非 JSON（`Error: type error in handler`）。客户端解析失败，2.2.0 下包装为 `MCPError: Failed to parse JSON response`（原 issue 为裸 SyntaxError）。非 JSON 响应体引发客户端解析错误，暴露在调用方，属 caller-exception。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `caller-exception` |
+| Evidence class | `caller-exception` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `runner/repro_pending/repro_json.py` |
+| Console log retained | yes (`logs/409.txt`) |
+| Raw payload retained | no |
+
+## B. Raw console log (logs/409.txt)
+
+```
 client entered
 list_tools RAISED:MCPError:Failed to parse JSON response: 1 validation error for union[JSONRPCRequest,JSONRPCNotification,JSONRPCResponse,JSONRPCError]
   Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value=b'Error: type error in handler', input_type=bytes]
     For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+```

@@ -1,19 +1,58 @@
 # issue: #3566
 # origin_layer: Client
+# exposure_channel: single-layer-correct
 # evidence_class: single-layer-correct
 # evidence_tier: A
-# transport: n/a
+# evidence_source: runtime
 # harness_entry: runner/repro_pending/repro_oauth_logic.py::test_3566
-# defect_captured: 
+# console_log: logs/3566.txt
+# raw_payload: not retained
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `runner/repro_pending/repro_oauth_logic.py::test_3566`
 
+Trigger, as recorded during the study:
 
-## console log (logs/3566.txt)
+```text
+union_scopes('read','read,write') 及 validate_scope(scope='read,write', req='read')
+```
 
+## 2. What the reporter described
+
+RFC 6749 用空格分隔 scope，但真实授权服务器（如 Linear）返回逗号分隔。union_scopes/validate_scope 按空格 split，把 'read,write' 当成单个 scope，导致校验失败
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
+union_scopes('read','read,write') -> 'read read,write' (Expected 'read write'); validate_scope(scope='read,write', req='read') -> RAISED InvalidScopeError
+```
+
+## 4. Why it happens
+
+RFC 6749 用空格分隔 scope，但真实授权服务器（如 Linear）返回逗号分隔。`union_scopes`/`validate_scope` 按空格 split，把 `read,write` 当成单个 scope，导致校验失败/合并错误，属 single-layer 逻辑缺陷。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `single-layer-correct` |
+| Evidence class | `single-layer-correct` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `runner/repro_pending/repro_oauth_logic.py::test_3566` |
+| Console log retained | yes (`logs/3566.txt`) |
+| Raw payload retained | no |
+
+## B. Raw console log (logs/3566.txt)
+
+```
 VERDICT=REPRO
 CATEGORY=single-layer
 union_scopes("read", "read,write") -> "read read,write"
 Expected: "read write" (split comma); Actual: "read read,write" (comma kept)
 validate_scope(scope="read,write", req="read") -> RAISED InvalidScopeError: Client was not registered with scope read
+```

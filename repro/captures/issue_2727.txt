@@ -1,16 +1,56 @@
 # issue: #2727
 # origin_layer: Transport
+# exposure_channel: caller-exception
 # evidence_class: caller-exception
 # evidence_tier: A
-# transport: n/a
+# evidence_source: runtime
 # harness_entry: runner/repro_pending/repro_2727.py
-# defect_captured: 
+# console_log: logs/2727.txt
+# raw_payload: not retained
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `runner/repro_pending/repro_2727.py`
 
+Trigger, as recorded during the study:
 
-## console log (logs/2727.txt)
+```text
+Client(http://127.0.0.1:9200/mcp, mode='auto') 连接一个校验Origin头的服务器
+```
 
+## 2. What the reporter described
+
+streamable_http 客户端不发送 Origin 头，被符合规范的（跨域保护）服务器拒绝(403)，客户端得到 MCPError: Server returned an error response
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
 enter RAISED:MCPError:Server returned an error response
 seen Origin headers on requests: [None, None]
+```
+
+## 4. Why it happens
+
+streamable-http 客户端请求未设置 `Origin` 头（`_prepare_headers` 只含 accept/content-type/session-id/protocol-version），符合规范的跨域保护服务器以 403 拒绝，客户端得到 `MCPError: Server returned an error response`。源是 Transport（HTTP 头缺失），以裸异常暴露在调用方，属 caller-exception。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Transport |
+| Exposure channel | `caller-exception` |
+| Evidence class | `caller-exception` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `runner/repro_pending/repro_2727.py` |
+| Console log retained | yes (`logs/2727.txt`) |
+| Raw payload retained | no |
+
+## B. Raw console log (logs/2727.txt)
+
+```
+enter RAISED:MCPError:Server returned an error response
+seen Origin headers on requests: [None, None]
+```

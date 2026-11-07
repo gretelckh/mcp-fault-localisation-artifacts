@@ -1,16 +1,64 @@
 # issue: #3637
 # origin_layer: Host
+# exposure_channel: pushed-to-Server
 # evidence_class: pushed-to-server
 # evidence_tier: B
-# transport: streamable-http
+# evidence_source: issue text
 # harness_entry: repro_cases.py::b_flat_argument
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_r_flat_argument.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
-verified (run_real_http*.py) - see raw/real_r_flat_argument.txt
+Harness entry: `repro_cases.py::b_flat_argument`
 
-## raw payload (raw/real_r_flat_argument.txt)
+Trigger, as recorded during the study:
 
+```text
+call_tool(summarize, {'title': 'x', 'pages': 5})
+```
+
+## 2. What the reporter described
+
+Pydantic model param not flattened; a flat client arg dict is rejected at Server [bug #3637]
+
+## 3. What we captured
+
+Quoted from the issue report; our replay did not raise it again (evidence tier B).
+
+```
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-flat', 'version': ''}} content=[TextContent(type='text', text="Error executing tool summarize: 1 validation error for summarizeArguments\nbook\n  Field required [type=missing, input_value={'title': 'x', 'pages': 5}, input_type=dict]\n    For
+```
+
+## 4. Why it happens
+
+Host 传扁平参数 dict（期望 Pydantic model 被 flatten），但 Server 侧未 flatten，按缺失字段报校验错误`Error executing tool summarize`（is_error=True）。源是 Host，报告层是 Server，属层错位。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Host |
+| Exposure channel | `pushed-to-Server` |
+| Evidence class | `pushed-to-server` |
+| Evidence tier | B |
+| Error text came from | issue text |
+| Harness entry | `repro_cases.py::b_flat_argument` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_r_flat_argument.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
+verified (run_real_http*.py) - see real_r_flat_argument.txt
+```
+
+## C. Raw payload (raw/real_r_flat_argument.txt)
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-flat', 'version': ''}} content=[TextContent(type='text', text="Error executing tool summarize: 1 validation error for summarizeArguments\nbook\n  Field required [type=missing, input_value={'title': 'x', 'pages': 5}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing", annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
 [control nested=OK]
+```

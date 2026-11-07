@@ -1,16 +1,65 @@
 # issue: #3646
 # origin_layer: Host
+# exposure_channel: silent
 # evidence_class: silent
 # evidence_tier: B
-# transport: streamable-http
+# evidence_source: issue text
 # harness_entry: repro_cases.py::case_extra_arg
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_r_extra_arg_silent.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
-verified (run_real_http*.py) - see raw/real_r_extra_arg_silent.txt
+Harness entry: `repro_cases.py::case_extra_arg`
 
-## raw payload (raw/real_r_extra_arg_silent.txt)
+Trigger, as recorded during the study:
 
+```text
+call_tool(extra, {})
+```
+
+## 2. What the reporter described
+
+extra unknown tool argument silently accepted (no opt-in rejection) [bug #3646]
+
+## 3. What we captured
+
+Quoted from the issue report; our replay did not raise it again (evidence tier B).
+
+```
 is_error=False
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3646', 'version': ''}} content=[TextContent(type='text', text='1', annotations=None, meta=None)] structured_content={'result': 1} is_error=Fa
+```
+
+## 4. Why it happens
+
+Host 传入的未知额外工具参数被静默接受（无 opt-in 拒绝），is_error=False。参数错误被无声吞掉，属静默失效。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Host |
+| Exposure channel | `silent` |
+| Evidence class | `silent` |
+| Evidence tier | B |
+| Error text came from | issue text |
+| Harness entry | `repro_cases.py::case_extra_arg` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_r_extra_arg_silent.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
+verified (run_real_http*.py) - see real_r_extra_arg_silent.txt
+```
+
+## C. Raw payload (raw/real_r_extra_arg_silent.txt)
+
+```
+is_error=False
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3646', 'version': ''}} content=[TextContent(type='text', text='1', annotations=None, meta=None)] structured_content={'result': 1} is_error=Fa
+```

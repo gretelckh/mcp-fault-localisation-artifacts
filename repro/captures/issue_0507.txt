@@ -1,16 +1,55 @@
 # issue: #507
 # origin_layer: Transport
+# exposure_channel: caller-exception
 # evidence_class: caller-exception
 # evidence_tier: A
-# transport: n/a
+# evidence_source: runtime
 # harness_entry: runner/repro_pending/repro_sse.py
-# defect_captured: 
+# console_log: logs/507.txt
+# raw_payload: not retained
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `runner/repro_pending/repro_sse.py`
 
+Trigger, as recorded during the study:
 
-## console log (logs/507.txt)
+```text
+sse_client('http://127.0.0.1:9210/sse') 连接返回404的SSE端点
+```
 
+## 2. What the reporter described
+
+SSE 连接时端点返回 404，mcp sse_client 抛出 HTTPStatusError，连接建立失败
+
+## 3. What we captured
+
+Captured in our run (evidence tier A).
+
+```
+RAISED:HTTPStatusError:Client error '404 Not Found' for url 'http://127.0.0.1:9210/sse'
+```
+
+## 4. Why it happens
+
+SSE 客户端连接建立时端点返回 404，客户端直接抛 `HTTPStatusError` 而非转为 MCP 错误，以裸异常暴露在调用方，属 Transport/HTTP 缺陷。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Transport |
+| Exposure channel | `caller-exception` |
+| Evidence class | `caller-exception` |
+| Evidence tier | A |
+| Error text came from | runtime |
+| Harness entry | `runner/repro_pending/repro_sse.py` |
+| Console log retained | yes (`logs/507.txt`) |
+| Raw payload retained | no |
+
+## B. Raw console log (logs/507.txt)
+
+```
 RAISED:HTTPStatusError:Client error '404 Not Found' for url 'http://127.0.0.1:9210/sse'
 For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+```

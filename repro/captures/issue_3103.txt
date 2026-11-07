@@ -1,17 +1,55 @@
 # issue: #3103
 # origin_layer: Client
+# exposure_channel: single-layer-genericised
 # evidence_class: single-layer-masked
 # evidence_tier: B
-# transport: n/a
+# evidence_source: runtime
 # harness_entry: runner/repro_pending/repro_oauth_flow.py::test_3103
-# defect_captured: 
+# console_log: logs/3103.txt
+# raw_payload: not retained
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `runner/repro_pending/repro_oauth_flow.py::test_3103`
 
+Trigger, as recorded during the study:
 
-## console log (logs/3103.txt)
+```text
+检查 mcp.server.auth.middleware.bearer_auth._send_auth_error 构造 WWW-Authenticate
+```
 
+## 2. What the reporter described
+
+RequireAuthMiddleware 的 _send_auth_error 构造 WWW-Authenticate 时只含 error/error_description(可选 resource_metadata)，从不含 RFC 6750 要求的 scope= 参数，导致客户端无法据挑战限定重新授权所需 scope
+
+## 3. What we captured
+
+Captured in our run (evidence tier B).
+
+```
+_send_auth_error: www_auth_parts=[error, error_description(, resource_metadata)] -> Bearer ...; scope= 参数缺失
+```
+
+## 4. Why it happens
+
+`RequireAuthMiddleware._send_auth_error` 构造 `WWW-Authenticate` 时只含 error/error_description（可选 resource_metadata），从不含 RFC 6750 §3 要求的 `scope=` 参数；客户端据挑战重授权时无法得知所需 scope，step-up 授权范围被降级。报在 Server 层（层面正确），但挑战信息被降级，属 single-layer 泛化/掩蔽。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `single-layer-genericised` |
+| Evidence class | `single-layer-masked` |
+| Evidence tier | B |
+| Error text came from | runtime |
+| Harness entry | `runner/repro_pending/repro_oauth_flow.py::test_3103` |
+| Console log retained | yes (`logs/3103.txt`) |
+| Raw payload retained | no |
+
+## B. Raw console log (logs/3103.txt)
+
+```
 VERDICT=REPRO
 CATEGORY=single-layer
 --- _send_auth_error source ---
@@ -35,3 +73,4 @@ def _send_auth_error(self, send: Send, status_code: int, error: str, description
                 "headers": [
             
 WWW-Authenticate includes scope= param: False
+```

@@ -1,20 +1,60 @@
 # issue: #2687
 # origin_layer: Client
+# exposure_channel: single-layer-correct
 # evidence_class: single-layer-correct
 # evidence_tier: D
-# transport: n/a
+# evidence_source: none
 # harness_entry: runner/repro_pending/repro_oauth_logic.py::test_2687
-# defect_captured: 
+# console_log: logs/2687.txt
+# raw_payload: not retained
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `runner/repro_pending/repro_oauth_logic.py::test_2687`
 
+Trigger, as recorded during the study:
 
-## console log (logs/2687.txt)
+```text
+OAuthClientInformationFull(redirect_uris=[AnyUrl('https://x/cb')]) 与 [AnyHttpUrl('https://x/cb')] 比较
+```
 
+## 2. What the reporter described
+
+redirect_uris 声明为 list[AnyUrl]，但传入 pydantic 的 AnyHttpUrl 子类型时相等性比较失败（AnyUrl != AnyHttpUrl），破坏 round-trip
+
+## 3. What we captured
+
+No error was raised (evidence tier D). The call finished; the defect shows up in
+what came back, not in a diagnostic:
+
+```
+a.redirect_uris==b.redirect_uris : False; a==b : False
+```
+
+## 4. Why it happens
+
+`OAuthClientInformationFull.redirect_uris` 声明为 `list[AnyUrl]`，但传入 pydantic 的 `AnyHttpUrl`子类型时相等性比较失败（`AnyUrl('https://x') != AnyHttpUrl('https://x')`），破坏 round-trip 与下游判定，属 single-layer 逻辑缺陷。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `single-layer-correct` |
+| Evidence class | `single-layer-correct` |
+| Evidence tier | D |
+| Error text came from | none |
+| Harness entry | `runner/repro_pending/repro_oauth_logic.py::test_2687` |
+| Console log retained | yes (`logs/2687.txt`) |
+| Raw payload retained | no |
+
+## B. Raw console log (logs/2687.txt)
+
+```
 VERDICT=REPRO
 CATEGORY=single-layer
 a.redirect_uris=[AnyUrl('https://x/cb')]
 b.redirect_uris=[AnyHttpUrl('https://x/cb')]
 a.redirect_uris == b.redirect_uris : False
 a == b : False
+```

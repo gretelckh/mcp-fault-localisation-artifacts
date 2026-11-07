@@ -1,16 +1,65 @@
 # issue: #3557
 # origin_layer: Transport
+# exposure_channel: caller-exception
 # evidence_class: caller-exception
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: issue text
 # harness_entry: repro_cases.py::case_jsonrpc_code
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_r_jsonrpc_error_code.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
-verified (run_real_http*.py) - see raw/real_r_jsonrpc_error_code.txt
+Harness entry: `repro_cases.py::case_jsonrpc_code`
 
-## raw payload (raw/real_r_jsonrpc_error_code.txt)
+Trigger, as recorded during the study:
 
+```text
+call_tool(jsonrpc, {})
+```
+
+## 2. What the reporter described
+
+malformed (non-JSON-RPC) body answered with -32602 instead of -32600 [bug #3557]
+
+## 3. What we captured
+
+Quoted from the issue report; our replay did not raise it again (evidence tier A).
+
+```
 status=400
 {"jsonrpc":"2.0","id":null,"error":{"code":-32602,"message":"Validation error: 4 validation errors for union[JSONRPCRequest,JSONRPCNotification,JSONRPCResponse,JSONRPCError]\nJSONRPCRequest\n  Input should be a valid dictionary or instance
+```
+
+## 4. Why it happens
+
+畸形的非 JSON-RPC body 被回答为 `-32602`（应 `-32600`），HTTP 400 裸异常。错误码规范问题，以调用方裸异常暴露。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Transport |
+| Exposure channel | `caller-exception` |
+| Evidence class | `caller-exception` |
+| Evidence tier | A |
+| Error text came from | issue text |
+| Harness entry | `repro_cases.py::case_jsonrpc_code` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_r_jsonrpc_error_code.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
+verified (run_real_http*.py) - see real_r_jsonrpc_error_code.txt
+```
+
+## C. Raw payload (raw/real_r_jsonrpc_error_code.txt)
+
+```
+status=400
+{"jsonrpc":"2.0","id":null,"error":{"code":-32602,"message":"Validation error: 4 validation errors for union[JSONRPCRequest,JSONRPCNotification,JSONRPCResponse,JSONRPCError]\nJSONRPCRequest\n  Input should be a valid dictionary or instance
+```

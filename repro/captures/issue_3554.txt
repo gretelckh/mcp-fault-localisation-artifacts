@@ -1,15 +1,63 @@
 # issue: #3554
 # origin_layer: Server
+# exposure_channel: single-layer-genericised
 # evidence_class: single-layer-masked
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: issue text
 # harness_entry: repro_cases.py::b_bytes_output
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_r_bytes_output_crash.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
-verified (run_real_http*.py) - see raw/real_r_bytes_output_crash.txt
+Harness entry: `repro_cases.py::b_bytes_output`
 
-## raw payload (raw/real_r_bytes_output_crash.txt)
+Trigger, as recorded during the study:
 
+```text
+call_tool(get_bytes, {})
+```
+
+## 2. What the reporter described
+
+-> bytes non-UTF-8 crashes with generic error [bug #3554]
+
+## 3. What we captured
+
+Quoted from the issue report; our replay did not raise it again (evidence tier A).
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-bytes', 'version': ''}} content=[TextContent(type='text', text='Error executing tool get_bytes', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+```
+
+## 4. Why it happens
+
+非 UTF-8 字节输出崩溃，报 `Error executing tool get_bytes`。报在 Server 层，但根因被掩蔽。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Server |
+| Exposure channel | `single-layer-genericised` |
+| Evidence class | `single-layer-masked` |
+| Evidence tier | A |
+| Error text came from | issue text |
+| Harness entry | `repro_cases.py::b_bytes_output` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_r_bytes_output_crash.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
+verified (run_real_http*.py) - see real_r_bytes_output_crash.txt
+```
+
+## C. Raw payload (raw/real_r_bytes_output_crash.txt)
+
+```
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-bytes', 'version': ''}} content=[TextContent(type='text', text='Error executing tool get_bytes', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+```

@@ -1,15 +1,63 @@
 # issue: #3569
 # origin_layer: Server
+# exposure_channel: single-layer-genericised
 # evidence_class: single-layer-masked
 # evidence_tier: A
-# transport: streamable-http
+# evidence_source: issue text
 # harness_entry: repro_cases.py::b_perm_raise
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_r_permission_swallow.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
-verified (run_real_http*.py) - see raw/real_r_permission_swallow.txt
+Harness entry: `repro_cases.py::b_perm_raise`
 
-## raw payload (raw/real_r_permission_swallow.txt)
+Trigger, as recorded during the study:
 
+```text
+call_tool(fragile2, {'x': 1})
+```
+
+## 2. What the reporter described
+
+tool raises non-tool error; surfaces as pushed-to-Server [bug #3569/#3560]
+
+## 3. What we captured
+
+Quoted from the issue report; our replay did not raise it again (evidence tier A).
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-perm', 'version': ''}} content=[TextContent(type='text', text='Error executing tool fragile2', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+```
+
+## 4. Why it happens
+
+工具抛非 ToolError，被通用化成 `Error executing tool fragile2`。报在 Server 层，但根因被掩蔽。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Server |
+| Exposure channel | `single-layer-genericised` |
+| Evidence class | `single-layer-masked` |
+| Evidence tier | A |
+| Error text came from | issue text |
+| Harness entry | `repro_cases.py::b_perm_raise` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_r_permission_swallow.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
+verified (run_real_http*.py) - see real_r_permission_swallow.txt
+```
+
+## C. Raw payload (raw/real_r_permission_swallow.txt)
+
+```
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-perm', 'version': ''}} content=[TextContent(type='text', text='Error executing tool fragile2', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+```

@@ -1,18 +1,57 @@
 # issue: #2260
 # origin_layer: Client
+# exposure_channel: single-layer-correct
 # evidence_class: single-layer-correct
 # evidence_tier: B
-# transport: n/a
+# evidence_source: runtime
 # harness_entry: runner/repro_pending/repro_oauth_logic.py::test_2260
-# defect_captured: 
+# console_log: logs/2260.txt
+# raw_payload: not retained
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
+Harness entry: `runner/repro_pending/repro_oauth_logic.py::test_2260`
 
+Trigger, as recorded during the study:
 
-## console log (logs/2260.txt)
+```text
+build_metadata(issuer_url=AnyHttpUrl('https://as.example'), ...)
+```
 
+## 2. What the reporter described
+
+build_metadata 把 token_endpoint_auth_methods_supported 硬编码为 ['client_secret_post','client_secret_basic']，未包含 'none'，破坏 public client（无 secret）流程
+
+## 3. What we captured
+
+Captured in our run (evidence tier B).
+
+```
+token_endpoint_auth_methods_supported = ['client_secret_post', 'client_secret_basic']
+```
+
+## 4. Why it happens
+
+`build_metadata` 把 `token_endpoint_auth_methods_supported` 硬编码为 `['client_secret_post','client_secret_basic']`，未包含 `none`，破坏 public client（无 secret）流程，属 single-layer 逻辑缺陷。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Client |
+| Exposure channel | `single-layer-correct` |
+| Evidence class | `single-layer-correct` |
+| Evidence tier | B |
+| Error text came from | runtime |
+| Harness entry | `runner/repro_pending/repro_oauth_logic.py::test_2260` |
+| Console log retained | yes (`logs/2260.txt`) |
+| Raw payload retained | no |
+
+## B. Raw console log (logs/2260.txt)
+
+```
 VERDICT=REPRO
 CATEGORY=single-layer
 token_endpoint_auth_methods_supported = ['client_secret_post', 'client_secret_basic']
 Expected: include "none" for public clients; Actual: hardcoded [client_secret_post, client_secret_basic]
+```

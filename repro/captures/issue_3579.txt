@@ -1,15 +1,64 @@
 # issue: #3579
 # origin_layer: Host
+# exposure_channel: pushed-to-Server
 # evidence_class: pushed-to-server
 # evidence_tier: D
-# transport: streamable-http
+# evidence_source: none
 # harness_entry: repro_cases.py::b_empty_server
-# defect_captured: True
+# console_log: not retained
+# raw_payload: raw/real_r_empty_server_components.txt
 
-## captured return value / raised exception (repro_progress.json)
+## 1. What was run
 
-verified (run_real_http*.py) - see raw/real_r_empty_server_components.txt
+Harness entry: `repro_cases.py::b_empty_server`
 
-## raw payload (raw/real_r_empty_server_components.txt)
+Trigger, as recorded during the study:
 
+```text
+call_tool(nonexistent, {})
+```
+
+## 2. What the reporter described
+
+Host requests an unknown tool from a component-less server [bug #3579]
+
+## 3. What we captured
+
+No error was raised (evidence tier D). The call finished; the defect shows up in
+what came back, not in a diagnostic:
+
+```
 meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-empty', 'version': ''}} content=[TextContent(type='text', text='Unknown tool: nonexistent', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+```
+
+## 4. Why it happens
+
+Host 向一个无组件的 server 请求未知工具，报 `Unknown tool`（is_error=True）。源是 Host 的请求，报告层是 Server，属层错位。
+
+## 5. Provenance
+
+| Field | Value |
+|---|---|
+| Origin layer | Host |
+| Exposure channel | `pushed-to-Server` |
+| Evidence class | `pushed-to-server` |
+| Evidence tier | D |
+| Error text came from | none |
+| Harness entry | `repro_cases.py::b_empty_server` |
+| Console log retained | no |
+| Raw payload retained | yes (`raw/real_r_empty_server_components.txt`) |
+
+## A. Harness progress record
+
+Last record written by the runner for this bug. It is a *runtime trace*, not the
+defect evidence: a bug whose last call returned normally still has an entry here.
+
+```
+verified (run_real_http*.py) - see real_r_empty_server_components.txt
+```
+
+## C. Raw payload (raw/real_r_empty_server_components.txt)
+
+```
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-empty', 'version': ''}} content=[TextContent(type='text', text='Unknown tool: nonexistent', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+```
