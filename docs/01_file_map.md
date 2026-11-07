@@ -40,7 +40,7 @@ mcp-fault-artifacts/
 │   ├── 06_data_dictionary.md      column-by-column reference
 │   └── 07_results_snapshot.md     all headline numbers on one page
 └── scripts/
-    └── verify_numbers.py          63 checks, no dependencies
+    └── verify_numbers.py          64 checks, no dependencies
 ```
 
 ## Where to look for a given question

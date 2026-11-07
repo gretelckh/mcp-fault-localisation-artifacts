@@ -27,7 +27,7 @@ python scripts/verify_numbers.py
 ```
 
 The script recomputes **every number in the paper** from the files in this repository and prints
-them next to the value printed in the manuscript — 63 checks, all of which should read `ok`.
+them next to the value printed in the manuscript — 64 checks, all of which should read `ok`.
 The last line reads `All checks passed ...` if the artefact and the paper agree.
 
 If you only want to look at one thing, open `data/active_bugs_339.csv` in Excel or pandas and

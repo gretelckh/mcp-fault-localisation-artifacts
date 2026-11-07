@@ -91,10 +91,11 @@ number in this snapshot follows from that — including the Server/Client split 
 Under that label the model also gets it wrong in both studies, so the accuracies above are the
 strict ones.
 
-If a reader prefers the Client reading of #3434, exactly four numbers move by one: Study A becomes
-40/72 (55.6 %), 45/72 (62.5 %) and 39/72 (54.2 %) for the three arms; Study B becomes 120/247
-(48.6 %) and 52/172 (30.2 %) on non-Server. Nothing else changes: 339, 72, 267, 184, 83, the
-evidence-class counts and the tier counts are independent of this row.
+If a reader prefers the Client reading of #3434, these move with it: the Server/Client split of the
+72 becomes 37/22; Study A becomes 40/72 (55.6 %), 45/72 (62.5 %) and 39/72 (54.2 %) for the three
+arms; Study B becomes 120/247 (48.6 %) and 52/172 (30.2 %) on non-Server; and the mismatch count
+becomes 25/35. Everything else — 339, 72, 267, 184, 83, the evidence-class counts and the tier
+counts — is independent of this row.
 
 The row is called out here rather than silently harmonised so that the released data and the paper
 can be checked against each other.
