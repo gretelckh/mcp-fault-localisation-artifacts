@@ -1,0 +1,8 @@
+VERDICT=FIXED
+CATEGORY=fixed-in-current
+server_url                = http://h:9999/sub
+canonical (RFC 9728)      = http://h:9999/sub
+PRM.resource as advertised= http://h:9999/sub
+advertised == canonical   : True
+check_resource_allowed    : True
+root: ""http://h:9999"" -> 'http://h:9999'  (trailing slash added by AnyHttpUrl)

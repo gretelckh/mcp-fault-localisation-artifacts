@@ -1,0 +1,8 @@
+VERDICT=FIXED
+CATEGORY=fixed-in-current
+pre-state: expiry=1791964505 (past), can_refresh=True
+POST /token calls: 1, of which grant_type=refresh_token: 1
+refresh request body: grant_type=refresh_token&refresh_token=rt-1&client_id=mock-client-1&client_secret=mock-secret
+refresh request path: /token
+first GET /mcp Authorization: Bearer at-refreshed
+final status: 200

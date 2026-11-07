@@ -1,0 +1,434 @@
+[
+ {
+  "issue": 76,
+  "origin": "Server",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 79,
+  "origin": "Client",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 110,
+  "origin": "Client",
+  "channel": "pushed-server",
+  "hint": "CLUE: The failure is reported by the Server-side tool-dispatch layer (an \"Error executing tool X\" / \"Unknown tool\" result with is_error=True). A tool-dispatch error is a REPORTING point, not necessarily the ORIGIN. Before editing the tool body, inspect the tool-call REQUEST: the tool NAME and the ARGUMENTS the caller sent (names, nesting, types, enum values). An upstream caller mistake is commonly surfaced exactly here, so compare the request against the tool's declared schema. Do not assume the defect lives inside the tool implementation."
+ },
+ {
+  "issue": 234,
+  "origin": "Server",
+  "channel": "single-layer-correct",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 244,
+  "origin": "Server",
+  "channel": "registration-error",
+  "hint": "CLUE: The failure occurred at SERVER REGISTRATION / BUILD time, before the server could start or serve any tool. The error is a raised Python exception (ValueError / AttributeError / PydanticSchemaGenerationError) thrown while the SDK built the tool/resource registry from the handler definitions. This is a definition/signature problem, not a runtime call problem: inspect the handler's parameters, annotations, return type, and any URI template variables the decorator binds, and check the SDK version. The server never comes up, so no client error is the real signal; the traceback at construction is the diagnostic evidence."
+ },
+ {
+  "issue": 326,
+  "origin": "Host",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 348,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 409,
+  "origin": "Client",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 417,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 507,
+  "origin": "Transport",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 521,
+  "origin": "Client",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 577,
+  "origin": "Client",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 613,
+  "origin": "Transport",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 698,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 743,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 891,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 915,
+  "origin": "Client",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 922,
+  "origin": "Client",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 1060,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 1313,
+  "origin": "Client",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 1361,
+  "origin": "Client",
+  "channel": "pushed-server",
+  "hint": "CLUE: The failure is reported by the Server-side tool-dispatch layer (an \"Error executing tool X\" / \"Unknown tool\" result with is_error=True). A tool-dispatch error is a REPORTING point, not necessarily the ORIGIN. Before editing the tool body, inspect the tool-call REQUEST: the tool NAME and the ARGUMENTS the caller sent (names, nesting, types, enum values). An upstream caller mistake is commonly surfaced exactly here, so compare the request against the tool's declared schema. Do not assume the defect lives inside the tool implementation."
+ },
+ {
+  "issue": 1579,
+  "origin": "Server",
+  "channel": "single-layer-correct",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 1702,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 1974,
+  "origin": "Server",
+  "channel": "registration-error",
+  "hint": "CLUE: The failure occurred at SERVER REGISTRATION / BUILD time, before the server could start or serve any tool. The error is a raised Python exception (ValueError / AttributeError / PydanticSchemaGenerationError) thrown while the SDK built the tool/resource registry from the handler definitions. This is a definition/signature problem, not a runtime call problem: inspect the handler's parameters, annotations, return type, and any URI template variables the decorator binds, and check the SDK version. The server never comes up, so no client error is the real signal; the traceback at construction is the diagnostic evidence."
+ },
+ {
+  "issue": 2057,
+  "origin": "Client",
+  "channel": "silent",
+  "hint": "CLUE: The SDK returned a SUCCESS status (is_error=False) with a plausible-looking result, despite the fault. This is a SILENT failure: the defect is not reported at all, so a normal error log will never show it. Trust nothing about the success flag. Instead, verify the returned VALUE is semantically correct (right tool? right method? right arguments? expected shape?), check for silently-dropped extra fields, type coercion, and duplicate registrations that make the SDK keep the first definition. Instrument the result, not the error path."
+ },
+ {
+  "issue": 2114,
+  "origin": "Client",
+  "channel": "pushed-server",
+  "hint": "CLUE: The failure is reported by the Server-side tool-dispatch layer (an \"Error executing tool X\" / \"Unknown tool\" result with is_error=True). A tool-dispatch error is a REPORTING point, not necessarily the ORIGIN. Before editing the tool body, inspect the tool-call REQUEST: the tool NAME and the ARGUMENTS the caller sent (names, nesting, types, enum values). An upstream caller mistake is commonly surfaced exactly here, so compare the request against the tool's declared schema. Do not assume the defect lives inside the tool implementation."
+ },
+ {
+  "issue": 2153,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 2216,
+  "origin": "Client",
+  "channel": "single-layer-correct",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 2260,
+  "origin": "Client",
+  "channel": "single-layer-correct",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 2386,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 2422,
+  "origin": "Server",
+  "channel": "single-layer-correct",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 2431,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 2539,
+  "origin": "Server",
+  "channel": "silent",
+  "hint": "CLUE: The SDK returned a SUCCESS status (is_error=False) with a plausible-looking result, despite the fault. This is a SILENT failure: the defect is not reported at all, so a normal error log will never show it. Trust nothing about the success flag. Instead, verify the returned VALUE is semantically correct (right tool? right method? right arguments? expected shape?), check for silently-dropped extra fields, type coercion, and duplicate registrations that make the SDK keep the first definition. Instrument the result, not the error path."
+ },
+ {
+  "issue": 2618,
+  "origin": "Transport",
+  "channel": "silent",
+  "hint": "CLUE: The SDK returned a SUCCESS status (is_error=False) with a plausible-looking result, despite the fault. This is a SILENT failure: the defect is not reported at all, so a normal error log will never show it. Trust nothing about the success flag. Instead, verify the returned VALUE is semantically correct (right tool? right method? right arguments? expected shape?), check for silently-dropped extra fields, type coercion, and duplicate registrations that make the SDK keep the first definition. Instrument the result, not the error path."
+ },
+ {
+  "issue": 2687,
+  "origin": "Client",
+  "channel": "single-layer-correct",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 2727,
+  "origin": "Transport",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 2741,
+  "origin": "Transport",
+  "channel": "pushed-server",
+  "hint": "CLUE: The failure is reported by the Server-side tool-dispatch layer (an \"Error executing tool X\" / \"Unknown tool\" result with is_error=True). A tool-dispatch error is a REPORTING point, not necessarily the ORIGIN. Before editing the tool body, inspect the tool-call REQUEST: the tool NAME and the ARGUMENTS the caller sent (names, nesting, types, enum values). An upstream caller mistake is commonly surfaced exactly here, so compare the request against the tool's declared schema. Do not assume the defect lives inside the tool implementation."
+ },
+ {
+  "issue": 2770,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 3067,
+  "origin": "Server",
+  "channel": "silent",
+  "hint": "CLUE: The SDK returned a SUCCESS status (is_error=False) with a plausible-looking result, despite the fault. This is a SILENT failure: the defect is not reported at all, so a normal error log will never show it. Trust nothing about the success flag. Instead, verify the returned VALUE is semantically correct (right tool? right method? right arguments? expected shape?), check for silently-dropped extra fields, type coercion, and duplicate registrations that make the SDK keep the first definition. Instrument the result, not the error path."
+ },
+ {
+  "issue": 3099,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 3103,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 3209,
+  "origin": "Client",
+  "channel": "silent",
+  "hint": "CLUE: The SDK returned a SUCCESS status (is_error=False) with a plausible-looking result, despite the fault. This is a SILENT failure: the defect is not reported at all, so a normal error log will never show it. Trust nothing about the success flag. Instead, verify the returned VALUE is semantically correct (right tool? right method? right arguments? expected shape?), check for silently-dropped extra fields, type coercion, and duplicate registrations that make the SDK keep the first definition. Instrument the result, not the error path."
+ },
+ {
+  "issue": 3240,
+  "origin": "Client",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 3250,
+  "origin": "Client",
+  "channel": "silent",
+  "hint": "CLUE: The SDK returned a SUCCESS status (is_error=False) with a plausible-looking result, despite the fault. This is a SILENT failure: the defect is not reported at all, so a normal error log will never show it. Trust nothing about the success flag. Instead, verify the returned VALUE is semantically correct (right tool? right method? right arguments? expected shape?), check for silently-dropped extra fields, type coercion, and duplicate registrations that make the SDK keep the first definition. Instrument the result, not the error path."
+ },
+ {
+  "issue": 3266,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 3341,
+  "origin": "Server",
+  "channel": "single-layer-correct",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 3342,
+  "origin": "Server",
+  "channel": "single-layer-correct",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 3351,
+  "origin": "Server",
+  "channel": "single-layer-correct",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 3382,
+  "origin": "Client",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 3384,
+  "origin": "Client",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 3385,
+  "origin": "Server",
+  "channel": "single-layer-correct",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 3434,
+  "origin": "Client",
+  "channel": "pushed-server",
+  "hint": "CLUE: The failure is reported by the Server-side tool-dispatch layer (an \"Error executing tool X\" / \"Unknown tool\" result with is_error=True). A tool-dispatch error is a REPORTING point, not necessarily the ORIGIN. Before editing the tool body, inspect the tool-call REQUEST: the tool NAME and the ARGUMENTS the caller sent (names, nesting, types, enum values). An upstream caller mistake is commonly surfaced exactly here, so compare the request against the tool's declared schema. Do not assume the defect lives inside the tool implementation."
+ },
+ {
+  "issue": 3549,
+  "origin": "Server",
+  "channel": "silent",
+  "hint": "CLUE: The SDK returned a SUCCESS status (is_error=False) with a plausible-looking result, despite the fault. This is a SILENT failure: the defect is not reported at all, so a normal error log will never show it. Trust nothing about the success flag. Instead, verify the returned VALUE is semantically correct (right tool? right method? right arguments? expected shape?), check for silently-dropped extra fields, type coercion, and duplicate registrations that make the SDK keep the first definition. Instrument the result, not the error path."
+ },
+ {
+  "issue": 3554,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 3556,
+  "origin": "Transport",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 3557,
+  "origin": "Transport",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 3560,
+  "origin": "Transport",
+  "channel": "caller-exception",
+  "hint": "CLUE: The failure surfaced as a RAW Python EXCEPTION in the calling code (e.g. CancelledError, TimeoutError, ExceptionGroup, or a \"Client must be used within an async context manager\" RuntimeError), bypassing the MCP is_error protocol. This signature is characteristic of the connection/session lifecycle rather than a tool's logic: check session and connection state, request cancellation, timing/ordering of initialisation calls, and whether the client was used inside the correct async context. The exception is raised by the runtime, so correlate it with transport/session state, not tool code."
+ },
+ {
+  "issue": 3566,
+  "origin": "Client",
+  "channel": "single-layer-correct",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 3569,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 3572,
+  "origin": "Host",
+  "channel": "pushed-server",
+  "hint": "CLUE: The failure is reported by the Server-side tool-dispatch layer (an \"Error executing tool X\" / \"Unknown tool\" result with is_error=True). A tool-dispatch error is a REPORTING point, not necessarily the ORIGIN. Before editing the tool body, inspect the tool-call REQUEST: the tool NAME and the ARGUMENTS the caller sent (names, nesting, types, enum values). An upstream caller mistake is commonly surfaced exactly here, so compare the request against the tool's declared schema. Do not assume the defect lives inside the tool implementation."
+ },
+ {
+  "issue": 3573,
+  "origin": "Server",
+  "channel": "registration-error",
+  "hint": "CLUE: The failure occurred at SERVER REGISTRATION / BUILD time, before the server could start or serve any tool. The error is a raised Python exception (ValueError / AttributeError / PydanticSchemaGenerationError) thrown while the SDK built the tool/resource registry from the handler definitions. This is a definition/signature problem, not a runtime call problem: inspect the handler's parameters, annotations, return type, and any URI template variables the decorator binds, and check the SDK version. The server never comes up, so no client error is the real signal; the traceback at construction is the diagnostic evidence."
+ },
+ {
+  "issue": 3578,
+  "origin": "Server",
+  "channel": "silent",
+  "hint": "CLUE: The SDK returned a SUCCESS status (is_error=False) with a plausible-looking result, despite the fault. This is a SILENT failure: the defect is not reported at all, so a normal error log will never show it. Trust nothing about the success flag. Instead, verify the returned VALUE is semantically correct (right tool? right method? right arguments? expected shape?), check for silently-dropped extra fields, type coercion, and duplicate registrations that make the SDK keep the first definition. Instrument the result, not the error path."
+ },
+ {
+  "issue": 3579,
+  "origin": "Host",
+  "channel": "pushed-server",
+  "hint": "CLUE: The failure is reported by the Server-side tool-dispatch layer (an \"Error executing tool X\" / \"Unknown tool\" result with is_error=True). A tool-dispatch error is a REPORTING point, not necessarily the ORIGIN. Before editing the tool body, inspect the tool-call REQUEST: the tool NAME and the ARGUMENTS the caller sent (names, nesting, types, enum values). An upstream caller mistake is commonly surfaced exactly here, so compare the request against the tool's declared schema. Do not assume the defect lives inside the tool implementation."
+ },
+ {
+  "issue": 3585,
+  "origin": "Server",
+  "channel": "silent",
+  "hint": "CLUE: The SDK returned a SUCCESS status (is_error=False) with a plausible-looking result, despite the fault. This is a SILENT failure: the defect is not reported at all, so a normal error log will never show it. Trust nothing about the success flag. Instead, verify the returned VALUE is semantically correct (right tool? right method? right arguments? expected shape?), check for silently-dropped extra fields, type coercion, and duplicate registrations that make the SDK keep the first definition. Instrument the result, not the error path."
+ },
+ {
+  "issue": 3586,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 3592,
+  "origin": "Server",
+  "channel": "silent",
+  "hint": "CLUE: The SDK returned a SUCCESS status (is_error=False) with a plausible-looking result, despite the fault. This is a SILENT failure: the defect is not reported at all, so a normal error log will never show it. Trust nothing about the success flag. Instead, verify the returned VALUE is semantically correct (right tool? right method? right arguments? expected shape?), check for silently-dropped extra fields, type coercion, and duplicate registrations that make the SDK keep the first definition. Instrument the result, not the error path."
+ },
+ {
+  "issue": 3637,
+  "origin": "Host",
+  "channel": "pushed-server",
+  "hint": "CLUE: The failure is reported by the Server-side tool-dispatch layer (an \"Error executing tool X\" / \"Unknown tool\" result with is_error=True). A tool-dispatch error is a REPORTING point, not necessarily the ORIGIN. Before editing the tool body, inspect the tool-call REQUEST: the tool NAME and the ARGUMENTS the caller sent (names, nesting, types, enum values). An upstream caller mistake is commonly surfaced exactly here, so compare the request against the tool's declared schema. Do not assume the defect lives inside the tool implementation."
+ },
+ {
+  "issue": 3640,
+  "origin": "Server",
+  "channel": "silent",
+  "hint": "CLUE: The SDK returned a SUCCESS status (is_error=False) with a plausible-looking result, despite the fault. This is a SILENT failure: the defect is not reported at all, so a normal error log will never show it. Trust nothing about the success flag. Instead, verify the returned VALUE is semantically correct (right tool? right method? right arguments? expected shape?), check for silently-dropped extra fields, type coercion, and duplicate registrations that make the SDK keep the first definition. Instrument the result, not the error path."
+ },
+ {
+  "issue": 3643,
+  "origin": "Server",
+  "channel": "silent",
+  "hint": "CLUE: The SDK returned a SUCCESS status (is_error=False) with a plausible-looking result, despite the fault. This is a SILENT failure: the defect is not reported at all, so a normal error log will never show it. Trust nothing about the success flag. Instead, verify the returned VALUE is semantically correct (right tool? right method? right arguments? expected shape?), check for silently-dropped extra fields, type coercion, and duplicate registrations that make the SDK keep the first definition. Instrument the result, not the error path."
+ },
+ {
+  "issue": 3644,
+  "origin": "Server",
+  "channel": "single-layer-correct",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ },
+ {
+  "issue": 3646,
+  "origin": "Host",
+  "channel": "silent",
+  "hint": "CLUE: The SDK returned a SUCCESS status (is_error=False) with a plausible-looking result, despite the fault. This is a SILENT failure: the defect is not reported at all, so a normal error log will never show it. Trust nothing about the success flag. Instead, verify the returned VALUE is semantically correct (right tool? right method? right arguments? expected shape?), check for silently-dropped extra fields, type coercion, and duplicate registrations that make the SDK keep the first definition. Instrument the result, not the error path."
+ },
+ {
+  "issue": 3656,
+  "origin": "Server",
+  "channel": "single-layer-masked",
+  "hint": "CLUE: The failure is reported at the layer whose tool body raised it (a normal \"Error executing tool X\" from within a Server tool, is_error=True). The reporting layer and the executing layer coincide here, so the defect is most plausibly INSIDE that tool's implementation: inspect the tool body, its logic, and any raised exceptions. However, still verify the incoming arguments, since a caller mistake can also be surfaced here."
+ }
+]

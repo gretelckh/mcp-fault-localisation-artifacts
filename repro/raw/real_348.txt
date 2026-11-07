@@ -1,0 +1,1 @@
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-348', 'version': ''}} content=[TextContent(type='text', text='Error executing tool img', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'

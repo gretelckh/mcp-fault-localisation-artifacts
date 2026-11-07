@@ -1,0 +1,5 @@
+VERDICT=OBS
+CATEGORY=observation/scenario-specific
+client.__aexit__ from the main task: no error
+request task finished: status=200
+context.lock: <anyio._backends._asyncio.Lock object at 0x00000253ADDB6C10>

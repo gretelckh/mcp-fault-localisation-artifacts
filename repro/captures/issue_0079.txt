@@ -1,0 +1,16 @@
+# issue: #79
+# origin_layer: Client
+# evidence_class: caller-exception
+# evidence_tier: A
+# transport: n/a
+# harness_entry: runner/repro_pending/repro_79.py
+# defect_captured: 
+
+## captured return value / raised exception (repro_progress.json)
+
+
+
+## console log (logs/79.txt)
+
+4 clients connected OK
+RUN EXC: CancelledError: Cancelled by cancel scope 1efebf8e990

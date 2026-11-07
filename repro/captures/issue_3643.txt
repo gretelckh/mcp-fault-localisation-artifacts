@@ -1,0 +1,17 @@
+# issue: #3643
+# origin_layer: Server
+# evidence_class: silent
+# evidence_tier: D
+# transport: streamable-http
+# harness_entry: repro_cases.py::b_userlist_prompt
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+verified (run_real_http*.py) - see raw/real_r_userlist_prompt.txt
+
+## raw payload (raw/real_r_userlist_prompt.txt)
+
+is_error=False
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-ulist', 'version': ''}} description='' messages=[PromptMessage(role='user', content=TextContent(type='text', text='"[PromptMessage(role=\'user\', content=TextContent(type=\'text\', text=\'hi bob\', annotations=None, meta=None))]"', annotations=None, meta=None))] result_type='complete'
+[stringified PromptMessage rendered as one message]

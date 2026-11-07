@@ -1,0 +1,21 @@
+# issue: #922
+# origin_layer: Client
+# evidence_class: caller-exception
+# evidence_tier: A
+# transport: n/a
+# harness_entry: runner/repro_pending/repro_cancelscope.py
+# defect_captured: 
+
+## captured return value / raised exception (repro_progress.json)
+
+
+
+## console log (logs/922.txt)
+
+4 clients connected OK
+scenario=create sessions in one task, close them in separate tasks
+created 4 sessions in a task group
+  RAISED:RuntimeError:Attempted to exit cancel scope in a different task than it was entered in
+  RAISED:RuntimeError:Attempted to exit cancel scope in a different task than it was entered in
+  RAISED:RuntimeError:Attempted to exit cancel scope in a different task than it was entered in
+  RAISED:RuntimeError:Attempted to exit cancel scope in a different task than it was entered in

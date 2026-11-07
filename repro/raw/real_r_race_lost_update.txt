@@ -1,0 +1,2 @@
+final_after_20_concurrent_calls={'result': 1} n_calls=20 is_error=False
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-race', 'version': ''}} content=[TextContent(type='text', text='1', annotations=None, meta=None)] stru

@@ -1,0 +1,8 @@
+stage,step,count,note
+1,Pure issues in modelcontextprotocol/python-sdk (PRs excluded),1343,"full issue pool, all states"
+2,Keyword screen flags a candidate bug,439,labels: BUG 439 / QUESTION 277 / OTHER 457 / FEATURE 88 / CI-REFACTOR 47 / DOC 35
+3,Manual review confirms a genuine defect report,398,keyword candidates rejected as non-bugs: 41
+4,Removed: already behaves correctly on the pinned SDK (mcp 2.2.0),59,"removed from the active dataset, kept in the confirmed pool"
+5,ACTIVE dataset (analysed in the paper),339,= stage 3 - stage 4
+6,Reproduced at runtime on this machine,72,each bound to a real issue and replayed over Streamable HTTP
+7,Not reproduced at runtime,267,184 with an analysable error in the report + 83 without

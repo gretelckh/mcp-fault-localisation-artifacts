@@ -1,0 +1,16 @@
+# issue: #3549
+# origin_layer: Server
+# evidence_class: silent
+# evidence_tier: C
+# transport: streamable-http
+# harness_entry: repro_cases.py::b_race_lost_update
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+verified (run_real_http*.py) - see raw/real_r_race_lost_update.txt
+
+## raw payload (raw/real_r_race_lost_update.txt)
+
+final_after_20_concurrent_calls={'result': 1} n_calls=20 is_error=False
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-race', 'version': ''}} content=[TextContent(type='text', text='1', annotations=None, meta=None)] stru

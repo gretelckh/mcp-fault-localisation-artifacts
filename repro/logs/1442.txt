@@ -1,0 +1,3 @@
+VERDICT=SPEC
+CATEGORY=spec-gap
+Spec gap: client MUST NOT send tokens other than issued for resource (issuer validation).

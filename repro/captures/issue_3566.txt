@@ -1,0 +1,19 @@
+# issue: #3566
+# origin_layer: Client
+# evidence_class: single-layer-correct
+# evidence_tier: A
+# transport: n/a
+# harness_entry: runner/repro_pending/repro_oauth_logic.py::test_3566
+# defect_captured: 
+
+## captured return value / raised exception (repro_progress.json)
+
+
+
+## console log (logs/3566.txt)
+
+VERDICT=REPRO
+CATEGORY=single-layer
+union_scopes("read", "read,write") -> "read read,write"
+Expected: "read write" (split comma); Actual: "read read,write" (comma kept)
+validate_scope(scope="read,write", req="read") -> RAISED InvalidScopeError: Client was not registered with scope read

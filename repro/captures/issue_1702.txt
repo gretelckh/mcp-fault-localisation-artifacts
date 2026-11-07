@@ -1,0 +1,15 @@
+# issue: #1702
+# origin_layer: Server
+# evidence_class: single-layer-masked
+# evidence_tier: B
+# transport: streamable-http
+# harness_entry: repro_cases.py::b_1702
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-1702', 'version': ''}} content=[TextContent(type='text', text='Error executing tool get_name', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+
+## raw payload written by the run (raw/real_1702.txt)
+
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-1702', 'version': ''}} content=[TextContent(type='text', text='Error executing tool get_name', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'

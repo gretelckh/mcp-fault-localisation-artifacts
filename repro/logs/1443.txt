@@ -1,0 +1,3 @@
+VERDICT=SPEC
+CATEGORY=spec-gap
+Spec gap: server MUST validate tokens are valid for resource (issuer validation).

@@ -1,0 +1,23 @@
+# issue: #3209
+# origin_layer: Client
+# evidence_class: silent
+# evidence_tier: A
+# transport: n/a
+# harness_entry: runner/repro_pending/repro_oauth_lifecycle.py::test_3209
+# defect_captured: 
+
+## captured return value / raised exception (repro_progress.json)
+
+
+
+## console log (logs/3209.txt)
+
+VERDICT=REPRO
+CATEGORY=silent
+three concurrent GET /mcp through ONE provider; /mcp sleeps 0.3s:
+  #0: status=200 err=None elapsed=0.624s
+  #1: status=200 err=None elapsed=0.935s
+  #2: status=200 err=None elapsed=1.247s
+elapsed sorted: [0.624, 0.935, 1.247]
+total wall clock: 1.248s  (parallel ~0.3s / serialised ~0.9s)
+unauthenticated /mcp hits (i.e. each caller re-ran the full flow): 1

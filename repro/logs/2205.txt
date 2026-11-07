@@ -1,0 +1,4 @@
+VERDICT=OBS
+CATEGORY=spec-gap
+authorization_servers annotation = list[pydantic.networks.AnyHttpUrl]
+Issue: field type/name mismatch vs RFC 9728 (authorization_servers should be list[AnyHttpUrl]).

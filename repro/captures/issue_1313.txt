@@ -1,0 +1,18 @@
+# issue: #1313
+# origin_layer: Client
+# evidence_class: caller-exception
+# evidence_tier: A
+# transport: n/a
+# harness_entry: runner/repro_pending/repro_json.py
+# defect_captured: 
+
+## captured return value / raised exception (repro_progress.json)
+
+
+
+## console log (logs/1313.txt)
+
+client entered
+list_tools RAISED:MCPError:Failed to parse JSON response: 1 validation error for union[JSONRPCRequest,JSONRPCNotification,JSONRPCResponse,JSONRPCError]
+  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value=b'?', input_type=bytes]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid

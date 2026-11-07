@@ -1,0 +1,19 @@
+# issue: #3382
+# origin_layer: Client
+# evidence_class: caller-exception
+# evidence_tier: A
+# transport: n/a
+# harness_entry: attempt_repro_external.py::issue#3382
+# defect_captured: 
+
+## captured return value / raised exception (repro_progress.json)
+
+RuntimeError: Attempted to acquire an already held Lock
+
+## console log (logs/3382.txt)
+
+VERDICT=OBS
+CATEGORY=observation/scenario-specific
+first request: cancelled mid-flow by wait_for (timeout)
+second request after cancellation: status=200
+context.lock: <anyio._backends._asyncio.Lock object at 0x00000253ADDEDF30>

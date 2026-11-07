@@ -1,0 +1,1 @@
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-flag', 'version': ''}} content=[TextContent(type='text', text='stale-cache-fallback:foo', annotations=None, meta=None)] structured_content={'result': 'stale-cache-fallback:foo'} is_error=False result_type='complete'

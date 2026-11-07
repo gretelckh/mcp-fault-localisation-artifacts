@@ -1,0 +1,16 @@
+# issue: #2727
+# origin_layer: Transport
+# evidence_class: caller-exception
+# evidence_tier: A
+# transport: n/a
+# harness_entry: runner/repro_pending/repro_2727.py
+# defect_captured: 
+
+## captured return value / raised exception (repro_progress.json)
+
+
+
+## console log (logs/2727.txt)
+
+enter RAISED:MCPError:Server returned an error response
+seen Origin headers on requests: [None, None]

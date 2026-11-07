@@ -1,0 +1,3 @@
+is_error=False
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-ulist', 'version': ''}} description='' messages=[PromptMessage(role='user', content=TextContent(type='text', text='"[PromptMessage(role=\'user\', content=TextContent(type=\'text\', text=\'hi bob\', annotations=None, meta=None))]"', annotations=None, meta=None))] result_type='complete'
+[stringified PromptMessage rendered as one message]

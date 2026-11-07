@@ -1,0 +1,3032 @@
+{
+ "baseline": [
+  {
+   "issue": 76,
+   "origin": "Server",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 79,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 110,
+   "origin": "Client",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 234,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 244,
+   "origin": "Server",
+   "channel": "registration-error",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 326,
+   "origin": "Host",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 348,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 409,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Client",
+    "Transport",
+    "Host"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":10,\"Server\":80,\"Transport\":10}"
+  },
+  {
+   "issue": 417,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 507,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Client",
+    "Transport",
+    "Host"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":10,\"Server\":80,\"Transport\":10}"
+  },
+  {
+   "issue": 521,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 577,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 613,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Transport",
+    "Host",
+    "Client"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":90,\"Transport\":10}"
+  },
+  {
+   "issue": 698,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 743,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 891,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 915,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 922,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Host",
+   "raw": "Host",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 1060,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 1313,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Client",
+    "Transport",
+    "Host"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":10,\"Server\":80,\"Transport\":10}"
+  },
+  {
+   "issue": 1361,
+   "origin": "Client",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 1579,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 1702,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 1974,
+   "origin": "Server",
+   "channel": "registration-error",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2057,
+   "origin": "Client",
+   "channel": "silent",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 2114,
+   "origin": "Client",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2153,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2216,
+   "origin": "Client",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Client",
+    "Host",
+    "Server",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":100,\"Server\":0,\"Transport\":0}"
+  },
+  {
+   "issue": 2260,
+   "origin": "Client",
+   "channel": "single-layer-correct",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 2386,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2422,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2431,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2539,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2618,
+   "origin": "Transport",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2687,
+   "origin": "Client",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 2727,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2741,
+   "origin": "Transport",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2770,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3067,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3099,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3103,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3209,
+   "origin": "Client",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Transport",
+    "Host",
+    "Client"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":90,\"Transport\":10}"
+  },
+  {
+   "issue": 3240,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3250,
+   "origin": "Client",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3266,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3341,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3342,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3351,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3382,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Host",
+    "Client",
+    "Server",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":80,\"Client\":10,\"Server\":5,\"Transport\":5}"
+  },
+  {
+   "issue": 3384,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Client",
+   "raw": "Client",
+   "rank": [
+    "Client",
+    "Host",
+    "Server",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":100,\"Server\":0,\"Transport\":0}"
+  },
+  {
+   "issue": 3385,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3434,
+   "origin": "Client",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3549,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3554,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3556,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 3557,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 3560,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 3566,
+   "origin": "Client",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Client",
+    "Host",
+    "Server",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":100,\"Server\":0,\"Transport\":0}"
+  },
+  {
+   "issue": 3569,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3572,
+   "origin": "Host",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3573,
+   "origin": "Server",
+   "channel": "registration-error",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3578,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3579,
+   "origin": "Host",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3585,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3586,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3592,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3637,
+   "origin": "Host",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3640,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3643,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":20,\"Client\":10,\"Server\":60,\"Transport\":10}"
+  },
+  {
+   "issue": 3644,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3646,
+   "origin": "Host",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3656,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  }
+ ],
+ "ruleclue": [
+  {
+   "issue": 76,
+   "origin": "Server",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 79,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Client",
+    "Transport",
+    "Host",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":80,\"Server\":0,\"Transport\":20}"
+  },
+  {
+   "issue": 110,
+   "origin": "Client",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":20,\"Client\":20,\"Server\":50,\"Transport\":10}"
+  },
+  {
+   "issue": 234,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 244,
+   "origin": "Server",
+   "channel": "registration-error",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 326,
+   "origin": "Host",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Client",
+    "Host",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":30,\"Server\":0,\"Transport\":70}"
+  },
+  {
+   "issue": 348,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 409,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Server",
+    "Client",
+    "Host",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":20,\"Server\":80,\"Transport\":0}"
+  },
+  {
+   "issue": 417,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 507,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Client",
+    "Host",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":10,\"Server\":0,\"Transport\":90}"
+  },
+  {
+   "issue": 521,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Client",
+    "Host",
+    "Transport",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":10,\"Client\":80,\"Server\":0,\"Transport\":10}"
+  },
+  {
+   "issue": 577,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Client",
+    "Host",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":10,\"Client\":20,\"Server\":0,\"Transport\":70}"
+  },
+  {
+   "issue": 613,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Client",
+    "Host",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":20,\"Server\":0,\"Transport\":80}"
+  },
+  {
+   "issue": 698,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 743,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Transport",
+    "Host",
+    "Client"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":95,\"Transport\":5}"
+  },
+  {
+   "issue": 891,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 915,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Client",
+    "Host",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":10,\"Client\":30,\"Server\":0,\"Transport\":60}"
+  },
+  {
+   "issue": 922,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Client",
+   "raw": "Client",
+   "rank": [
+    "Client",
+    "Host",
+    "Transport",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":10,\"Client\":80,\"Server\":0,\"Transport\":10}"
+  },
+  {
+   "issue": 1060,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 1313,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Server",
+    "Client",
+    "Host",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":20,\"Server\":80,\"Transport\":0}"
+  },
+  {
+   "issue": 1361,
+   "origin": "Client",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":20,\"Client\":10,\"Server\":60,\"Transport\":10}"
+  },
+  {
+   "issue": 1579,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 1702,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 1974,
+   "origin": "Server",
+   "channel": "registration-error",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2057,
+   "origin": "Client",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2114,
+   "origin": "Client",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":20,\"Client\":20,\"Server\":50,\"Transport\":10}"
+  },
+  {
+   "issue": 2153,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2216,
+   "origin": "Client",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2260,
+   "origin": "Client",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2386,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2422,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2431,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2539,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2618,
+   "origin": "Transport",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2687,
+   "origin": "Client",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2727,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Client",
+    "Server",
+    "Transport",
+    "Host"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":80,\"Server\":10,\"Transport\":10}"
+  },
+  {
+   "issue": 2741,
+   "origin": "Transport",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":20,\"Client\":10,\"Server\":60,\"Transport\":10}"
+  },
+  {
+   "issue": 2770,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3067,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3099,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3103,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3209,
+   "origin": "Client",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3240,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Server",
+    "Client",
+    "Host",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":10,\"Client\":20,\"Server\":60,\"Transport\":10}"
+  },
+  {
+   "issue": 3250,
+   "origin": "Client",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 3266,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3341,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3342,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Transport",
+    "Host",
+    "Client"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":95,\"Transport\":5}"
+  },
+  {
+   "issue": 3351,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3382,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Client",
+    "Host",
+    "Transport",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":10,\"Client\":80,\"Server\":0,\"Transport\":10}"
+  },
+  {
+   "issue": 3384,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Client",
+   "raw": "Client",
+   "rank": [
+    "Client",
+    "Transport",
+    "Host",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":90,\"Server\":0,\"Transport\":10}"
+  },
+  {
+   "issue": 3385,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3434,
+   "origin": "Client",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Client",
+    "Host",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":20,\"Client\":30,\"Server\":40,\"Transport\":10}"
+  },
+  {
+   "issue": 3549,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3554,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3556,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Client",
+    "Transport",
+    "Host",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":80,\"Server\":0,\"Transport\":20}"
+  },
+  {
+   "issue": 3557,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 3560,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Client",
+    "Transport",
+    "Host",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":80,\"Server\":0,\"Transport\":20}"
+  },
+  {
+   "issue": 3566,
+   "origin": "Client",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3569,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3572,
+   "origin": "Host",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Host",
+    "Client",
+    "Server",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":80,\"Client\":10,\"Server\":10,\"Transport\":0}"
+  },
+  {
+   "issue": 3573,
+   "origin": "Server",
+   "channel": "registration-error",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3578,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3579,
+   "origin": "Host",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":20,\"Client\":20,\"Server\":50,\"Transport\":10}"
+  },
+  {
+   "issue": 3585,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3586,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3592,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3637,
+   "origin": "Host",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3640,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3643,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3644,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3646,
+   "origin": "Host",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3656,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Transport",
+    "Host",
+    "Client"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":95,\"Transport\":5}"
+  }
+ ],
+ "analyst": [
+  {
+   "issue": 76,
+   "origin": "Server",
+   "channel": "caller-exception",
+   "pred": "Client",
+   "raw": "Client",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 79,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Client",
+   "raw": "Client",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 110,
+   "origin": "Client",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":10,\"Client\":10,\"Server\":70,\"Transport\":10}"
+  },
+  {
+   "issue": 234,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 244,
+   "origin": "Server",
+   "channel": "registration-error",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 326,
+   "origin": "Host",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 348,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 409,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Transport",
+    "Host",
+    "Client"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":90,\"Transport\":10}"
+  },
+  {
+   "issue": 417,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 507,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Client",
+    "Transport",
+    "Host"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":10,\"Server\":80,\"Transport\":10}"
+  },
+  {
+   "issue": 521,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 577,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Transport",
+    "Server",
+    "Client",
+    "Host"
+   ],
+   "scores_raw": "{\"Host\":10,\"Client\":20,\"Server\":30,\"Transport\":40}"
+  },
+  {
+   "issue": 613,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Client",
+    "Transport",
+    "Host"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":10,\"Server\":80,\"Transport\":10}"
+  },
+  {
+   "issue": 698,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 743,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 891,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 915,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Transport",
+   "raw": "Transport",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 922,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Client",
+   "raw": "Client",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 1060,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 1313,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Transport",
+    "Host",
+    "Client"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":90,\"Transport\":10}"
+  },
+  {
+   "issue": 1361,
+   "origin": "Client",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 1579,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 1702,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Transport",
+    "Host",
+    "Client"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":90,\"Transport\":10}"
+  },
+  {
+   "issue": 1974,
+   "origin": "Server",
+   "channel": "registration-error",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2057,
+   "origin": "Client",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":10,\"Client\":10,\"Server\":70,\"Transport\":10}"
+  },
+  {
+   "issue": 2114,
+   "origin": "Client",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2153,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Transport",
+    "Host",
+    "Client"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":90,\"Transport\":10}"
+  },
+  {
+   "issue": 2216,
+   "origin": "Client",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Client",
+    "Host",
+    "Server",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":100,\"Server\":0,\"Transport\":0}"
+  },
+  {
+   "issue": 2260,
+   "origin": "Client",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2386,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2422,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2431,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2539,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":20,\"Client\":10,\"Server\":60,\"Transport\":10}"
+  },
+  {
+   "issue": 2618,
+   "origin": "Transport",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2687,
+   "origin": "Client",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 2727,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Transport",
+    "Host",
+    "Client"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":90,\"Transport\":10}"
+  },
+  {
+   "issue": 2741,
+   "origin": "Transport",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":10,\"Client\":10,\"Server\":70,\"Transport\":10}"
+  },
+  {
+   "issue": 2770,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3067,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3099,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":10,\"Client\":10,\"Server\":70,\"Transport\":10}"
+  },
+  {
+   "issue": 3103,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3209,
+   "origin": "Client",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3240,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Transport",
+    "Host",
+    "Client"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":90,\"Transport\":10}"
+  },
+  {
+   "issue": 3250,
+   "origin": "Client",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3266,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3341,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3342,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3351,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3382,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Client",
+    "Host",
+    "Transport",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":10,\"Client\":80,\"Server\":0,\"Transport\":10}"
+  },
+  {
+   "issue": 3384,
+   "origin": "Client",
+   "channel": "caller-exception",
+   "pred": "Client",
+   "raw": "Client",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 3385,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3434,
+   "origin": "Client",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Transport",
+    "Host",
+    "Client"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":70,\"Transport\":30}"
+  },
+  {
+   "issue": 3549,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3554,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3556,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 3557,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3560,
+   "origin": "Transport",
+   "channel": "caller-exception",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Transport",
+    "Host",
+    "Client",
+    "Server"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":0,\"Transport\":100}"
+  },
+  {
+   "issue": 3566,
+   "origin": "Client",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3569,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3572,
+   "origin": "Host",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3573,
+   "origin": "Server",
+   "channel": "registration-error",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3578,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3579,
+   "origin": "Host",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3585,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3586,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3592,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":20,\"Client\":10,\"Server\":60,\"Transport\":10}"
+  },
+  {
+   "issue": 3637,
+   "origin": "Host",
+   "channel": "pushed-server",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3640,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3643,
+   "origin": "Server",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":20,\"Client\":10,\"Server\":70,\"Transport\":0}"
+  },
+  {
+   "issue": 3644,
+   "origin": "Server",
+   "channel": "single-layer-correct",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3646,
+   "origin": "Host",
+   "channel": "silent",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  },
+  {
+   "issue": 3656,
+   "origin": "Server",
+   "channel": "single-layer-masked",
+   "pred": "Server",
+   "raw": "Server",
+   "rank": [
+    "Server",
+    "Host",
+    "Client",
+    "Transport"
+   ],
+   "scores_raw": "{\"Host\":0,\"Client\":0,\"Server\":100,\"Transport\":0}"
+  }
+ ]
+}

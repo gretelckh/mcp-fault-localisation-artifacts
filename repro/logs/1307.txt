@@ -1,0 +1,5 @@
+VERDICT=OBS
+CATEGORY=spec-gap
+OAuthClientMetadata(scope="read,write").scope = 'read,write'
+union_scopes(['read'], ['read', 'write']) RAISED AttributeError: 'list' object has no attribute 'split'
+union_scopes(['read,write'], ['read']) RAISED AttributeError: 'list' object has no attribute 'split'

@@ -1,0 +1,16 @@
+# issue: #3640
+# origin_layer: Server
+# evidence_class: silent
+# evidence_tier: D
+# transport: streamable-http
+# harness_entry: repro_cases.py::b_capabilities_drop
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+verified (run_real_http*.py) - see raw/real_r_capabilities_drop.txt
+
+## raw payload (raw/real_r_capabilities_drop.txt)
+
+is_error=False
+advertised_capabilities=experimental=None logging=None prompts=PromptsCapability(list_changed=True) resources=ResourcesCapability(subscribe=True, list_changed=True) tools=ToolsCapability(list_changed=True) completions=None extensions=None tasks=None

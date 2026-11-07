@@ -1,0 +1,2 @@
+client entered
+list_tools RAISED:MCPError:Server returned an error response

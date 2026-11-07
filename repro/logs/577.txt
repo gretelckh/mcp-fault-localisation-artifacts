@@ -1,0 +1,3 @@
+4 clients connected OK
+scenario=out-of-order cross-task cleanup [2,0,3,1]
+RUN EXC: CancelledError: Cancelled by cancel scope 140d930aa40

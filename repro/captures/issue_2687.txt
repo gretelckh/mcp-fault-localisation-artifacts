@@ -1,0 +1,20 @@
+# issue: #2687
+# origin_layer: Client
+# evidence_class: single-layer-correct
+# evidence_tier: D
+# transport: n/a
+# harness_entry: runner/repro_pending/repro_oauth_logic.py::test_2687
+# defect_captured: 
+
+## captured return value / raised exception (repro_progress.json)
+
+
+
+## console log (logs/2687.txt)
+
+VERDICT=REPRO
+CATEGORY=single-layer
+a.redirect_uris=[AnyUrl('https://x/cb')]
+b.redirect_uris=[AnyHttpUrl('https://x/cb')]
+a.redirect_uris == b.redirect_uris : False
+a == b : False

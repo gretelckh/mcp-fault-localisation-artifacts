@@ -1,0 +1,15 @@
+# issue: #743
+# origin_layer: Server
+# evidence_class: single-layer-masked
+# evidence_tier: A
+# transport: streamable-http
+# harness_entry: repro_cases.py::b_743
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-743', 'version': ''}} content=[TextContent(type='text', text='Error executing tool boom', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+
+## raw payload written by the run (raw/real_743.txt)
+
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-743', 'version': ''}} content=[TextContent(type='text', text='Error executing tool boom', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'

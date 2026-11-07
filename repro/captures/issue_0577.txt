@@ -1,0 +1,17 @@
+# issue: #577
+# origin_layer: Client
+# evidence_class: caller-exception
+# evidence_tier: A
+# transport: n/a
+# harness_entry: runner/repro_pending/repro_cancelscope.py
+# defect_captured: 
+
+## captured return value / raised exception (repro_progress.json)
+
+
+
+## console log (logs/577.txt)
+
+4 clients connected OK
+scenario=out-of-order cross-task cleanup [2,0,3,1]
+RUN EXC: CancelledError: Cancelled by cancel scope 140d930aa40

@@ -1,0 +1,2 @@
+status=400
+{"jsonrpc":"2.0","id":null,"error":{"code":-32602,"message":"Validation error: 4 validation errors for union[JSONRPCRequest,JSONRPCNotification,JSONRPCResponse,JSONRPCError]\nJSONRPCRequest\n  Input should be a valid dictionary or instance 

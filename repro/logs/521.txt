@@ -1,0 +1,3 @@
+4 clients connected OK
+scenario=cross-task entry/exit (each client in its own close task)
+RUN EXC: CancelledError: Cancelled by cancel scope 208addfd940

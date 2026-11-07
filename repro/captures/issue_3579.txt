@@ -1,0 +1,15 @@
+# issue: #3579
+# origin_layer: Host
+# evidence_class: pushed-to-server
+# evidence_tier: D
+# transport: streamable-http
+# harness_entry: repro_cases.py::b_empty_server
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+verified (run_real_http*.py) - see raw/real_r_empty_server_components.txt
+
+## raw payload (raw/real_r_empty_server_components.txt)
+
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-empty', 'version': ''}} content=[TextContent(type='text', text='Unknown tool: nonexistent', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'

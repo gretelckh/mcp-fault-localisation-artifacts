@@ -1,0 +1,15 @@
+# issue: #3592
+# origin_layer: Server
+# evidence_class: silent
+# evidence_tier: B
+# transport: streamable-http
+# harness_entry: repro_cases.py::b_unregistered_result
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+verified (run_real_http*.py) - see raw/real_r_fallback_success_flag.txt
+
+## raw payload (raw/real_r_fallback_success_flag.txt)
+
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-flag', 'version': ''}} content=[TextContent(type='text', text='stale-cache-fallback:foo', annotations=None, meta=None)] structured_content={'result': 'stale-cache-fallback:foo'} is_error=False result_type='complete'

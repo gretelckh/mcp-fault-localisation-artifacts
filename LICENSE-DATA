@@ -1,0 +1,17 @@
+Data licence: Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Applies to: data/*.csv, llm/outputs/*, docs/*.md, and the reproduced issue excerpts in this
+repository.
+
+You are free to share and adapt this material for any purpose, including commercially, provided
+you give appropriate credit, link to the licence, and indicate whether changes were made.
+
+Full legal text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+Attribution (for use during review): "Anonymous Authors, review artefact for *Why Is It So Hard to
+Localize Bugs in MCP Pipelines?*, 2026." After acceptance this notice will be replaced with the
+citable dataset DOI.
+
+Note on the underlying issue text: the excerpts come from public issues of
+modelcontextprotocol/python-sdk and remain the property of their authors; they are reproduced here
+under the GitHub Terms of Service for the purpose of peer review.

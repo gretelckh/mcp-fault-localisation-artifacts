@@ -1,0 +1,1 @@
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-2539', 'version': ''}} content=[TextContent(type='text', text='{\n  "text": null\n}', annotations=None, meta=None)] structured_content={'text': None} is_error=False result_type='complete'

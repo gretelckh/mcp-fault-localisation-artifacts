@@ -1,0 +1,1 @@
+RAISED-AT-REG:ValueError:Resource 'data://r' has no URI template variables, but the handler declares parameters {'ctx'}. Add matching {...} variables to the URI or remove the parameters.

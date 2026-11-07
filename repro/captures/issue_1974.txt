@@ -1,0 +1,15 @@
+# issue: #1974
+# origin_layer: Server
+# evidence_class: registration-time
+# evidence_tier: A
+# transport: streamable-http/registration
+# harness_entry: repro_cases.py::b_1974
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+RAISED-AT-REG:AttributeError:'Handler' object has no attribute '__name__'
+
+## raw payload written by the run (raw/real_1974.txt)
+
+RAISED-AT-REG:AttributeError:'Handler' object has no attribute '__name__'

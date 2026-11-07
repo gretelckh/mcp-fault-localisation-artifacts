@@ -1,0 +1,18 @@
+# issue: #2260
+# origin_layer: Client
+# evidence_class: single-layer-correct
+# evidence_tier: B
+# transport: n/a
+# harness_entry: runner/repro_pending/repro_oauth_logic.py::test_2260
+# defect_captured: 
+
+## captured return value / raised exception (repro_progress.json)
+
+
+
+## console log (logs/2260.txt)
+
+VERDICT=REPRO
+CATEGORY=single-layer
+token_endpoint_auth_methods_supported = ['client_secret_post', 'client_secret_basic']
+Expected: include "none" for public clients; Actual: hardcoded [client_secret_post, client_secret_basic]

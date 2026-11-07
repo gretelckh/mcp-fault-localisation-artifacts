@@ -1,0 +1,5 @@
+VERDICT=REPRO
+CATEGORY=single-layer
+union_scopes("read", "read,write") -> "read read,write"
+Expected: "read write" (split comma); Actual: "read read,write" (comma kept)
+validate_scope(scope="read,write", req="read") -> RAISED InvalidScopeError: Client was not registered with scope read

@@ -1,0 +1,7 @@
+VERDICT=OBS
+CATEGORY=spec-gap
+TokenErrorCode = typing.Literal['invalid_request', 'invalid_client', 'invalid_grant', 'unauthorized_client', 'unsupported_grant_type', 'invalid_scope', 'invalid_target']
+has invalid_client: True
+error="invalid_client",
+# unauthorized_client (not invalid_client, which is for failed authentication).
+error="unauthorized_client",

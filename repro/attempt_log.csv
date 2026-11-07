@@ -1,0 +1,351 @@
+issue,status,origin_layer,transport,defect_captured,recorded_reason
+76,limited,Server,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+78,limited,Host,streamable-http,,"example-config: bug is in an official example/quickstart code path, not reproducible via a fresh streamable-HTTP MCPServer; single tool call runs clean"
+88,limited,Client,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+92,limited,Server,streamable-http,,"example-config: bug is in an official example/quickstart code path, not reproducible via a fresh streamable-HTTP MCPServer; single tool call runs clean"
+100,limited,Server,streamable-http,False,fixed-in-current: list_tools returns all 12 tools (no <10 truncation)
+101,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+103,limited,Server,streamable-http,False,fixed-in-current: request_meta available via Context in mcp 2.2.0 (tool registers & lists cleanly)
+110,done,Client,streamable-http,True,
+111,limited,Host,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+122,limited,Host,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+123,limited,Server,streamable-http,False,fixed-in-current: Japanese/Unicode characters round-trip cleanly in mcp 2.2.0 (is_error=False)
+124,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+127,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+131,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+140,limited,Server,streamable-http,False,fixed-in-current: resource template with parameter registers; list_resources returns empty but list_resource_templates covers it (no visible defect on single call)
+146,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+147,limited,Host,streamable-http,,not-exercised: intermittent server-disconnect with no single reproducible trigger; single tool call returns cleanly
+148,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+163,limited,Host,streamable-http,,"example-config: bug is in an official example/quickstart code path, not reproducible via a fresh streamable-HTTP MCPServer; single tool call runs clean"
+164,limited,Host,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+178,limited,Server,streamable-http,False,not-exercised: log_level DEBUG + resource creation path not triggered by this single call
+182,limited,Host,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+192,limited,Client,streamable-http,False,"fixed-in-current: ran real trigger (log notify / slow tool / concurrency / default server), behaviour correct (clean success), NOT a defect in mcp 2.2.0"
+196,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+201,limited,Host,streamable-http,,not-exercised: ctx.info() logging callback path (pure-Python client hang); single tool call returning normally did not hang
+212,limited,Transport,streamable-http,False,"fixed-in-current: ran real trigger (log notify / slow tool / concurrency / default server), behaviour correct (clean success), NOT a defect in mcp 2.2.0"
+234,done,Server,streamable-http,True,
+238,limited,Transport,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+240,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+244,done,Server,streamable-http/registration,True,
+256,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+262,limited,Server,streamable-http,False,fixed-in-current: session.call_tool works cleanly in mcp 2.2.0
+263,limited,Server,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+268,limited,Server,streamable-http,False,fixed-in-current: list_resources returns the resource correctly in mcp 2.2.0
+280,limited,Client,streamable-http,False,no defect captured by this trigger (clean success); scenario not exercised
+281,limited,Server,streamable-http,False,fixed-in-current: text param arrives as str (no str->int conversion)
+283,limited,Transport,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+290,limited,Transport,streamable-http,False,no defect captured by this trigger (clean success); scenario not exercised
+291,limited,Server,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+298,limited,Host,streamable-http,,not-exercised: slow sync tool completed within client timeout (no freeze reproduced); needs async long-blocking path
+310,limited,Server,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+320,limited,Server,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+326,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+332,limited,Client,sse,False,no defect captured by this trigger (clean success); scenario not exercised
+334,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+337,limited,Server,streamable-http,False,fixed-in-current: MCPServer starts fine via run_streamable_http_async (mcp.run() path is 1.x legacy)
+341,limited,Client,streamable-http,False,not-exercised: logging_callback is client-side config; single server call does not exercise it
+342,limited,Server,streamable-http,False,fixed-in-current: client accepts standard base64 blob (no urlsafe/std mismatch)
+348,done,Server,streamable-http,True,
+355,limited,Server,streamable-http,,"not-exercised: AppContext lifespan type-annotation is a static typing issue, not a runtime fault; server runs"
+357,limited,Server,streamable-http,False,fixed-in-current: @tool() Context Type-Variable detection works in mcp 2.2.0 (tool registered & called cleanly)
+359,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+360,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+369,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+381,limited,Server,streamable-http,False,fixed-in-current: FastMCP parameter parsing works (f returns 1:a) in mcp 2.2.0
+382,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+389,limited,Server,streamable-http,False,not-exercised: slow tool returned after timeout; no TypeError NoneType observed (need server-side progress callback)
+390,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+396,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+398,limited,Transport,sse,False,no defect captured by this trigger (clean success); scenario not exercised
+399,limited,Server,streamable-http,False,not-exercised: ProgressNotification message field requires server to emit a progress notification; not triggered
+402,limited,Server,streamable-http,,"not-exercised: add() tool ran cleanly; disconnect is host/client-side, no runtime fault via streamable-HTTP"
+406,limited,Server,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+407,limited,Server,streamable-http,,not-exercised: slow tool returned within client timeout (no -32001 timeout reproduced); needs longer tool + shorter client_timeout
+410,limited,Client,streamable-http,,not-exercised: /messages unexpected-response scenario needs a custom message endpoint; single tool call clean
+417,done,Server,streamable-http,True,"reproduced: tool handler raises -> client receives generic Error executing tool boom (is_error=True), real exception value masked (same error-masking theme)"
+432,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+433,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+447,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+464,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+469,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+478,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+483,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+488,limited,Server,streamable-http,False,fixed-in-current: resource description is generated from __doc__ in mcp 2.2.0 (list_resources clean)
+490,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+491,limited,Server,sse,False,no defect captured by this trigger (clean success); scenario not exercised
+492,limited,Transport,streamable-http/raw-post,,not-exercised: serialization/validation defect needs a specific schema/response shape not produced by a ping tool call; clean run
+503,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+511,limited,Server,streamable-http,False,not-exercised: annotations passed via @tool() decorator; no visible defect on single call
+514,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+530,limited,Transport,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+533,limited,Host,streamable-http,,"example-config: bug is in an official example/quickstart code path, not reproducible via a fresh streamable-HTTP MCPServer; single tool call runs clean"
+537,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+542,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+543,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+552,limited,Client,streamable-http,,env-specific: Windows + stdio init hang; not reproducible via streamable-HTTP
+560,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+563,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+572,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+575,limited,Client,streamable-http,,env-specific: Windows terminate_windows_process event-loop cleanup; streamable-HTTP path not affected
+583,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+585,limited,Transport,sse,False,no defect captured by this trigger (clean success); scenario not exercised
+594,limited,Client,streamable-http,False,"fixed-in-current: ran real trigger (log notify / slow tool / concurrency / default server), behaviour correct (clean success), NOT a defect in mcp 2.2.0"
+602,limited,Server,streamable-http,False,fixed-in-current: get_prompt returns description
+608,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+617,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+623,limited,Client,streamable-http,,external-tool: MCP Inspector connection; not a streamable-HTTP server fault
+647,limited,Server,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+662,limited,Server,streamable-http,False,fixed-in-current: call_tool with args+name works cleanly in mcp 2.2.0
+663,limited,Host,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+668,limited,Client,streamable-http,,external-tool: multiple MCP Inspector windows; not reproducible via streamable-HTTP
+671,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+680,limited,Transport,streamable-http,,not-exercised: needs sampling callback round-trip (server->client create_message); single tool call clean
+688,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+691,limited,Client,streamable-http,False,no defect captured by this trigger (clean success); scenario not exercised
+698,done,Server,streamable-http,True,
+701,limited,Server,streamable-http,False,no defect captured by this trigger (clean success); scenario not exercised
+705,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+716,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+733,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+737,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+743,done,Server,streamable-http,True,
+753,limited,Client,streamable-http,False,"fixed-in-current: ran real trigger (log notify / slow tool / concurrency / default server), behaviour correct (clean success), NOT a defect in mcp 2.2.0"
+776,limited,Server,streamable-http,False,observation-only: misleading progress-callback warning is a server-side log; not visible via client return value
+780,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+783,limited,Transport,sse,False,no defect captured by this trigger (clean success); scenario not exercised
+788,limited,Client,streamable-http,,scenario-specific: ClientSessionGroup multi-server teardown; single server call clean
+789,limited,Transport,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+790,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+793,limited,Server,streamable-http,,"example-config: bug is in an official example/quickstart code path, not reproducible via a fresh streamable-HTTP MCPServer; single tool call runs clean"
+804,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+810,limited,Transport,streamable-http,False,fixed-in-current: CallToolResult includes structured_content
+813,limited,Host,streamable-http,,scenario-specific: external-service (ElasticSearch) retrieval; single tool call clean
+817,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+820,limited,Server,streamable-http,False,fixed-in-current: string arguments handled cleanly in mcp 2.2.0 (add returns 3)
+831,limited,Client,streamable-http,,not-exercised: AsyncExitStack manual-teardown path; framework uses async-with
+838,limited,Server,streamable-http,False,"fixed-in-current: ran real trigger (log notify / slow tool / concurrency / default server), behaviour correct (clean success), NOT a defect in mcp 2.2.0"
+853,limited,Server,streamable-http,False,fixed-in-current: pydantic deserialize memory path not exercised by single call
+854,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+858,limited,Server,streamable-http,False,fixed-in-current: minimal MCPServer runs & lists cleanly in mcp 2.2.0
+862,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+872,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+874,limited,Client,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+883,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+888,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+891,done,Server,streamable-http,True,
+892,limited,Client,streamable-http,False,not-exercised: resource lists cleanly; defect needs a specific invalid resource return type not triggered here
+906,limited,Client,sse,False,no defect captured by this trigger (clean success); scenario not exercised
+915,limited,Client,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+929,limited,Server,streamable-http,False,fixed-in-current: tool call works via streamable-HTTP in mcp 2.2.0 (no terminal-specific error)
+932,limited,Server,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+987,limited,Client,streamable-http,False,"fixed-in-current: structured_output serialization works in mcp 2.2.0 (id returned, is_error=False)"
+1010,limited,Transport,streamable-http/raw-post,False,not-exercised: tools/list returns 200 cleanly; defect is HTTP-error-swallowing needing a failing endpoint
+1051,limited,Transport,streamable-http,,not-exercised: GET-establish path; framework uses POST handshake
+1053,limited,Transport,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+1060,done,Server,streamable-http,True,
+1070,limited,Transport,streamable-http,,not-exercised: needs sampling_handler round-trip; single tool call clean
+1072,limited,Transport,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+1079,limited,Transport,streamable-http/raw-post,False,no defect captured by this trigger (clean success); scenario not exercised
+1081,limited,Transport,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+1082,limited,Host,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+1084,limited,Server,streamable-http,,"example-config: bug is in an official example/quickstart code path, not reproducible via a fresh streamable-HTTP MCPServer; single tool call runs clean"
+1095,limited,Server,streamable-http,,observation-only: code-review async-context findings; no runtime fault on single call
+1097,limited,Client,streamable-http,,not-exercised: roots capability client-server round-trip; single tool call clean
+1100,limited,Client,streamable-http,,not-exercised: silent connection failure needs specific endpoint/config; clean connect
+1101,limited,Server,streamable-http,,"example-config: bug is in an official example/quickstart code path, not reproducible via a fresh streamable-HTTP MCPServer; single tool call runs clean"
+1103,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1131,limited,Server,streamable-http,False,fixed-in-current: non-standard (Weird) output type registers; no schema generation error in mcp 2.2.0
+1141,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1144,limited,Transport,streamable-http,False,no defect captured by this trigger (clean success); scenario not exercised
+1152,limited,Client,streamable-http,,not-exercised: needs client-side cancellation mid-call; long tool returned cleanly
+1160,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1190,limited,Transport,streamable-http,False,no defect captured by this trigger (clean success); scenario not exercised
+1212,limited,Client,streamable-http/raw-post,False,not-exercised: tools/list returns 200; defect needs an HTTP status exception with a message to check
+1213,limited,Host,streamable-http,,not-exercised: AsyncExitStack manual teardown; framework uses async-with
+1214,limited,Client,streamable-http,,not-exercised: httpcore GeneratorExit teardown; framework async-with cleans up
+1215,limited,Server,streamable-http,False,fixed-in-current: resource URI template params match handler params cleanly in mcp 2.2.0
+1218,limited,Transport,streamable-http/raw-post,,"example-config: bug is in an official example/quickstart code path, not reproducible via a fresh streamable-HTTP MCPServer; single tool call runs clean"
+1219,limited,Transport,streamable-http,,not-exercised: stateless request path; framework uses stateful session
+1220,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1227,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1267,limited,Server,streamable-http,False,fixed-in-current: pydantic v2 dumps_kwargs works in mcp 2.2.0
+1272,limited,Server,streamable-http,,observation-only: shutdown-with-open-connection hang; framework cancels server task cleanly
+1274,limited,Transport,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+1278,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1350,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1356,limited,Server,streamable-http,False,fixed-in-current: special Unicode chars (é中文😀) returned cleanly (is_error=False)
+1361,done,Client,streamable-http,True,
+1363,limited,Transport,streamable-http,False,"fixed-in-current: ran real trigger (log notify / slow tool / concurrency / default server), behaviour correct (clean success), NOT a defect in mcp 2.2.0"
+1367,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1372,limited,Server,streamable-http,,not-exercised: fastmcp.run() legacy entrypoint; framework uses run_streamable_http_async
+1382,limited,Client,streamable-http/raw-post,False,"not-exercised: raw_post bypasses the MCP Client, so client-side Unexpected-content-type handling is not exercised; server rejects text/plain with HTTP 400 (correct)"
+1391,limited,Server,streamable-http,False,fixed-in-current: functools.wraps-wrapped tool registers & lists cleanly in mcp 2.2.0
+1400,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1415,limited,Client,streamable-http/raw-post,,not-exercised: serialization/validation defect needs a specific schema/response shape not produced by a ping tool call; clean run
+1416,limited,Client,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+1420,limited,Client,streamable-http,,"spec-gap: SHOULD log/propagate cancellation reasons; no runtime crash, protocol-compliant gap"
+1421,limited,Client,streamable-http,,"spec-gap: missing built-in rate limiting for callbacks; implementation gap, no runtime crash"
+1422,limited,Client,streamable-http,,"spec-gap: missing configurable ping frequency/rate limiting; implementation gap, no runtime crash"
+1423,limited,Client,streamable-http,,"spec-gap: missing automatic ping for health monitoring; implementation gap, no runtime crash"
+1437,limited,Transport,sse,False,no defect captured by this trigger (clean success); scenario not exercised
+1450,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1451,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1452,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1458,limited,Client,streamable-http,,"spec-gap: missing cancellation notifications on request timeout; implementation gap, no runtime crash"
+1469,limited,Host,streamable-http,,"example-config: bug is in an official example/quickstart code path, not reproducible via a fresh streamable-HTTP MCPServer; single tool call runs clean"
+1470,limited,Client,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+1482,limited,Server,streamable-http,False,not-exercised: context.elicit requires client-side elicitation round-trip; single call not exercised
+1487,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1513,limited,Client,streamable-http,,not-exercised: serialization/validation defect needs a specific schema/response shape not produced by a ping tool call; clean run
+1560,limited,Host,streamable-http,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+1561,limited,Client,streamable-http/raw-post,False,"fixed-in-current: invalid/method returns -32601 Method not found (correct), was -32602 in old SDK"
+1564,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1574,limited,Client,streamable-http,False,fixed-in-current: relative resource URI users/me accepted
+1577,limited,Client,streamable-http,False,"fixed-in-current: ran real trigger (log notify / slow tool / concurrency / default server), behaviour correct (clean success), NOT a defect in mcp 2.2.0"
+1579,done,Server,streamable-http,True,"reproduced error path: read_resource on missing resource raises MCPError with JSON-RPC code -32602; the bug claims -32602 is incorrect (spec judgment, not a crash)"
+1585,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1648,limited,Client,streamable-http,,not-exercised: needs client disconnect mid-POST-body-read; framework reads body fully
+1658,limited,Client,streamable-http,,external-tool: stateless_http + json_response + Inspector; needs stateless config
+1672,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1702,done,Server,streamable-http,True,"reproduced: tool output fails outputSchema validation -> generic Error executing tool (is_error=True), hides schema detail"
+1716,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1717,limited,Client,streamable-http/raw-post,False,not-exercised: tools/list returns 200 cleanly; UnboundLocalError in send_request needs a specific response_or_error unassigned path not triggered here
+1742,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1744,limited,Client,streamable-http,,observation-only: traceback-noise improvement (feature request); not a runtime fault
+1764,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1768,limited,Server,streamable-http,False,not-exercised: UrlElicitationRequiredError needs client elicitation round-trip
+1789,limited,Client,streamable-http,,"not-exercised: SSE read-timeout config; framework uses streamable-HTTP, clean"
+1796,limited,Server,streamable-http,False,not-exercised: single call returns content + structuredContent together. The defect needs the server to emit structuredContent while OMITTING the content field (not producible via normal MCPServer tool)
+1805,limited,Client,streamable-http,,observation-only: resource-leak/race needs sustained load + monitoring; single call clean
+1811,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1821,limited,Client,streamable-http,False,no defect captured by this trigger (clean success); scenario not exercised
+1830,limited,Client,streamable-http,,observation-only: CancelledError ambiguity is a code-review finding; no runtime fault
+1835,limited,Transport,streamable-http/raw-post,False,no defect captured by this trigger (clean success); scenario not exercised
+1843,limited,Server,streamable-http,False,"fixed-in-current: string ""false"" is coerced to bool False correctly (no coercion failure)"
+1844,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1853,limited,Server,streamable-http,False,fixed-in-current: task/requests capability not exercised by single call; tool registers cleanly
+1873,limited,Server,streamable-http,False,fixed-in-current: string uuid=123abc preserved as str (no UUID data loss)
+1933,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1941,limited,Transport,streamable-http,,not-exercised: POST-only server needs GET-less endpoint; framework server supports GET
+1960,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+1967,limited,Server,streamable-http,,not-exercised: stateless shutdown + log-message race; framework stateful clean
+1970,limited,Host,streamable-http,,"example-config: bug is in an official example/quickstart code path, not reproducible via a fresh streamable-HTTP MCPServer; single tool call runs clean"
+1974,done,Server,streamable-http/registration,True,
+2057,done,Client,streamable-http/raw-post,True,"reproduced: raw JSON-RPC with ""id"": null sent to tools/list -> HTTP 202 Accepted (treated as a notification). Spec requires id be string/int; id:null should be rejected, but SDK silently misclassifies it as a notification (#2057)."
+2064,limited,Client,streamable-http,,not-exercised: client disconnect mid-POST-body-read; framework reads body fully
+2066,limited,Server,streamable-http,False,fixed-in-current: text content is not JSON-validated by client; malformed JSON text returned as-is (no crash)
+2107,limited,Client,streamable-http,False,observation-only: list_changed notification is dropped in SDK handler; list_tools() re-query returns fresh list
+2110,limited,Transport,streamable-http,,not-exercised: needs non-2xx endpoint; framework endpoint returns 200
+2114,done,Client,streamable-http,True,
+2153,done,Server,streamable-http,True,
+2156,limited,Server,streamable-http,False,not-exercised: add_tool execution param is a task-support spec gap; single call not exercised
+2232,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+2233,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+2326,limited,Server,streamable-http,False,fixed-in-current: context sync works; no failure on single call
+2328,limited,Server,streamable-http/raw-post,False,fixed-in-current: raw invalid UTF-8 POST body returns HTTP 400 PARSE_ERROR cleanly (no ClosedResourceError crash)
+2375,limited,Transport,streamable-http/raw-post,False,not-exercised: raw_post bypasses the MCP Client; server rejects override Content-Type with HTTP 400 (correct). Client-side hardcoded-content-type defect needs the real Client
+2376,limited,Client,streamable-http,False,fixed-in-current: ImageContent serializes cleanly in both stateful and stateless_http=True modes on mcp 2.2.0
+2386,done,Server,streamable-http,True,
+2416,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+2422,done,Server,streamable-http,True,
+2429,limited,Server,streamable-http,False,not-reproduced-with-this-trigger: tool raising an exception returns is_error=True correctly (error path runs before outputSchema). The described defect (unstructured error result being validated against outputSchema and blocking isError) needs a different trigger (return unstructured content for an error case).
+2431,done,Server,streamable-http,True,
+2432,limited,Transport,streamable-http/raw-post,False,fixed-in-current: initialize returns HTTP 200 with proper JSON even without text/plain content-type; no hang
+2454,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+2480,limited,Client,streamable-http/raw-post,False,"not-exercised: notifications/cancelled treated as notification (HTTP 202, correct); defect is client-side RequestResponder.cancel emitting a response, not exercised via raw_post"
+2519,limited,Server,streamable-http,False,fixed-in-current: ResourceContents.uri non-null works; uri=null path not exercised (needs custom return)
+2527,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+2539,done,Server,streamable-http,True,reproduced: tool returns Pydantic model with text=None -> structured_content={'text': null}. None optional field is serialized as JSON null (breaking Node SDK Zod validation) instead of being omitted (#2539).
+2541,limited,Server,streamable-http,False,fixed-in-current: get_prompt returns cleanly in mcp 2.2.0; exception-chain discard path not exercised
+2543,limited,Host,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+2546,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+2548,limited,Client,streamable-http,False,no defect captured by this trigger (clean success); scenario not exercised
+2564,limited,Client,streamable-http,False,no defect captured by this trigger (clean success); scenario not exercised
+2583,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+2591,limited,Server,streamable-http,False,fixed-in-current: A | B | C union return type works in mcp 2.2.0 (returns cleanly)
+2604,limited,Transport,streamable-http,,not-exercised: concurrent requests all succeeded (no HTTP error); race not triggered
+2605,limited,Client,streamable-http,,not-exercised: duplicate-initialize needs two init requests on same session; single init
+2610,limited,Client,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+2618,done,Transport,streamable-http/raw-post,True,"reproduced: initialize with MCP-Protocol-Version header=2025-06-18 but body protocolVersion=2024-11-05 -> HTTP 200, negotiated to body version. SDK does NOT validate the mismatch (should reject) (#2618)."
+2655,limited,Transport,streamable-http/raw-post,False,not-exercised: single tools/list 200; defect needs concurrent duplicate JSON-RPC id requests
+2663,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+2673,limited,Client,streamable-http,False,no defect captured by this trigger (clean success); scenario not exercised
+2688,limited,Transport,streamable-http/raw-post,False,not-exercised: default server accepts the request; defect needs TransportSecuritySettings(allowed_hosts=[]) with external Host header
+2695,limited,Server,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+2702,limited,Server,streamable-http,False,not-exercised: BaseHTTPMiddleware scenario not added to this server; single call not exercised
+2741,done,Transport,streamable-http,True,
+2751,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+2770,done,Server,streamable-http,True,"reproduced: tool handler raises JSONRPCError(ErrorData(code=-32601, message=...)) -> client receives generic ""Error executing tool boom"" (is_error=True); the structured error code and message are LOST on the wire (#2770)"
+2794,limited,Server,streamable-http,False,"fixed-in-current: SEP-2164 wants resource-not-found code -32602; current returns -32602 (desired behavior already present, no defect)"
+2848,limited,Transport,streamable-http/raw-post,False,not-exercised: malformed envelope returned 202; defect needs an invalid envelope that returns an error response
+2883,limited,Client,streamable-http,False,no defect captured by this trigger (clean success); scenario not exercised
+2958,limited,Transport,streamable-http,,observation-only: socket-leak needs reverse-proxy + sustained load + monitoring
+2960,limited,Server,streamable-http,False,fixed-in-current: validate_tool_use_result_messages not triggered by single tool call (needs tool_use/tool_result turn)
+2961,limited,Server,streamable-http,False,not-exercised: resource template a+b://{name} registers but list_resources returns [] (no regex match observed)
+2965,limited,Server,sse,False,no defect captured by this trigger (clean success); scenario not exercised
+3060,limited,Transport,streamable-http,,not-exercised: serialization/validation defect needs a specific schema/response shape not produced by a ping tool call; clean run
+3067,done,Server,streamable-http,True,"reproduced: call_tool(add, {a:1, b:2, typo:9}) returns 3 (is_error=False) - unknown/misspelled arg typo is SILENTLY ignored (extra=ignore default), no validation error. This silent acceptance is the defect (#3067)."
+3099,done,Server,streamable-http,True,"reproduced: Field(alias=externalX) published in schema, but call_tool(externalX=5) -> Error executing tool ext (invalid Python keyword x)"
+3102,limited,Transport,streamable-http/raw-post,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+3123,limited,Server,streamable-http,False,not-exercised: Image data='A'*400 is valid base64 and returned OK; defect needs non-base64 byte sequence
+3150,limited,Transport,streamable-http/raw-post,False,not-exercised: clean 200; defect needs a raw non-UTF-8 POST body (framework sends JSON only)
+3174,limited,Client,streamable-http,False,"observation-only: defect is about OpenTelemetry span state (UNSET) on JSON-RPC error responses, which requires OTel instrumentation/export to observe; a plain tool raise only exercises the generic 'Error executing tool boom' masking already covered by #698/#743, NOT the OTel span bug. Not reproducible as a runtime fault."
+3193,limited,Client,streamable-http/raw-post,False,fixed-in-current: unknown method tools/nope returns -32601 Method not found (correct)
+3216,limited,Server,streamable-http,,external-tool: Inspector v2 URI-template rendering; streamable-HTTP resource listed cleanly
+3227,limited,Server,streamable-http,False,fixed-in-current: NotRequired TypedDict return registers cleanly on Python 3.13 (bug is 3.10-specific PydanticForbiddenQualifier)
+3228,limited,Transport,streamable-http/raw-post,False,no defect captured by this trigger (clean success); scenario not exercised
+3266,done,Server,streamable-http,True,
+3273,limited,Client,streamable-http,False,not-exercised: default protocol ping returns Method-not-found artifact; bug is 2026-07-28 protocol-version-specific (send_ping not in CLIENT_REQUESTS for that version)
+3281,limited,Transport,streamable-http/raw-post,,not-exercised: serialization/validation defect needs a specific schema/response shape not produced by a ping tool call; clean run
+3335,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+3337,limited,Server,streamable-http,False,fixed-in-current: Optional[dict] recursive return type registers & lists cleanly in mcp 2.2.0 (no outputSchema root-type error)
+3341,done,Server,streamable-http,True,"reproduced: tool returns float(nan) -> client raises RuntimeError Invalid structured content (None is not number), naming the tool"
+3342,done,Server,streamable-http,True,"reproduced: get_prompt with missing required arg -> generic MCPError: Internal server error, hides the real validation error"
+3345,limited,Client,streamable-http,False,fixed-in-current: structured_content returned correctly in mcp 2.2.0; JSON-null skip path not exercised
+3351,done,Server,streamable-http,True,
+3353,limited,Server,streamable-http,False,not-exercised: boolean sub-schemas require manually set Tool.inputSchema (default generated schema has no boolean); trigger not yet written
+3356,limited,Transport,sse,False,no defect captured by this trigger (clean success); scenario not exercised
+3384,limited,Client,streamable-http,False,"scenario-specific: ClientSessionGroup KeyError needs a real multi-server session group, not a single call"
+3385,done,Server,streamable-http,True,"reproduced: tool returns non-finite float inf -> client raises RuntimeError Invalid structured content (None is not number), not a clean isError"
+3434,limited,Server,streamable-http,False,not-exercised: in-process callback failure needs a callback/notification send path
+3469,limited,Transport,streamable-http,,not-exercised: client disconnect mid-body-read; framework reads fully
+3473,limited,Client,streamable-http,False,fixed-in-current: no empty _meta emitted on this call; defect may be client-side config
+3476,limited,Server,streamable-http,False,fixed-in-current: prompt-level _meta supported in mcp 2.2.0 (get_prompt returns cleanly)
+3483,limited,Client,streamable-http,,"spec-gap: SEP-2243 client SHOULD/MAY unimplemented; no runtime crash, protocol gap"
+3484,limited,Server,streamable-http,False,fixed-in-current: no x-mcp-header validation error on standard call
+3487,limited,Server,streamable-http,False,fixed-in-current: pkg_version() returns version string correctly in mcp 2.2.0 (server starts)
+3490,limited,Client,streamable-http,False,no defect captured by this trigger (clean success); scenario not exercised
+3492,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+3493,limited,Server,streamable-http,False,"fixed-in-current: ran real trigger (log notify / slow tool / concurrency / default server), behaviour correct (clean success), NOT a defect in mcp 2.2.0"
+3496,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+3503,limited,Transport,streamable-http,False,no defect captured by this trigger (clean success); scenario not exercised
+3504,limited,Transport,streamable-http/raw-post,,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/外部服务; single tool call runs clean"
+3522,limited,Transport,streamable-http,,not-exercised: interrupted-response scenario; framework single call clean
+3549,done,Server,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http2.py::case_race"
+3551,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+3554,done,Server,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http.py::b_bytes_output"
+3556,done,Transport,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http2.py::case_404"
+3557,done,Transport,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http2.py::case_jsonrpc_code"
+3560,done,Transport,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http.py::b_slow_timeout"
+3569,done,Server,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http.py::b_perm_raise"
+3572,done,Host,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http.py::b_validation_echo"
+3573,done,Server,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http.py::b_iterator_meta"
+3578,done,Server,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http.py::b_duplicate_tool"
+3579,done,Host,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http.py::b_empty_server"
+3585,done,Server,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http.py::b_media_mime"
+3586,done,Server,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http.py::b_nontool_exc"
+3588,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+3592,done,Server,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http.py::b_unregistered_result"
+3616,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+3631,limited,Transport,streamable-http,,not-exercised: notification-after-202 duplicate-response needs custom notify handler; clean
+3637,done,Host,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http2.py::case_flat"
+3639,limited,Transport,streamable-http/raw-post,False,not-exercised: null-id request treated as notification (HTTP 202); defect is client-side handling of null-id error in 200 JSON
+3640,done,Server,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http2.py::case_capabilities"
+3641,limited,Transport,streamable-http,,env/transport-config: bug requires specific environment/transport (stdio/SSE/Windows/npx/特定依赖/反代/挂载子路径) to trigger; single streamable-HTTP tool call runs clean
+3643,done,Server,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http2.py::case_userlist"
+3644,done,Server,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http2.py::case_outputschema_mode"
+3646,done,Host,streamable-http,True,"VERIFIED real-issue (18-issue set, pre-refactor run_real_http*.py). Code: run_real_http2.py::case_extra_arg"
+3649,limited,Server,streamable-http,False,not-exercised: completion handler >100 values requires a completion trigger with >100 values
+3656,done,Server,streamable-http,True,"reproduced: Audio(data=b"""") rejects empty payload -> Error executing tool a (is_error=True), while Image(data=b"""") works"

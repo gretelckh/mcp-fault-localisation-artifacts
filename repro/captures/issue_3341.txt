@@ -1,0 +1,27 @@
+# issue: #3341
+# origin_layer: Server
+# evidence_class: single-layer-correct
+# evidence_tier: A
+# transport: streamable-http
+# harness_entry: repro_cases.py::b_3341
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+RAISED:RuntimeError:Invalid structured content returned by tool nan: None is not of type 'number'
+
+Failed validating 'type' in schema['properties']['result']:
+    {'title': 'Result', 'type': 'number'}
+
+On instance['result']:
+    None
+
+## raw payload written by the run (raw/real_3341.txt)
+
+RAISED:RuntimeError:Invalid structured content returned by tool nan: None is not of type 'number'
+
+Failed validating 'type' in schema['properties']['result']:
+    {'title': 'Result', 'type': 'number'}
+
+On instance['result']:
+    None

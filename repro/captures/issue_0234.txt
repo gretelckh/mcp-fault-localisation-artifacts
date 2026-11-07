@@ -1,0 +1,15 @@
+# issue: #234
+# origin_layer: Server
+# evidence_class: single-layer-correct
+# evidence_tier: B
+# transport: streamable-http
+# harness_entry: repro_cases.py::b_234
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-234', 'version': ''}} content=[TextContent(type='text', text='Unknown tool: no_such_tool', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+
+## raw payload written by the run (raw/real_234.txt)
+
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-234', 'version': ''}} content=[TextContent(type='text', text='Unknown tool: no_such_tool', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'

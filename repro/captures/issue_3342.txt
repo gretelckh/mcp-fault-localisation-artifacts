@@ -1,0 +1,15 @@
+# issue: #3342
+# origin_layer: Server
+# evidence_class: single-layer-correct
+# evidence_tier: A
+# transport: streamable-http
+# harness_entry: repro_cases.py::b_3342
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+RAISED:MCPError:Internal server error
+
+## raw payload written by the run (raw/real_3342.txt)
+
+RAISED:MCPError:Internal server error

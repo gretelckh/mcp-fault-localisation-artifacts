@@ -1,0 +1,16 @@
+# issue: #3646
+# origin_layer: Host
+# evidence_class: silent
+# evidence_tier: B
+# transport: streamable-http
+# harness_entry: repro_cases.py::case_extra_arg
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+verified (run_real_http*.py) - see raw/real_r_extra_arg_silent.txt
+
+## raw payload (raw/real_r_extra_arg_silent.txt)
+
+is_error=False
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3646', 'version': ''}} content=[TextContent(type='text', text='1', annotations=None, meta=None)] structured_content={'result': 1} is_error=Fa

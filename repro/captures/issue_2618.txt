@@ -1,0 +1,26 @@
+# issue: #2618
+# origin_layer: Transport
+# evidence_class: silent
+# evidence_tier: B
+# transport: streamable-http/raw-post
+# harness_entry: repro_cases.py::b_proto
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+HTTP 200
+event: message
+data: {"jsonrpc":"2.0","id":1,"result":{"capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"listChanged":false,"subscribe":false},"tools":{"listChanged":false}},"protocolVersion":"2024-11-05","serverInfo":{"name":"real-proto","version":""}}}
+
+
+
+## raw payload written by the run (raw/real_2618.txt)
+
+HTTP 200
+event: message
+
+data: {"jsonrpc":"2.0","id":1,"result":{"capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"listChanged":false,"subscribe":false},"tools":{"listChanged":false}},"protocolVersion":"2024-11-05","serverInfo":{"name":"real-proto","version":""}}}
+
+
+
+

@@ -1,0 +1,17 @@
+# issue: #2057
+# origin_layer: Client
+# evidence_class: silent
+# evidence_tier: D
+# transport: streamable-http/raw-post
+# harness_entry: repro_cases.py::b_proto
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+HTTP 202
+
+
+## raw payload written by the run (raw/real_2057.txt)
+
+HTTP 202
+

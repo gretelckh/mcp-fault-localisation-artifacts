@@ -1,0 +1,5 @@
+VERDICT=OBS
+CATEGORY=observation/scenario-specific
+first request: cancelled mid-flow by wait_for (timeout)
+second request after cancellation: status=200
+context.lock: <anyio._backends._asyncio.Lock object at 0x00000253ADDEDF30>

@@ -1,0 +1,15 @@
+# issue: #3586
+# origin_layer: Server
+# evidence_class: single-layer-masked
+# evidence_tier: A
+# transport: streamable-http
+# harness_entry: repro_cases.py::b_nontool_exc
+# defect_captured: True
+
+## captured return value / raised exception (repro_progress.json)
+
+verified (run_real_http*.py) - see raw/real_r_non_tool_error_silent.txt
+
+## raw payload (raw/real_r_non_tool_error_silent.txt)
+
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-exc', 'version': ''}} content=[TextContent(type='text', text='Error executing tool fragile', annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'

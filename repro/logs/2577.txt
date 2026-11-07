@@ -1,0 +1,6 @@
+VERDICT=FIXED
+CATEGORY=fixed-in-current
+original POST /mcp resends: 2 (expected 2: challenged + retried)
+final status: 200 body: {"ok":"authenticated","token":"Bearer at-1"}
+Authorization on the retry: Bearer at-1
+flow: ['POST /mcp', 'GET /.well-known/oauth-protected-resource', 'GET /.well-known/oauth-authorization-server', 'POST /register', 'POST /token', 'POST /mcp']

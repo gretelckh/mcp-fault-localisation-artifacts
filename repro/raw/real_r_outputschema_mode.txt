@@ -1,0 +1,6 @@
+is_error=False
+advertised_outputSchema={"properties": {"fullTitle": {"title": "Fulltitle", "type": "string"}}, "required": ["fullTitle"], "title": "Out", "type": "object"}
+RAISED:RuntimeError:Invalid structured content returned by tool get: 'fullTitle' is a required property
+
+Failed validating 'required' in schema:
+    {'properties': {'fullTitle': {'title': 'Fulltitle', 'type': 'string'}},

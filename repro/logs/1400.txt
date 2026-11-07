@@ -1,0 +1,13 @@
+VERDICT=OBS
+CATEGORY=spec-gap
+PRM discovery URLs (www_auth resource_metadata = None):
+  server_url=http://h:9999/mcp
+     http://h:9999/.well-known/oauth-protected-resource/mcp
+     http://h:9999/.well-known/oauth-protected-resource
+  server_url=http://h:9999/sub/mcp
+     http://h:9999/.well-known/oauth-protected-resource/sub/mcp
+     http://h:9999/.well-known/oauth-protected-resource
+  server_url=http://h:9999/
+     http://h:9999/.well-known/oauth-protected-resource
+actual PRM GET paths in a path-mounted flow: (none — aborted earlier)
+final: status=404 error=None

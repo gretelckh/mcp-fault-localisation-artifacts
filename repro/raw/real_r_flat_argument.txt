@@ -1,0 +1,2 @@
+meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-flat', 'version': ''}} content=[TextContent(type='text', text="Error executing tool summarize: 1 validation error for summarizeArguments\nbook\n  Field required [type=missing, input_value={'title': 'x', 'pages': 5}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing", annotations=None, meta=None)] structured_content=None is_error=True result_type='complete'
+[control nested=OK]

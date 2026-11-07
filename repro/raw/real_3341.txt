@@ -1,0 +1,7 @@
+RAISED:RuntimeError:Invalid structured content returned by tool nan: None is not of type 'number'
+
+Failed validating 'type' in schema['properties']['result']:
+    {'title': 'Result', 'type': 'number'}
+
+On instance['result']:
+    None

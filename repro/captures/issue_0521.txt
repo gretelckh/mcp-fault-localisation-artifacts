@@ -1,0 +1,17 @@
+# issue: #521
+# origin_layer: Client
+# evidence_class: caller-exception
+# evidence_tier: A
+# transport: n/a
+# harness_entry: runner/repro_pending/repro_cancelscope.py
+# defect_captured: 
+
+## captured return value / raised exception (repro_progress.json)
+
+
+
+## console log (logs/521.txt)
+
+4 clients connected OK
+scenario=cross-task entry/exit (each client in its own close task)
+RUN EXC: CancelledError: Cancelled by cancel scope 208addfd940

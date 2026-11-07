@@ -1,0 +1,2 @@
+RAISED:HTTPStatusError:Client error '404 Not Found' for url 'http://127.0.0.1:9210/sse'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
