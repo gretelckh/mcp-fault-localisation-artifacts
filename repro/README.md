@@ -77,10 +77,24 @@ imputed.
 | `message` | 36 | one to three lines |
 | `none` | 8 | the call succeeded; a wrong result is documented instead |
 
-So 57 of the 72 have no traceback. That is a property of the protocol rather than of our runs: the
-server catches the tool exception and returns `is_error=True` with a one-line message, so the frames
-never reach the client. `../docs/08_evidence_coverage.md` breaks the 57 down (22 exception-type, 24
-wrong-result, 11 silent) and says what was captured instead. Nothing was reconstructed to fill them.
+So 57 of the 72 have no traceback in the 2025 record. That is a property of the protocol rather than
+of our runs: the server catches the tool exception and returns `is_error=True` with a one-line
+message, so the frames never reach the client.
+
+`logs_rerun_2026_11/` closes part of that gap. On 2026-11-09 the 57 stack-less bugs that have a
+`Case` (39 of them) were re-run with the server's logger at DEBUG:
+
+```bash
+python -m repro.runner.rerun_with_server_log 110     # prints client result + server traceback
+```
+
+20 came back with the same client-visible payload and the traceback; 12 with the same payload and
+nothing raised; 7 did not fire. The 20 are labelled as re-runs in their header and are never mixed
+with the 2025 captures. `evidence_matrix.csv` keeps `text_shape` (2025) and `stack_available` (which
+run the frames come from) apart, and `rerun_2026_11.csv` lists all 39 attempts with the outcome.
+
+`../docs/08_evidence_coverage.md` breaks the rest down and says what was captured instead. Nothing
+was reconstructed to fill the remaining 37.
 
 ## Re-running
 

@@ -177,8 +177,25 @@ One row per reproduced bug. Rebuilt by `scripts/build_evidence_matrix.py`; never
 | `has_raw_payload` | whether `repro/raw/` holds the payload |
 | `run_output`, `capture` | paths to the two per-bug records |
 | `gap_reason` | empty when a stack trace exists; otherwise why not — the client-visible message is all that survived, or the failure is a wrong result with no exception |
+| `rerun_outcome` | `A` (re-run reproduced the payload and the server printed the traceback), `B` (same payload, no exception raised), `C` (not re-observed), or empty if the bug was not re-run |
+| `rerun_transcript` | path to `repro/logs_rerun_2026_11/issue_N.txt` for the 20 `A` cases, empty otherwise |
+| `stack_available` | which run the traceback comes from: `2025 record`, `2026-11 re-run`, or empty |
 
-Counts: `stack` 15, `block` 13, `message` 36, `none` 8.
+Counts: `stack` 15, `block` 13, `message` 36, `none` 8; `stack_available` 15 + 20 = 35.
+
+---
+
+## `repro/rerun_2026_11.csv` (n = 39)
+
+The 2026-11-09 re-run attempt on every stack-less bug that has a `Case` definition.
+
+| column | meaning |
+|---|---|
+| `issue` | issue number |
+| `outcome` | `A` same client-visible payload + server traceback, `B` same payload but nothing raised, `C` not re-observed |
+| `server_traceback` | whether the run printed the traceback the server caught |
+| `transcript` | path under `repro/logs_rerun_2026_11/` (`A` only) |
+| `note` | one line on what happened |
 
 ---
 

@@ -42,9 +42,11 @@ What the 72 runs actually captured (`repro/evidence_matrix.csv`):
 | one-to-three-line message | 36 |
 | no error at all (`is_error=False`) | 8 |
 
-15 of 72 is the honest number for "full console traceback". Of the 59 non-silent bugs, 46 have no
-stack: 22 because the server converted the exception into a one-line `TextContent`, 24 because the
-failure is a wrong result rather than an exception. `docs/08_evidence_coverage.md` has the list.
+15 of 72 is the honest number for "full console traceback" in the 2025 record. A 2026-11 re-run of
+39 of the rest recovered 20 more (`repro/logs_rerun_2026_11/`), so **35 of 72** now have a traceback
+— 15 original, 20 from the re-run, kept apart in the matrix. The remaining 37 are silent cases,
+client-side raises, returned errors and wrong results, where a server traceback does not exist;
+`docs/08_evidence_coverage.md` has the list and the reason for each.
 
 ## Evidence classes on the 72
 

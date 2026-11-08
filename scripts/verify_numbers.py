@@ -12,6 +12,7 @@ status 1 if any of them disagree.
 import csv
 import json
 import os
+import re
 import sys
 from collections import Counter, defaultdict
 
@@ -195,6 +196,35 @@ def main():
           sum(1 for r in mat if r["text_shape"] != "stack" and not r["gap_reason"]), 0)
     check("no gap reason where a stack trace exists",
           sum(1 for r in mat if r["text_shape"] == "stack" and r["gap_reason"]), 0)
+
+    # the 2026-11 re-run: 39 attempts, 20 of them recovered the server traceback
+    rr = load("repro/rerun_2026_11.csv")
+    check("re-run attempts recorded", len(rr), 39)
+    check("  A: same payload + server traceback", sum(1 for r in rr if r["outcome"] == "A"), 20)
+    check("  B: same payload, nothing raised", sum(1 for r in rr if r["outcome"] == "B"), 12)
+    check("  C: not re-observed", sum(1 for r in rr if r["outcome"] == "C"), 7)
+    rdir = os.path.join(ROOT, "repro", "logs_rerun_2026_11")
+    rfiles = sorted(f for f in os.listdir(rdir)) if os.path.isdir(rdir) else []
+    check("re-run transcripts on disk", len(rfiles), 20)
+    rt = {int(f.split("_")[1].split(".")[0]): open(os.path.join(rdir, f), encoding="utf-8").read()
+          for f in rfiles}
+    check("  labelled as re-runs",
+          sum(1 for s in rt.values() if s.startswith("# re-run transcript -- issue #")), 20)
+    check("  carrying the server's traceback",
+          sum(1 for s in rt.values() if "raised an unexpected exception" in s
+              and re.search(r'File ".+", line \d+', s)), 20)
+    check("  for bugs that had no stack in the 2025 record",
+          sum(1 for n in rt if next(r for r in mat if r["issue"] == "#%d" % n)["text_shape"] != "stack"), 20)
+    check("transcripts promised by rerun_2026_11.csv that are missing",
+          sum(1 for r in rr if r["transcript"] and not os.path.exists(os.path.join(ROOT, r["transcript"]))), 0)
+    sa = {}
+    for r in mat:
+        sa[r["stack_available"]] = sa.get(r["stack_available"], 0) + 1
+    check("bugs whose traceback comes from the 2025 record", sa.get("2025 record", 0), 15)
+    check("bugs whose traceback comes from the 2026-11 re-run", sa.get("2026-11 re-run", 0), 20)
+    check("bugs with a traceback, either source", sa.get("2025 record", 0) + sa.get("2026-11 re-run", 0), 35)
+    check("non-silent bugs still without a traceback",
+          sum(1 for r in mat if r["evidence_class"] != "silent" and not r["stack_available"]), 26)
 
     print()
     if FAIL:

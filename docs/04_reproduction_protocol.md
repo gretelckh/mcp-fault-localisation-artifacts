@@ -54,6 +54,8 @@ Each run captures:
 | `raw_map.csv` | 54 | issue number → raw payload file |
 | `logs/NNNN.txt` | 53 | console dumps as the harness wrote them, including runs that did not reproduce (30 belong to the 72) |
 | `evidence_matrix.csv` | 72 | one row per bug: `text_shape` (stack / block / message / none), the file paths, and the reason for any gap |
+| `logs_rerun_2026_11/` | 20 | 2026-11 re-runs that recovered the server traceback, labelled as re-runs |
+| `rerun_2026_11.csv` | 39 | every re-run attempt: outcome A / B / C and the reason |
 | `repro_verdicts_72.csv` | 72 | verdict table: origin layer, evidence class, evidence tier, error vs silent, path to the capture |
 | `attempt_log.csv` | 350 | every attempt the harness recorded: 49 `done` (reproduced) and 301 `limited` (attempted, obstacle recorded) |
 
@@ -73,7 +75,7 @@ set of bugs. `captures_index.csv` states this per bug rather than leaving the re
 No cell is filled in by inference. Where a source does not exist, the section is absent from the
 capture and the corresponding column says `no`.
 
-### Stack traces: 15 of 72
+### Stack traces: 15 of 72 in the 2025 record, 35 of 72 after the 2026-11 re-run
 
 The one number a reader is most likely to misread is "console dump 30". A console log existing is not
 the same as a traceback existing. By content (`evidence_matrix.csv`, column `text_shape`):
@@ -88,9 +90,19 @@ the same as a traceback existing. By content (`evidence_matrix.csv`, column `tex
 The reason is protocol-level: `mcp/server/mcpserver/tools/base.py` catches a tool exception and
 returns a normal result with `is_error=True` and a one-line `TextContent`; the frames go to the
 server's stderr and are printed only if that process installs a log handler. Our harness recorded
-the client side. `docs/08_evidence_coverage.md` splits the 57 without a traceback by failure kind
-(22 exception-type, 24 wrong-result, 11 silent), lists the 22 exception-type cases by issue, and
-explains why they were not regenerated from a newer environment.
+the client side. `docs/08_evidence_coverage.md` splits the remainder by failure kind, lists the
+exception-type cases by issue, and explains where each one raised.
+
+#### Re-running with the server log on (2026-11-09)
+
+`repro/runner/rerun_with_server_log.py <issue>` re-runs one `Case` with `mcp` logging at DEBUG and
+`Client(..., mode="legacy")`, which in this build is the handshake that works. 39 of the 57
+stack-less bugs have a `Case` definition and were re-run; 20 came back with the same client-visible
+payload **and** the server traceback (`repro/logs_rerun_2026_11/`). Those 20 are labelled as re-runs
+in their header and are not mixed with the 2025 captures: `evidence_matrix.csv` keeps `text_shape`
+(2025) and `stack_available` (which run the traceback comes from) apart, and
+`repro/rerun_2026_11.csv` records all 39 attempts with the outcome (A same payload + traceback,
+B same payload without, C not re-observed).
 
 The attempt log is the honest part of the package: it shows the failures as failures, with the
 reason. Its 350 rows are 350 distinct issues — 49 recorded `done` and 301 `limited`. It includes

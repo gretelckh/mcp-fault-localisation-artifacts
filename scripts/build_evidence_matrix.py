@@ -68,6 +68,14 @@ def main():
     for p in glob.glob(os.path.join(ROOT, "repro", "logs", "*.txt")):
         logs.setdefault(os.path.basename(p)[:-4], []).append(os.path.basename(p))
 
+    # the 2026-11 re-runs: 39 of the bugs without a stack were re-run, 20 came back with the
+    # same payload and the server traceback the 2025 harness never wrote down
+    rerun = {}
+    rpath = os.path.join(ROOT, "repro", "rerun_2026_11.csv")
+    if os.path.exists(rpath):
+        for r in csv.DictReader(open(rpath, encoding="utf-8")):
+            rerun[r["issue"].lstrip("#")] = r
+
     out = []
     for r in sorted(idx, key=lambda r: int(r["issue"].lstrip("#"))):
         n = r["issue"].lstrip("#")
@@ -105,6 +113,10 @@ def main():
             "run_output": rel_out,
             "capture": "repro/captures/issue_%04d.txt" % int(n),
             "gap_reason": gap,
+            "rerun_outcome": rerun.get(n, {}).get("outcome", ""),
+            "rerun_transcript": rerun.get(n, {}).get("transcript", ""),
+            "stack_available": ("2025 record" if shape == "stack"
+                                else ("2026-11 re-run" if rerun.get(n, {}).get("transcript") else "")),
         })
 
     dst = os.path.join(ROOT, "repro", "evidence_matrix.csv")
@@ -115,14 +127,13 @@ def main():
 
     from collections import Counter
     c = Counter(r["text_shape"] for r in out)
+    s = Counter(r["stack_available"] for r in out)
     print("wrote %s (%d rows)" % (os.path.relpath(dst, ROOT), len(out)))
     print("text_shape:", dict(c))
-    print("with a stack trace:", c["stack"])
-    print("without a stack trace:", len(out) - c["stack"])
-    print("  of which exception-type:", sum(1 for r in out if r["text_shape"] != "stack"
+    print("stack available:", dict(s))
+    print("without any stack trace:", len(out) - (s["2025 record"] + s["2026-11 re-run"]))
+    print("  of which exception-type:", sum(1 for r in out if not r["stack_available"]
                                            and r["evidence_class"] in EXCEPTION_CLASSES))
-    print("  of which wrong-result:", sum(1 for r in out if r["text_shape"] != "stack"
-                                          and r["evidence_class"] not in EXCEPTION_CLASSES))
     return 0
 
 

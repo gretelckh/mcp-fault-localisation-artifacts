@@ -19,7 +19,8 @@ The per-bug table is **`repro/evidence_matrix.csv`** (72 rows, one per reproduce
 | `none` | **8** | the call succeeded (`is_error=False`); the defect is a wrong result, documented instead of an exception |
 | | **72** | |
 
-So **15 of 72** runs kept a full console traceback. The rest did not, and section 3 says why.
+So **15 of 72** runs kept a full console traceback. A 2026-11 re-run recovered 20 more (§6), for
+**35 of 72**. The rest did not, and section 3 says why.
 
 ## 2. The gap, separated by what kind of failure it is
 
@@ -28,15 +29,16 @@ error at all. Of those 13, 8 have no text whatsoever; the other 5 still captured
 because a background task raised while the call itself returned normally (2 of them have frames,
 2 a block, 1 a message).
 
-That leaves **59 non-silent bugs, of which 46 have no stack trace**:
+That leaves **59 non-silent bugs**. In the 2025 record 46 of them had no stack trace; the re-run
+closed 20, leaving 26:
 
-| | without a stack | why |
-|---|---|---|
-| exception-type (`caller-exception`, `pushed-to-server`, `registration-time`) | **22** | an exception did occur, but only its message reached the client (a one-line message in 15, a block in 7) |
-| wrong-result (`single-layer-correct`, `single-layer-masked`) | **24** | the failure is a wrong answer or a missing safeguard; there is no exception to catch |
+| | 2025 only | after the 2026-11 re-run | why |
+|---|---|---|---|
+| exception-type (`caller-exception`, `pushed-to-server`, `registration-time`) | 22 | **18** | the exception was raised, but in the client or at the HTTP boundary, or only its message reached the client |
+| wrong-result (`single-layer-correct`, `single-layer-masked`) | 24 | **8** | the failure is a wrong answer or a missing safeguard; there is no exception to catch |
 
-44 of the 46 do have a verbatim error text (37 runtime + 7 quoted from the report); 2 carry only
-the observed output.
+Of the 26 that still have no stack, 24 do have a verbatim error text (20 captured at runtime, 4
+quoted from the report) and 2 carry only the observed output.
 
 ## 3. Why the stack is missing
 
@@ -71,55 +73,79 @@ fix is not in the layer the message names.
 
 ```bash
 python scripts/build_evidence_matrix.py          # rebuild the table; prints the shape counts
-grep '^#3637,' repro/evidence_matrix.csv         # one bug: shape, files, and the gap reason
+grep '^#3637,' repro/evidence_matrix.csv         # one bug: shape, files, gap reason, which run has the stack
 sed -n '1,40p' repro/run_output/issue_3637.txt   # the recorded text, verbatim
+ls repro/logs_rerun_2026_11/ | wc -l             # 20 re-run transcripts
+python -m repro.runner.rerun_with_server_log 891 # re-do one yourself; prints client result + server traceback
 ```
 
-## 6. What would close the gap, and why it is not done
+## 6. The 2026-11 re-run: what it recovered and what it could not
 
-Re-running the 46 with server-side logging on (`PYTHONFAULTHANDLER=1`, or a `logging` handler on the
-`mcp` logger) would print the frames. We did not do it, for two reasons, both of which belong in the
-record rather than in a footnote:
+The 2025 harness recorded the client side. Turning the *server's* logger up would have printed the
+frames it caught, so on 2026-11-09 every one of the 57 stack-less bugs that has a `Case` definition
+was re-run with `mcp` logging at DEBUG (`repro/runner/rerun_with_server_log.py`). 39 bugs were
+re-run; the rest have no case definition (they were driven by one-off scripts that are not in the
+release).
 
-1. **The runs cannot be repeated faithfully on this machine.** The original runs were made in a
-   2025 environment (`C:\Users\kehuichen2\...`, `mcp` 1.x–2.x per bug); replaying the same snippets
-   today returns `MCPError: Not Found` before the defect is reached. A traceback from a different
-   build would not be the same evidence.
-2. **A reconstructed traceback is not a captured one.** Filling 46 files with output produced today,
-   under a different interpreter and SDK version, and presenting it as the original run would
-   misrepresent the record. The gap is left visible instead.
+| Outcome | n | what it means |
+|---|---:|---|
+| A · same payload + server traceback | **20** | the same client-visible result came back and the server printed the traceback: `repro/logs_rerun_2026_11/issue_N.txt` |
+| B · same payload, no traceback | 12 | the failure is a returned error (validation, unknown tool, a wrong value); the server never raised, so there is nothing to print |
+| C · not re-observed | 7 | the trigger did not fire in this build, or the endpoint the case targets answers 404 |
+
+The 20 are labelled as re-runs in every file: the header says `source: live re-run on this machine,
+2026-11-09 (not the 2025 record)`. They are **not** presented as the original capture, and
+`repro/evidence_matrix.csv` keeps the two apart (`text_shape` = 2025, `stack_available` = which
+run the traceback comes from).
+
+Nothing was filled in for the other 37. Two reasons, both in the record rather than a footnote:
+
+1. **Most remaining cases never had a server-side exception.** Of the 37 still without a stack:
+   11 are the silent class; of the other 26, 6 raise in the client (cancel-scope `CancelledError`,
+   JSON decode), 2 are HTTP-boundary errors (404/401), 3 return an error instead of raising, 4 did
+   not fire when re-run, 8 are wrong-result cases, and 3 were driven by custom harnesses that only
+   recorded a verdict. A server traceback does not exist for them at any effort.
+2. **A traceback reconstructed by hand is not a capture.** No file was written from expectations;
+   every line in `logs_rerun_2026_11/` came out of a process that ran on this machine.
+
+## 7. How much a traceback would have changed
+
+Not much, and this is measurable. The traceback's top frame shows where the exception was *raised*;
+the layer label records where the *fix* goes. Those differ for 34 of the 72 — the finding the paper
+is about. For the 40 bugs that have an upstream fix PR, the label can be checked against the file
+that had to change, with no log at all.
 
 ---
 
-## Appendix · the 22 exception-type bugs without a stack trace
+## Appendix · the exception-type bugs that still have no stack trace (18)
 
 These are the cases where a reader is most entitled to ask for one. Each still has a capture, an
-`observed_output`, and a `defect_description`.
+`observed_output`, and a `defect_description`; the last column says whether the 2026-11 re-run was
+attempted and what happened.
 
-| issue | true layer | class | text captured |
+| issue | true layer | class | re-run |
 |---|---|---|---|
-| #79 | Client | caller-exception | message |
-| #110 | Client | pushed-to-server | message |
-| #326 | Host | caller-exception | block |
-| #409 | Client | caller-exception | block |
-| #507 | Transport | caller-exception | message |
-| #521 | Client | caller-exception | message |
-| #577 | Client | caller-exception | message |
-| #613 | Transport | caller-exception | message |
-| #922 | Client | caller-exception | block |
-| #1313 | Client | caller-exception | block |
-| #1361 | Client | pushed-to-server | message |
-| #2114 | Client | pushed-to-server | message |
-| #2727 | Transport | caller-exception | message |
-| #2741 | Transport | pushed-to-server | message |
-| #3240 | Client | caller-exception | block |
-| #3382 | Client | caller-exception | block |
-| #3384 | Client | caller-exception | block |
-| #3556 | Transport | caller-exception | message |
-| #3560 | Transport | caller-exception | message |
-| #3572 | Host | pushed-to-server | message |
-| #3579 | Host | pushed-to-server | message |
-| #3637 | Host | pushed-to-server | message |
+| #79 | Client | caller-exception | not re-run |
+| #326 | Host | caller-exception | re-run: did not fire |
+| #409 | Client | caller-exception | not re-run |
+| #507 | Transport | caller-exception | not re-run |
+| #521 | Client | caller-exception | not re-run |
+| #577 | Client | caller-exception | not re-run |
+| #613 | Transport | caller-exception | not re-run |
+| #922 | Client | caller-exception | not re-run |
+| #1313 | Client | caller-exception | not re-run |
+| #2727 | Transport | caller-exception | not re-run |
+| #3240 | Client | caller-exception | not re-run |
+| #3382 | Client | caller-exception | not re-run |
+| #3384 | Client | caller-exception | re-run: did not fire |
+| #3556 | Transport | caller-exception | re-run: did not fire |
+| #3560 | Transport | caller-exception | re-run: did not fire |
+| #3572 | Host | pushed-to-server | re-run: no exception raised |
+| #3579 | Host | pushed-to-server | re-run: no exception raised |
+| #3637 | Host | pushed-to-server | re-run: no exception raised |
 
-(#3572 is a Host-side argument error surfaced by the Server: the captured text is the validation
-message the Server returned.)
+Where each of them raised: 6 in the client (cancel-scope `CancelledError`, JSON decode), 2 at the
+HTTP boundary (404 on `/sse`, 401), 4 did not fire in the current build, 3 returned a validation or
+unknown-tool error instead of raising, and 3 were driven by custom harnesses that recorded only a
+verdict. Only the last group could in principle produce a server traceback, and those scripts are
+not part of the release.
