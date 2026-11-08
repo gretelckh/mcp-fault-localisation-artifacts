@@ -162,6 +162,26 @@ the record, or to see which bugs have a console dump before going looking for on
 
 ---
 
+## `repro/evidence_matrix.csv` (n = 72)
+
+One row per reproduced bug. Rebuilt by `scripts/build_evidence_matrix.py`; never edited by hand.
+
+| column | meaning |
+|---|---|
+| `issue`, `origin_layer`, `exposure_channel`, `evidence_class`, `evidence_tier` | the same values as in `captures_index.csv` |
+| `error_text_source` | `runtime` / `issue text` / `none` |
+| `text_shape` | `stack` (real frames), `block` (4+ lines, no frames), `message` (1–3 lines), `none` (call succeeded) |
+| `stack_frames` | number of frame lines found: 0 unless `text_shape = stack` |
+| `body_lines` | non-blank lines in the captured text |
+| `has_console_log`, `console_log` | whether a `repro/logs/` file exists, and its path |
+| `has_raw_payload` | whether `repro/raw/` holds the payload |
+| `run_output`, `capture` | paths to the two per-bug records |
+| `gap_reason` | empty when a stack trace exists; otherwise why not — the client-visible message is all that survived, or the failure is a wrong result with no exception |
+
+Counts: `stack` 15, `block` 13, `message` 36, `none` 8.
+
+---
+
 ## `repro/attempt_log.csv` (n = 350)
 
 | column | meaning |

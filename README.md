@@ -28,7 +28,7 @@ python scripts/verify_numbers.py
 ```
 
 The script recomputes **every number in the paper** from the files in this repository and prints
-them next to the value printed in the manuscript — 81 checks, all of which should read `ok`.
+them next to the value printed in the manuscript — 91 checks, all of which should read `ok`.
 The last line reads `All checks passed ...` if the artefact and the paper agree.
 
 If you only want to look at one thing, open `data/active_bugs_339.csv` in Excel or pandas and
@@ -86,13 +86,23 @@ for the raw payload and the console dump appear only where the run kept one.
 
 `repro/run_output/issue_XXXX.txt` — **one file per reproduced bug** (72 files), the shortest way to
 see what a run actually printed. Six header lines say which harness ran, what kind of capture this
-is, and where the text came from; the body is the output, verbatim. 30 files carry the full console
-transcript, 5 carry a traceback excerpt, and 37 carry the return payload the client received. Paths
-and account names inside the text are redacted to `<user>` / `<python-env>`.
+is, and where the text came from; the body is the output, verbatim. The header's `capture kind` is
+the *source* of the text (a console log for 30, a traceback excerpt for 5, the client's return
+payload for 37), not a claim about how complete it is: by content, **15 of the 72 contain a real
+stack trace**, 13 a multi-line error block without frames, 36 a one-to-three-line message, and 8 no
+error at all. `repro/evidence_matrix.csv` gives that per bug. Paths and account names inside the
+text are redacted to `<user>` / `<python-env>`.
 
 `repro/captures_index.csv` — one row per bug, saying which kinds of evidence exist for it
-(trigger 72/72, error text 63, raw payload 54, console dump 30). Read this before concluding that
+(trigger 72/72, error text 63, raw payload 54, console log 30). Read this before concluding that
 something is missing: the four kinds were collected by different mechanisms at different times.
+
+`repro/evidence_matrix.csv` — one row per reproduced bug answering the two questions a reviewer asks
+first: *what exactly did you capture* (`text_shape`, `stack_frames`, the file paths) and *is anything
+missing* (`gap_reason`). 46 of the 59 non-silent bugs have no stack trace, and the file says why for
+each: 22 are exception-type cases where only the client-visible message survived, 24 are wrong-result
+cases where no exception exists. Rebuild it with `scripts/build_evidence_matrix.py`; the reasoning
+and the list are in `docs/08_evidence_coverage.md`.
 
 `repro/logs/` — the console dumps exactly as the harness wrote them (53 runs, 30 of them belonging
 to the reproduced set; the rest are attempts that did not reproduce). The 12 files added last carry
@@ -133,6 +143,7 @@ that was shown to the model, the model's JSON answer, and the true layer joined 
 | `05_llm_experiments.md` | Study A and Study B designs, scoring, and the result tables |
 | `06_data_dictionary.md` | every column of every released table |
 | `07_results_snapshot.md` | all headline numbers in one page, each with the file that produces it |
+| `08_evidence_coverage.md` | for the 72: what text was captured, what is missing, and why |
 
 ---
 
@@ -203,7 +214,15 @@ gives the full list.
    that preceded the repair experiment and are included here with a provenance header. For the
    other 42 bugs the output exists in the capture file, the run-output file and
    `repro/attempt_log.csv`, but no separate server-side transcript was kept.
-4. **Redaction.** Local filesystem paths, the analysts' machine user names and e-mail addresses
+4. **A stack trace exists for 15 of the 72, not for 72.** The MCP server turns a tool exception into
+   a `TextContent` error, so the frames stay in the server's stderr and only the message reaches the
+   client. 13 bugs raised no error at all (the defect is a wrong result or a missing safeguard); of
+   the 59 that did, 46 kept a message or a block but no frames — 22 exception-type, 24 wrong-result.
+   `repro/evidence_matrix.csv` gives the reason per bug, `docs/08_evidence_coverage.md` the
+   explanation. The missing traces were **not** regenerated from today's environment: the original
+   runs cannot be replayed faithfully here (they were made on another machine, against the `mcp`
+   build of the time), and output produced now would not be the same evidence.
+5. **Redaction.** Local filesystem paths, the analysts' machine user names and e-mail addresses
    were replaced with `<user>` / `<email-redacted>` so that the artefact cannot identify its
    authors. Nothing else was changed.
 

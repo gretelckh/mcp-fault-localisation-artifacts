@@ -39,7 +39,9 @@ is enough to replay the case by hand even if the harness does not run on your ma
 Each run captures:
 
 1. the return object (`CallToolResult`) — text content, `is_error`, structured content;
-2. or the exception that escaped, with its traceback;
+2. or the exception that escaped — as its traceback when the traceback actually reached the client,
+   otherwise as the one-line message the client received (the server converts most tool exceptions
+   into `is_error=True`, so this is the common case; see "How complete is the evidence" below);
 3. the transport-level record (HTTP status, headers) where the failure is at that level.
 
 ## What is in `repro/`
@@ -51,6 +53,7 @@ Each run captures:
 | `raw/` | 54 | the raw payload the run wrote to disk |
 | `raw_map.csv` | 54 | issue number → raw payload file |
 | `logs/NNNN.txt` | 53 | console dumps as the harness wrote them, including runs that did not reproduce (30 belong to the 72) |
+| `evidence_matrix.csv` | 72 | one row per bug: `text_shape` (stack / block / message / none), the file paths, and the reason for any gap |
 | `repro_verdicts_72.csv` | 72 | verdict table: origin layer, evidence class, evidence tier, error vs silent, path to the capture |
 | `attempt_log.csv` | 350 | every attempt the harness recorded: 49 `done` (reproduced) and 301 `limited` (attempted, obstacle recorded) |
 
@@ -69,6 +72,25 @@ set of bugs. `captures_index.csv` states this per bug rather than leaving the re
 
 No cell is filled in by inference. Where a source does not exist, the section is absent from the
 capture and the corresponding column says `no`.
+
+### Stack traces: 15 of 72
+
+The one number a reader is most likely to misread is "console dump 30". A console log existing is not
+the same as a traceback existing. By content (`evidence_matrix.csv`, column `text_shape`):
+
+| Shape | Bugs |
+|---|---:|
+| real stack trace, with file and line | 15 |
+| multi-line error block, no frames | 13 |
+| one-to-three-line message | 36 |
+| no error at all (`is_error=False`) | 8 |
+
+The reason is protocol-level: `mcp/server/mcpserver/tools/base.py` catches a tool exception and
+returns a normal result with `is_error=True` and a one-line `TextContent`; the frames go to the
+server's stderr and are printed only if that process installs a log handler. Our harness recorded
+the client side. `docs/08_evidence_coverage.md` splits the 57 without a traceback by failure kind
+(22 exception-type, 24 wrong-result, 11 silent), lists the 22 exception-type cases by issue, and
+explains why they were not regenerated from a newer environment.
 
 The attempt log is the honest part of the package: it shows the failures as failures, with the
 reason. Its 350 rows are 350 distinct issues — 49 recorded `done` and 301 `limited`. It includes

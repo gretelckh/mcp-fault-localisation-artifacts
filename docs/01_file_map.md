@@ -21,9 +21,10 @@ mcp-fault-artifacts/
 │   ├── captures/issue_XXXX.txt    72 files · one per reproduced bug: trigger, captured output, layer analysis
 │   ├── captures_index.csv         72 rows · which kinds of evidence exist for which bug
 │   ├── run_output/issue_XXXX.txt  72 files · one per bug: what that run printed, verbatim
+│   ├── evidence_matrix.csv        72 rows · per bug: what was captured, and what is missing
 │   ├── raw/                       54 files · the raw payload each run wrote to disk
 │   ├── raw_map.csv                54 rows · issue number → raw payload file name
-│   ├── logs/NNNN.txt              53 files · console dumps (30 of them belong to the 72)
+│   ├── logs/NNNN.txt              53 files · console dumps as the harness wrote them (30 belong to the 72)
 │   ├── repro_verdicts_72.csv      72 rows · the verdict table
 │   └── attempt_log.csv           350 rows · every attempt, including the failures
 ├── llm/
@@ -41,9 +42,11 @@ mcp-fault-artifacts/
 │   ├── 04_reproduction_protocol.md environment, harness, what "reproduced" means
 │   ├── 05_llm_experiments.md      the two studies and their results
 │   ├── 06_data_dictionary.md      column-by-column reference
-│   └── 07_results_snapshot.md     all headline numbers on one page
+│   ├── 07_results_snapshot.md     all headline numbers on one page
+│   └── 08_evidence_coverage.md    what was captured for each of the 72, and what is missing
 └── scripts/
-    └── verify_numbers.py          78 checks, no dependencies
+    ├── verify_numbers.py          checks every headline number against the files
+    └── build_evidence_matrix.py   rebuilds repro/evidence_matrix.csv
 ```
 
 ## Where to look for a given question
@@ -53,6 +56,7 @@ mcp-fault-artifacts/
 | Is issue #1234 in the dataset, and what is it? | `data/active_bugs_339.csv`, column `issue` |
 | What happened when you ran #1234? | `repro/run_output/issue_1234.txt` (output) · `repro/captures/issue_1234.txt` (full record) |
 | Which bugs have a console log / raw payload? | `repro/captures_index.csv` |
+| Does #1234 have a stack trace, and if not why? | `repro/evidence_matrix.csv`, columns `text_shape` and `gap_reason` |
 | Why is #1234 not in the 72? | `data/active_bugs_339.csv`, column `not_reproduced_reason`; `repro/attempt_log.csv` |
 | How do you decide a bug originates in Transport? | `docs/02_codebook.md`, rules R1–R6 |
 | What exactly did you show the model? | `llm/prompts.md` and the `body` field in `llm/outputs/studyB_247.jsonl` |

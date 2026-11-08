@@ -13,8 +13,11 @@
 
 `run_output/` holds one file per reproduced bug (72). Its first six lines are a header — harness,
 kind of capture, source of the text, and where the diagnostic came from — and everything below is
-the output, verbatim. 30 files carry a console transcript, 5 a traceback excerpt, 37 the return
-payload the client received.
+the output, verbatim. The header's `capture kind` names the *source* of the text (a console log for
+30, a traceback excerpt for 5, the client's return payload for 37). It is not a statement about
+completeness: judged by content, 15 files contain a real stack trace, 13 a multi-line error block
+with no frames, 36 a one-to-three-line message, and 8 no error at all. `evidence_matrix.csv` has
+that, and the reason for any gap, bug by bug.
 
 ## Anatomy of a capture
 
@@ -56,7 +59,7 @@ The distinction matters: it is the difference between "we saw this" and "the rep
 | `has_trigger_code` | 72 | every bug has the code or the reproduction recipe that was run |
 | `has_error_text` | 63 | an error text is recorded (49 runtime, 14 quoted from the issue) |
 | `has_raw_payload` | 54 | the raw object returned by the run was written to `raw/` |
-| `has_console_log` | 30 | a full console dump was kept |
+| `has_console_log` | 30 | a separate console log file was kept |
 | `has_harness_record` | 54 | the runner's progress file has an entry for the bug |
 
 The four kind of evidence accumulated at different points in the study, which is why the coverages
@@ -64,6 +67,20 @@ differ: the runner's progress record came first, the per-bug raw dump came next,
 console-log dump was added partway through, so only the bugs run after that point have one. Where a
 source does not exist for a bug, the corresponding appendix is absent rather than empty. Nothing is
 imputed.
+
+`evidence_matrix.csv` answers the sharper question — **is there a stack trace?** — for all 72:
+
+| `text_shape` | bugs | what the file contains |
+|---|---|---|
+| `stack` | 15 | frames with file and line |
+| `block` | 13 | four or more lines, no frames |
+| `message` | 36 | one to three lines |
+| `none` | 8 | the call succeeded; a wrong result is documented instead |
+
+So 57 of the 72 have no traceback. That is a property of the protocol rather than of our runs: the
+server catches the tool exception and returns `is_error=True` with a one-line message, so the frames
+never reach the client. `../docs/08_evidence_coverage.md` breaks the 57 down (22 exception-type, 24
+wrong-result, 11 silent) and says what was captured instead. Nothing was reconstructed to fill them.
 
 ## Re-running
 

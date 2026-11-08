@@ -33,6 +33,19 @@ one its error reporting describes least.
 | reproduced | 72 (Server 38 / Client 21 / Host 5 / Transport 8) |
 | not reproduced | 267 = 184 with error text + 83 without |
 
+What the 72 runs actually captured (`repro/evidence_matrix.csv`):
+
+| Shape of the captured text | n |
+|---|---:|
+| real stack trace, with file and line | 15 |
+| multi-line error block, no frames | 13 |
+| one-to-three-line message | 36 |
+| no error at all (`is_error=False`) | 8 |
+
+15 of 72 is the honest number for "full console traceback". Of the 59 non-silent bugs, 46 have no
+stack: 22 because the server converted the exception into a one-line `TextContent`, 24 because the
+failure is a wrong result rather than an exception. `docs/08_evidence_coverage.md` has the list.
+
 ## Evidence classes on the 72
 
 | Class | n |

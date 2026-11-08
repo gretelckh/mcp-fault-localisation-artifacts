@@ -129,7 +129,7 @@ def main():
     check("  of which quoted from the issue", sum(1 for r in idx if r["error_text_source"] == "issue text"), 14)
     check("  of which silent (no diagnostic)", sum(1 for r in idx if r["error_text_source"] == "none"), 9)
     check("bugs with a raw payload", sum(1 for r in idx if r["has_raw_payload"] == "yes"), 54)
-    check("bugs with a console dump", sum(1 for r in idx if r["has_console_log"] == "yes"), 30)
+    check("bugs with a separate console log file", sum(1 for r in idx if r["has_console_log"] == "yes"), 30)
     # console files on disk: 30 for the reproduced bugs plus runs that failed to reproduce
     logdir = os.path.join(ROOT, "repro", "logs")
     lognames = sorted(os.listdir(logdir)) if os.path.isdir(logdir) else []
@@ -172,6 +172,29 @@ def main():
     check("  console transcripts", kinds["console transcript"], 30)
     check("  traceback excerpts", kinds["traceback excerpt"], 5)
     check("  client return payloads", kinds["client return payload"], 37)
+
+    # the per-bug evidence matrix: derived from the files, so its counts must agree with them
+    mat = load("repro/evidence_matrix.csv")
+    check("evidence-matrix rows", len(mat), 72)
+    check("evidence-matrix rows == index rows",
+          len({r["issue"] for r in mat} & {r["issue"] for r in idx}), 72)
+    shapes = {}
+    for r in mat:
+        shapes[r["text_shape"]] = shapes.get(r["text_shape"], 0) + 1
+    check("  bugs with a real stack trace", shapes.get("stack", 0), 15)
+    check("  bugs with a multi-line block, no frames", shapes.get("block", 0), 13)
+    check("  bugs with a one-to-three-line message", shapes.get("message", 0), 36)
+    check("  bugs with no error text", shapes.get("none", 0), 8)
+    nonsilent = [r for r in mat if r["evidence_class"] != "silent"]
+    check("non-silent bugs without a stack trace",
+          sum(1 for r in nonsilent if r["text_shape"] != "stack"), 46)
+    exc = {"caller-exception", "pushed-to-server", "registration-time"}
+    check("  of which exception-type",
+          sum(1 for r in nonsilent if r["text_shape"] != "stack" and r["evidence_class"] in exc), 22)
+    check("every gap row carries a reason",
+          sum(1 for r in mat if r["text_shape"] != "stack" and not r["gap_reason"]), 0)
+    check("no gap reason where a stack trace exists",
+          sum(1 for r in mat if r["text_shape"] == "stack" and r["gap_reason"]), 0)
 
     print()
     if FAIL:
