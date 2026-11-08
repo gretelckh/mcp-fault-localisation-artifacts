@@ -1,0 +1,48 @@
+# console transcript -- issue #1974
+# harness: repair demo, baseline run against unpatched mcp 2.2.0
+# source: BENCHMARK/repair/output/demos/1974.txt
+# ------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<workspace>/BENCHMARK/repair/demos\tmpv0k2bcdo.py", line 33, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "<python-env>/lib\asyncio\runners.py", line 196, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "<python-env>/lib\asyncio\runners.py", line 119, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "<python-env>/lib\asyncio\base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "<workspace>/BENCHMARK/repair/demos\tmpv0k2bcdo.py", line 23, in main
+    server = build()
+  File "<workspace>/BENCHMARK/repair/demos\tmpv0k2bcdo.py", line 17, in build
+    server.add_tool(Handler(), name="h")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\mcpserver\server.py", line 638, in add_tool
+    self._tool_manager.add_tool(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        fn,
+        ^^^
+    ...<6 lines>...
+        structured_output=structured_output,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "<python-env>/site-packages\mcp\server\mcpserver\tools\tool_manager.py", line 51, in add_tool
+    tool = Tool.from_function(
+        fn,
+    ...<6 lines>...
+        structured_output=structured_output,
+    )
+  File "<python-env>/site-packages\mcp\server\mcpserver\tools\base.py", line 101, in from_function
+    func_arg_metadata = func_metadata(
+        fn,
+        skip_names=skip_names,
+        structured_output=structured_output,
+    )
+  File "<python-env>/site-packages\mcp\server\mcpserver\utilities\func_metadata.py", line 359, in func_metadata
+    f"{func.__name__}Arguments",
+       ^^^^^^^^^^^^^
+AttributeError: 'Handler' object has no attribute '__name__'. Did you mean: '__ne__'?

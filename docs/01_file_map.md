@@ -23,7 +23,7 @@ mcp-fault-artifacts/
 │   ├── run_output/issue_XXXX.txt  72 files · one per bug: what that run printed, verbatim
 │   ├── raw/                       54 files · the raw payload each run wrote to disk
 │   ├── raw_map.csv                54 rows · issue number → raw payload file name
-│   ├── logs/NNNN.txt              41 files · console dumps (18 of them belong to the 72)
+│   ├── logs/NNNN.txt              53 files · console dumps (30 of them belong to the 72)
 │   ├── repro_verdicts_72.csv      72 rows · the verdict table
 │   └── attempt_log.csv           350 rows · every attempt, including the failures
 ├── llm/

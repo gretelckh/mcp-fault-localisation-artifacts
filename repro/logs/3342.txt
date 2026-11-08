@@ -1,0 +1,52 @@
+# console transcript -- issue #3342
+# harness: repair demo, baseline run against unpatched mcp 2.2.0
+# source: BENCHMARK/repair/output/demos/3342.txt
+# ------------------------------------------------------------------
+OBSERVED: raised MCPError code= 0 message= Missing required arguments: {'name'}
+StreamableHTTP session manager started
+Created new transport with session ID: 6a581d2f455e4c0c84c087d12caae248
+Received session ID: 6a581d2f455e4c0c84c087d12caae248
+handler for 'prompts/get' raised
+Traceback (most recent call last):
+  File "<python-env>/site-packages\mcp\server\mcpserver\server.py", line 1350, in get_prompt
+    rendered = await prompt.render(arguments, context)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\mcpserver\prompts\base.py", line 177, in render
+    raise ValueError(f"Missing required arguments: {missing}")
+ValueError: Missing required arguments: {'name'}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<python-env>/site-packages\mcp\shared\jsonrpc_dispatcher.py", line 720, in _handle_request
+    result = await on_request(dctx, req.method, req.params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\runner.py", line 230, in _on_request
+    result = _dump_result(await call(ctx))
+                          ^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\_otel.py", line 44, in __call__
+    result = await call_next(ctx)
+             ^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\request_state.py", line 361, in __call__
+    result = await call_next(ctx)
+             ^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\runner.py", line 217, in _inner
+    result = await entry.handler(ctx, typed_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\mcpserver\server.py", line 505, in _handle_get_prompt
+    return await self.get_prompt(params.name, params.arguments, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\mcpserver\server.py", line 1362, in get_prompt
+    raise ValueError(str(e)) from e
+ValueError: Missing required arguments: {'name'}
+Terminating session: 6a581d2f455e4c0c84c087d12caae248
+StreamableHTTP session manager shutting down
+ERROR:    Traceback (most recent call last):
+  File "<python-env>/site-packages\starlette\routing.py", line 663, in lifespan
+    await receive()
+  File "<python-env>/site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/lib\asyncio\queues.py", line 186, in get
+    await getter
+asyncio.exceptions.CancelledError

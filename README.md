@@ -28,7 +28,7 @@ python scripts/verify_numbers.py
 ```
 
 The script recomputes **every number in the paper** from the files in this repository and prints
-them next to the value printed in the manuscript — 78 checks, all of which should read `ok`.
+them next to the value printed in the manuscript — 81 checks, all of which should read `ok`.
 The last line reads `All checks passed ...` if the artefact and the paper agree.
 
 If you only want to look at one thing, open `data/active_bugs_339.csv` in Excel or pandas and
@@ -86,16 +86,18 @@ for the raw payload and the console dump appear only where the run kept one.
 
 `repro/run_output/issue_XXXX.txt` — **one file per reproduced bug** (72 files), the shortest way to
 see what a run actually printed. Six header lines say which harness ran, what kind of capture this
-is, and where the text came from; the body is the output, verbatim. 18 files carry the full console
-transcript, 5 carry a traceback excerpt, and 49 carry the return payload the client received. Paths
+is, and where the text came from; the body is the output, verbatim. 30 files carry the full console
+transcript, 5 carry a traceback excerpt, and 37 carry the return payload the client received. Paths
 and account names inside the text are redacted to `<user>` / `<python-env>`.
 
 `repro/captures_index.csv` — one row per bug, saying which kinds of evidence exist for it
-(trigger 72/72, error text 63, raw payload 54, console dump 18). Read this before concluding that
+(trigger 72/72, error text 63, raw payload 54, console dump 30). Read this before concluding that
 something is missing: the four kinds were collected by different mechanisms at different times.
 
-`repro/logs/` — the console dumps exactly as the harness wrote them (41 runs, 18 of them belonging
-to the reproduced set; the rest are attempts that did not reproduce).
+`repro/logs/` — the console dumps exactly as the harness wrote them (53 runs, 30 of them belonging
+to the reproduced set; the rest are attempts that did not reproduce). The 12 files added last carry
+a four-line provenance header naming the baseline harness they came from; the body below it is
+unmodified apart from path redaction.
 
 `repro/repro_verdicts_72.csv` — the verdict table: issue, origin layer, evidence class, evidence
 tier, whether an error was raised or the call returned silently, and the path to the capture.
@@ -195,9 +197,12 @@ gives the full list.
 2. **Issue bodies are truncated.** Reports are capped at 800 characters (screening table) and
    6,000 characters (active dataset); the model input in Study B at 4,000 characters. The full text
    is one click away at the URL in each row.
-3. **41 console logs, 72 captures.** Every reproduced bug has a capture file, but the harness only
-   started writing a separate console log partway through the study, so the older runs have their
-   output recorded in the capture file and in `repro/attempt_log.csv` only.
+3. **53 console logs, 30 of them for the 72, and 72 captures.** Every reproduced bug has a capture
+   file and a run-output file, but the harness only started writing a separate console log partway
+   through the study. Twelve of the richest transcripts were recovered from the baseline replay
+   that preceded the repair experiment and are included here with a provenance header. For the
+   other 42 bugs the output exists in the capture file, the run-output file and
+   `repro/attempt_log.csv`, but no separate server-side transcript was kept.
 4. **Redaction.** Local filesystem paths, the analysts' machine user names and e-mail addresses
    were replaced with `<user>` / `<email-redacted>` so that the artefact cannot identify its
    authors. Nothing else was changed.

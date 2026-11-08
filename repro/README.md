@@ -13,7 +13,7 @@
 
 `run_output/` holds one file per reproduced bug (72). Its first six lines are a header — harness,
 kind of capture, source of the text, and where the diagnostic came from — and everything below is
-the output, verbatim. 18 files carry a console transcript, 5 a traceback excerpt, 49 the return
+the output, verbatim. 30 files carry a console transcript, 5 a traceback excerpt, 37 the return
 payload the client received.
 
 ## Anatomy of a capture
@@ -56,7 +56,7 @@ The distinction matters: it is the difference between "we saw this" and "the rep
 | `has_trigger_code` | 72 | every bug has the code or the reproduction recipe that was run |
 | `has_error_text` | 63 | an error text is recorded (49 runtime, 14 quoted from the issue) |
 | `has_raw_payload` | 54 | the raw object returned by the run was written to `raw/` |
-| `has_console_log` | 18 | a full console dump was kept |
+| `has_console_log` | 30 | a full console dump was kept |
 | `has_harness_record` | 54 | the runner's progress file has an entry for the bug |
 
 The four kind of evidence accumulated at different points in the study, which is why the coverages

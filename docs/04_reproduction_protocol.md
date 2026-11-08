@@ -50,7 +50,7 @@ Each run captures:
 | `captures_index.csv` | 72 | one row per bug: which kinds of evidence exist for it |
 | `raw/` | 54 | the raw payload the run wrote to disk |
 | `raw_map.csv` | 54 | issue number → raw payload file |
-| `logs/NNNN.txt` | 41 | console dumps as the harness wrote them, including runs that did not reproduce (18 belong to the 72) |
+| `logs/NNNN.txt` | 53 | console dumps as the harness wrote them, including runs that did not reproduce (30 belong to the 72) |
 | `repro_verdicts_72.csv` | 72 | verdict table: origin layer, evidence class, evidence tier, error vs silent, path to the capture |
 | `attempt_log.csv` | 350 | every attempt the harness recorded: 49 `done` (reproduced) and 301 `limited` (attempted, obstacle recorded) |
 
@@ -64,7 +64,7 @@ set of bugs. `captures_index.csv` states this per bug rather than leaving the re
 | Trigger code or reproduction recipe | 72 | required to run the case at all |
 | Error text | 63 | 49 captured at runtime, 14 quoted from the issue body because our replay did not raise it again, 9 are silent failures with no diagnostic |
 | Raw payload on disk | 54 | the per-bug dump was added after the first batch had been run |
-| Console dump | 18 | the separate log dump was added later still |
+| Console dump | 30 | the separate log dump was added later still; 12 were recovered from the baseline replay that preceded the repair experiment |
 | Runner progress record | 54 | a few cases were driven by standalone scripts that did not write to the progress file |
 
 No cell is filled in by inference. Where a source does not exist, the section is absent from the

@@ -129,7 +129,16 @@ def main():
     check("  of which quoted from the issue", sum(1 for r in idx if r["error_text_source"] == "issue text"), 14)
     check("  of which silent (no diagnostic)", sum(1 for r in idx if r["error_text_source"] == "none"), 9)
     check("bugs with a raw payload", sum(1 for r in idx if r["has_raw_payload"] == "yes"), 54)
-    check("bugs with a console dump", sum(1 for r in idx if r["has_console_log"] == "yes"), 18)
+    check("bugs with a console dump", sum(1 for r in idx if r["has_console_log"] == "yes"), 30)
+    # console files on disk: 30 for the reproduced bugs plus runs that failed to reproduce
+    logdir = os.path.join(ROOT, "repro", "logs")
+    lognames = sorted(os.listdir(logdir)) if os.path.isdir(logdir) else []
+    check("console log files on disk", len(lognames), 53)
+    check("  carrying a provenance header",
+          sum(1 for f in lognames if open(os.path.join(logdir, f), encoding="utf-8").readline().startswith("# console transcript")), 12)
+    check("console dumps promised by the index that are missing",
+          sum(1 for r in idx if r["has_console_log"] == "yes"
+              and not os.path.exists(os.path.join(logdir, r["issue"].lstrip("#") + ".txt"))), 0)
     # every capture must actually carry the sections its index row advertises
     missing = []
     for r in idx:
@@ -160,9 +169,9 @@ def main():
             kinds[k] += 1
     check("per-bug run-output files", len(names), 72)
     check("run-output files carrying a provenance header", 72 - len(bad), 72)
-    check("  console transcripts", kinds["console transcript"], 18)
+    check("  console transcripts", kinds["console transcript"], 30)
     check("  traceback excerpts", kinds["traceback excerpt"], 5)
-    check("  client return payloads", kinds["client return payload"], 49)
+    check("  client return payloads", kinds["client return payload"], 37)
 
     print()
     if FAIL:

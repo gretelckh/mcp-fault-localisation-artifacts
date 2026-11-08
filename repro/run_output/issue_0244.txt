@@ -1,7 +1,29 @@
 # run output -- issue #244
-# harness: repro_cases.py::b_244
-# capture kind: client return payload
-# source: analysis workbook, column "完整报错文本"
+# harness: repair demo, baseline run against unpatched mcp 2.2.0
+# capture kind: console transcript
+# source: BENCHMARK/repair/output/demos/244.txt
 # diagnostic text used for coding came from: runtime capture
 # ------------------------------------------------------------------
-RAISED-AT-REG:ValueError:Resource 'data://r' has no URI template variables, but the handler declares parameters {'ctx'}. Add matching {...} variables to the URI or remove the parameters.
+Traceback (most recent call last):
+  File "<workspace>/BENCHMARK/repair/demos\tmpxdk0lt0d.py", line 32, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "<python-env>/lib\asyncio\runners.py", line 196, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "<python-env>/lib\asyncio\runners.py", line 119, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "<python-env>/lib\asyncio\base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "<workspace>/BENCHMARK/repair/demos\tmpxdk0lt0d.py", line 22, in main
+    server = build()
+  File "<workspace>/BENCHMARK/repair/demos\tmpxdk0lt0d.py", line 13, in build
+    @server.resource("data://r")
+     ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\mcpserver\server.py", line 910, in decorator
+    raise ValueError(
+    ...<3 lines>...
+    )
+ValueError: Resource 'data://r' has no URI template variables, but the handler declares parameters {'ctx'}. Add matching {...} variables to the URI or remove the parameters.

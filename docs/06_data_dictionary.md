@@ -130,7 +130,7 @@ the record, or to see which bugs have a console dump before going looking for on
 | `has_error_text` | `yes` for 63 of 72 |
 | `has_trigger_code` | `yes` for all 72 |
 | `section3_chars` | length of the captured text in the capture file, 0 if empty |
-| `has_console_log` | `yes` for 18 |
+| `has_console_log` | `yes` for 30 |
 | `has_raw_payload` | `yes` for 54 |
 | `has_harness_record` | `yes` for 54 — the runner's progress file has an entry |
 | `harness_entry` | `file.py::case` in `repro/runner/`, where the harness has one |
