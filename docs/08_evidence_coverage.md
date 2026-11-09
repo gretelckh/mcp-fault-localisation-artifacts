@@ -51,9 +51,9 @@ The MCP server catches a tool exception and converts it into a normal `CallToolR
 to the server process's own stderr, and are printed only if that process installs a log handler.
 
 This is a property of the protocol, not of individual bugs, which is why the shape is so uniform:
-the 16 `message` rows are the same phenomenon 16 times. Where the server's logger was on, both
-sides of the call ended up in the same file — the request, the frames, and the result the client
-received — which is what `repro/transcripts/` holds.
+the 16 `message` rows are the same phenomenon 16 times. In the 32 cases where the traceback is
+complete, the same file holds both sides of the call — the request, the frames, and the result the
+client received — which is what `repro/transcripts/` collects.
 
 ## 4. What a reader can still check for every bug
 

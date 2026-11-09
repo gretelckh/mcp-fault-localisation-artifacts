@@ -50,9 +50,10 @@ Per-bug detail is in `../evidence_matrix.csv` (`text_shape`, `gap_reason`) and
 `../../docs/08_evidence_coverage.md`. Three bugs (#76, #915, #3434) kept only the **tail** of their
 traceback; those are left in `../run_output/` rather than padded out here.
 
-Captures were made with the server's logger on, so the server-side frames are present rather than
-swallowed by the protocol. Local paths and account names were replaced with `<workspace>`,
-`<python-env>` and `<user>`; nothing else was altered.
+Server-side frames appear only where the server process printed its own traceback; where it did
+not, the client got a one-line message and nothing else, and those bugs are not in this folder.
+Local paths and account names were replaced with `<workspace>`, `<python-env>` and `<user>`;
+nothing else was altered.
 
 ## Check them
 
