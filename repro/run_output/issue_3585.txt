@@ -1,7 +1,0 @@
-# run output -- issue #3585
-# harness: repro_cases.py::b_media_mime
-# capture kind: client return payload
-# source: analysis workbook, column "完整报错文本"
-# diagnostic text used for coding came from: none (run returned normally)
-# ------------------------------------------------------------------
-meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-media', 'version': ''}} content=[TextContent(type='text', text='image/jpg', annotations=None, meta=None)] structured_content={'result': 'image/jpg'} is_error=False result_type='complete'

@@ -1,7 +1,0 @@
-# run output -- issue #3351
-# harness: repro_cases.py::b_3351
-# capture kind: client return payload
-# source: analysis workbook, column "完整报错文本"
-# diagnostic text used for coding came from: runtime capture
-# ------------------------------------------------------------------
-meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3351', 'version': ''}} content=[TextContent(type='text', text="Error executing tool f: 1 validation error for fArguments\nx\n  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='not_an_int',

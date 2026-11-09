@@ -1,7 +1,0 @@
-4 clients connected OK
-scenario=create sessions in one task, close them in separate tasks
-created 4 sessions in a task group
-  RAISED:RuntimeError:Attempted to exit cancel scope in a different task than it was entered in
-  RAISED:RuntimeError:Attempted to exit cancel scope in a different task than it was entered in
-  RAISED:RuntimeError:Attempted to exit cancel scope in a different task than it was entered in
-  RAISED:RuntimeError:Attempted to exit cancel scope in a different task than it was entered in

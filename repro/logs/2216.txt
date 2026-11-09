@@ -1,3 +1,0 @@
-VERDICT=REPRO
-CATEGORY=single-layer
-validate_scope(scope=None, req="read") -> RAISED InvalidScopeError: Client was not registered with scope read

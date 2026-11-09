@@ -1,3 +1,0 @@
-VERDICT=FIXED
-CATEGORY=fixed-in-current
-minimal metadata accepted: issuer=https://as.example

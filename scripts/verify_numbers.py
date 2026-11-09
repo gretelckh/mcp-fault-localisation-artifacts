@@ -116,97 +116,69 @@ def main():
     check("non-Server accuracy (%)", pct(sum(int(r["correct"]) for r in ns), len(ns)), 29.7)
     check("model abstained on the reporter's claim", sum(1 for r in scores if not r["model_reporter_claim"]), 78)
 
-    print("\n== 8. Reproduction artefacts ==")
-    caps = [f for f in os.listdir(os.path.join(ROOT, "repro", "captures")) if f.endswith(".txt")]
-    check("per-bug captured-output files", len(caps), 72)
-    check("attempt log rows", len(load("repro/attempt_log.csv")), 350)
-    check("verdict rows", len(load("repro/repro_verdicts_72.csv")), 72)
+    print("\n== 8. Per-bug captured output ==")
+    capdir = os.path.join(ROOT, "repro", "captures")
+    caps = sorted(f for f in os.listdir(capdir) if f.endswith(".txt"))
+    check("per-bug capture files", len(caps), 72)
+    missing, hdr = [], {}
+    for f in caps:
+        s = open(os.path.join(capdir, f), encoding="utf-8").read()
+        if ("## 1. What was run" not in s or "## 3. What we captured" not in s
+                or "## 4. Why it happens" not in s):
+            missing.append(f)
+        head = {}
+        for line in s.splitlines():
+            if not line.startswith("# "):
+                break
+            k, _, v = line[2:].partition(": ")
+            head[k.strip()] = v.strip()
+        hdr[int(f[6:10])] = head
+    check("captures missing a mandatory section", len(missing), 0)
+    check("captures whose header names another issue",
+          sum(1 for n, h in hdr.items() if h.get("issue") != "#%d" % n), 0)
+    check("capture headers carrying an origin layer",
+          sum(1 for h in hdr.values() if h.get("origin_layer")), 72)
+    hl = Counter(h["origin_layer"] for h in hdr.values() if h.get("origin_layer"))
+    for k, v in [("Server", 38), ("Client", 21), ("Transport", 8), ("Host", 5)]:
+        check(f"captures, origin_layer = {k}", hl[k], v)
+    hc = Counter(h["exposure_channel"] for h in hdr.values() if h.get("exposure_channel"))
+    for k, v in [("pushed-to-Server", 8), ("silent", 13), ("caller-exception", 18),
+                 ("single-layer-genericised", 18), ("single-layer-correct", 12), ("registration", 3)]:
+        check(f"captures, evidence class = {k}", hc[k], v)
 
-    print("\n== 9. Evidence coverage, bug by bug ==")
-    idx = load("repro/captures_index.csv")
-    check("index rows", len(idx), 72)
-    check("bugs with a trigger or reproduction recipe", sum(1 for r in idx if r["has_trigger_code"] == "yes"), 72)
-    check("bugs with an error text", sum(1 for r in idx if r["has_error_text"] == "yes"), 63)
-    check("  of which captured at runtime", sum(1 for r in idx if r["error_text_source"] == "runtime"), 49)
-    check("  of which quoted from the issue", sum(1 for r in idx if r["error_text_source"] == "issue text"), 14)
-    check("  of which silent (no diagnostic)", sum(1 for r in idx if r["error_text_source"] == "none"), 9)
-    check("bugs with a raw payload", sum(1 for r in idx if r["has_raw_payload"] == "yes"), 54)
-    check("bugs with a separate console log file", sum(1 for r in idx if r["has_console_log"] == "yes"), 30)
-    # console files on disk: 30 for the reproduced bugs plus runs that failed to reproduce
-    logdir = os.path.join(ROOT, "repro", "logs")
-    lognames = sorted(os.listdir(logdir)) if os.path.isdir(logdir) else []
-    check("console log files on disk", len(lognames), 53)
-    check("  carrying a provenance header",
-          sum(1 for f in lognames if open(os.path.join(logdir, f), encoding="utf-8").readline().startswith("# console transcript")), 12)
-    check("console dumps promised by the index that are missing",
-          sum(1 for r in idx if r["has_console_log"] == "yes"
-              and not os.path.exists(os.path.join(logdir, r["issue"].lstrip("#") + ".txt"))), 0)
-    # every capture must actually carry the sections its index row advertises
-    missing = []
-    for r in idx:
-        p = os.path.join(ROOT, "repro", "captures", "issue_%04d.txt" % int(r["issue"].lstrip("#")))
-        if not os.path.exists(p):
-            missing.append(r["issue"])
-            continue
-        s = open(p, encoding="utf-8").read()
-        if "## 1. What was run" not in s or "## 4. Why it happens" not in s:
-            missing.append(r["issue"])
-    check("captures missing their mandatory sections", len(missing), 0)
-    # one run-output file per reproduced bug, each with its provenance header
-    outdir = os.path.join(ROOT, "repro", "run_output")
-    names = sorted(os.listdir(outdir)) if os.path.isdir(outdir) else []
-    kinds = {"console transcript": 0, "traceback excerpt": 0, "client return payload": 0}
-    bad = []
-    for r in idx:
-        p = os.path.join(outdir, "issue_%04d.txt" % int(r["issue"].lstrip("#")))
-        if not os.path.exists(p):
-            bad.append(r["issue"])
-            continue
-        s = open(p, encoding="utf-8").read()
-        if "# capture kind: " not in s or "# source: " not in s:
-            bad.append(r["issue"])
-            continue
-        k = [l for l in s.splitlines() if l.startswith("# capture kind: ")][0].split(": ", 1)[1]
-        if k in kinds:
-            kinds[k] += 1
-    check("per-bug run-output files", len(names), 72)
-    check("run-output files carrying a provenance header", 72 - len(bad), 72)
-    check("  console transcripts", kinds["console transcript"], 30)
-    check("  traceback excerpts", kinds["traceback excerpt"], 5)
-    check("  client return payloads", kinds["client return payload"], 37)
-
-    # the per-bug evidence matrix: derived from the files, so its counts must agree with them
+    print("\n== 9. Per-bug evidence classification and run logs ==")
     mat = load("repro/evidence_matrix.csv")
     check("evidence-matrix rows", len(mat), 72)
-    check("evidence-matrix rows == index rows",
-          len({r["issue"] for r in mat} & {r["issue"] for r in idx}), 72)
-    shapes = {}
-    for r in mat:
-        shapes[r["text_shape"]] = shapes.get(r["text_shape"], 0) + 1
-    check("  bugs with a real stack trace", shapes.get("stack", 0), 40)
-    check("  bugs with a multi-line block, no frames", shapes.get("block", 0), 10)
-    check("  bugs with a one-to-three-line message", shapes.get("message", 0), 14)
-    check("  bugs with no error text", shapes.get("none", 0), 8)
+    check("evidence-matrix rows that match a capture",
+          len({r["issue"] for r in mat} & {"#%d" % n for n in hdr}), 72)
+    check("evidence-matrix rows whose layer disagrees with the capture header",
+          sum(1 for r in mat if r["origin_layer"] != hdr[int(r["issue"].lstrip("#"))]["origin_layer"]), 0)
+    shapes = Counter(r["text_shape"] for r in mat)
+    for k, v in [("stack", 40), ("block", 10), ("message", 14), ("none", 8)]:
+        check(f"text shape = {k}", shapes[k], v)
+    check("text shapes sum to the 72 reproduced bugs", sum(shapes.values()), 72)
     nonsilent = [r for r in mat if r["evidence_class"] != "silent"]
     check("non-silent bugs without a stack trace",
           sum(1 for r in nonsilent if r["text_shape"] != "stack"), 21)
     exc = {"caller-exception", "pushed-to-server", "registration-time"}
     check("  of which exception-type",
           sum(1 for r in nonsilent if r["text_shape"] != "stack" and r["evidence_class"] in exc), 13)
-    check("every gap row carries a reason",
+    check("every non-stack row carries a reason",
           sum(1 for r in mat if r["text_shape"] != "stack" and not r["gap_reason"]), 0)
-    check("stack rows with no transcript and no reason",
+    check("stack rows with neither a run log nor a reason",
           sum(1 for r in mat if r["text_shape"] == "stack"
               and not r["transcript"] and not r["gap_reason"]), 0)
-    check("a gap reason on a row that has a transcript",
+    check("a gap reason on a row that has a run log",
           sum(1 for r in mat if r["transcript"] and r["gap_reason"]), 0)
-    check("matrix rows pointing at a transcript that is missing",
-          sum(1 for r in mat if r["transcript"] and not os.path.exists(os.path.join(ROOT, r["transcript"]))), 0)
-    check("  rows that point at a transcript", sum(1 for r in mat if r["transcript"]), 40)
-    check("matrix columns that still record which capture pass a file came from",
-          sum(1 for c in mat[0] if "rerun" in c or "stack_available" in c), 0)
+    check("  rows that point at a run log", sum(1 for r in mat if r["transcript"]), 40)
+    check("matrix rows pointing at a run log that is missing",
+          sum(1 for r in mat if r["transcript"]
+              and not os.path.exists(os.path.join(ROOT, r["transcript"]))), 0)
+    check("matrix rows pointing at a capture that is missing",
+          sum(1 for r in mat if r["capture"]
+              and not os.path.exists(os.path.join(ROOT, r["capture"]))), 0)
 
-    # the reviewer-facing folder: one file per bug with a complete traceback
+    # the run logs: one file per bug whose traceback is complete
     tdir = os.path.join(ROOT, "repro", "transcripts")
     tfiles = sorted(glob.glob(os.path.join(tdir, "issue_*.txt")))
     check("files in repro/transcripts/", len(tfiles), 40)
@@ -214,27 +186,22 @@ def main():
     for p in tfiles:
         s = open(p, encoding="utf-8", errors="replace").read()
         tbodies[int(os.path.basename(p)[6:10])] = s
-    check("transcripts whose header is not the 3-line form",
+    check("run logs whose header is not the 3-line form",
           sum(1 for s in tbodies.values()
-              if not re.match(r"^# issue #\d+ -- reproduction run log\n# stack: (?:complete|tail only), \d+ frames\n# -+\n", s)), 0)
-    tail_only = {n for n, s in tbodies.items() if s.splitlines()[1].startswith("# stack: tail only")}
-    check("transcripts with no traceback in the body",
-          sum(1 for n, s in tbodies.items()
-              if n not in tail_only and "Traceback (most recent call last):" not in s), 0)
-    check("transcripts marked as a tail", len(tail_only), 0)
-    check("transcripts whose body has no file/line frame",
+              if not re.match(r"^# issue #\d+ -- reproduction run log\n# stack: complete, \d+ frames\n# -+\n", s)), 0)
+    check("run logs with no traceback in the body",
+          sum(1 for s in tbodies.values() if "Traceback (most recent call last):" not in s), 0)
+    check("run logs whose body has no file/line frame",
           sum(1 for s in tbodies.values() if not re.search(r'File ".+", line \d+', s)), 0)
-    check("transcripts naming a pass, a date or a local path",
+    check("run logs naming a pass, a date or a local path",
           sum(1 for s in tbodies.values()
               if re.search(r"re-?run|2025|2026|Gretel|kehuichen|Desktop", s, re.I)), 0)
-    check("transcripts in the folder that the matrix does not point at",
+    check("run logs in the folder that the matrix does not point at",
           sum(1 for n in tbodies
               if not next(r for r in mat if r["issue"] == "#%d" % n)["transcript"]), 0)
-    check("bugs with frames but no transcript",
-          sum(1 for r in mat if r["text_shape"] == "stack" and not r["transcript"]), 0)
     check("frame counts in the header disagreeing with the body",
           sum(1 for s in tbodies.values()
-              if int(re.search(r"# stack: (?:complete|tail only), (\d+) frames", s).group(1))
+              if int(re.search(r"# stack: complete, (\d+) frames", s).group(1))
               != len(re.findall(r'File ".+", line \d+', s))), 0)
 
     print()

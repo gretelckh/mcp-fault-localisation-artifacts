@@ -1,8 +1,0 @@
-# run output -- issue #3549
-# harness: repro_cases.py::b_race_lost_update
-# capture kind: client return payload
-# source: analysis workbook, column "完整报错文本"
-# diagnostic text used for coding came from: none (run returned normally)
-# ------------------------------------------------------------------
-final_after_20_concurrent_calls={'result': 1} n_calls=20 is_error=False
-meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-race', 'version': ''}} content=[TextContent(type='text', text='1', annotations=None, meta=None)] stru

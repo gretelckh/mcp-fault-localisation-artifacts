@@ -4,8 +4,8 @@
 These five cases mirror genuinely-distinct defects mined from the official
 modelcontextprotocol/python-sdk issue tracker (issue number in issue_src). Each
 needs bespoke capture (concurrency, prompt, session-404, capabilities), so they are
-kept apart from the generic single-call runner. Output is merged into the same
-repro/raw + repro/raw_map.csv consumed by analysis/parse_real_runs.py.
+kept apart from the generic single-call runner. Output is written to the console and
+recorded, per bug, in ../captures/ and ../evidence_matrix.csv.
 
 Usage: python runner/run_real_http2.py
 """

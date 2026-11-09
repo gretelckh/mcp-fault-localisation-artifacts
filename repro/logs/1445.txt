@@ -1,3 +1,0 @@
-VERDICT=SPEC
-CATEGORY=spec-gap
-Spec gap: server MUST validate token issuer (iss validation).

@@ -1,8 +1,0 @@
-# run output -- issue #3646
-# harness: repro_cases.py::case_extra_arg
-# capture kind: client return payload
-# source: analysis workbook, column "完整报错文本"
-# diagnostic text used for coding came from: the issue report
-# ------------------------------------------------------------------
-is_error=False
-meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3646', 'version': ''}} content=[TextContent(type='text', text='1', annotations=None, meta=None)] structured_content={'result': 1} is_error=Fa

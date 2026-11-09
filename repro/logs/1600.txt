@@ -1,4 +1,0 @@
-VERDICT=OBS
-CATEGORY=observation/interop
-ProgressToken type = str | int
-Issue is interop (spring-ai int vs python str token) mismatch, not a standalone SDK crash.

@@ -1,6 +1,0 @@
-VERDICT=REPRO
-CATEGORY=single-layer
-a.redirect_uris=[AnyUrl('https://x/cb')]
-b.redirect_uris=[AnyHttpUrl('https://x/cb')]
-a.redirect_uris == b.redirect_uris : False
-a == b : False

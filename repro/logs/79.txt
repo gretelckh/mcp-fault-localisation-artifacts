@@ -1,2 +1,0 @@
-4 clients connected OK
-RUN EXC: CancelledError: Cancelled by cancel scope 1efebf8e990

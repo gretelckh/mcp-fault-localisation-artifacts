@@ -1,4 +1,0 @@
-VERDICT=FIXED
-CATEGORY=fixed-in-current
-token request body: grant_type=client_credentials&client_id=my-client-id&client_secret=my-secret&resource=http%3A%2F%2F127.0.0.1%3A9999&scope=read+write
-client_id in body: True

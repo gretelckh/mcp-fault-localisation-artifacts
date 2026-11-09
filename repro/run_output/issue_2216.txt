@@ -1,9 +1,0 @@
-# run output -- issue #2216
-# harness: runner/repro_pending/repro_oauth_logic.py::test_2216
-# capture kind: console transcript
-# source: repro/logs/2216.txt
-# diagnostic text used for coding came from: runtime capture
-# ------------------------------------------------------------------
-VERDICT=REPRO
-CATEGORY=single-layer
-validate_scope(scope=None, req="read") -> RAISED InvalidScopeError: Client was not registered with scope read

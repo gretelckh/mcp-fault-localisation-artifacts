@@ -1,4 +1,0 @@
-VERDICT=EXAMPLE
-CATEGORY=example-config
-OAuthToken(token_type="bearer").token_type -> 'Bearer'
-SDK normalizes token_type to "Bearer" -> defect is in the example server, not the SDK core.

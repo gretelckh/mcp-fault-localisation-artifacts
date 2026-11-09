@@ -45,8 +45,7 @@ There are 40 files, not 72. Here is where the other 32 went:
 | complete traceback | **40** | this folder |
 | no traceback at all | 32 | 11 silent (the call returned normally, `is_error=False`: the defect is a wrong answer or a missing safeguard); 21 non-silent but no frames exist — the server returned `isError=True` with a one-line message instead of raising, the exception was raised in the client (cancel scope, JSON decode), or there was no exception because the result was simply wrong |
 
-Per-bug detail is in `../evidence_matrix.csv` (`text_shape`, `gap_reason`) and
-`../../docs/08_evidence_coverage.md`.
+Per-bug detail is in `../evidence_matrix.csv` (`text_shape`, `gap_reason`).
 
 Server-side frames appear only where the server process printed its own traceback; where it did
 not, the client got a one-line message and nothing else, and those bugs are not in this folder.

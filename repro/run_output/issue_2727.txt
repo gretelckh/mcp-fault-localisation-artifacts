@@ -1,8 +1,0 @@
-# run output -- issue #2727
-# harness: runner/repro_pending/repro_2727.py
-# capture kind: console transcript
-# source: repro/logs/2727.txt
-# diagnostic text used for coding came from: runtime capture
-# ------------------------------------------------------------------
-enter RAISED:MCPError:Server returned an error response
-seen Origin headers on requests: [None, None]

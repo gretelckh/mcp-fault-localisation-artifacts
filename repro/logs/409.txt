@@ -1,4 +1,0 @@
-client entered
-list_tools RAISED:MCPError:Failed to parse JSON response: 1 validation error for union[JSONRPCRequest,JSONRPCNotification,JSONRPCResponse,JSONRPCError]
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value=b'Error: type error in handler', input_type=bytes]
-    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid

@@ -1,17 +1,18 @@
-# Review artefact — *Why Is It So Hard to Localize Bugs in MCP Pipelines?*
+# Artefact — *Why Is It So Hard to Localize Bugs in MCP Pipelines?*
 
 Artefact package accompanying the manuscript *Why Is It So Hard to Localize Bugs in MCP
-Pipelines?*, released under the authors' GitHub account. It contains the five things the manuscript
-promises in its data-availability statement:
+Pipelines? An Empirical Study with a Reproducible Fault-Injection Benchmark*. It contains the five
+things the manuscript promises in its data-availability statement, and nothing else:
 
 | # | What the paper promises | Where it is |
 |---|---|---|
-| 1 | Screening record of all 1,343 mined issues | `data/screening_1343.csv`, `data/screening_funnel.csv` |
-| 1a | The raw GitHub metadata exactly as pulled (`modelcontextprotocol/python-sdk`, 1,373 issues, 14 API fields, no analysis columns) | `data/gh_issues_raw_2026-11-09.xlsx` |
-| 2 | The active dataset of 339 real bugs, with labels | `data/active_bugs_339.csv`, `data/evidence_class_339.csv` |
-| 3 | Reproduction scripts + the output captured from each of the 72 runs | `repro/runner/`, `repro/run_output/`, `repro/captures/`, `repro/transcripts/` |
-| 4 | Per-bug evidence classification | `data/evidence_class_339.csv`, `data/blocking_gaps_83.csv` |
-| 5 | LLM prompts and raw model output | `llm/prompts.md`, `llm/outputs/` |
+| 1 | Issue-screening workbook over all 1,343 pure issues | `data/screening_1343.csv`, `data/screening_funnel.csv` |
+| 1a | The same pull, raw, exactly as the GitHub API returned it (1,373 issues, 14 API fields, no analysis columns) | `data/gh_issues_raw_2026-11-09.xlsx` |
+| 2 | The live dataset: 339 rows | `data/active_bugs_339.csv`, `data/evidence_class_339.csv` |
+| 3 | The 72 reproduction scripts and the output captured from each run | `repro/runner/`, `repro/captures/`, `repro/transcripts/` |
+| 4 | Per-bug evidence classification | `data/evidence_class_339.csv`, `repro/evidence_matrix.csv`, `data/blocking_gaps_83.csv` |
+| 5 | LLM prompts and raw answers | `llm/prompts.md`, `llm/outputs/` |
+| 6 | A script that recomputes every number in the paper | `scripts/verify_numbers.py` |
 
 Nothing here is synthetic. Every row is traceable to a public GitHub issue in
 `modelcontextprotocol/python-sdk`, a run that was actually executed, or a model response that was
@@ -28,9 +29,9 @@ git clone <this-repo> mcp-artefacts && cd mcp-artefacts
 python scripts/verify_numbers.py
 ```
 
-The script recomputes **every number in the paper** from the files in this repository and prints
-them next to the value printed in the manuscript — 102 checks, all of which should read `ok`.
-The last line reads `All checks passed ...` if the artefact and the paper agree.
+The script recomputes **every dataset-level number in the paper** from the files in this repository
+and prints each value next to the one printed in the manuscript — 98 checks, all of which should
+read `ok`. The last line reads `All checks passed ...` if the artefact and the paper agree.
 
 If you only want to look at one thing, open `data/active_bugs_339.csv` in Excel or pandas and
 filter the column `reproduction_status`.
@@ -42,17 +43,20 @@ filter the column `reproduction_status`.
 ### 2.1 Screening (`data/`)
 
 `data/screening_1343.csv` — one row per issue in the mined pool (all issues of
-`modelcontextprotocol/python-sdk`, pull requests excluded), with the issue number, title, state,
-creation date, the keyword-screen label, the URL and the first 800 characters of the report body.
-The keyword label takes one of six values: `BUG`, `QUESTION`, `OTHER`, `FEATURE`, `CI/REFACTOR`,
-`DOC`.
+`modelcontextprotocol/python-sdk`, pull requests excluded): issue number, title, state, creation
+date, the keyword-screen label, the URL and the first 800 characters of the report body. The
+keyword label takes one of six values: `BUG`, `QUESTION`, `OTHER`, `FEATURE`, `CI/REFACTOR`, `DOC`.
 
 `data/screening_funnel.csv` — the seven-stage funnel from 1,343 mined issues down to 339 analysed
 bugs, with the count at each stage and the rule applied. Stages 3→4→5 are auditable: 398 confirmed
 reports minus 59 that already behave correctly on the pinned SDK (`mcp 2.2.0`) gives the 339 bugs
 the paper analyses.
 
-### 2.2 Active dataset (`data/active_bugs_339.csv`)
+`data/gh_issues_raw_2026-11-09.xlsx` — the raw pull, before any screening or labelling: every
+field the GitHub API returned for the repository, unmodified apart from comment bodies being
+truncated. Useful if you want to redo the screening from scratch rather than audit ours.
+
+### 2.2 Live dataset (`data/active_bugs_339.csv`, `data/evidence_class_339.csv`)
 
 One row per bug, 25 columns. The columns that matter for the paper:
 
@@ -65,10 +69,10 @@ One row per bug, 25 columns. The columns that matter for the paper:
 | `reproduction_status` | `reproduced` / `not_reproduced__error_text_present` / `not_reproduced__no_error_text` |
 | `not_reproduced_reason` | for the 267: the concrete obstacle that blocked reproduction |
 | `observed_output` | for the 72: the return value or exception the run actually produced |
-| `analyst_note`, `defect_description` | the analyst's free-text note for that bug (Chinese; see §6) |
+| `analyst_note`, `defect_description` | the analyst's free-text note for that bug (Chinese; see §5) |
 
-Full column-by-column documentation: `docs/06_data_dictionary.md`.
-The class definitions are in `docs/02_codebook.md`.
+`data/evidence_class_339.csv` is the compact per-bug classification: issue, origin layer, evidence
+class, evidence tier, and the one-line reason for the class.
 
 ### 2.3 Reproduction (`repro/`)
 
@@ -79,49 +83,26 @@ The class definitions are in `docs/02_codebook.md`.
 * `repro_framework.py` — starts the server over Streamable HTTP with uvicorn, connects with the
   official client, invokes the tool and captures whatever comes back (return object or exception).
 * `run_real_http.py`, `run_real_http2.py` — transport-level and interactive replays.
+* `capture_with_server_log.py` — one bug, client result plus server traceback.
 
 `repro/captures/issue_XXXX.txt` — **one file per reproduced bug** (72 files). Each is a
 self-contained record: the trigger that was run, what the reporter described, the output that was
-captured, the layer analysis, and a provenance table saying where each field came from. Sections
-for the raw payload and the console dump appear only where the run kept one.
+captured, the layer analysis, and a provenance table saying where each field came from. This is the
+"captured console output" the paper refers to: section 3 holds exactly what the client saw.
 
-`repro/transcripts/issue_XXXX.txt` — **the 40 bugs whose run kept a Python traceback**, one file
-each, body verbatim, all 40 complete. Where the file opens with `CLIENT ->` / `SERVER !!` / `CLIENT <-` it shows the
-request, the exception the server caught, and the result the client received. In many of the 40 the frames
-point at a different layer than the message the caller saw, which is the phenomenon this study
-measures. `repro/transcripts/README.md` explains the 32 that are not there. Start here if you
-want to check one bug's evidence.
+`repro/transcripts/issue_XXXX.txt` — the **40 bugs whose run kept a Python traceback**, one file
+each, body verbatim, all 40 complete. Where the file opens with `CLIENT ->` / `SERVER !!` /
+`CLIENT <-` it shows the request, the exception the server caught, and the result the client
+received. In many of the 40 the frames point at a different layer than the message the caller saw,
+which is the phenomenon this study measures.
 
-`repro/run_output/issue_XXXX.txt` — **one file per reproduced bug** (72 files), the shortest way to
-see what a run actually printed. Six header lines say which harness ran, what kind of capture this
-is, and where the text came from; the body is the output, verbatim. The header's `capture kind` is
-the *source* of the text (a console log for 30, a traceback excerpt for 5, the client's return
-payload for 37), not a claim about how complete it is: `text_shape` in `repro/evidence_matrix.csv`
-is what says how much of the error each bug left behind. `repro/transcripts/` holds the **40 complete tracebacks**, and `evidence_matrix.csv` (column `transcript`) points at the file for each of them.
-Paths and account names inside the text are redacted to `<user>` / `<python-env>`.
+`repro/evidence_matrix.csv` — one row per reproduced bug answering the two questions a reviewer
+asks first: *what exactly did you capture* (`text_shape`, `stack_frames`, `body_lines`, plus the
+path to the capture and, where one exists, the run log) and *is anything missing* (`gap_reason`).
+21 of the 59 non-silent bugs have no stack trace: 13 exception-type cases where the exception was
+raised in the client or at the HTTP boundary, and 8 wrong-result cases where no exception exists.
 
-`repro/captures_index.csv` — one row per bug, saying which kinds of evidence exist for it
-(trigger 72/72, error text 63, raw payload 54, console log 30). Read this before concluding that
-something is missing: the four kinds were collected by different mechanisms at different times.
-
-`repro/evidence_matrix.csv` — one row per reproduced bug answering the two questions a reviewer asks
-first: *what exactly did you capture* (`text_shape`, `stack_frames`, the file paths) and *is anything
-missing* (`gap_reason`). 21 of the 59 non-silent bugs have no stack trace: 13 exception-type cases
-where the exception was raised in the client or at the HTTP boundary, and 8 wrong-result cases where
-no exception exists. Rebuild it with `scripts/build_evidence_matrix.py`; the reasoning and the list
-are in `docs/08_evidence_coverage.md`.
-
-`repro/logs/` — the console dumps exactly as the harness wrote them (53 runs, 30 of them belonging
-to the reproduced set; the rest are attempts that did not reproduce). The 12 files added last carry
-a four-line provenance header naming the baseline harness they came from; the body below it is
-unmodified apart from path redaction.
-
-`repro/repro_verdicts_72.csv` — the verdict table: issue, origin layer, evidence class, evidence
-tier, whether an error was raised or the call returned silently, and the path to the capture.
-
-`repro/attempt_log.csv` — **all 350 attempts**, including the ones that failed, with the recorded
-reason. This is the audit trail behind the claim that the 267 unreproduced bugs were attempted and
-not asserted.
+`repro/README.md` — how to read a case, worked example included.
 
 ### 2.4 LLM experiments (`llm/`)
 
@@ -136,21 +117,11 @@ that was shown to the model, the model's JSON answer, and the true layer joined 
 `llm/outputs/studyB_scores_247.csv` — the same, flattened to one row per bug for counting:
 `true_origin_layer`, `model_reporter_claim`, `model_origin_layer`, `correct`.
 
+`llm/outputs/clues_72.json` — the six fixed, layer-blind guidance paragraphs used by the `ruleclue`
+arm, one per evidence class.
+
 `llm/run_llm_labelling.py` — a self-contained reference implementation of the labelling call
 (OpenAI-compatible endpoint, `temperature=0`), so the experiment can be re-run on another model.
-
-### 2.5 Docs (`docs/`)
-
-| file | content |
-|---|---|
-| `01_file_map.md` | this map, in one table, with file counts |
-| `02_codebook.md` | the four layers, the six evidence classes, the four evidence tiers, the labelling rules |
-| `03_screening_protocol.md` | how 1,343 → 439 → 398 → 339 was done, and what each stage can and cannot tell you |
-| `04_reproduction_protocol.md` | environment, harness, what "reproduced" means, what was never claimed |
-| `05_llm_experiments.md` | Study A and Study B designs, scoring, and the result tables |
-| `06_data_dictionary.md` | every column of every released table |
-| `07_results_snapshot.md` | all headline numbers in one page, each with the file that produces it |
-| `08_evidence_coverage.md` | for the 72: what text was captured, what is missing, and why |
 
 ---
 
@@ -194,52 +165,39 @@ The framework prints the same three things the captures record: the return objec
   simulating a pass.
 * Cases marked `env/transport-config` need a transport variant (stdio, SSE, a reverse proxy, a
   mounted sub-path) that the single Streamable-HTTP replay does not exercise. They are the largest
-  single reason a bug is not reproduced, and the attempt log says so per bug.
+  single reason a bug is not reproduced, and `not_reproduced_reason` says so per bug.
 
 ---
 
-## 5. How to cite the numbers
-
-If you want to quote a number from this artefact, quote it together with the file it comes from,
-e.g. *"119/247 = 48.2 % (`llm/outputs/studyB_scores_247.csv`)"*. Section `07_results_snapshot.md`
-gives the full list.
-
----
-
-## 6. Known limitations of the released files
+## 5. Known limitations of the released files
 
 1. **Free-text analyst notes are in Chinese.** The fields `defect_description`, `analyst_note`,
    `observed_output` and `not_reproduced_reason` were written by the analysts during the study and
    are released unedited apart from redaction. Every machine-readable label they support
    (`origin_layer`, `exposure_channel_raw`, `evidence_tier`, `reproduction_status`) is in English.
 2. **Issue bodies are truncated.** Reports are capped at 800 characters (screening table) and
-   6,000 characters (active dataset); the model input in Study B at 4,000 characters. The full text
-   is one click away at the URL in each row.
-3. **53 console logs, 30 of them for the 72, and 72 captures.** Every reproduced bug has a capture
-   file and a run-output file, but the harness only started writing a separate console log partway
-   through the study. Twelve of the richest transcripts were recovered from the baseline replay
-   that preceded the repair experiment and are included here with a provenance header. For the
-   other 42 bugs the output exists in the capture file, the run-output file and
-   `repro/attempt_log.csv`, but no separate server-side transcript was kept.
-4. **A stack trace exists for 40 of the 72, and all 40 are complete.** The MCP server turns a
-   tool exception into a `TextContent` error, so the frames stay in the server's stderr and only the
-   message reaches the client. `repro/transcripts/` holds all 40, complete. The remaining 32 are silent cases, client-side raises,
-   returned errors and wrong results, where a server traceback does not exist.
-   `docs/08_evidence_coverage.md` has the per-bug explanation.
-5. **Redaction.** Local filesystem paths, the analysts' machine user names and e-mail addresses
-   were replaced with `<user>` / `<email-redacted>` so that the artefact cannot identify its
-   authors. Nothing else was changed.
+   6,000 characters (live dataset); the model input in Study B at 4,000 characters. The full text
+   is one click away at the URL in each row, and `data/gh_issues_raw_2026-11-09.xlsx` carries the
+   raw bodies as returned by the API.
+3. **A stack trace exists for 40 of the 72, and all 40 are complete.** The MCP server turns a tool
+   exception into a `TextContent` error, so the frames stay in the server's stderr and only the
+   message reaches the client. The remaining 32 are silent cases, client-side raises, returned
+   errors and wrong results, where a server traceback does not exist; `repro/evidence_matrix.csv`
+   records the reason for each of them in `gap_reason`.
+4. **Capture headers cite internal paths.** A capture may name the harness entry that produced it,
+   and occasionally a console dump or raw payload file. Those internal dumps are not part of this
+   release; the text used for coding is reproduced in section 3 of the same capture.
+5. **Redaction.** Local filesystem paths and the analysts' user names were replaced with `<user>` /
+   `<python-env>` so that the artefact cannot identify its authors. Nothing else was changed.
 
 ---
 
-## 7. Licence and redaction
+## 6. Licence and redaction
 
 Code (`repro/`, `llm/*.py`, `scripts/`) — MIT, see `LICENSE`.
-Data and documentation (`data/`, `llm/outputs/`, `docs/`) — CC BY 4.0, see `LICENSE-DATA`.
-The underlying issue text belongs to its authors on GitHub and is reproduced here under the
-GitHub Terms of Service for the purpose of review.
+Data and documentation (`data/`, `llm/outputs/`) — CC BY 4.0, see `LICENSE-DATA`.
+The underlying issue text belongs to its authors on GitHub and is reproduced here under the GitHub
+Terms of Service for the purpose of review.
 
-Local machine paths and e-mail addresses found in captured tracebacks and issue text were redacted
-before release; see `ANONYMITY.md` for the rules applied and a check a reader can re-run. The
-authors' identity is not concealed by this repository. A permanent DOI will be minted after
+The authors' identity is not concealed by this repository. A permanent DOI will be minted after
 acceptance.

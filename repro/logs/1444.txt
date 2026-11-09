@@ -1,3 +1,0 @@
-VERDICT=SPEC
-CATEGORY=spec-gap
-Spec gap: server MUST NOT accept or transit tokens other than issued (token validation).

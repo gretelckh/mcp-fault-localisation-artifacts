@@ -68,8 +68,8 @@ transport/session state, not tool code.
 ```
 
 The six clues, one per evidence class, are in `llm/outputs/clues_72.json`. They are mechanically
-generated from the class definition in `docs/02_codebook.md`; no clue mentions a layer name, a bug
-number or a file.
+generated from the class definition recorded in `data/evidence_class_339.csv` (column
+`exposure_channel_raw`); no clue mentions a layer name, a bug number or a file.
 
 ## P3 — Study A, analyst note (`analyst` arm)
 
@@ -159,7 +159,7 @@ MOST ERROR-RELEVANT EXCERPT:
   such in the raw output files; no label was ever imputed by hand.
 * `our_layer` is compared with `origin_layer` from `data/active_bugs_339.csv`, not with the
   `origin` field stored inside the model output files (that field carries an earlier labelling
-  round). This is why the accuracies in `docs/05_llm_experiments.md` are slightly different from a
-  naive read of the JSON.
+  round). This is why the accuracies recomputed by `scripts/verify_numbers.py` are slightly
+  different from a naive read of the JSON.
 * `reporter_claim_layer` is kept as the model's *reading of the reporter*, not as a hand annotation;
   an empty value in `studyB_scores_247.csv` means the model returned `unclear` (78 of 247).
