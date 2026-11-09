@@ -7,6 +7,7 @@ promises in its data-availability statement:
 | # | What the paper promises | Where it is |
 |---|---|---|
 | 1 | Screening record of all 1,343 mined issues | `data/screening_1343.csv`, `data/screening_funnel.csv` |
+| 1a | The raw GitHub metadata exactly as pulled (`modelcontextprotocol/python-sdk`, 1,373 issues, 14 API fields, no analysis columns) | `data/gh_issues_raw_2026-11-09.xlsx` |
 | 2 | The active dataset of 339 real bugs, with labels | `data/active_bugs_339.csv`, `data/evidence_class_339.csv` |
 | 3 | Reproduction scripts + the output captured from each of the 72 runs | `repro/runner/`, `repro/run_output/`, `repro/captures/`, `repro/transcripts/` |
 | 4 | Per-bug evidence classification | `data/evidence_class_339.csv`, `data/blocking_gaps_83.csv` |

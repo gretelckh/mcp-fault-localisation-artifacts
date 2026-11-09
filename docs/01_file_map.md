@@ -10,6 +10,7 @@ mcp-fault-artifacts/
 ├── LICENSE / LICENSE-DATA         MIT (code) / CC BY 4.0 (data, docs)
 ├── requirements.txt               only needed for the reproduction harness
 ├── data/
+│   ├── gh_issues_raw_2026-11-09.xlsx  1,373 rows · the raw GitHub pull, API fields only, no analysis columns
 │   ├── screening_1343.csv         1,343 rows · the whole mined issue pool + keyword label
 │   ├── screening_funnel.csv          7 rows · 1,343 → 339 with the rule at each stage
 │   ├── active_bugs_339.csv         339 rows · the analysed dataset, 26 columns
