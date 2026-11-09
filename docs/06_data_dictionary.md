@@ -176,10 +176,10 @@ One row per reproduced bug. Rebuilt by `scripts/build_evidence_matrix.py`; never
 | `has_console_log`, `console_log` | whether a `repro/logs/` file exists, and its path |
 | `has_raw_payload` | whether `repro/raw/` holds the payload |
 | `run_output`, `capture` | paths to the two per-bug records |
-| `transcript` | path to `repro/transcripts/issue_N.txt` when the traceback is complete (32 rows), empty otherwise |
-| `gap_reason` | empty when a stack trace exists; otherwise why not — the client-visible message is all that survived, or the failure is a wrong result with no exception |
+| `transcript` | path to `repro/transcripts/issue_N.txt` when the traceback is complete (34 rows), empty otherwise |
+| `gap_reason` | why there is no transcript — the client-visible message is all that survived, the failure is a wrong result with no exception, or only the tail of a traceback was kept. Empty whenever `transcript` is filled |
 
-Counts: `stack` 35 (32 of them with a complete transcript), `block` 13, `message` 16, `none` 8.
+Counts: `stack` 35 (34 of them with a complete transcript), `block` 13, `message` 16, `none` 8.
 
 ---
 

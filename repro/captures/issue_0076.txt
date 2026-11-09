@@ -77,6 +77,8 @@ env.GITHUB_PERSONAL_ACCESS_TOKEN
     For further information visit https://errors.pydantic.dev/2.12/v/string_type
 ```
 
+For the complete traceback of this bug see `../transcripts/issue_0076.txt`.
+
 ## 4. Why it happens
 
 传 `env={GITHUB_PERSONAL_ACCESS_TOKEN: os.getenv(...)}` 时值为 None，`StdioServerParameters` 的严格 Pydantic 校验直接抛 `ValidationError: env.GITHUB_PERSONAL_ACCESS_TOKEN Input should be a valid string`。配置错误本可给出可读提示，却以底层校验异常裸抛给调用方，属 caller-exception。

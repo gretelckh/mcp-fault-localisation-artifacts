@@ -195,18 +195,21 @@ def main():
           sum(1 for r in nonsilent if r["text_shape"] != "stack" and r["evidence_class"] in exc), 18)
     check("every gap row carries a reason",
           sum(1 for r in mat if r["text_shape"] != "stack" and not r["gap_reason"]), 0)
-    check("no gap reason where a stack trace exists",
-          sum(1 for r in mat if r["text_shape"] == "stack" and r["gap_reason"]), 0)
+    check("stack rows with no transcript and no reason",
+          sum(1 for r in mat if r["text_shape"] == "stack"
+              and not r["transcript"] and not r["gap_reason"]), 0)
+    check("a gap reason on a row that has a transcript",
+          sum(1 for r in mat if r["transcript"] and r["gap_reason"]), 0)
     check("matrix rows pointing at a transcript that is missing",
           sum(1 for r in mat if r["transcript"] and not os.path.exists(os.path.join(ROOT, r["transcript"]))), 0)
-    check("  rows that point at a transcript", sum(1 for r in mat if r["transcript"]), 32)
+    check("  rows that point at a transcript", sum(1 for r in mat if r["transcript"]), 34)
     check("matrix columns that still record which capture pass a file came from",
           sum(1 for c in mat[0] if "rerun" in c or "stack_available" in c), 0)
 
     # the reviewer-facing folder: one file per bug with a complete traceback
     tdir = os.path.join(ROOT, "repro", "transcripts")
     tfiles = sorted(glob.glob(os.path.join(tdir, "issue_*.txt")))
-    check("files in repro/transcripts/", len(tfiles), 32)
+    check("files in repro/transcripts/", len(tfiles), 34)
     tbodies = {}
     for p in tfiles:
         s = open(p, encoding="utf-8", errors="replace").read()
@@ -224,8 +227,8 @@ def main():
     check("transcripts in the folder that the matrix does not point at",
           sum(1 for n in tbodies
               if not next(r for r in mat if r["issue"] == "#%d" % n)["transcript"]), 0)
-    check("bugs with frames but no transcript (3 kept only a tail)",
-          sum(1 for r in mat if r["text_shape"] == "stack" and not r["transcript"]), 3)
+    check("bugs with frames but no transcript (1 kept only a tail)",
+          sum(1 for r in mat if r["text_shape"] == "stack" and not r["transcript"]), 1)
     check("frame counts in the header disagreeing with the body",
           sum(1 for s in tbodies.values()
               if int(re.match(r"# issue #\d+ -- reproduction run log\n# stack: complete, (\d+) frames", s).group(1))

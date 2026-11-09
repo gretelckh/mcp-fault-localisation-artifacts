@@ -1,6 +1,6 @@
 # Stack-trace transcripts
 
-One file per reproduced bug whose run kept a **complete Python traceback**: 32 of the 72. Files are
+One file per reproduced bug whose run kept a **complete Python traceback**: 34 of the 72. Files are
 verbatim, redacted, and named `issue_XXXX.txt`.
 
 Each opens with a three-line header:
@@ -38,17 +38,17 @@ the message names.
 
 ## Missing files are missing for a reason
 
-There are 32 files, not 72. Here is where the other 40 went:
+There are 34 files, not 72. Here is where the other 38 went:
 
 | | n | where / why |
 |---|---:|---|
-| complete traceback | **32** | this folder |
-| only the tail of the traceback | 3 | #76, #915, #3434 — left in `../run_output/` rather than padded out here |
+| complete traceback | **34** | this folder |
+| only the tail of the traceback | 1 | #915 — left in `../run_output/` rather than padded out here |
 | no traceback at all | 37 | 11 silent (the call returned normally, `is_error=False`: the defect is a wrong answer or a missing safeguard); 26 non-silent but no frames exist — the server returned `isError=True` with a one-line message instead of raising, the exception was raised in the client (cancel scope, JSON decode), or there was no exception because the result was simply wrong |
 
 Per-bug detail is in `../evidence_matrix.csv` (`text_shape`, `gap_reason`) and
-`../../docs/08_evidence_coverage.md`. Three bugs (#76, #915, #3434) kept only the **tail** of their
-traceback; those are left in `../run_output/` rather than padded out here.
+`../../docs/08_evidence_coverage.md`. One bug (#915) kept only the **tail** of its traceback; it is left in
+`../run_output/` rather than padded out here.
 
 Server-side frames appear only where the server process printed its own traceback; where it did
 not, the client got a one-line message and nothing else, and those bugs are not in this folder.
@@ -58,7 +58,7 @@ nothing else was altered.
 ## Check them
 
 ```bash
-ls issue_*.txt | wc -l                    # 32
+ls issue_*.txt | wc -l                    # 34
 grep -c 'Traceback (most recent call last)' issue_0244.txt
 sed -n '4,40p' issue_1060.txt             # the frames
 ```

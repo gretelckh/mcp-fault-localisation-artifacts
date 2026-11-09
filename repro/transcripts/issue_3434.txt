@@ -1,0 +1,41 @@
+# issue #3434 -- reproduction run log
+# stack: complete, 12 frames
+# ------------------------------------------------------------------
+CLIENT -> call_tool('work', {'x': 1}, progress_callback=consumer)
+           consumer() raises RuntimeError('consumer failed') when the tool reports progress
+SERVER !! Tool 'work' raised an unexpected exception
+Traceback (most recent call last):
+  File "<python-env>/site-packages\mcp\server\mcpserver\tools\base.py", line 176, in run
+    result = await self.fn_metadata.call_fn(self.fn, self.is_async, validated, pass_directly)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\mcpserver\utilities\func_metadata.py", line 163, in call_fn
+    return await fn(**kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "<workspace>\repro_snippet.py", line 19, in work
+    await ctx.report_progress(0, 2, "start")
+  File "<python-env>/site-packages\mcp\server\mcpserver\context.py", line 121, in report_progress
+    await self.request_context.session.report_progress(progress, total, message)
+  File "<python-env>/site-packages\mcp\server\session.py", line 434, in report_progress
+    await self._request_outbound.progress(progress, total, message)
+  File "<python-env>/site-packages\mcp\server\runner.py", line 599, in progress
+    await self._inner.progress(progress, total, message)
+  File "<python-env>/site-packages\mcp\shared\direct_dispatcher.py", line 93, in progress
+    await self._on_progress(progress, total, message)
+  File "<workspace>\repro_snippet.py", line 24, in consumer
+    raise RuntimeError("consumer failed")
+RuntimeError: consumer failed
+
+Traceback (most recent call last):
+  File "<python-env>/site-packages\mcp\server\mcpserver\server.py", line 433, in _handle_call_tool
+    return await self.call_tool(params.name, params.arguments or {}, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\mcpserver\server.py", line 539, in call_tool
+    return await self._tool_manager.call_tool(name, arguments, context, convert_result=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\mcpserver\tools\tool_manager.py", line 87, in call_tool
+    return await tool.run(arguments, context, convert_result=convert_result)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\mcpserver\tools\base.py", line 210, in run
+    raise UnexpectedToolError(f"Error executing tool {self.name}") from exc
+mcp.server.mcpserver.exceptions.UnexpectedToolError: Error executing tool work
+CLIENT <- is_error=True text='Error executing tool work'

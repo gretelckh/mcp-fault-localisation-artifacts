@@ -6,7 +6,7 @@ below is derived from the files in `repro/`, by `scripts/build_evidence_matrix.p
 estimated.
 
 The per-bug table is **`repro/evidence_matrix.csv`** (72 rows, one per reproduced bug). The flat
-copy of every complete traceback is **`repro/transcripts/`** (32 files).
+copy of every complete traceback is **`repro/transcripts/`** (34 files).
 
 ---
 
@@ -17,14 +17,14 @@ transcript in `repro/transcripts/` when that goes deeper:
 
 | `text_shape` | bugs | what was captured |
 |---|---|---|
-| `stack` | **35** | real frames — Python `File "...", line N`, or JS `at fn (file:line:col)`; 32 of them complete |
+| `stack` | **35** | real frames — Python `File "...", line N`, or JS `at fn (file:line:col)`; 34 of them complete |
 | `block` | **13** | four or more lines: verdict line, error type, message, and the state the run observed — but no frames |
 | `message` | **16** | one to three lines: the message the client received, or the return payload |
 | `none` | **8** | the call succeeded (`is_error=False`); the defect is a wrong result, documented instead of an exception |
 | | **72** | |
 
-The 32 complete tracebacks are in `repro/transcripts/`, one file per bug. Of the 35 with frames,
-three (#76, #915, #3434) kept only the tail of the traceback and stay in `repro/run_output/`.
+The 34 complete tracebacks are in `repro/transcripts/`, one file per bug. Of the 35 with frames,
+one (#915) kept only the tail of the traceback and stays in `repro/run_output/`.
 The remaining 37 have none, and section 2 says why.
 
 ## 2. The gap, separated by what kind of failure it is
@@ -51,7 +51,7 @@ The MCP server catches a tool exception and converts it into a normal `CallToolR
 to the server process's own stderr, and are printed only if that process installs a log handler.
 
 This is a property of the protocol, not of individual bugs, which is why the shape is so uniform:
-the 16 `message` rows are the same phenomenon 16 times. In the 32 cases where the traceback is
+the 16 `message` rows are the same phenomenon 16 times. In the 34 cases where the traceback is
 complete, the same file holds both sides of the call — the request, the frames, and the result the
 client received — which is what `repro/transcripts/` collects.
 
@@ -78,7 +78,7 @@ fix is not in the layer the message names.
 ```bash
 python scripts/build_evidence_matrix.py            # rebuild the table; prints the shape counts
 grep '^#3637,' repro/evidence_matrix.csv           # one bug: shape, files, gap reason
-sed -n '1,40p' repro/transcripts/issue_1060.txt    # a complete traceback, if the bug is one of the 32
+sed -n '1,40p' repro/transcripts/issue_1060.txt    # a complete traceback, if the bug is one of the 34
 sed -n '1,40p' repro/run_output/issue_3637.txt     # otherwise: the recorded text, verbatim
 python -m repro.runner.capture_with_server_log 891 # capture one yourself: client result + server traceback
 ```

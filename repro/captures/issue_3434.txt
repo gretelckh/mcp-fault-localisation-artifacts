@@ -68,6 +68,8 @@ direct cause: RuntimeError: consumer failed
 expected: print "done"; actual: tool fails with UnexpectedToolError.
 ```
 
+For the complete traceback of this bug see `../transcripts/issue_3434.txt`.
+
 ## 4. Why it happens
 
 `Client(server)` 走 in-process `DirectDispatcher`；客户端 progress_callback 抛 `RuntimeError: consumer failed` 时异常穿透回服务端工具执行，本应返回 `done` 的工具失败为 `UnexpectedToolError: Error executing tool work`（mcp/server/mcpserver/tools/base.py:210），真实 cause 被通用化掩蔽。源是调用方回调（Client 侧），报告层却是 Server，属层错位 + 掩蔽。
