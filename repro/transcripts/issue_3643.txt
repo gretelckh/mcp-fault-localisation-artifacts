@@ -1,0 +1,18 @@
+# issue #3643 -- reproduction run log
+# stack: complete, 3 frames
+# ------------------------------------------------------------------
+OBSERVED: meta=None description='' messages=[PromptMessage(role='user', content=TextContent(type='text', text='"[PromptMessage(role=\'user\', content=TextContent(type=\'text\', text=\'hi bob\', annotations=None, meta=None))]"', annotations=None, meta=None))] result_type='complete'
+StreamableHTTP session manager started
+Created new transport with session ID: cc3c7c14eddc4a77bc73fb637191d5d3
+Received session ID: cc3c7c14eddc4a77bc73fb637191d5d3
+Terminating session: cc3c7c14eddc4a77bc73fb637191d5d3
+StreamableHTTP session manager shutting down
+ERROR:    Traceback (most recent call last):
+  File "<python-env>/site-packages\starlette\routing.py", line 663, in lifespan
+    await receive()
+  File "<python-env>/site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/lib\asyncio\queues.py", line 186, in get
+    await getter
+asyncio.exceptions.CancelledError

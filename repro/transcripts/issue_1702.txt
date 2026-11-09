@@ -1,0 +1,40 @@
+# issue #1702 -- reproduction run log
+# stack: complete, 7 frames
+# ------------------------------------------------------------------
+CLIENT -> jsonrpc='2.0' id=2 method='tools/call' params={'name': 'get_name', 'arguments': {}, '_meta': {}}
+SERVER !! Tool 'get_name' raised an unexpected exception
+Traceback (most recent call last):
+  File "<python-env>/site-packages\mcp\server\mcpserver\tools\base.py", line 189, in run
+    result = self.fn_metadata.convert_result(result)
+  File "<python-env>/site-packages\mcp\server\mcpserver\utilities\func_metadata.py", line 219, in convert_result
+    validated = adapter.validate_python(result, by_alias=True, by_name=True)
+  File "<python-env>/site-packages\pydantic\type_adapter.py", line 410, in validate_python
+    return self.validator.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        object,
+        ^^^^^^^
+    ...<6 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for _Name
+  Input should be a valid dictionary or instance of _Name [type=model_type, input_value='not-a-name', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.14/v/model_type
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<python-env>/site-packages\mcp\server\mcpserver\server.py", line 433, in _handle_call_tool
+    return await self.call_tool(params.name, params.arguments or {}, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\mcpserver\server.py", line 539, in call_tool
+    return await self._tool_manager.call_tool(name, arguments, context, convert_result=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\mcpserver\tools\tool_manager.py", line 87, in call_tool
+    return await tool.run(arguments, context, convert_result=convert_result)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\server\mcpserver\tools\base.py", line 210, in run
+    raise UnexpectedToolError(f"Error executing tool {self.name}") from exc
+mcp.server.mcpserver.exceptions.UnexpectedToolError: Error executing tool get_name
+CLIENT <- {'content': [{'text': 'Error executing tool get_name', 'type': 'text'}], 'isError': True}

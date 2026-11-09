@@ -5,7 +5,8 @@ about an empirical reproduction study, and the honest answer differs from bug to
 below is derived from the files in `repro/`, by `scripts/build_evidence_matrix.py`; nothing is
 estimated.
 
-The per-bug table is **`repro/evidence_matrix.csv`** (72 rows, one per reproduced bug).
+The per-bug table is **`repro/evidence_matrix.csv`** (72 rows, one per reproduced bug). The flat,
+reader-facing copy of every complete traceback is **`repro/transcripts/`** (32 files).
 
 ---
 
@@ -19,8 +20,10 @@ The per-bug table is **`repro/evidence_matrix.csv`** (72 rows, one per reproduce
 | `none` | **8** | the call succeeded (`is_error=False`); the defect is a wrong result, documented instead of an exception |
 | | **72** | |
 
-So **15 of 72** runs kept a full console traceback. A 2026-11 re-run recovered 20 more (§6), for
-**35 of 72**. The rest did not, and section 3 says why.
+So **15 of 72** run-output files carry frames, 12 of them complete. Capturing the same cases again
+with the server logger on added 20 more (§6), so **32 of 72 have a complete traceback** and they are
+collected in `repro/transcripts/`; three more (#76, #915, #3434) kept only the tail. The rest did
+not, and section 3 says why.
 
 ## 2. The gap, separated by what kind of failure it is
 

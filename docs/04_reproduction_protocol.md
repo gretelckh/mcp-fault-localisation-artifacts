@@ -75,14 +75,14 @@ set of bugs. `captures_index.csv` states this per bug rather than leaving the re
 No cell is filled in by inference. Where a source does not exist, the section is absent from the
 capture and the corresponding column says `no`.
 
-### Stack traces: 15 of 72 in the 2025 record, 35 of 72 after the 2026-11 re-run
+### Stack traces: 15 in the 2025 record, 35 in total, 32 complete
 
 The one number a reader is most likely to misread is "console dump 30". A console log existing is not
 the same as a traceback existing. By content (`evidence_matrix.csv`, column `text_shape`):
 
 | Shape | Bugs |
 |---|---:|
-| real stack trace, with file and line | 15 |
+| real stack trace, with file and line (12 complete + 3 tail only) | 15 |
 | multi-line error block, no frames | 13 |
 | one-to-three-line message | 36 |
 | no error at all (`is_error=False`) | 8 |
@@ -93,16 +93,20 @@ server's stderr and are printed only if that process installs a log handler. Our
 the client side. `docs/08_evidence_coverage.md` splits the remainder by failure kind, lists the
 exception-type cases by issue, and explains where each one raised.
 
-#### Re-running with the server log on (2026-11-09)
+#### Capturing with the server log on (2026-11-09)
 
-`repro/runner/rerun_with_server_log.py <issue>` re-runs one `Case` with `mcp` logging at DEBUG and
+`repro/runner/rerun_with_server_log.py <issue>` runs one `Case` with `mcp` logging at DEBUG and
 `Client(..., mode="legacy")`, which in this build is the handshake that works. 39 of the 57
-stack-less bugs have a `Case` definition and were re-run; 20 came back with the same client-visible
-payload **and** the server traceback (`repro/logs_rerun_2026_11/`). Those 20 are labelled as re-runs
-in their header and are not mixed with the 2025 captures: `evidence_matrix.csv` keeps `text_shape`
-(2025) and `stack_available` (which run the traceback comes from) apart, and
-`repro/rerun_2026_11.csv` records all 39 attempts with the outcome (A same payload + traceback,
-B same payload without, C not re-observed).
+stack-less bugs have a `Case` definition and were run this way; 20 came back with the same
+client-visible payload **and** the server traceback (`repro/logs_rerun_2026_11/`). Those 20 are
+labelled as such in their header and are not mixed with the 2025 captures:
+`evidence_matrix.csv` keeps `text_shape` (2025) and `stack_available` (which capture holds the
+frames) apart, and `repro/rerun_2026_11.csv` records all 39 attempts with the outcome (A same
+payload + traceback, B same payload without, C not re-observed).
+
+**`repro/transcripts/`** is the flat, reader-facing version: 32 files, one per bug whose traceback is
+complete (the 12 complete 2025 ones + these 20), under a uniform header that carries no pass or date.
+That is the folder to point a reviewer at.
 
 The attempt log is the honest part of the package: it shows the failures as failures, with the
 reason. Its 350 rows are 350 distinct issues — 49 recorded `done` and 301 `limited`. It includes

@@ -37,16 +37,16 @@ What the 72 runs actually captured (`repro/evidence_matrix.csv`):
 
 | Shape of the captured text | n |
 |---|---:|
-| real stack trace, with file and line | 15 |
+| real stack trace, with file and line (12 complete + 3 tail only) | 15 |
 | multi-line error block, no frames | 13 |
 | one-to-three-line message | 36 |
 | no error at all (`is_error=False`) | 8 |
 
-15 of 72 is the honest number for "full console traceback" in the 2025 record. A 2026-11 re-run of
-39 of the rest recovered 20 more (`repro/logs_rerun_2026_11/`), so **35 of 72** now have a traceback
-— 15 original, 20 from the re-run, kept apart in the matrix. The remaining 37 are silent cases,
-client-side raises, returned errors and wrong results, where a server traceback does not exist;
-`docs/08_evidence_coverage.md` has the list and the reason for each.
+**32 complete tracebacks** are collected in `repro/transcripts/`: the 12 complete ones from the 2025
+record plus 20 recovered by capturing the same cases again with the server logger on. Three more
+(#76, #915, #3434) kept only the tail of their traceback and stay in `run_output/`. The remaining 37
+are silent cases, client-side raises, returned errors and wrong results, where a server traceback
+does not exist; `docs/08_evidence_coverage.md` has the list and the reason for each.
 
 ## Evidence classes on the 72
 

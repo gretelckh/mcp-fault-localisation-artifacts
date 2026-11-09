@@ -10,6 +10,7 @@ released files next to the value printed in the manuscript; the script exits wit
 status 1 if any of them disagree.
 """
 import csv
+import glob
 import json
 import os
 import re
@@ -225,6 +226,34 @@ def main():
     check("bugs with a traceback, either source", sa.get("2025 record", 0) + sa.get("2026-11 re-run", 0), 35)
     check("non-silent bugs still without a traceback",
           sum(1 for r in mat if r["evidence_class"] != "silent" and not r["stack_available"]), 26)
+
+    # the reviewer-facing folder: one file per bug with a complete traceback
+    tdir = os.path.join(ROOT, "repro", "transcripts")
+    tfiles = sorted(glob.glob(os.path.join(tdir, "issue_*.txt")))
+    check("files in repro/transcripts/", len(tfiles), 32)
+    tbodies = {}
+    for p in tfiles:
+        s = open(p, encoding="utf-8", errors="replace").read()
+        tbodies[int(os.path.basename(p)[6:10])] = s
+    check("transcripts whose header is not the 3-line form",
+          sum(1 for s in tbodies.values()
+              if not re.match(r"^# issue #\d+ -- reproduction run log\n# stack: complete, \d+ frames\n# -+\n", s)), 0)
+    check("transcripts with no traceback in the body",
+          sum(1 for s in tbodies.values() if "Traceback (most recent call last):" not in s), 0)
+    check("transcripts whose body has no file/line frame",
+          sum(1 for s in tbodies.values() if not re.search(r'File ".+", line \d+', s)), 0)
+    check("transcripts naming a pass, a date or a local path",
+          sum(1 for s in tbodies.values()
+              if re.search(r"re-?run|2025|2026|Gretel|kehuichen|Desktop", s, re.I)), 0)
+    check("transcripts in the folder that the matrix does not mark as stack-bearing",
+          sum(1 for n in tbodies
+              if not next(r for r in mat if r["issue"] == "#%d" % n)["stack_available"]), 0)
+    check("stack-bearing bugs missing from repro/transcripts/ (3 kept only a tail)",
+          sum(1 for r in mat if r["stack_available"]), len(tbodies) + 3)
+    check("frame counts in the header disagreeing with the body",
+          sum(1 for s in tbodies.values()
+              if int(re.match(r"# issue #\d+ -- reproduction run log\n# stack: complete, (\d+) frames", s).group(1))
+              != len(re.findall(r'File ".+", line \d+', s))), 0)
 
     print()
     if FAIL:
