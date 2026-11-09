@@ -3,7 +3,7 @@
 ## The short version
 
 1. Take an issue number from `../data/active_bugs_339.csv` where `reproduction_status = reproduced`.
-2. Open `transcripts/issue_XXXX.txt` first — if the bug is one of the 34 with a complete traceback,
+2. Open `transcripts/issue_XXXX.txt` first — if the bug is one of the 39 with a complete traceback,
    that is the whole story in one page. Otherwise `run_output/issue_XXXX.txt` has what the run
    printed, and `captures/issue_XXXX.txt` the self-contained record: the trigger that was run, what
    the reporter described, the output that was captured, and the layer analysis.
@@ -19,10 +19,10 @@ the output, verbatim. The header's `capture kind` names the *source* of the text
 completeness. `evidence_matrix.csv` (`text_shape`, `gap_reason`) is what says how much of the error each
 bug left behind, and `transcripts/` holds the tracebacks that are complete.
 
-`transcripts/` is the folder to send a reviewer to: 34 files, one per bug whose traceback is complete,
+`transcripts/` is the folder to send a reviewer to: 39 files, one per bug whose traceback is complete,
 each with a three-line header and the body verbatim. Two chained tracebacks in one file mean the
 defect and the message the caller got are on different layers — the paper's whole point. Its
-`README.md` explains the 38 bugs that are not in there. `evidence_matrix.csv` has the per-bug
+`README.md` explains the 33 bugs that are not in there. `evidence_matrix.csv` has the per-bug
 reason for any gap.
 
 ## Anatomy of a capture
@@ -78,7 +78,7 @@ imputed.
 
 | `text_shape` | bugs | what was captured |
 |---|---|---|
-| `stack` | 35 | frames with file and line; 34 complete, 1 tail only |
+| `stack` | 40 | frames with file and line; 39 complete, 1 tail only |
 | `block` | 13 | four or more lines, no frames |
 | `message` | 16 | one to three lines |
 | `none` | 8 | the call succeeded; a wrong result is documented instead |

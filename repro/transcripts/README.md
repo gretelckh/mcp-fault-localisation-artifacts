@@ -1,6 +1,6 @@
 # Stack-trace transcripts
 
-One file per reproduced bug whose run kept a **complete Python traceback**: 34 of the 72. Files are
+One file per reproduced bug whose run kept a **complete Python traceback**: 39 of the 72. Files are
 verbatim, redacted, and named `issue_XXXX.txt`.
 
 Each opens with a three-line header:
@@ -38,13 +38,13 @@ the message names.
 
 ## Missing files are missing for a reason
 
-There are 34 files, not 72. Here is where the other 38 went:
+There are 39 files, not 72. Here is where the other 33 went:
 
 | | n | where / why |
 |---|---:|---|
-| complete traceback | **34** | this folder |
+| complete traceback | **39** | this folder |
 | only the tail of the traceback | 1 | #915 — left in `../run_output/` rather than padded out here |
-| no traceback at all | 37 | 11 silent (the call returned normally, `is_error=False`: the defect is a wrong answer or a missing safeguard); 26 non-silent but no frames exist — the server returned `isError=True` with a one-line message instead of raising, the exception was raised in the client (cancel scope, JSON decode), or there was no exception because the result was simply wrong |
+| no traceback at all | 32 | 11 silent (the call returned normally, `is_error=False`: the defect is a wrong answer or a missing safeguard); 21 non-silent but no frames exist — the server returned `isError=True` with a one-line message instead of raising, the exception was raised in the client (cancel scope, JSON decode), or there was no exception because the result was simply wrong |
 
 Per-bug detail is in `../evidence_matrix.csv` (`text_shape`, `gap_reason`) and
 `../../docs/08_evidence_coverage.md`. One bug (#915) kept only the **tail** of its traceback; it is left in
@@ -58,7 +58,7 @@ nothing else was altered.
 ## Check them
 
 ```bash
-ls issue_*.txt | wc -l                    # 34
+ls issue_*.txt | wc -l                    # 39
 grep -c 'Traceback (most recent call last)' issue_0244.txt
 sed -n '4,40p' issue_1060.txt             # the frames
 ```

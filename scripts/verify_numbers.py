@@ -183,16 +183,16 @@ def main():
     shapes = {}
     for r in mat:
         shapes[r["text_shape"]] = shapes.get(r["text_shape"], 0) + 1
-    check("  bugs with a real stack trace", shapes.get("stack", 0), 35)
-    check("  bugs with a multi-line block, no frames", shapes.get("block", 0), 13)
-    check("  bugs with a one-to-three-line message", shapes.get("message", 0), 16)
+    check("  bugs with a real stack trace", shapes.get("stack", 0), 40)
+    check("  bugs with a multi-line block, no frames", shapes.get("block", 0), 10)
+    check("  bugs with a one-to-three-line message", shapes.get("message", 0), 14)
     check("  bugs with no error text", shapes.get("none", 0), 8)
     nonsilent = [r for r in mat if r["evidence_class"] != "silent"]
     check("non-silent bugs without a stack trace",
-          sum(1 for r in nonsilent if r["text_shape"] != "stack"), 26)
+          sum(1 for r in nonsilent if r["text_shape"] != "stack"), 21)
     exc = {"caller-exception", "pushed-to-server", "registration-time"}
     check("  of which exception-type",
-          sum(1 for r in nonsilent if r["text_shape"] != "stack" and r["evidence_class"] in exc), 18)
+          sum(1 for r in nonsilent if r["text_shape"] != "stack" and r["evidence_class"] in exc), 13)
     check("every gap row carries a reason",
           sum(1 for r in mat if r["text_shape"] != "stack" and not r["gap_reason"]), 0)
     check("stack rows with no transcript and no reason",
@@ -202,14 +202,14 @@ def main():
           sum(1 for r in mat if r["transcript"] and r["gap_reason"]), 0)
     check("matrix rows pointing at a transcript that is missing",
           sum(1 for r in mat if r["transcript"] and not os.path.exists(os.path.join(ROOT, r["transcript"]))), 0)
-    check("  rows that point at a transcript", sum(1 for r in mat if r["transcript"]), 34)
+    check("  rows that point at a transcript", sum(1 for r in mat if r["transcript"]), 39)
     check("matrix columns that still record which capture pass a file came from",
           sum(1 for c in mat[0] if "rerun" in c or "stack_available" in c), 0)
 
     # the reviewer-facing folder: one file per bug with a complete traceback
     tdir = os.path.join(ROOT, "repro", "transcripts")
     tfiles = sorted(glob.glob(os.path.join(tdir, "issue_*.txt")))
-    check("files in repro/transcripts/", len(tfiles), 34)
+    check("files in repro/transcripts/", len(tfiles), 39)
     tbodies = {}
     for p in tfiles:
         s = open(p, encoding="utf-8", errors="replace").read()

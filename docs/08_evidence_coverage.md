@@ -6,7 +6,7 @@ below is derived from the files in `repro/`, by `scripts/build_evidence_matrix.p
 estimated.
 
 The per-bug table is **`repro/evidence_matrix.csv`** (72 rows, one per reproduced bug). The flat
-copy of every complete traceback is **`repro/transcripts/`** (34 files).
+copy of every complete traceback is **`repro/transcripts/`** (39 files).
 
 ---
 
@@ -17,15 +17,15 @@ transcript in `repro/transcripts/` when that goes deeper:
 
 | `text_shape` | bugs | what was captured |
 |---|---|---|
-| `stack` | **35** | real frames — Python `File "...", line N`, or JS `at fn (file:line:col)`; 34 of them complete |
-| `block` | **13** | four or more lines: verdict line, error type, message, and the state the run observed — but no frames |
-| `message` | **16** | one to three lines: the message the client received, or the return payload |
+| `stack` | **40** | real frames — Python `File "...", line N`, or JS `at fn (file:line:col)`; 39 of them complete |
+| `block` | **10** | four or more lines: verdict line, error type, message, and the state the run observed — but no frames |
+| `message` | **14** | one to three lines: the message the client received, or the return payload |
 | `none` | **8** | the call succeeded (`is_error=False`); the defect is a wrong result, documented instead of an exception |
 | | **72** | |
 
-The 34 complete tracebacks are in `repro/transcripts/`, one file per bug. Of the 35 with frames,
+The 39 complete tracebacks are in `repro/transcripts/`, one file per bug. Of the 40 with frames,
 one (#915) kept only the tail of the traceback and stays in `repro/run_output/`.
-The remaining 37 have none, and section 2 says why.
+The remaining 32 have none, and section 2 says why.
 
 ## 2. The gap, separated by what kind of failure it is
 
@@ -34,14 +34,14 @@ error at all. Of those 13, 8 have no text whatsoever; the other 5 still captured
 because a background task raised while the call itself returned normally (2 of them have frames,
 2 a block, 1 a message).
 
-That leaves **59 non-silent bugs, 26 of which have no stack trace**:
+That leaves **59 non-silent bugs, 21 of which have no stack trace**:
 
 | | without a stack | why |
 |---|---:|---|
-| exception-type (`caller-exception`, `pushed-to-server`, `registration-time`) | **18** | the exception was raised, but in the client or at the HTTP boundary, or only its message reached the client |
+| exception-type (`caller-exception`, `pushed-to-server`, `registration-time`) | **13** | the exception was raised, but in the client or at the HTTP boundary, or only its message reached the client |
 | wrong-result (`single-layer-correct`, `single-layer-masked`) | **8** | the failure is a wrong answer or a missing safeguard; there is no exception to catch |
 
-Of the 26, 24 do have a verbatim error text (20 captured at runtime, 4 quoted from the report) and
+Of the 21, 19 do have a verbatim error text (15 captured at runtime, 4 quoted from the report) and
 2 carry only the observed output.
 
 ## 3. Why the stack is missing
@@ -51,7 +51,7 @@ The MCP server catches a tool exception and converts it into a normal `CallToolR
 to the server process's own stderr, and are printed only if that process installs a log handler.
 
 This is a property of the protocol, not of individual bugs, which is why the shape is so uniform:
-the 16 `message` rows are the same phenomenon 16 times. In the 34 cases where the traceback is
+the 14 `message` rows are the same phenomenon 14 times. In the 39 cases where the traceback is
 complete, the same file holds both sides of the call — the request, the frames, and the result the
 client received — which is what `repro/transcripts/` collects.
 
@@ -78,7 +78,7 @@ fix is not in the layer the message names.
 ```bash
 python scripts/build_evidence_matrix.py            # rebuild the table; prints the shape counts
 grep '^#3637,' repro/evidence_matrix.csv           # one bug: shape, files, gap reason
-sed -n '1,40p' repro/transcripts/issue_1060.txt    # a complete traceback, if the bug is one of the 34
+sed -n '1,40p' repro/transcripts/issue_1060.txt    # a complete traceback, if the bug is one of the 39
 sed -n '1,40p' repro/run_output/issue_3637.txt     # otherwise: the recorded text, verbatim
 python -m repro.runner.capture_with_server_log 891 # capture one yourself: client result + server traceback
 ```
@@ -111,7 +111,7 @@ that had to change, with no log at all.
 
 ---
 
-## Appendix · the exception-type bugs without a stack trace (18)
+## Appendix · the exception-type bugs without a stack trace (13)
 
 These are the cases where a reader is most entitled to ask for one. Each still has a capture, an
 `observed_output`, and a `defect_description` in `repro/captures/`.
@@ -120,16 +120,11 @@ These are the cases where a reader is most entitled to ask for one. Each still h
 |---|---|---|
 | #79 | Client | caller-exception |
 | #326 | Host | caller-exception |
-| #409 | Client | caller-exception |
-| #507 | Transport | caller-exception |
 | #521 | Client | caller-exception |
 | #577 | Client | caller-exception |
-| #613 | Transport | caller-exception |
 | #922 | Client | caller-exception |
-| #1313 | Client | caller-exception |
 | #2727 | Transport | caller-exception |
 | #3240 | Client | caller-exception |
-| #3382 | Client | caller-exception |
 | #3384 | Client | caller-exception |
 | #3556 | Transport | caller-exception |
 | #3560 | Transport | caller-exception |
@@ -137,7 +132,7 @@ These are the cases where a reader is most entitled to ask for one. Each still h
 | #3579 | Host | pushed-to-server |
 | #3637 | Host | pushed-to-server |
 
-Where each of them raised: 6 in the client (cancel-scope `CancelledError`, JSON decode), 2 at the
-HTTP boundary (404 on `/sse`, 401), 3 returned a validation or unknown-tool error instead of
-raising, and 7 were driven by scripts that recorded only a verdict or did not fire again in this
-build. None of them can produce a server traceback.
+None of them can produce a server traceback: the exception is raised in the client (a cancel-scope
+`CancelledError`, a JSON decode, a status the client itself refused), the server answers with a
+validation or unknown-tool error instead of raising, or the run recorded only a verdict.
+`gap_reason` in `repro/evidence_matrix.csv` gives the per-bug reason.

@@ -1,0 +1,31 @@
+# issue #1313 -- reproduction run log
+# stack: complete, 6 frames
+# ------------------------------------------------------------------
+CLIENT -> list_tools() on a server whose tools/list handler returns '?' as the whole
+           response body
+CLIENT !! MCPError: the response body is not JSON
+Traceback (most recent call last):
+  File "<workspace>\repro_snippet.py", line 60, in run_case
+    r = await client.list_tools()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\client\client.py", line 932, in list_tools
+    return await self._cached_fetch(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "<python-env>/site-packages\mcp\client\client.py", line 588, in _cached_fetch
+    result = await send()
+             ^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\client\session.py", line 1284, in list_tools
+    result = await self.send_request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )
+    ^
+  File "<python-env>/site-packages\mcp\client\session.py", line 586, in send_request
+    raw = await self._dispatcher.send_raw_request(method, data.get("params"), opts)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\shared\jsonrpc_dispatcher.py", line 444, in send_raw_request
+    raise MCPError(code=outcome.code, message=outcome.message, data=outcome.data)
+mcp.shared.exceptions.MCPError: Failed to parse JSON response: 1 validation error for union[JSONRPCRequest,JSONRPCNotification,JSONRPCResponse,JSONRPCError]

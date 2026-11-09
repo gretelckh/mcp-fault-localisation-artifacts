@@ -1,0 +1,19 @@
+# issue #613 -- reproduction run log
+# stack: complete, 4 frames
+# ------------------------------------------------------------------
+CLIENT -> sse_client('http://127.0.0.1:9211/sse') -- the server requires an auth header
+           the client never sends
+CLIENT !! HTTPStatusError: 401 on the connect request
+Traceback (most recent call last):
+  File "<workspace>\repro_snippet.py", line 40, in run_case
+    async with sse_client(url) as (read, write):
+               ~~~~~~~~~~^^^^^
+  File "<python-env>/lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\client\sse.py", line 71, in sse_client
+    event_source.response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "<python-env>/site-packages\httpx2\_models.py", line 827, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx2.HTTPStatusError: Client error '401 Unauthorized' for url 'http://127.0.0.1:9211/sse'

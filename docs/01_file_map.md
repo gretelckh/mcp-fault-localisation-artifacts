@@ -21,7 +21,7 @@ mcp-fault-artifacts/
 │   ├── captures/issue_XXXX.txt    72 files · one per reproduced bug: trigger, captured output, layer analysis
 │   ├── captures_index.csv         72 rows · which kinds of evidence exist for which bug
 │   ├── run_output/issue_XXXX.txt  72 files · one per bug: what that run printed, verbatim
-│   ├── transcripts/issue_XXXX.txt 34 files · one per bug with a complete traceback — start here
+│   ├── transcripts/issue_XXXX.txt 39 files · one per bug with a complete traceback — start here
 │   ├── evidence_matrix.csv        72 rows · per bug: what was captured, and what is missing
 │   ├── raw/                       54 files · the raw payload each run wrote to disk
 │   ├── raw_map.csv                54 rows · issue number → raw payload file name
@@ -57,7 +57,7 @@ mcp-fault-artifacts/
 | Is issue #1234 in the dataset, and what is it? | `data/active_bugs_339.csv`, column `issue` |
 | What happened when you ran #1234? | `repro/run_output/issue_1234.txt` (output) · `repro/captures/issue_1234.txt` (full record) |
 | Which bugs have a console log / raw payload? | `repro/captures_index.csv` |
-| Does #1234 have a stack trace, and if not why? | `repro/transcripts/issue_1234.txt` if it is one of the 34 · otherwise `repro/evidence_matrix.csv`, columns `text_shape` / `transcript` / `gap_reason` |
+| Does #1234 have a stack trace, and if not why? | `repro/transcripts/issue_1234.txt` if it is one of the 39 · otherwise `repro/evidence_matrix.csv`, columns `text_shape` / `transcript` / `gap_reason` |
 | Can I capture the server-side traceback for a case myself? | `python -m repro.runner.capture_with_server_log 110` |
 | Why is #1234 not in the 72? | `data/active_bugs_339.csv`, column `not_reproduced_reason`; `repro/attempt_log.csv` |
 | How do you decide a bug originates in Transport? | `docs/02_codebook.md`, rules R1–R6 |

@@ -1,0 +1,35 @@
+# issue #3382 -- reproduction run log
+# stack: complete, 10 frames
+# ------------------------------------------------------------------
+CLIENT -> OAuthClientProvider.async_auth_flow(): the first flow is suspended holding
+           context.lock and is closed from another task; a second flow is then opened
+CLIENT !! RuntimeError: Attempted to acquire an already held Lock
+Traceback (most recent call last):
+  File "<workspace>\repro_snippet.py", line 45, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "<python-env>/lib\asyncio\runners.py", line 196, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "<python-env>/lib\asyncio\runners.py", line 119, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "<python-env>/lib\asyncio\base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "<workspace>\repro_snippet.py", line 38, in main
+    await asyncio.wait_for(flow2.asend(None), timeout=2)
+  File "<python-env>/lib\asyncio\tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "<python-env>/site-packages\mcp\shared\_httpx_utils.py", line 205, in async_auth_flow
+    outgoing = await flow.__anext__()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\client\auth\oauth2.py", line 606, in _auth_flow
+    async with self.context.lock:
+               ^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\anyio\_core\_synchronization.py", line 171, in __aenter__
+    await self.acquire()
+  File "<python-env>/site-packages\anyio\_backends\_asyncio.py", line 1971, in acquire
+    raise RuntimeError("Attempted to acquire an already held Lock")
+RuntimeError: Attempted to acquire an already held Lock
