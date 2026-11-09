@@ -59,7 +59,8 @@ the layer.
 bugs that also have text. Bugs with no usable text at all (83) are excluded, because there is
 nothing to show the model.
 
-**Output.** A JSON object with the reporter's claimed layer and the model's own origin layer.
+**Output.** A JSON object with the layer the model reads in the report (or `unclear`) and the
+model's own origin layer.
 
 **Result.**
 
@@ -73,14 +74,16 @@ nothing to show the model.
 | **all** | **119 / 247** | **48.2 %** |
 | **non-Server** | **51 / 172** | **29.7 %** |
 
-The pattern is the same as Study A and stronger: the more text you give the model, the more it
-agrees with the reporter, and the reporter is usually talking about the Server. On Transport and
-Host — the two layers where the SDK's own reporting is weakest — the model is at chance or below.
+The pattern is the same as Study A and stronger: the more text the model gets, the more it is
+drawn to whichever layer the text mentions, and Server is the layer the text mentions most. On
+Transport and Host — the two layers where the SDK's own reporting is weakest — the model is at
+chance or below.
 
-**Reading of the reporter.** In 169 of 247 cases the model found an explicit claim about the layer
-in the report; in 78 it returned `unclear`. This field is the model's reading, not a hand
-annotation, and it is released so a reviewer can check whether "the model is right" is really "the
-model repeats the reporter".
+**Reading of the reporter.** The model reported an explicit claim about the layer in 169 of 247
+cases and returned `unclear` in 78. That count is the model's reading, not an annotation: hand
+coding of the same reports finds a verbal claim in only 53, a further 100 where the layer can be
+inferred from an SDK path in the pasted traceback, and 94 with nothing at all. The field is
+released as model output only — it is not evidence that the reporter named a layer.
 
 Files: `llm/outputs/studyB_247.jsonl` (input + full reply + true layer),
 `llm/outputs/studyB_scores_247.csv` (one row per bug, with `correct`).

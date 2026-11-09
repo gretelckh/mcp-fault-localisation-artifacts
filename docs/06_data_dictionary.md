@@ -77,8 +77,7 @@ Cross-checks (not used as ground truth)
 
 | column | meaning |
 |---|---|
-| `archived_llm_layer` | what an earlier LLM labelling pass said. It agrees with the reporter's own claim ~91 % of the time, i.e. it largely echoes the report; it is **not** the label used in the paper |
-| `archived_llm_agrees_with_reporter` | that pass compared with the reporter's stated layer |
+| `archived_llm_layer` | what an earlier LLM labelling pass said. It is an archived model output, not a hand label and not the label used in the paper |
 | `l2_path_layer` | layer inferred mechanically from the file paths touched by the linked pull request — an independent side check (35.4 % coverage, 76.5 % agreement with `origin_layer`) |
 | `l2_confidence` | confidence of that inference, where recorded |
 | `related_pr` | the linked pull request, where one exists |

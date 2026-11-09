@@ -54,7 +54,7 @@ the paper analyses.
 
 ### 2.2 Active dataset (`data/active_bugs_339.csv`)
 
-One row per bug, 26 columns. The columns that matter for the paper:
+One row per bug, 25 columns. The columns that matter for the paper:
 
 | column | meaning |
 |---|---|
