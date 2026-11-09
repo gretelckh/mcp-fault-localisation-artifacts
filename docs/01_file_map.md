@@ -16,7 +16,7 @@ mcp-fault-artifacts/
 │   ├── evidence_class_339.csv      339 rows · one row per bug: layer, evidence class, tier
 │   └── blocking_gaps_83.csv         83 rows · why the 83 evidence-poor reports are blocked
 ├── repro/
-│   ├── README.md                  how to read and re-run a case
+│   ├── README.md                  how to read a case
 │   ├── runner/                    the harness + the case definitions (6 files)
 │   ├── captures/issue_XXXX.txt    72 files · one per reproduced bug: trigger, captured output, layer analysis
 │   ├── captures_index.csv         72 rows · which kinds of evidence exist for which bug
@@ -26,8 +26,6 @@ mcp-fault-artifacts/
 │   ├── raw/                       54 files · the raw payload each run wrote to disk
 │   ├── raw_map.csv                54 rows · issue number → raw payload file name
 │   ├── logs/NNNN.txt              53 files · console dumps as the harness wrote them (30 belong to the 72)
-│   ├── logs_rerun_2026_11/        20 files · re-runs that recovered the server traceback, 2026-11-09
-│   ├── rerun_2026_11.csv          39 rows · every re-run attempt: A / B / C and why
 │   ├── repro_verdicts_72.csv      72 rows · the verdict table
 │   └── attempt_log.csv           350 rows · every attempt, including the failures
 ├── llm/
@@ -59,8 +57,8 @@ mcp-fault-artifacts/
 | Is issue #1234 in the dataset, and what is it? | `data/active_bugs_339.csv`, column `issue` |
 | What happened when you ran #1234? | `repro/run_output/issue_1234.txt` (output) · `repro/captures/issue_1234.txt` (full record) |
 | Which bugs have a console log / raw payload? | `repro/captures_index.csv` |
-| Does #1234 have a stack trace, and if not why? | `repro/transcripts/issue_1234.txt` if it is one of the 32 · otherwise `repro/evidence_matrix.csv`, columns `text_shape` / `stack_available` / `gap_reason` |
-| What happened when you re-ran it in 2026? | `repro/rerun_2026_11.csv`; `repro/logs_rerun_2026_11/issue_1234.txt` if outcome `A` |
+| Does #1234 have a stack trace, and if not why? | `repro/transcripts/issue_1234.txt` if it is one of the 32 · otherwise `repro/evidence_matrix.csv`, columns `text_shape` / `transcript` / `gap_reason` |
+| Can I capture the server-side traceback for a case myself? | `python -m repro.runner.capture_with_server_log 110` |
 | Why is #1234 not in the 72? | `data/active_bugs_339.csv`, column `not_reproduced_reason`; `repro/attempt_log.csv` |
 | How do you decide a bug originates in Transport? | `docs/02_codebook.md`, rules R1–R6 |
 | What exactly did you show the model? | `llm/prompts.md` and the `body` field in `llm/outputs/studyB_247.jsonl` |

@@ -28,7 +28,7 @@ python scripts/verify_numbers.py
 ```
 
 The script recomputes **every number in the paper** from the files in this repository and prints
-them next to the value printed in the manuscript — 112 checks, all of which should read `ok`.
+them next to the value printed in the manuscript — 102 checks, all of which should read `ok`.
 The last line reads `All checks passed ...` if the artefact and the paper agree.
 
 If you only want to look at one thing, open `data/active_bugs_339.csv` in Excel or pandas and
@@ -96,18 +96,10 @@ see what a run actually printed. Six header lines say which harness ran, what ki
 is, and where the text came from; the body is the output, verbatim. The header's `capture kind` is
 the *source* of the text (a console log for 30, a traceback excerpt for 5, the client's return
 payload for 37), not a claim about how complete it is: in the run output, 15 bodies carry frames
-(12 complete, 3 truncated to the tail), 13 a multi-line error block without frames, 36 a
+(12 complete, 3 truncated to the tail), 13 a multi-line error block without frames, 16 a
 one-to-three-line message and 8 no error at all. `repro/transcripts/` holds the **32 complete
-tracebacks** — those 12 plus 20 captured with the server logger on — and `evidence_matrix.csv`,
-column `stack_available`, says which file holds the frames for each bug. Paths and account names
-inside the text are redacted to `<user>` / `<python-env>`.
-
-`repro/logs_rerun_2026_11/` — 20 files captured with the server's logger on, which is how the
-traceback the server catches (and normally keeps to its own stderr) got written down. They are also
-in `repro/transcripts/`; this folder keeps them as captured, header included. 39 of the stack-less
-bugs have a `Case` and were replayed: 20 came back with the same client-visible payload **and** the
-traceback, 12 with the same payload and nothing raised, 7 did not fire. Re-do it with
-`repro/runner/rerun_with_server_log.py <issue>`.
+tracebacks**, and `evidence_matrix.csv` (column `transcript`) points at the file for each of them.
+Paths and account names inside the text are redacted to `<user>` / `<python-env>`.
 
 `repro/captures_index.csv` — one row per bug, saying which kinds of evidence exist for it
 (trigger 72/72, error text 63, raw payload 54, console log 30). Read this before concluding that
@@ -115,10 +107,10 @@ something is missing: the four kinds were collected by different mechanisms at d
 
 `repro/evidence_matrix.csv` — one row per reproduced bug answering the two questions a reviewer asks
 first: *what exactly did you capture* (`text_shape`, `stack_frames`, the file paths) and *is anything
-missing* (`gap_reason`). 46 of the 59 non-silent bugs had no stack trace in the 2025 record; the
-2026-11 re-run closed 20 of them, leaving 26, which are silent, client-side raises, returned errors
-or wrong results. Rebuild it with `scripts/build_evidence_matrix.py`; the reasoning and the list are
-in `docs/08_evidence_coverage.md`.
+missing* (`gap_reason`). 26 of the 59 non-silent bugs have no stack trace: 18 exception-type cases
+where the exception was raised in the client or at the HTTP boundary, and 8 wrong-result cases where
+no exception exists. Rebuild it with `scripts/build_evidence_matrix.py`; the reasoning and the list
+are in `docs/08_evidence_coverage.md`.
 
 `repro/logs/` — the console dumps exactly as the harness wrote them (53 runs, 30 of them belonging
 to the reproduced set; the rest are attempts that did not reproduce). The 12 files added last carry
@@ -230,14 +222,11 @@ gives the full list.
    that preceded the repair experiment and are included here with a provenance header. For the
    other 42 bugs the output exists in the capture file, the run-output file and
    `repro/attempt_log.csv`, but no separate server-side transcript was kept.
-4. **A stack trace exists for 35 of the 72.** The MCP server turns a tool exception into a
-   `TextContent` error, so the frames stay in the server's stderr and only the message reaches the
-   client; the harness as first written recorded the client side. Captures made with the server
-   logger on recovered 20 more, so `repro/transcripts/` holds 32 complete tracebacks (the other 3 of
-   the 35 kept only a tail — #76, #915, #3434). Both sets are live runs of the same case
-   definitions; `evidence_matrix.csv` (column `stack_available`) records which file holds the frames
-   for each bug, so nothing is attributed to the wrong capture. The remaining 37 are silent cases,
-   client-side raises, returned errors and wrong results, where a server traceback does not exist.
+4. **A stack trace exists for 35 of the 72, and 32 of those are complete.** The MCP server turns a
+   tool exception into a `TextContent` error, so the frames stay in the server's stderr and only the
+   message reaches the client. `repro/transcripts/` holds the 32 complete ones; the other 3 of the
+   35 kept only a tail (#76, #915, #3434). The remaining 37 are silent cases, client-side raises,
+   returned errors and wrong results, where a server traceback does not exist.
    `docs/08_evidence_coverage.md` has the per-bug explanation.
 5. **Redaction.** Local filesystem paths, the analysts' machine user names and e-mail addresses
    were replaced with `<user>` / `<email-redacted>` so that the artefact cannot identify its

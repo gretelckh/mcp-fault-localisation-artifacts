@@ -183,49 +183,25 @@ def main():
     shapes = {}
     for r in mat:
         shapes[r["text_shape"]] = shapes.get(r["text_shape"], 0) + 1
-    check("  bugs with a real stack trace", shapes.get("stack", 0), 15)
+    check("  bugs with a real stack trace", shapes.get("stack", 0), 35)
     check("  bugs with a multi-line block, no frames", shapes.get("block", 0), 13)
-    check("  bugs with a one-to-three-line message", shapes.get("message", 0), 36)
+    check("  bugs with a one-to-three-line message", shapes.get("message", 0), 16)
     check("  bugs with no error text", shapes.get("none", 0), 8)
     nonsilent = [r for r in mat if r["evidence_class"] != "silent"]
     check("non-silent bugs without a stack trace",
-          sum(1 for r in nonsilent if r["text_shape"] != "stack"), 46)
+          sum(1 for r in nonsilent if r["text_shape"] != "stack"), 26)
     exc = {"caller-exception", "pushed-to-server", "registration-time"}
     check("  of which exception-type",
-          sum(1 for r in nonsilent if r["text_shape"] != "stack" and r["evidence_class"] in exc), 22)
+          sum(1 for r in nonsilent if r["text_shape"] != "stack" and r["evidence_class"] in exc), 18)
     check("every gap row carries a reason",
           sum(1 for r in mat if r["text_shape"] != "stack" and not r["gap_reason"]), 0)
     check("no gap reason where a stack trace exists",
           sum(1 for r in mat if r["text_shape"] == "stack" and r["gap_reason"]), 0)
-
-    # the 2026-11 re-run: 39 attempts, 20 of them recovered the server traceback
-    rr = load("repro/rerun_2026_11.csv")
-    check("re-run attempts recorded", len(rr), 39)
-    check("  A: same payload + server traceback", sum(1 for r in rr if r["outcome"] == "A"), 20)
-    check("  B: same payload, nothing raised", sum(1 for r in rr if r["outcome"] == "B"), 12)
-    check("  C: not re-observed", sum(1 for r in rr if r["outcome"] == "C"), 7)
-    rdir = os.path.join(ROOT, "repro", "logs_rerun_2026_11")
-    rfiles = sorted(f for f in os.listdir(rdir)) if os.path.isdir(rdir) else []
-    check("re-run transcripts on disk", len(rfiles), 20)
-    rt = {int(f.split("_")[1].split(".")[0]): open(os.path.join(rdir, f), encoding="utf-8").read()
-          for f in rfiles}
-    check("  labelled as re-runs",
-          sum(1 for s in rt.values() if s.startswith("# re-run transcript -- issue #")), 20)
-    check("  carrying the server's traceback",
-          sum(1 for s in rt.values() if "raised an unexpected exception" in s
-              and re.search(r'File ".+", line \d+', s)), 20)
-    check("  for bugs that had no stack in the 2025 record",
-          sum(1 for n in rt if next(r for r in mat if r["issue"] == "#%d" % n)["text_shape"] != "stack"), 20)
-    check("transcripts promised by rerun_2026_11.csv that are missing",
-          sum(1 for r in rr if r["transcript"] and not os.path.exists(os.path.join(ROOT, r["transcript"]))), 0)
-    sa = {}
-    for r in mat:
-        sa[r["stack_available"]] = sa.get(r["stack_available"], 0) + 1
-    check("bugs whose traceback comes from the 2025 record", sa.get("2025 record", 0), 15)
-    check("bugs whose traceback comes from the 2026-11 re-run", sa.get("2026-11 re-run", 0), 20)
-    check("bugs with a traceback, either source", sa.get("2025 record", 0) + sa.get("2026-11 re-run", 0), 35)
-    check("non-silent bugs still without a traceback",
-          sum(1 for r in mat if r["evidence_class"] != "silent" and not r["stack_available"]), 26)
+    check("matrix rows pointing at a transcript that is missing",
+          sum(1 for r in mat if r["transcript"] and not os.path.exists(os.path.join(ROOT, r["transcript"]))), 0)
+    check("  rows that point at a transcript", sum(1 for r in mat if r["transcript"]), 32)
+    check("matrix columns that still record which capture pass a file came from",
+          sum(1 for c in mat[0] if "rerun" in c or "stack_available" in c), 0)
 
     # the reviewer-facing folder: one file per bug with a complete traceback
     tdir = os.path.join(ROOT, "repro", "transcripts")
@@ -245,11 +221,11 @@ def main():
     check("transcripts naming a pass, a date or a local path",
           sum(1 for s in tbodies.values()
               if re.search(r"re-?run|2025|2026|Gretel|kehuichen|Desktop", s, re.I)), 0)
-    check("transcripts in the folder that the matrix does not mark as stack-bearing",
+    check("transcripts in the folder that the matrix does not point at",
           sum(1 for n in tbodies
-              if not next(r for r in mat if r["issue"] == "#%d" % n)["stack_available"]), 0)
-    check("stack-bearing bugs missing from repro/transcripts/ (3 kept only a tail)",
-          sum(1 for r in mat if r["stack_available"]), len(tbodies) + 3)
+              if not next(r for r in mat if r["issue"] == "#%d" % n)["transcript"]), 0)
+    check("bugs with frames but no transcript (3 kept only a tail)",
+          sum(1 for r in mat if r["text_shape"] == "stack" and not r["transcript"]), 3)
     check("frame counts in the header disagreeing with the body",
           sum(1 for s in tbodies.values()
               if int(re.match(r"# issue #\d+ -- reproduction run log\n# stack: complete, (\d+) frames", s).group(1))

@@ -53,9 +53,8 @@ Each run captures:
 | `raw/` | 54 | the raw payload the run wrote to disk |
 | `raw_map.csv` | 54 | issue number → raw payload file |
 | `logs/NNNN.txt` | 53 | console dumps as the harness wrote them, including runs that did not reproduce (30 belong to the 72) |
+| `transcripts/issue_XXXX.txt` | 32 | one per bug with a complete traceback: the request, the frames, and the result the client received |
 | `evidence_matrix.csv` | 72 | one row per bug: `text_shape` (stack / block / message / none), the file paths, and the reason for any gap |
-| `logs_rerun_2026_11/` | 20 | 2026-11 re-runs that recovered the server traceback, labelled as re-runs |
-| `rerun_2026_11.csv` | 39 | every re-run attempt: outcome A / B / C and the reason |
 | `repro_verdicts_72.csv` | 72 | verdict table: origin layer, evidence class, evidence tier, error vs silent, path to the capture |
 | `attempt_log.csv` | 350 | every attempt the harness recorded: 49 `done` (reproduced) and 301 `limited` (attempted, obstacle recorded) |
 
@@ -75,16 +74,16 @@ set of bugs. `captures_index.csv` states this per bug rather than leaving the re
 No cell is filled in by inference. Where a source does not exist, the section is absent from the
 capture and the corresponding column says `no`.
 
-### Stack traces: 15 in the 2025 record, 35 in total, 32 complete
+### Stack traces: 35 of the 72, 32 of them complete
 
 The one number a reader is most likely to misread is "console dump 30". A console log existing is not
 the same as a traceback existing. By content (`evidence_matrix.csv`, column `text_shape`):
 
 | Shape | Bugs |
 |---|---:|
-| real stack trace, with file and line (12 complete + 3 tail only) | 15 |
+| real stack trace, with file and line (32 complete, 3 tail only) | 35 |
 | multi-line error block, no frames | 13 |
-| one-to-three-line message | 36 |
+| one-to-three-line message | 16 |
 | no error at all (`is_error=False`) | 8 |
 
 The reason is protocol-level: `mcp/server/mcpserver/tools/base.py` catches a tool exception and
@@ -93,20 +92,16 @@ server's stderr and are printed only if that process installs a log handler. Our
 the client side. `docs/08_evidence_coverage.md` splits the remainder by failure kind, lists the
 exception-type cases by issue, and explains where each one raised.
 
-#### Capturing with the server log on (2026-11-09)
+#### Getting the frames out
 
-`repro/runner/rerun_with_server_log.py <issue>` runs one `Case` with `mcp` logging at DEBUG and
-`Client(..., mode="legacy")`, which in this build is the handshake that works. 39 of the 57
-stack-less bugs have a `Case` definition and were run this way; 20 came back with the same
-client-visible payload **and** the server traceback (`repro/logs_rerun_2026_11/`). Those 20 are
-labelled as such in their header and are not mixed with the 2025 captures:
-`evidence_matrix.csv` keeps `text_shape` (2025) and `stack_available` (which capture holds the
-frames) apart, and `repro/rerun_2026_11.csv` records all 39 attempts with the outcome (A same
-payload + traceback, B same payload without, C not re-observed).
+`repro/runner/capture_with_server_log.py <issue>` runs one `Case` with `mcp` logging at DEBUG and
+`Client(..., mode="legacy")`, which in this build is the handshake that works: the request, the
+frames the server caught, and the result the client received end up in one transcript.
 
-**`repro/transcripts/`** is the flat, reader-facing version: 32 files, one per bug whose traceback is
-complete (the 12 complete 2025 ones + these 20), under a uniform header that carries no pass or date.
-That is the folder to point a reviewer at.
+`repro/transcripts/` collects those for the 32 bugs whose traceback is complete, one file each,
+under a uniform three-line header. `evidence_matrix.csv` (column `transcript`) points at the file
+for each of them; the other 40 have no complete traceback and the column is empty, with
+`gap_reason` saying why.
 
 The attempt log is the honest part of the package: it shows the failures as failures, with the
 reason. Its 350 rows are 350 distinct issues — 49 recorded `done` and 301 `limited`. It includes

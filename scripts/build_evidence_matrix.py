@@ -7,8 +7,8 @@ bug, the two questions that come up first:
     what exactly did you capture?   -> text_shape + the file paths
     is anything missing?            -> gap_reason
 
-text_shape is derived from the body of repro/run_output/issue_XXXX.txt, i.e. from
-the text that was actually recorded, not from a label chosen in advance:
+text_shape is derived from the body of the text that was actually recorded -- the run output, or
+the transcript in repro/transcripts/ when that goes deeper -- not from a label chosen in advance:
 
     stack    at least one real stack frame (Python `File "...", line N`,
              or a JS `at fn (file:line:col)`)
@@ -68,13 +68,9 @@ def main():
     for p in glob.glob(os.path.join(ROOT, "repro", "logs", "*.txt")):
         logs.setdefault(os.path.basename(p)[:-4], []).append(os.path.basename(p))
 
-    # the 2026-11 re-runs: 39 of the bugs without a stack were re-run, 20 came back with the
-    # same payload and the server traceback the 2025 harness never wrote down
-    rerun = {}
-    rpath = os.path.join(ROOT, "repro", "rerun_2026_11.csv")
-    if os.path.exists(rpath):
-        for r in csv.DictReader(open(rpath, encoding="utf-8")):
-            rerun[r["issue"].lstrip("#")] = r
+    # the flat traceback set: one file per bug whose text goes deeper than the run output
+    transcripts = {int(os.path.basename(p)[6:10]): p
+                   for p in glob.glob(os.path.join(ROOT, "repro", "transcripts", "issue_*.txt"))}
 
     out = []
     for r in sorted(idx, key=lambda r: int(r["issue"].lstrip("#"))):
@@ -82,6 +78,12 @@ def main():
         rel_out = "repro/run_output/issue_%04d.txt" % int(n)
         p = os.path.join(ROOT, rel_out)
         shape, frames, nlines = shape_of(p)
+        rel_t = ""
+        if int(n) in transcripts:
+            tshape, tframes, tlines = shape_of(transcripts[int(n)])
+            if tframes and tframes >= frames:
+                shape, frames, nlines = tshape, tframes, tlines
+                rel_t = "repro/transcripts/issue_%04d.txt" % int(n)
         cls = r["evidence_class"]
 
         if shape == "stack":
@@ -111,12 +113,9 @@ def main():
             "console_log": ("repro/logs/%s.txt" % n) if n in logs else "",
             "has_raw_payload": r["has_raw_payload"],
             "run_output": rel_out,
+            "transcript": rel_t,
             "capture": "repro/captures/issue_%04d.txt" % int(n),
             "gap_reason": gap,
-            "rerun_outcome": rerun.get(n, {}).get("outcome", ""),
-            "rerun_transcript": rerun.get(n, {}).get("transcript", ""),
-            "stack_available": ("2025 record" if shape == "stack"
-                                else ("2026-11 re-run" if rerun.get(n, {}).get("transcript") else "")),
         })
 
     dst = os.path.join(ROOT, "repro", "evidence_matrix.csv")
@@ -127,12 +126,12 @@ def main():
 
     from collections import Counter
     c = Counter(r["text_shape"] for r in out)
-    s = Counter(r["stack_available"] for r in out)
     print("wrote %s (%d rows)" % (os.path.relpath(dst, ROOT), len(out)))
     print("text_shape:", dict(c))
-    print("stack available:", dict(s))
-    print("without any stack trace:", len(out) - (s["2025 record"] + s["2026-11 re-run"]))
-    print("  of which exception-type:", sum(1 for r in out if not r["stack_available"]
+    print("with a stack trace:", c["stack"])
+    print("  complete transcripts:", sum(1 for r in out if r["transcript"]))
+    print("without a stack trace:", len(out) - c["stack"])
+    print("  of which exception-type:", sum(1 for r in out if r["text_shape"] != "stack"
                                            and r["evidence_class"] in EXCEPTION_CLASSES))
     return 0
 

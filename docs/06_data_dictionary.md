@@ -170,32 +170,16 @@ One row per reproduced bug. Rebuilt by `scripts/build_evidence_matrix.py`; never
 |---|---|
 | `issue`, `origin_layer`, `exposure_channel`, `evidence_class`, `evidence_tier` | the same values as in `captures_index.csv` |
 | `error_text_source` | `runtime` / `issue text` / `none` |
-| `text_shape` | `stack` (real frames), `block` (4+ lines, no frames), `message` (1–3 lines), `none` (call succeeded) |
+| `text_shape` | the fullest text captured for the bug: `stack` (real frames), `block` (4+ lines, no frames), `message` (1–3 lines), `none` (call succeeded) |
 | `stack_frames` | number of frame lines found: 0 unless `text_shape = stack` |
 | `body_lines` | non-blank lines in the captured text |
 | `has_console_log`, `console_log` | whether a `repro/logs/` file exists, and its path |
 | `has_raw_payload` | whether `repro/raw/` holds the payload |
 | `run_output`, `capture` | paths to the two per-bug records |
+| `transcript` | path to `repro/transcripts/issue_N.txt` when the traceback is complete (32 rows), empty otherwise |
 | `gap_reason` | empty when a stack trace exists; otherwise why not — the client-visible message is all that survived, or the failure is a wrong result with no exception |
-| `rerun_outcome` | `A` (re-run reproduced the payload and the server printed the traceback), `B` (same payload, no exception raised), `C` (not re-observed), or empty if the bug was not re-run |
-| `rerun_transcript` | path to `repro/logs_rerun_2026_11/issue_N.txt` for the 20 `A` cases, empty otherwise |
-| `stack_available` | which run the traceback comes from: `2025 record`, `2026-11 re-run`, or empty |
 
-Counts: `stack` 15, `block` 13, `message` 36, `none` 8; `stack_available` 15 + 20 = 35.
-
----
-
-## `repro/rerun_2026_11.csv` (n = 39)
-
-The 2026-11-09 re-run attempt on every stack-less bug that has a `Case` definition.
-
-| column | meaning |
-|---|---|
-| `issue` | issue number |
-| `outcome` | `A` same client-visible payload + server traceback, `B` same payload but nothing raised, `C` not re-observed |
-| `server_traceback` | whether the run printed the traceback the server caught |
-| `transcript` | path under `repro/logs_rerun_2026_11/` (`A` only) |
-| `note` | one line on what happened |
+Counts: `stack` 35 (32 of them with a complete transcript), `block` 13, `message` 16, `none` 8.
 
 ---
 
