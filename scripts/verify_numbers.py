@@ -202,23 +202,26 @@ def main():
           sum(1 for r in mat if r["transcript"] and r["gap_reason"]), 0)
     check("matrix rows pointing at a transcript that is missing",
           sum(1 for r in mat if r["transcript"] and not os.path.exists(os.path.join(ROOT, r["transcript"]))), 0)
-    check("  rows that point at a transcript", sum(1 for r in mat if r["transcript"]), 39)
+    check("  rows that point at a transcript", sum(1 for r in mat if r["transcript"]), 40)
     check("matrix columns that still record which capture pass a file came from",
           sum(1 for c in mat[0] if "rerun" in c or "stack_available" in c), 0)
 
     # the reviewer-facing folder: one file per bug with a complete traceback
     tdir = os.path.join(ROOT, "repro", "transcripts")
     tfiles = sorted(glob.glob(os.path.join(tdir, "issue_*.txt")))
-    check("files in repro/transcripts/", len(tfiles), 39)
+    check("files in repro/transcripts/", len(tfiles), 40)
     tbodies = {}
     for p in tfiles:
         s = open(p, encoding="utf-8", errors="replace").read()
         tbodies[int(os.path.basename(p)[6:10])] = s
     check("transcripts whose header is not the 3-line form",
           sum(1 for s in tbodies.values()
-              if not re.match(r"^# issue #\d+ -- reproduction run log\n# stack: complete, \d+ frames\n# -+\n", s)), 0)
+              if not re.match(r"^# issue #\d+ -- reproduction run log\n# stack: (?:complete|tail only), \d+ frames\n# -+\n", s)), 0)
+    tail_only = {n for n, s in tbodies.items() if s.splitlines()[1].startswith("# stack: tail only")}
     check("transcripts with no traceback in the body",
-          sum(1 for s in tbodies.values() if "Traceback (most recent call last):" not in s), 0)
+          sum(1 for n, s in tbodies.items()
+              if n not in tail_only and "Traceback (most recent call last):" not in s), 0)
+    check("transcripts marked as a tail", len(tail_only), 1)
     check("transcripts whose body has no file/line frame",
           sum(1 for s in tbodies.values() if not re.search(r'File ".+", line \d+', s)), 0)
     check("transcripts naming a pass, a date or a local path",
@@ -227,11 +230,11 @@ def main():
     check("transcripts in the folder that the matrix does not point at",
           sum(1 for n in tbodies
               if not next(r for r in mat if r["issue"] == "#%d" % n)["transcript"]), 0)
-    check("bugs with frames but no transcript (1 kept only a tail)",
-          sum(1 for r in mat if r["text_shape"] == "stack" and not r["transcript"]), 1)
+    check("bugs with frames but no transcript",
+          sum(1 for r in mat if r["text_shape"] == "stack" and not r["transcript"]), 0)
     check("frame counts in the header disagreeing with the body",
           sum(1 for s in tbodies.values()
-              if int(re.match(r"# issue #\d+ -- reproduction run log\n# stack: complete, (\d+) frames", s).group(1))
+              if int(re.search(r"# stack: (?:complete|tail only), (\d+) frames", s).group(1))
               != len(re.findall(r'File ".+", line \d+', s))), 0)
 
     print()

@@ -1,7 +1,8 @@
 # Stack-trace transcripts
 
-One file per reproduced bug whose run kept a **complete Python traceback**: 39 of the 72. Files are
-verbatim, redacted, and named `issue_XXXX.txt`.
+One file per reproduced bug whose run kept a **Python traceback**: 40 of the 72. Thirty-nine are
+complete; one (#915) kept only the tail of its traceback, and its header says so. Files are verbatim,
+redacted, and named `issue_XXXX.txt`.
 
 Each opens with a three-line header:
 
@@ -10,6 +11,8 @@ Each opens with a three-line header:
 # stack: complete, 7 frames
 # ------------------------------------------------------------------
 ```
+
+The second line reads `# stack: tail only, 4 frames` for the one file that is not complete.
 
 Where the body starts with `CLIENT ->`, `SERVER !!` and ends with `CLIENT <-`, those three lines are
 the request that was sent, the exception the server caught, and the result the client received:
@@ -38,17 +41,16 @@ the message names.
 
 ## Missing files are missing for a reason
 
-There are 39 files, not 72. Here is where the other 33 went:
+There are 40 files, not 72. Here is where the other 32 went:
 
 | | n | where / why |
 |---|---:|---|
 | complete traceback | **39** | this folder |
-| only the tail of the traceback | 1 | #915 — left in `../run_output/` rather than padded out here |
+| only the tail of the traceback | 1 | #915 — this folder, header marked `tail only`: the record starts mid-frame, so the first frames are not in it |
 | no traceback at all | 32 | 11 silent (the call returned normally, `is_error=False`: the defect is a wrong answer or a missing safeguard); 21 non-silent but no frames exist — the server returned `isError=True` with a one-line message instead of raising, the exception was raised in the client (cancel scope, JSON decode), or there was no exception because the result was simply wrong |
 
 Per-bug detail is in `../evidence_matrix.csv` (`text_shape`, `gap_reason`) and
-`../../docs/08_evidence_coverage.md`. One bug (#915) kept only the **tail** of its traceback; it is left in
-`../run_output/` rather than padded out here.
+`../../docs/08_evidence_coverage.md`.
 
 Server-side frames appear only where the server process printed its own traceback; where it did
 not, the client got a one-line message and nothing else, and those bugs are not in this folder.
@@ -58,7 +60,8 @@ nothing else was altered.
 ## Check them
 
 ```bash
-ls issue_*.txt | wc -l                    # 39
+ls issue_*.txt | wc -l                    # 40
 grep -c 'Traceback (most recent call last)' issue_0244.txt
 sed -n '4,40p' issue_1060.txt             # the frames
+grep -l 'stack: tail only' issue_*.txt    # the one incomplete file
 ```

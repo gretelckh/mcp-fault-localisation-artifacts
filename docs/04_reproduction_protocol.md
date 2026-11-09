@@ -74,16 +74,16 @@ set of bugs. `captures_index.csv` states this per bug rather than leaving the re
 No cell is filled in by inference. Where a source does not exist, the section is absent from the
 capture and the corresponding column says `no`.
 
-### Stack traces: 40 of the 72, 39 of them complete
+### Stack traces: 40 of the 72, 39 complete and 1 tail only
 
 The one number a reader is most likely to misread is "console dump 30". A console log existing is not
 the same as a traceback existing. By content (`evidence_matrix.csv`, column `text_shape`):
 
 | Shape | Bugs |
 |---|---:|
-| real stack trace, with file and line (39 complete, 1 tail only) | 35 |
-| multi-line error block, no frames | 13 |
-| one-to-three-line message | 16 |
+| real stack trace, with file and line (39 complete, 1 tail only) | 40 |
+| multi-line error block, no frames | 10 |
+| one-to-three-line message | 14 |
 | no error at all (`is_error=False`) | 8 |
 
 The reason is protocol-level: `mcp/server/mcpserver/tools/base.py` catches a tool exception and
@@ -98,7 +98,7 @@ exception-type cases by issue, and explains where each one raised.
 `Client(..., mode="legacy")`, which in this build is the handshake that works: the request, the
 frames the server caught, and the result the client received end up in one transcript.
 
-`repro/transcripts/` collects those for the 39 bugs whose traceback is complete, one file each,
+`repro/transcripts/` collects all 40, one file each — 39 complete and one (#915) marked as a tail,
 under a uniform three-line header. `evidence_matrix.csv` (column `transcript`) points at the file
 for each of them; the other 33 have no complete traceback and the column is empty, with
 `gap_reason` saying why.

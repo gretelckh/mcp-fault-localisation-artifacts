@@ -58,6 +58,9 @@ d, data.get("params"), opts)
 asyncio.exceptions.CancelledError: Cancelled by cancel scope 1d11e8d5160
 ```
 
+The same excerpt, with the frames that were kept, is collected as
+`../transcripts/issue_0915.txt`; the record starts mid-frame, so it is marked `tail only` there.
+
 ## 4. Why it happens
 
 远程 streamable-http 服务端不可用时，`ClientSessionGroup` 未正确处理连接失败，cancel scope 归属错乱，抛 `RuntimeError: Attempted to exit cancel scope in a different task than it was entered in`。与 #922 同源，属 caller-exception（会话组的 cancel-scope 生命周期缺陷）。

@@ -1,0 +1,22 @@
+# issue #915 -- reproduction run log
+# stack: tail only, 4 frames
+# ------------------------------------------------------------------
+CLIENT -> connect_to_server(StreamableHttpParameters(url='http://localhost:3001/mcp/'))
+CLIENT !! the call is cancelled from a cancel scope; the record kept from the run starts
+           mid-frame, so the first frames are not part of it
+CancelledError: Cancelled by cancel scope 1d11e8d5160
+---
+d, data.get("params"), opts)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>\Lib\site-packages\mcp\shared\jsonrpc_dispatcher.py", line 403, in send_raw_request
+    outcome = await receive.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>\Lib\site-packages\anyio\streams\memory.py", line 119, in receive
+    await receive_event.wait()
+  File "<python-env>\Lib\site-packages\anyio\_backends\_asyncio.py", line 1774, in wait
+    await self._event.wait()
+  File "<python-env>\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError: Cancelled by cancel scope 1d11e8d5160
+CLIENT <- nothing: CancelledError is a BaseException, so the caller's `except Exception`
+           does not catch it and the call never returns

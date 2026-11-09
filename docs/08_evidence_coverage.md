@@ -6,7 +6,7 @@ below is derived from the files in `repro/`, by `scripts/build_evidence_matrix.p
 estimated.
 
 The per-bug table is **`repro/evidence_matrix.csv`** (72 rows, one per reproduced bug). The flat
-copy of every complete traceback is **`repro/transcripts/`** (39 files).
+copy of every traceback the runs kept is **`repro/transcripts/`** (40 files, 39 of them complete).
 
 ---
 
@@ -17,14 +17,14 @@ transcript in `repro/transcripts/` when that goes deeper:
 
 | `text_shape` | bugs | what was captured |
 |---|---|---|
-| `stack` | **40** | real frames — Python `File "...", line N`, or JS `at fn (file:line:col)`; 39 of them complete |
+| `stack` | **40** | real frames — Python `File "...", line N`, or JS `at fn (file:line:col)`; 39 complete, 1 tail only |
 | `block` | **10** | four or more lines: verdict line, error type, message, and the state the run observed — but no frames |
 | `message` | **14** | one to three lines: the message the client received, or the return payload |
 | `none` | **8** | the call succeeded (`is_error=False`); the defect is a wrong result, documented instead of an exception |
 | | **72** | |
 
-The 39 complete tracebacks are in `repro/transcripts/`, one file per bug. Of the 40 with frames,
-one (#915) kept only the tail of the traceback and stays in `repro/run_output/`.
+The 40 tracebacks are in `repro/transcripts/`, one file per bug. Thirty-nine are complete; one
+(#915) kept only the tail of the traceback, and its header says so.
 The remaining 32 have none, and section 2 says why.
 
 ## 2. The gap, separated by what kind of failure it is
@@ -78,7 +78,7 @@ fix is not in the layer the message names.
 ```bash
 python scripts/build_evidence_matrix.py            # rebuild the table; prints the shape counts
 grep '^#3637,' repro/evidence_matrix.csv           # one bug: shape, files, gap reason
-sed -n '1,40p' repro/transcripts/issue_1060.txt    # a complete traceback, if the bug is one of the 39
+sed -n '1,40p' repro/transcripts/issue_1060.txt    # a complete traceback, if the bug is one of the 39 complete ones
 sed -n '1,40p' repro/run_output/issue_3637.txt     # otherwise: the recorded text, verbatim
 python -m repro.runner.capture_with_server_log 891 # capture one yourself: client result + server traceback
 ```
