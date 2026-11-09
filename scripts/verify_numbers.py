@@ -221,7 +221,7 @@ def main():
     check("transcripts with no traceback in the body",
           sum(1 for n, s in tbodies.items()
               if n not in tail_only and "Traceback (most recent call last):" not in s), 0)
-    check("transcripts marked as a tail", len(tail_only), 1)
+    check("transcripts marked as a tail", len(tail_only), 0)
     check("transcripts whose body has no file/line frame",
           sum(1 for s in tbodies.values() if not re.search(r'File ".+", line \d+', s)), 0)
     check("transcripts naming a pass, a date or a local path",

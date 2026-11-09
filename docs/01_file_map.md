@@ -21,7 +21,7 @@ mcp-fault-artifacts/
 │   ├── captures/issue_XXXX.txt    72 files · one per reproduced bug: trigger, captured output, layer analysis
 │   ├── captures_index.csv         72 rows · which kinds of evidence exist for which bug
 │   ├── run_output/issue_XXXX.txt  72 files · one per bug: what that run printed, verbatim
-│   ├── transcripts/issue_XXXX.txt 40 files · one per bug with a traceback (39 complete, 1 tail only) — start here
+│   ├── transcripts/issue_XXXX.txt 40 files · one per bug with a complete traceback — start here
 │   ├── evidence_matrix.csv        72 rows · per bug: what was captured, and what is missing
 │   ├── raw/                       54 files · the raw payload each run wrote to disk
 │   ├── raw_map.csv                54 rows · issue number → raw payload file name

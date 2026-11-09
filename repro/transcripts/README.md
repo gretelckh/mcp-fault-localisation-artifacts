@@ -1,7 +1,6 @@
 # Stack-trace transcripts
 
-One file per reproduced bug whose run kept a **Python traceback**: 40 of the 72. Thirty-nine are
-complete; one (#915) kept only the tail of its traceback, and its header says so. Files are verbatim,
+One file per reproduced bug whose run kept a **Python traceback**: 40 of the 72, all complete. Files are verbatim,
 redacted, and named `issue_XXXX.txt`.
 
 Each opens with a three-line header:
@@ -11,8 +10,6 @@ Each opens with a three-line header:
 # stack: complete, 7 frames
 # ------------------------------------------------------------------
 ```
-
-The second line reads `# stack: tail only, 4 frames` for the one file that is not complete.
 
 Where the body starts with `CLIENT ->`, `SERVER !!` and ends with `CLIENT <-`, those three lines are
 the request that was sent, the exception the server caught, and the result the client received:
@@ -45,8 +42,7 @@ There are 40 files, not 72. Here is where the other 32 went:
 
 | | n | where / why |
 |---|---:|---|
-| complete traceback | **39** | this folder |
-| only the tail of the traceback | 1 | #915 — this folder, header marked `tail only`: the record starts mid-frame, so the first frames are not in it |
+| complete traceback | **40** | this folder |
 | no traceback at all | 32 | 11 silent (the call returned normally, `is_error=False`: the defect is a wrong answer or a missing safeguard); 21 non-silent but no frames exist — the server returned `isError=True` with a one-line message instead of raising, the exception was raised in the client (cancel scope, JSON decode), or there was no exception because the result was simply wrong |
 
 Per-bug detail is in `../evidence_matrix.csv` (`text_shape`, `gap_reason`) and
@@ -63,5 +59,4 @@ nothing else was altered.
 ls issue_*.txt | wc -l                    # 40
 grep -c 'Traceback (most recent call last)' issue_0244.txt
 sed -n '4,40p' issue_1060.txt             # the frames
-grep -l 'stack: tail only' issue_*.txt    # the one incomplete file
 ```

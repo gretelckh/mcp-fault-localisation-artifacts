@@ -1,22 +1,175 @@
 # issue #915 -- reproduction run log
-# stack: tail only, 4 frames
+# stack: complete, 43 frames
 # ------------------------------------------------------------------
-CLIENT -> connect_to_server(StreamableHttpParameters(url='http://localhost:3001/mcp/'))
-CLIENT !! the call is cancelled from a cancel scope; the record kept from the run starts
-           mid-frame, so the first frames are not part of it
-CancelledError: Cancelled by cancel scope 1d11e8d5160
----
-d, data.get("params"), opts)
+CLIENT -> ClientSessionGroup(); connect_to_server(
+              StreamableHttpParameters(url='http://127.0.0.1:57046/mcp/'))
+          the endpoint accepts the POST and closes without sending a response
+
+an error occurred during closing of asynchronous generator <async_generator object streamable_http_client at 0x0000021DCE617940>
+asyncgen: <async_generator object streamable_http_client at 0x0000021DCE617940>
+  + Exception Group Traceback (most recent call last):
+  |   File "<python-env>/site-packages\anyio\_backends\_asyncio.py", line 847, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     ) from None
+  | BaseExceptionGroup: unhandled errors in a TaskGroup (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "<python-env>/site-packages\httpx2\_transports\default.py", line 98, in map_httpcore_exceptions
+    |     yield
+    |   File "<python-env>/site-packages\httpx2\_transports\default.py", line 388, in handle_async_request
+    |     resp = await self._pool.handle_async_request(req)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "<python-env>/site-packages\httpcore2\_async\connection_pool.py", line 242, in handle_async_request
+    |     raise exc from None
+    |   File "<python-env>/site-packages\httpcore2\_async\connection_pool.py", line 224, in handle_async_request
+    |     response = await connection.handle_async_request(pool_request.request)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "<python-env>/site-packages\httpcore2\_async\http_proxy.py", line 198, in handle_async_request
+    |     return await self._connection.handle_async_request(proxy_request)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "<python-env>/site-packages\httpcore2\_async\connection.py", line 96, in handle_async_request
+    |     return await self._connection.handle_async_request(request)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "<python-env>/site-packages\httpcore2\_async\http11.py", line 125, in handle_async_request
+    |     raise exc
+    |   File "<python-env>/site-packages\httpcore2\_async\http11.py", line 97, in handle_async_request
+    |     ) = await self._receive_response_headers(**kwargs)
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "<python-env>/site-packages\httpcore2\_async\http11.py", line 167, in _receive_response_headers
+    |     event = await self._receive_event(timeout=timeout)
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "<python-env>/site-packages\httpcore2\_async\http11.py", line 212, in _receive_event
+    |     raise RemoteProtocolError(msg)
+    | httpcore2.RemoteProtocolError: Server disconnected without sending a response.
+    | 
+    | The above exception was the direct cause of the following exception:
+    | 
+    | Traceback (most recent call last):
+    |   File "<python-env>/site-packages\anyio\_core\_tasks.py", line 327, in _run_coro
+    |     retval = await self._coro
+    |              ^^^^^^^^^^^^^^^^
+    |   File "<python-env>/site-packages\mcp\client\streamable_http.py", line 340, in _run_request_post
+    |     await post_fn()
+    |   File "<python-env>/site-packages\mcp\client\streamable_http.py", line 630, in handle_request_async
+    |     await self._handle_post_request(ctx)
+    |   File "<python-env>/site-packages\mcp\client\streamable_http.py", line 355, in _handle_post_request
+    |     async with stream_within_origin(
+    |                ~~~~~~~~~~~~~~~~~~~~^
+    |         ctx.client,
+    |         ^^^^^^^^^^^
+    |     ...<3 lines>...
+    |         headers=headers,
+    |         ^^^^^^^^^^^^^^^^
+    |     ) as response:
+    |     ^
+    |   File "<python-env>/lib\contextlib.py", line 214, in __aenter__
+    |     return await anext(self.gen)
+    |            ^^^^^^^^^^^^^^^^^^^^^
+    |   File "<python-env>/site-packages\mcp\shared\_httpx_utils.py", line 131, in stream_within_origin
+    |     response = await client.send(request, stream=True, follow_redirects=False)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "<python-env>/site-packages\httpx2\_client.py", line 1818, in send
+    |     response = await self._send_handling_auth(
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |     ...<4 lines>...
+    |     )
+    |     ^
+    |   File "<python-env>/site-packages\httpx2\_client.py", line 1846, in _send_handling_auth
+    |     response = await self._send_handling_redirects(
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |     ...<3 lines>...
+    |     )
+    |     ^
+    |   File "<python-env>/site-packages\httpx2\_client.py", line 1881, in _send_handling_redirects
+    |     response = await self._send_single_request(request)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "<python-env>/site-packages\httpx2\_client.py", line 1915, in _send_single_request
+    |     response = await transport.handle_async_request(request)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "<python-env>/site-packages\httpx2\_transports\default.py", line 387, in handle_async_request
+    |     with map_httpcore_exceptions():
+    |          ~~~~~~~~~~~~~~~~~~~~~~~^^
+    |   File "<python-env>/lib\contextlib.py", line 162, in __exit__
+    |     self.gen.throw(value)
+    |     ~~~~~~~~~~~~~~^^^^^^^
+    |   File "<python-env>/site-packages\httpx2\_transports\default.py", line 115, in map_httpcore_exceptions
+    |     raise mapped_exc(message) from exc
+    | httpx2.RemoteProtocolError: Server disconnected without sending a response.
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "<python-env>/site-packages\mcp\client\streamable_http.py", line 753, in streamable_http_client
+    |     yield read_stream, write_stream
+    | GeneratorExit
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<python-env>/site-packages\mcp\client\streamable_http.py", line 736, in streamable_http_client
+    anyio.create_task_group() as tg,
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "<python-env>/site-packages\anyio\_backends\_asyncio.py", line 853, in __aexit__
+    if self.cancel_scope.__exit__(type(exc), exc, exc.__traceback__):
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\anyio\_backends\_asyncio.py", line 464, in __exit__
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: Attempted to exit cancel scope in a different task than it was entered in
+
+CLIENT !! the initialize request is cancelled rather than failed, so the caller's
+           `except Exception` never runs
+
+Traceback (most recent call last):
+  File "<python-env>/site-packages\anyio\streams\memory.py", line 118, in receive
+    return self.receive_nowait()
+           ~~~~~~~~~~~~~~~~~~~^^
+  File "<python-env>/site-packages\anyio\streams\memory.py", line 113, in receive_nowait
+    raise WouldBlock
+anyio._core._exceptions.WouldBlock
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<workspace>\repro_snippet.py", line 46, in <module>
+    asyncio.run(main(url))
+    ~~~~~~~~~~~^^^^^^^^^^^
+  File "<python-env>/lib\asyncio\runners.py", line 196, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "<python-env>/lib\asyncio\runners.py", line 119, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "<python-env>/lib\asyncio\base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "<workspace>\repro_snippet.py", line 30, in main
+    await client_session_group.connect_to_server(server_params)
+  File "<python-env>/site-packages\mcp\client\session_group.py", line 300, in connect_to_server
+    server_info, session = await self._establish_session(server_params, session_params or ClientSessionParameters())
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\client\session_group.py", line 355, in _establish_session
+    result = await session.initialize()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<python-env>/site-packages\mcp\client\session.py", line 654, in initialize
+    result = await self.send_request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "<python-env>/site-packages\mcp\client\session.py", line 586, in send_request
+    raw = await self._dispatcher.send_raw_request(method, data.get("params"), opts)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<python-env>\Lib\site-packages\mcp\shared\jsonrpc_dispatcher.py", line 403, in send_raw_request
+  File "<python-env>/site-packages\mcp\shared\jsonrpc_dispatcher.py", line 403, in send_raw_request
     outcome = await receive.receive()
               ^^^^^^^^^^^^^^^^^^^^^^^
-  File "<python-env>\Lib\site-packages\anyio\streams\memory.py", line 119, in receive
+  File "<python-env>/site-packages\anyio\streams\memory.py", line 126, in receive
     await receive_event.wait()
-  File "<python-env>\Lib\site-packages\anyio\_backends\_asyncio.py", line 1774, in wait
+  File "<python-env>/site-packages\anyio\_backends\_asyncio.py", line 1936, in wait
     await self._event.wait()
-  File "<python-env>\Lib\asyncio\locks.py", line 213, in wait
+  File "<python-env>/lib\asyncio\locks.py", line 213, in wait
     await fut
-asyncio.exceptions.CancelledError: Cancelled by cancel scope 1d11e8d5160
-CLIENT <- nothing: CancelledError is a BaseException, so the caller's `except Exception`
-           does not catch it and the call never returns
+asyncio.exceptions.CancelledError: Cancelled via cancel scope 21dce840050
+
+CLIENT <- nothing: no error reaches the caller; the run ends in CancelledError

@@ -3,7 +3,7 @@
 ## The short version
 
 1. Take an issue number from `../data/active_bugs_339.csv` where `reproduction_status = reproduced`.
-2. Open `transcripts/issue_XXXX.txt` first — if the bug kept a traceback (39 complete, 1 tail only),
+2. Open `transcripts/issue_XXXX.txt` first — if the bug kept a traceback (all 40 complete),
    that is the whole story in one page. Otherwise `run_output/issue_XXXX.txt` has what the run
    printed, and `captures/issue_XXXX.txt` the self-contained record: the trigger that was run, what
    the reporter described, the output that was captured, and the layer analysis.
@@ -78,7 +78,7 @@ imputed.
 
 | `text_shape` | bugs | what was captured |
 |---|---|---|
-| `stack` | 40 | frames with file and line; 39 complete, 1 tail only |
+| `stack` | 40 | frames with file and line; all complete |
 | `block` | 10 | four or more lines, no frames |
 | `message` | 14 | one to three lines |
 | `none` | 8 | the call succeeded; a wrong result is documented instead |

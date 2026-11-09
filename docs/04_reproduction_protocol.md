@@ -74,14 +74,14 @@ set of bugs. `captures_index.csv` states this per bug rather than leaving the re
 No cell is filled in by inference. Where a source does not exist, the section is absent from the
 capture and the corresponding column says `no`.
 
-### Stack traces: 40 of the 72, 39 complete and 1 tail only
+### Stack traces: 40 of the 72, all complete
 
 The one number a reader is most likely to misread is "console dump 30". A console log existing is not
 the same as a traceback existing. By content (`evidence_matrix.csv`, column `text_shape`):
 
 | Shape | Bugs |
 |---|---:|
-| real stack trace, with file and line (39 complete, 1 tail only) | 40 |
+| real stack trace, with file and line (all complete) | 40 |
 | multi-line error block, no frames | 10 |
 | one-to-three-line message | 14 |
 | no error at all (`is_error=False`) | 8 |
@@ -98,9 +98,9 @@ exception-type cases by issue, and explains where each one raised.
 `Client(..., mode="legacy")`, which in this build is the handshake that works: the request, the
 frames the server caught, and the result the client received end up in one transcript.
 
-`repro/transcripts/` collects all 40, one file each — 39 complete and one (#915) marked as a tail,
+`repro/transcripts/` collects all 40, one file each, complete,
 under a uniform three-line header. `evidence_matrix.csv` (column `transcript`) points at the file
-for each of them; the other 33 have no complete traceback and the column is empty, with
+for each of them; the other 32 have no traceback and the column is empty, with
 `gap_reason` saying why.
 
 The attempt log is the honest part of the package: it shows the failures as failures, with the

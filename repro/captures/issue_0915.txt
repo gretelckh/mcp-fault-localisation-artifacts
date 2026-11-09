@@ -58,8 +58,8 @@ d, data.get("params"), opts)
 asyncio.exceptions.CancelledError: Cancelled by cancel scope 1d11e8d5160
 ```
 
-The same excerpt, with the frames that were kept, is collected as
-`../transcripts/issue_0915.txt`; the record starts mid-frame, so it is marked `tail only` there.
+A re-run of the same trigger with the endpoint closing the connection mid-response is collected as
+`../transcripts/issue_0915.txt`; it keeps the full chain, 43 frames.
 
 ## 4. Why it happens
 

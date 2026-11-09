@@ -179,7 +179,7 @@ One row per reproduced bug. Rebuilt by `scripts/build_evidence_matrix.py`; never
 | `transcript` | path to `repro/transcripts/issue_N.txt` when the run kept a traceback (40 rows), empty otherwise |
 | `gap_reason` | why there is no transcript — the client-visible message is all that survived, or the failure is a wrong result with no exception. Empty whenever `transcript` is filled |
 
-Counts: `stack` 40 (39 complete and 1 tail only), `block` 10, `message` 14, `none` 8.
+Counts: `stack` 40 (all complete), `block` 10, `message` 14, `none` 8.
 
 ---
 

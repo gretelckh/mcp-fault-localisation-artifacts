@@ -85,7 +85,7 @@ captured, the layer analysis, and a provenance table saying where each field cam
 for the raw payload and the console dump appear only where the run kept one.
 
 `repro/transcripts/issue_XXXX.txt` — **the 40 bugs whose run kept a Python traceback**, one file
-each, body verbatim. Thirty-nine are complete; one (#915) kept only the tail and its header says so. Where the file opens with `CLIENT ->` / `SERVER !!` / `CLIENT <-` it shows the
+each, body verbatim, all 40 complete. Where the file opens with `CLIENT ->` / `SERVER !!` / `CLIENT <-` it shows the
 request, the exception the server caught, and the result the client received. In many of the 40 the frames
 point at a different layer than the message the caller saw, which is the phenomenon this study
 measures. `repro/transcripts/README.md` explains the 32 that are not there. Start here if you
@@ -96,7 +96,7 @@ see what a run actually printed. Six header lines say which harness ran, what ki
 is, and where the text came from; the body is the output, verbatim. The header's `capture kind` is
 the *source* of the text (a console log for 30, a traceback excerpt for 5, the client's return
 payload for 37), not a claim about how complete it is: `text_shape` in `repro/evidence_matrix.csv`
-is what says how much of the error each bug left behind. `repro/transcripts/` holds the **40 tracebacks** (39 complete, 1 tail only), and `evidence_matrix.csv` (column `transcript`) points at the file for each of them.
+is what says how much of the error each bug left behind. `repro/transcripts/` holds the **40 complete tracebacks**, and `evidence_matrix.csv` (column `transcript`) points at the file for each of them.
 Paths and account names inside the text are redacted to `<user>` / `<python-env>`.
 
 `repro/captures_index.csv` — one row per bug, saying which kinds of evidence exist for it
@@ -220,10 +220,9 @@ gives the full list.
    that preceded the repair experiment and are included here with a provenance header. For the
    other 42 bugs the output exists in the capture file, the run-output file and
    `repro/attempt_log.csv`, but no separate server-side transcript was kept.
-4. **A stack trace exists for 40 of the 72, and 39 of those are complete.** The MCP server turns a
+4. **A stack trace exists for 40 of the 72, and all 40 are complete.** The MCP server turns a
    tool exception into a `TextContent` error, so the frames stay in the server's stderr and only the
-   message reaches the client. `repro/transcripts/` holds all 40; 39 are complete and one (#915)
-   is the tail that the run kept, marked as such in its header. The remaining 32 are silent cases, client-side raises,
+   message reaches the client. `repro/transcripts/` holds all 40, complete. The remaining 32 are silent cases, client-side raises,
    returned errors and wrong results, where a server traceback does not exist.
    `docs/08_evidence_coverage.md` has the per-bug explanation.
 5. **Redaction.** Local filesystem paths, the analysts' machine user names and e-mail addresses

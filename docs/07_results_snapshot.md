@@ -37,13 +37,12 @@ What the 72 runs actually captured (`repro/evidence_matrix.csv`):
 
 | Shape of the captured text | n |
 |---|---:|
-| real stack trace, with file and line (39 complete + 1 tail only) | 40 |
+| real stack trace, with file and line (all complete) | 40 |
 | multi-line error block, no frames | 10 |
 | one-to-three-line message | 14 |
 | no error at all (`is_error=False`) | 8 |
 
-**40 tracebacks** are collected in `repro/transcripts/`, one file per bug: 39 complete, and
-#915 kept only the tail of its traceback and is marked as such in its header. The remaining 32
+**40 complete tracebacks** are collected in `repro/transcripts/`, one file per bug. The remaining 32
 are silent cases, client-side raises, returned errors and wrong results, where a server traceback
 does not exist; `docs/08_evidence_coverage.md` has the list and the reason for each.
 

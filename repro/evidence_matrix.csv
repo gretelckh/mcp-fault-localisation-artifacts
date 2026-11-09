@@ -15,7 +15,7 @@ issue,origin_layer,exposure_channel,evidence_class,evidence_tier,error_text_sour
 #698,Server,single-layer-genericised,single-layer-masked,A,runtime,stack,10,39,no,,yes,repro/run_output/issue_0698.txt,repro/transcripts/issue_0698.txt,repro/captures/issue_0698.txt,
 #743,Server,single-layer-genericised,single-layer-masked,A,runtime,stack,10,39,no,,yes,repro/run_output/issue_0743.txt,repro/transcripts/issue_0743.txt,repro/captures/issue_0743.txt,
 #891,Server,single-layer-genericised,single-layer-masked,B,runtime,stack,10,40,no,,yes,repro/run_output/issue_0891.txt,repro/transcripts/issue_0891.txt,repro/captures/issue_0891.txt,
-#915,Client,caller-exception,caller-exception,A,runtime,stack,4,14,no,,yes,repro/run_output/issue_0915.txt,repro/transcripts/issue_0915.txt,repro/captures/issue_0915.txt,
+#915,Client,caller-exception,caller-exception,A,runtime,stack,43,172,no,,yes,repro/run_output/issue_0915.txt,repro/transcripts/issue_0915.txt,repro/captures/issue_0915.txt,
 #922,Client,caller-exception,caller-exception,A,runtime,block,0,7,yes,repro/logs/922.txt,no,repro/run_output/issue_0922.txt,,repro/captures/issue_0922.txt,"a cancel-scope cancellation when sessions are created in one task and closed in others; the failure appears in the teardown handlers, so the record keeps the message the caller got"
 #1060,Server,single-layer-genericised,single-layer-masked,A,runtime,stack,7,26,no,,yes,repro/run_output/issue_1060.txt,repro/transcripts/issue_1060.txt,repro/captures/issue_1060.txt,
 #1313,Client,caller-exception,caller-exception,A,runtime,stack,6,28,yes,repro/logs/1313.txt,no,repro/run_output/issue_1313.txt,repro/transcripts/issue_1313.txt,repro/captures/issue_1313.txt,
