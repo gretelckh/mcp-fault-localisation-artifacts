@@ -4,13 +4,13 @@
 # evidence_class: caller-exception
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: reconstructed/issue_2727.py::repro_2727
+# harness_entry: issue_2727.py::repro_2727
 # console_log: logs/2727.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `reconstructed/issue_2727.py::repro_2727`
+Harness entry: `issue_2727.py::repro_2727`
 
 Trigger, as recorded during the study:
 
@@ -44,7 +44,7 @@ The streamable-http client request does not set the `Origin` header (`_prepare_h
 | Evidence class | `caller-exception` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `reconstructed/issue_2727.py::repro_2727` |
+| Harness entry | `issue_2727.py::repro_2727` |
 | Console log retained | yes (`logs/2727.txt`) |
 | Raw payload retained | no |
 

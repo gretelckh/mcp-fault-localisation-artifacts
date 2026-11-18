@@ -4,13 +4,13 @@
 # evidence_class: caller-exception
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: reconstructed/issue_0922.py::repro_0922
+# harness_entry: issue_0922.py::repro_0922
 # console_log: logs/922.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `reconstructed/issue_0922.py::repro_0922`
+Harness entry: `issue_0922.py::repro_0922`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ When multiple client sessions are created in a task group and closed in separate
 | Evidence class | `caller-exception` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `reconstructed/issue_0922.py::repro_0922` |
+| Harness entry | `issue_0922.py::repro_0922` |
 | Console log retained | yes (`logs/922.txt`) |
 | Raw payload retained | no |
 

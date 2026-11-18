@@ -1,27 +1,27 @@
-issue,current_harness_entry,status,note
-#76,reconstructed/issue_0076.py::repro_0076,reconstructed_as_evidence,"As-recorded code archived; uses APIs absent in mcp 2.2.0, not runnable"
-#79,reconstructed/issue_0079.py::repro_0079,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#326,reconstructed/issue_0326.py::repro_0326,reconstructed_as_evidence,"As-recorded code archived; uses APIs absent in mcp 2.2.0, not runnable"
-#409,reconstructed/issue_0409.py::repro_0409,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#507,reconstructed/issue_0507.py::repro_0507,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#521,reconstructed/issue_0521.py::repro_0521,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#577,reconstructed/issue_0577.py::repro_0577,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#613,reconstructed/issue_0613.py::repro_0613,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#915,reconstructed/issue_0915.py::repro_0915,reconstructed_as_evidence,"As-recorded code archived; uses APIs absent in mcp 2.2.0, not runnable"
-#922,reconstructed/issue_0922.py::repro_0922,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#1313,reconstructed/issue_1313.py::repro_1313,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#2216,reconstructed/issue_2216.py::repro_2216,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#2260,reconstructed/issue_2260.py::repro_2260,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#2687,reconstructed/issue_2687.py::repro_2687,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#2727,reconstructed/issue_2727.py::repro_2727,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#3103,reconstructed/issue_3103.py::repro_3103,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#3209,reconstructed/issue_3209.py::repro_3209,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#3240,reconstructed/issue_3240.py::repro_3240,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#3250,reconstructed/issue_3250.py::repro_3250,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#3382,reconstructed/issue_3382.py::repro_3382,reconstructed_as_evidence,"As-recorded code archived; uses APIs absent in mcp 2.2.0, not runnable"
-#3384,reconstructed/issue_3384.py::repro_3384,reconstructed_as_evidence,"As-recorded code archived; uses APIs absent in mcp 2.2.0, not runnable"
-#3434,reconstructed/issue_3434.py::repro_3434,reconstructed_as_evidence,"As-recorded code archived; uses APIs absent in mcp 2.2.0, not runnable"
-#3557,repro_cases.py::case_jsonrpc_code,reconstructed_clean,Rebuilt; SDK 2.2.0 no longer raises (capture already marked replay-clean)
-#3566,reconstructed/issue_3566.py::repro_3566,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#3644,repro_cases.py::case_outputschema_mode,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
-#3646,repro_cases.py::case_extra_arg,reconstructed_clean,Rebuilt; SDK 2.2.0 no longer raises (capture already marked replay-clean)
+issue,harness_entry,status,note
+#76,issue_0076.py::repro_0076,recorded,Config-error validation raised bare to caller (stdio external tool)
+#79,issue_0079.py::repro_0079,reproduced,Defect reproduced on mcp 2.2.0
+#326,issue_0326.py::repro_0326,recorded,npx subprocess loses PATH when env is set (stdio external tool)
+#409,issue_0409.py::repro_0409,reproduced,Defect reproduced on mcp 2.2.0
+#507,issue_0507.py::repro_0507,reproduced,Defect reproduced on mcp 2.2.0
+#521,issue_0521.py::repro_0521,reproduced,Defect reproduced on mcp 2.2.0
+#577,issue_0577.py::repro_0577,reproduced,Defect reproduced on mcp 2.2.0
+#613,issue_0613.py::repro_0613,reproduced,Defect reproduced on mcp 2.2.0
+#915,issue_0915.py::repro_0915,recorded,Session group connect failure on unreachable server
+#922,issue_0922.py::repro_0922,reproduced,Defect reproduced on mcp 2.2.0
+#1313,issue_1313.py::repro_1313,reproduced,Defect reproduced on mcp 2.2.0
+#2216,issue_2216.py::repro_2216,reproduced,Defect reproduced on mcp 2.2.0
+#2260,issue_2260.py::repro_2260,reproduced,Defect reproduced on mcp 2.2.0
+#2687,issue_2687.py::repro_2687,reproduced,Defect reproduced on mcp 2.2.0
+#2727,issue_2727.py::repro_2727,reproduced,Defect reproduced on mcp 2.2.0
+#3103,issue_3103.py::repro_3103,reproduced,Defect reproduced on mcp 2.2.0
+#3209,issue_3209.py::repro_3209,reproduced,Defect reproduced on mcp 2.2.0
+#3240,issue_3240.py::repro_3240,reproduced,Defect reproduced on mcp 2.2.0
+#3250,issue_3250.py::repro_3250,reproduced,Defect reproduced on mcp 2.2.0
+#3382,issue_3382.py::repro_3382,recorded,OAuth auth flow lock poisoning on cross-task close
+#3384,issue_3384.py::repro_3384,recorded,Session group KeyError on component-less server
+#3434,issue_3434.py::repro_3434,recorded,In-process tool callback failure surfaces as tool error
+#3557,repro_cases.py::case_jsonrpc_code,clean_on_pinned_sdk,Malformed JSON-RPC envelope answered with -32602
+#3566,issue_3566.py::repro_3566,reproduced,Defect reproduced on mcp 2.2.0
+#3644,repro_cases.py::case_outputschema_mode,reproduced,outputSchema validation failure on structured output
+#3646,repro_cases.py::case_extra_arg,clean_on_pinned_sdk,Unknown extra tool argument silently ignored

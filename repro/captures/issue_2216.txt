@@ -4,13 +4,13 @@
 # evidence_class: single-layer-correct
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: reconstructed/issue_2216.py::repro_2216
+# harness_entry: issue_2216.py::repro_2216
 # console_log: logs/2216.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `reconstructed/issue_2216.py::repro_2216`
+Harness entry: `issue_2216.py::repro_2216`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ validate_scope(scope=None, req='read') -> RAISED InvalidScopeError: Client was n
 | Evidence class | `single-layer-correct` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `reconstructed/issue_2216.py::repro_2216` |
+| Harness entry | `issue_2216.py::repro_2216` |
 | Console log retained | yes (`logs/2216.txt`) |
 | Raw payload retained | no |
 

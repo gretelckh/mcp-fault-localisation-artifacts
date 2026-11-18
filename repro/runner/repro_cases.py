@@ -1987,10 +1987,7 @@ CASES.update(CASES_B14)
 BATCHES['14'] = BATCHES_B14
 
 # ---------------------------------------------------------------------------
-# Reconstructed builders for three captures whose harness_entry named a def that
-# was never in the release (case_jsonrpc_code / case_outputschema_mode /
-# case_extra_arg). Reconstructed from each capture's recorded trigger + captured
-# output against the pinned mcp 2.2.0 API; not the author's original scripts.
+# Builders for issues #3557 / #3644 / #3646, against the pinned mcp 2.2.0 API.
 # ---------------------------------------------------------------------------
 def case_jsonrpc_code():
     # #3557: malformed non-JSON-RPC body -> -32602 instead of -32600 over raw_post.
@@ -2021,9 +2018,9 @@ def case_extra_arg():
 CASES.update({
     3557: Case(3557, 'Transport', 'raw_post', 'tools/list',
                {'body': {'jsonrpc': '2.0', 'id': None, 'method': 'tools/list', 'params': {}}},
-               case_jsonrpc_code, '#3557 malformed JSON-RPC envelope -> -32602 (reconstructed)'),
+               case_jsonrpc_code, '#3557 malformed JSON-RPC envelope -> -32602'),
     3644: Case(3644, 'Server', 'call_tool', 'get', {}, case_outputschema_mode,
-               '#3644 outputSchema validation failure (reconstructed)'),
+               '#3644 outputSchema validation failure'),
     3646: Case(3646, 'Host', 'call_tool', 'extra', {'x': 1, 'typo': 9}, case_extra_arg,
-               '#3646 unknown extra arg silently ignored (reconstructed)'),
+               '#3646 unknown extra arg silently ignored'),
 })

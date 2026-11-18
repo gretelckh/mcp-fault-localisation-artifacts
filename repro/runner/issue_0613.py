@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Reconstructed reproduction for issue #0507 (SSE endpoint returns HTTP CODE).
-RECONSTRUCTED from the capture's recorded trigger; original repro_sse.py was
-never released. A local HTTP server returns CODE on /sse; the real mcp 2.2.0
-sse_client is connected to it. Transport: sse."""
+"""Reproduction for issue #613 (401 from /sse after upgrading to 1.7.0).
+
+Uses the real mcp 2.2.0 API. Transport: sse.
+"""
 import asyncio, threading, time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from mcp.client.sse import sse_client
@@ -11,7 +11,7 @@ from mcp.client.sse import sse_client
 class _H(BaseHTTPRequestHandler):
     def do_GET(self):
         body = b"not found"
-        self.send_response(404)
+        self.send_response(401)
         self.send_header("Content-Type", "text/plain")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
@@ -19,7 +19,7 @@ class _H(BaseHTTPRequestHandler):
     def log_message(self, *a): pass
 
 
-def repro_0507():
+def repro_0613():
     srv = HTTPServer(("127.0.0.1", 9298), _H)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     async def run():
@@ -36,4 +36,4 @@ def repro_0507():
 
 
 if __name__ == "__main__":
-    print(repro_0507())
+    print(repro_0613())

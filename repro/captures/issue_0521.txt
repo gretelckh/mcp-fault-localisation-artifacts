@@ -4,13 +4,13 @@
 # evidence_class: caller-exception
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: reconstructed/issue_0521.py::repro_0521
+# harness_entry: issue_0521.py::repro_0521
 # console_log: logs/521.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `reconstructed/issue_0521.py::repro_0521`
+Harness entry: `issue_0521.py::repro_0521`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ When multiple MCPClients perform cross-task entry/exit, the transport's cancel s
 | Evidence class | `caller-exception` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `reconstructed/issue_0521.py::repro_0521` |
+| Harness entry | `issue_0521.py::repro_0521` |
 | Console log retained | yes (`logs/521.txt`) |
 | Raw payload retained | no |
 

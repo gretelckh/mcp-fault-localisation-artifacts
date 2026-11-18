@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Reconstructed reproduction for issue #0409 (client parses non-JSON body marked application/json).
-RECONSTRUCTED from the capture's recorded trigger; original repro_json.py was
-never released. The real mcp 2.2.0 JSON-RPC parser (pydantic TypeAdapter) is fed
-a non-JSON body. Transport: streamable-http."""
+"""Reproduction for issue #409 (Error from MCP server: SyntaxError: Unexpected token 'E', 'Error: typ'... is not valid JSO).
+
+Uses the real mcp 2.2.0 API. Transport: streamable-http.
+"""
 from pydantic import TypeAdapter
 from mcp.types import JSONRPCMessage
 

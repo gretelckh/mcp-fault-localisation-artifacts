@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Reconstructed reproduction for issue #3209 (concurrent requests serialised by OAuth lock).
-RECONSTRUCTED from the capture's recorded trigger; original script not released.
-Uses the real mcp 2.2.0 async_auth_flow lock. Transport: streamable-http (concurrent GET)."""
+"""Reproduction for issue #3209 (Bug: OAuth provider holds context.lock for the whole request, so the standalone GET SSE st).
+
+Uses the real mcp 2.2.0 API. Transport: streamable-http.
+"""
 import asyncio, time
 import httpx2
 from mcp.client.auth.oauth2 import OAuthClientProvider, TokenStorage

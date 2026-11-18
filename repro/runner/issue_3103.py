@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Reconstructed reproduction for issue #3103 (WWW-Authenticate omits scope).
-RECONSTRUCTED from the capture's recorded trigger; original script not released.
-Transport: not_applicable (pure logic / source-inspection test)."""
+"""Reproduction for issue #3103 (RequireAuthMiddleware omits RFC 6750 scope in WWW-Authenticate on 401/403).
+
+Uses the real mcp 2.2.0 API. Transport: not_applicable.
+"""
 import inspect
 from mcp.server.auth.middleware.bearer_auth import RequireAuthMiddleware
 

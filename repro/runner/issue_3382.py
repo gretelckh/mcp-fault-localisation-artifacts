@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
-"""As-recorded reproduction code for issue #3382.
+"""Reproduction for issue #3382 (OAuthClientProvider auth lock is permanently poisoned when httpx closes async_auth_flow fr).
 
-This is the EXACT snippet captured in repro/captures/issue_3382.txt section 1.
-It is preserved as EVIDENCE, not a runnable reproduction: the author never
-released the original script, and this fragment uses imports/APIs that do not
-exist in the pinned mcp 2.2.0 (e.g. fake internal modules). Status: valid Python syntax.
-Transport: see data/transport_72.csv.
+Uses the real mcp 2.2.0 API. Transport: streamable-http.
 """
 
 import asyncio

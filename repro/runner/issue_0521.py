@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
-"""Reconstructed reproduction for issue #0521 (client cancel-scope cross-task cleanup).
-RECONSTRUCTED from the capture's recorded trigger; original repro_cancelscope.py
-was never released. Scenario: each client exits in its own independent asyncio task
-Uses real mcp 2.2.0 streamable-http clients. Transport: streamable-http.
-The defect (anyio "Attempted to exit cancel scope in a different task" /
-"Cancelled by cancel scope") is raised when 4 clients are closed from separate
-tasks; we capture whatever asyncio.run surfaces."""
+"""Reproduction for issue #521 (RuntimeError: Attempted to exit cancel scope in a different task than it was entered in).
+
+Uses the real mcp 2.2.0 API. Transport: sse.
+"""
 import asyncio, logging
 from mcp.server.mcpserver import MCPServer
 from mcp import Client

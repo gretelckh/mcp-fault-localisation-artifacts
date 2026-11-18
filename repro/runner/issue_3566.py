@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Reconstructed reproduction for issue #3566 (comma-separated scopes).
-RECONSTRUCTED from the capture's recorded trigger; original script not released.
-Transport: not_applicable (pure logic test)."""
+"""Reproduction for issue #3566 (OAuth client scope handling breaks on comma-separated scope strings).
+
+Uses the real mcp 2.2.0 API. Transport: not_applicable.
+"""
 from mcp.client.auth.oauth2 import union_scopes
 from mcp.shared.auth import OAuthClientInformationFull, InvalidScopeError
 

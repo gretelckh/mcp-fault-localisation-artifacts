@@ -4,13 +4,13 @@
 # evidence_class: caller-exception
 # evidence_tier: B
 # evidence_source: runtime
-# harness_entry: reconstructed/issue_3240.py::repro_3240
+# harness_entry: issue_3240.py::repro_3240
 # console_log: logs/3240.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `reconstructed/issue_3240.py::repro_3240`
+Harness entry: `issue_3240.py::repro_3240`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ Refresh endpoint resolution only recognizes `oauth_metadata.token_endpoint`, oth
 | Evidence class | `caller-exception` |
 | Evidence tier | B |
 | Error text came from | runtime |
-| Harness entry | `reconstructed/issue_3240.py::repro_3240` |
+| Harness entry | `issue_3240.py::repro_3240` |
 | Console log retained | yes (`logs/3240.txt`) |
 | Raw payload retained | no |
 

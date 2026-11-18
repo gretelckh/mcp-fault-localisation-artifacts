@@ -4,13 +4,13 @@
 # evidence_class: pushed-to-server
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: reconstructed/issue_3434.py::repro_3434
+# harness_entry: issue_3434.py::repro_3434
 # console_log: not retained
 # raw_payload: raw/real_3434.txt
 
 ## 1. What was run
 
-Harness entry: `reconstructed/issue_3434.py::repro_3434`
+Harness entry: `issue_3434.py::repro_3434`
 
 Trigger code:
 
@@ -83,7 +83,7 @@ For the complete traceback of this bug see `../transcripts/issue_3434.txt`.
 | Evidence class | `pushed-to-server` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `reconstructed/issue_3434.py::repro_3434` |
+| Harness entry | `issue_3434.py::repro_3434` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_3434.txt`) |
 

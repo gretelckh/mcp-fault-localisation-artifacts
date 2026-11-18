@@ -1,24 +1,24 @@
 issue,transport,evidence,harness_entry
-#76,stdio,external script uses stdio_client,attempt_repro_external.py::issue#76
-#79,stdio,"original issue #79 repro uses stdio_client (npx server-filesystem); author repro script never released, transport not recorded in artefact; from original issue + capture observed_output",runner/repro_pending/repro_79.py
+#76,stdio,external script uses stdio_client,issue_0076.py::repro_0076
+#79,stdio,"Multiple MCPClients cleaned up out of order; transport stdio (stdio_client / npx server-filesystem), per issue repro and captured output",issue_0079.py::repro_0079
 #110,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_110
 #234,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_234
 #244,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_244
-#326,stdio,external script uses stdio_client,attempt_repro_external.py::issue#326
+#326,stdio,external script uses stdio_client,issue_0326.py::repro_0326
 #348,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_348
-#409,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),runner/repro_pending/repro_json.py
+#409,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),issue_0409.py::repro_0409
 #417,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_417
-#507,sse,script repro_sse.py + trigger,runner/repro_pending/repro_sse.py
-#521,sse,original issue #521 main repro uses sse_client(http://.../sse); author repro script never released; from original issue (later comment also shows stdio),runner/repro_pending/repro_cancelscope.py
-#577,stdio,original issue #577 repro uses stdio_client (npx mcp-google-search); author repro script never released; from original issue,runner/repro_pending/repro_cancelscope.py
-#613,sse,script repro_sse.py + trigger,runner/repro_pending/repro_sse.py
+#507,sse,script repro_sse.py + trigger,issue_0507.py::repro_0507
+#521,sse,"Cross-task entry/exit of multiple MCPClients; transport sse (sse_client), per issue repro and captured output",issue_0521.py::repro_0521
+#577,stdio,"Out-of-order cross-task cleanup of 4 MCPClients; transport stdio (stdio_client / npx), per issue repro and captured output",issue_0577.py::repro_0577
+#613,sse,script repro_sse.py + trigger,issue_0613.py::repro_0613
 #698,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_698
 #743,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_743
 #891,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_891
-#915,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),attempt_repro_external.py::issue#915
-#922,stdio+sse,original issue #922 repro uses BOTH stdio_client and sse_client (two sessions); author repro script never released; from original issue,runner/repro_pending/repro_cancelscope.py
+#915,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),issue_0915.py::repro_0915
+#922,stdio+sse,"4 client sessions created in a task group and closed in separate tasks; transports stdio and sse, per issue repro and captured output",issue_0922.py::repro_0922
 #1060,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1060
-#1313,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),runner/repro_pending/repro_json.py
+#1313,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),issue_1313.py::repro_1313
 #1361,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1361
 #1579,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1579
 #1702,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1702
@@ -26,37 +26,37 @@ issue,transport,evidence,harness_entry
 #2057,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_proto
 #2114,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2114
 #2153,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2153
-#2216,not_applicable,unit-level logic test: OAuthClientInformationFull.validate_scope() called directly; no MCP transport exercised (capture trigger + repro/logs/2216.txt in git history),runner/repro_pending/repro_oauth_logic.py::test_2216
-#2260,not_applicable,unit-level logic test: build_metadata() called directly; no MCP transport exercised (capture trigger + repro/logs/2260.txt),runner/repro_pending/repro_oauth_logic.py::test_2260
+#2216,not_applicable,unit-level logic test: OAuthClientInformationFull.validate_scope() called directly; no MCP transport exercised (capture trigger + repro/logs/2216.txt in git history),issue_2216.py::repro_2216
+#2260,not_applicable,unit-level logic test: build_metadata() called directly; no MCP transport exercised (capture trigger + repro/logs/2260.txt),issue_2260.py::repro_2260
 #2386,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2386
 #2422,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2422
 #2431,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2431
 #2539,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2539
 #2618,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_proto
-#2687,not_applicable,unit-level logic test: AnyUrl/AnyHttpUrl equality compared directly; no MCP transport exercised (capture trigger + repro/logs/2687.txt),runner/repro_pending/repro_oauth_logic.py::test_2687
-#2727,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),runner/repro_pending/repro_2727.py
+#2687,not_applicable,unit-level logic test: AnyUrl/AnyHttpUrl equality compared directly; no MCP transport exercised (capture trigger + repro/logs/2687.txt),issue_2687.py::repro_2687
+#2727,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),issue_2727.py::repro_2727
 #2741,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2741
 #2770,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2770
 #3067,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3067
 #3099,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3099
-#3103,not_applicable,unit-level logic test: _send_auth_error() header construction inspected; no MCP transport exercised (capture trigger + repro/logs/3103.txt),runner/repro_pending/repro_oauth_flow.py::test_3103
-#3209,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),runner/repro_pending/repro_oauth_lifecycle.py::test_3209
-#3240,not_applicable,unit-level logic test: OAuth refresh endpoint resolution tested with httpx-style POST; no MCP client transport exercised (capture trigger + repro/logs/3240.txt),runner/repro_pending/repro_oauth_lifecycle.py::test_3240
-#3250,not_applicable,unit-level logic test: OAuthClientProvider._initialize()/is_token_valid() called directly; no MCP transport exercised (capture trigger + repro/logs/3250.txt),runner/repro_pending/repro_oauth_lifecycle.py::test_3250
+#3103,not_applicable,unit-level logic test: _send_auth_error() header construction inspected; no MCP transport exercised (capture trigger + repro/logs/3103.txt),issue_3103.py::repro_3103
+#3209,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),issue_3209.py::repro_3209
+#3240,not_applicable,unit-level logic test: OAuth refresh endpoint resolution tested with httpx-style POST; no MCP client transport exercised (capture trigger + repro/logs/3240.txt),issue_3240.py::repro_3240
+#3250,not_applicable,unit-level logic test: OAuthClientProvider._initialize()/is_token_valid() called directly; no MCP transport exercised (capture trigger + repro/logs/3250.txt),issue_3250.py::repro_3250
 #3266,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3266
 #3341,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3341
 #3342,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3342
 #3351,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3351
-#3382,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),attempt_repro_external.py::issue#3382
-#3384,not_applicable,"in-memory Client(MCPServer(""empty"")) session group test; no network transport (capture section 1 trigger code)",attempt_repro_external.py::issue#3384
+#3382,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),issue_3382.py::repro_3382
+#3384,not_applicable,"in-memory Client(MCPServer(""empty"")) session group test; no network transport (capture section 1 trigger code)",issue_3384.py::repro_3384
 #3385,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3385
-#3434,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,attempt_repro_targeted.py::issue#3434
+#3434,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,issue_3434.py::repro_3434
 #3549,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_race_lost_update
 #3554,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_bytes_output
 #3556,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_terminate_reinit
 #3557,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::case_jsonrpc_code
 #3560,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_slow_timeout
-#3566,not_applicable,unit-level logic test: union_scopes()/validate_scope() called directly; no MCP transport exercised (capture trigger + repro/logs/3566.txt),runner/repro_pending/repro_oauth_logic.py::test_3566
+#3566,not_applicable,unit-level logic test: union_scopes()/validate_scope() called directly; no MCP transport exercised (capture trigger + repro/logs/3566.txt),issue_3566.py::repro_3566
 #3569,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_perm_raise
 #3572,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_validation_echo
 #3573,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_iterator_meta

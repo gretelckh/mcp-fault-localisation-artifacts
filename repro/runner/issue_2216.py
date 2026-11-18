@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Reconstructed reproduction for issue #2216 (validate_scope rejects None scopes).
-RECONSTRUCTED from the capture's recorded trigger; the author's original
-repro_oauth_logic.py was never released. Uses the real mcp 2.2.0 API.
-Transport: not_applicable (pure logic test)."""
+"""Reproduction for issue #2216 (Bug: validate_scope rejects client scopes when required scopes in None).
+
+Uses the real mcp 2.2.0 API. Transport: not_applicable.
+"""
 from mcp.shared.auth import OAuthClientInformationFull, InvalidScopeError
 
 

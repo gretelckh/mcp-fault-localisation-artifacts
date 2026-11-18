@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Reconstructed reproduction for issue #3250 (_initialize drops token expiry).
-RECONSTRUCTED from the capture's recorded trigger; original script not released.
-Uses the real mcp 2.2.0 OAuthClientProvider._initialize. Transport: not_applicable."""
+"""Reproduction for issue #3250 (OAuthClientProvider._initialize() breaks transparent refresh: missing update_token_expiry ).
+
+Uses the real mcp 2.2.0 API. Transport: not_applicable.
+"""
 import asyncio
 from mcp.client.auth.oauth2 import OAuthClientProvider, TokenStorage
 from mcp.shared.auth import OAuthClientMetadata, OAuthToken

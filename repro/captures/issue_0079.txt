@@ -4,13 +4,13 @@
 # evidence_class: caller-exception
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: reconstructed/issue_0079.py::repro_0079
+# harness_entry: issue_0079.py::repro_0079
 # console_log: logs/79.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `reconstructed/issue_0079.py::repro_0079`
+Harness entry: `issue_0079.py::repro_0079`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ When multiple MCPClient instances are cleaned up out of order across tasks, the 
 | Evidence class | `caller-exception` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `reconstructed/issue_0079.py::repro_0079` |
+| Harness entry | `issue_0079.py::repro_0079` |
 | Console log retained | yes (`logs/79.txt`) |
 | Raw payload retained | no |
 

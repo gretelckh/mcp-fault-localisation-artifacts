@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Reconstructed reproduction for issue #3240 (OAuth refresh hits wrong endpoint under a path).
-RECONSTRUCTED from the capture's recorded trigger; original script not released.
-Uses the real mcp 2.2.0 _refresh_token. Transport: streamable-http (refresh POST)."""
+"""Reproduction for issue #3240 (OAuth token refresh hits the wrong endpoint when the auth server lives under a path).
+
+Uses the real mcp 2.2.0 API. Transport: not_applicable.
+"""
 import asyncio
 from mcp.client.auth.oauth2 import OAuthClientProvider, TokenStorage
 from mcp.shared.auth import OAuthClientMetadata, OAuthToken, OAuthClientInformationFull

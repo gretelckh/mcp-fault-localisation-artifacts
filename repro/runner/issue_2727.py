@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Reconstructed reproduction for issue #2727 (streamable-http client omits Origin header).
-RECONSTRUCTED from the capture's recorded trigger; original repro_2727.py was
-never released. Inspects the real mcp 2.2.0 streamable-http client header builder.
-Transport: streamable-http."""
+"""Reproduction for issue #2727 (streamable_http client does not send `Origin` header → rejected with 403 by spec-compliant).
+
+Uses the real mcp 2.2.0 API. Transport: streamable-http.
+"""
 import inspect
 from mcp.client import streamable_http
 

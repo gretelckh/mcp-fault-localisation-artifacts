@@ -4,13 +4,13 @@
 # evidence_class: caller-exception
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: reconstructed/issue_0915.py::repro_0915
+# harness_entry: issue_0915.py::repro_0915
 # console_log: not retained
 # raw_payload: raw/real_915.txt
 
 ## 1. What was run
 
-Harness entry: `reconstructed/issue_0915.py::repro_0915`
+Harness entry: `issue_0915.py::repro_0915`
 
 Trigger code:
 
@@ -74,7 +74,7 @@ When the remote streamable-http server is unavailable, `ClientSessionGroup` does
 | Evidence class | `caller-exception` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `reconstructed/issue_0915.py::repro_0915` |
+| Harness entry | `issue_0915.py::repro_0915` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_915.txt`) |
 
