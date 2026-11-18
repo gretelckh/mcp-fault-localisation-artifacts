@@ -244,13 +244,16 @@ def main():
         check("transport rows", len(trows), 72)
         check("transport table covers the 72 reproduced bugs",
               {r["issue"] for r in trows} == {"#%d" % n for n in hdr}, True)
-        known = {"sse", "stdio", "streamable-http", "unknown"}
+        known = {"sse", "stdio", "stdio+sse", "streamable-http", "not_applicable"}
         check("transport values drawn from the allowed set",
               sum(1 for r in trows if r["transport"] not in known), 0)
-        check("transport rows with a recorded transport",
-              sum(1 for r in trows if r["transport"] != "unknown"), 60)
-        check("transport rows honestly marked unknown",
-              sum(1 for r in trows if r["transport"] == "unknown"), 12)
+        check("transport rows with no unknown left",
+              sum(1 for r in trows if r["transport"] == "unknown"), 0)
+        tc = Counter(r["transport"] for r in trows)
+        for k, v in [("streamable-http", 56), ("sse", 3), ("stdio", 4),
+                     ("stdio+sse", 1), ("not_applicable", 8)]:
+            check("transport = %s" % k, tc[k], v)
+        check("all 72 rows classified", sum(tc.values()), 72)
 
     print()
     if FAIL:
