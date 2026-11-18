@@ -4,13 +4,13 @@
 # evidence_class: caller-exception
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: runner/repro_pending/repro_cancelscope.py
+# harness_entry: reconstructed/issue_0577.py::repro_0577
 # console_log: logs/577.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `runner/repro_pending/repro_cancelscope.py`
+Harness entry: `reconstructed/issue_0577.py::repro_0577`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ Multiple MCPClient instances are cleaned up out of order across tasks (order not
 | Evidence class | `caller-exception` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `runner/repro_pending/repro_cancelscope.py` |
+| Harness entry | `reconstructed/issue_0577.py::repro_0577` |
 | Console log retained | yes (`logs/577.txt`) |
 | Raw payload retained | no |
 

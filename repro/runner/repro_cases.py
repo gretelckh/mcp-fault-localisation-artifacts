@@ -1985,3 +1985,45 @@ CASES.update(VERIFIED)
 from repro_cases_b14 import CASES_B14, BATCHES_B14
 CASES.update(CASES_B14)
 BATCHES['14'] = BATCHES_B14
+
+# ---------------------------------------------------------------------------
+# Reconstructed builders for three captures whose harness_entry named a def that
+# was never in the release (case_jsonrpc_code / case_outputschema_mode /
+# case_extra_arg). Reconstructed from each capture's recorded trigger + captured
+# output against the pinned mcp 2.2.0 API; not the author's original scripts.
+# ---------------------------------------------------------------------------
+def case_jsonrpc_code():
+    # #3557: malformed non-JSON-RPC body -> -32602 instead of -32600 over raw_post.
+    return MCPServer('real-3557')
+
+
+def case_outputschema_mode():
+    # #3644: tool advertises an outputSchema (fullTitle required) but returns a
+    # payload missing that key -> structured-content validation failure.
+    s = MCPServer('real-3644')
+
+    @s.tool(structured_output=True)
+    def get() -> _Item:
+        return _Item.model_construct()  # 'id' missing -> schema mismatch
+    return s
+
+
+def case_extra_arg():
+    # #3646: unknown extra tool argument is silently accepted (extra=ignore).
+    s = MCPServer('real-3646')
+
+    @s.tool()
+    def extra(x: int) -> int:
+        return x
+    return s
+
+
+CASES.update({
+    3557: Case(3557, 'Transport', 'raw_post', 'tools/list',
+               {'body': {'jsonrpc': '2.0', 'id': None, 'method': 'tools/list', 'params': {}}},
+               case_jsonrpc_code, '#3557 malformed JSON-RPC envelope -> -32602 (reconstructed)'),
+    3644: Case(3644, 'Server', 'call_tool', 'get', {}, case_outputschema_mode,
+               '#3644 outputSchema validation failure (reconstructed)'),
+    3646: Case(3646, 'Host', 'call_tool', 'extra', {'x': 1, 'typo': 9}, case_extra_arg,
+               '#3646 unknown extra arg silently ignored (reconstructed)'),
+})

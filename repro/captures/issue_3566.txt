@@ -4,13 +4,13 @@
 # evidence_class: single-layer-correct
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: runner/repro_pending/repro_oauth_logic.py::test_3566
+# harness_entry: reconstructed/issue_3566.py::repro_3566
 # console_log: logs/3566.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `runner/repro_pending/repro_oauth_logic.py::test_3566`
+Harness entry: `reconstructed/issue_3566.py::repro_3566`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ RFC 6749 separates scopes with spaces, but real authorization servers (e.g. Line
 | Evidence class | `single-layer-correct` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `runner/repro_pending/repro_oauth_logic.py::test_3566` |
+| Harness entry | `reconstructed/issue_3566.py::repro_3566` |
 | Console log retained | yes (`logs/3566.txt`) |
 | Raw payload retained | no |
 

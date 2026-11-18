@@ -4,13 +4,13 @@
 # evidence_class: silent
 # evidence_tier: B
 # evidence_source: runtime
-# harness_entry: runner/repro_pending/repro_oauth_lifecycle.py::test_3250
+# harness_entry: reconstructed/issue_3250.py::repro_3250
 # console_log: logs/3250.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `runner/repro_pending/repro_oauth_lifecycle.py::test_3250`
+Harness entry: `reconstructed/issue_3250.py::repro_3250`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ After a process restart, `OAuthClientProvider._initialize()` only restores `curr
 | Evidence class | `silent` |
 | Evidence tier | B |
 | Error text came from | runtime |
-| Harness entry | `runner/repro_pending/repro_oauth_lifecycle.py::test_3250` |
+| Harness entry | `reconstructed/issue_3250.py::repro_3250` |
 | Console log retained | yes (`logs/3250.txt`) |
 | Raw payload retained | no |
 

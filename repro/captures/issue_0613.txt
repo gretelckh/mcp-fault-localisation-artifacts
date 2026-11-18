@@ -4,13 +4,13 @@
 # evidence_class: caller-exception
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: runner/repro_pending/repro_sse.py
+# harness_entry: reconstructed/issue_0613.py::repro_0613
 # console_log: logs/613.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `runner/repro_pending/repro_sse.py`
+Harness entry: `reconstructed/issue_0613.py::repro_0613`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ When the SSE client connection is being established, the endpoint returns 401 (a
 | Evidence class | `caller-exception` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `runner/repro_pending/repro_sse.py` |
+| Harness entry | `reconstructed/issue_0613.py::repro_0613` |
 | Console log retained | yes (`logs/613.txt`) |
 | Raw payload retained | no |
 

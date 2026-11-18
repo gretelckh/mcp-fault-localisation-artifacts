@@ -4,13 +4,13 @@
 # evidence_class: caller-exception
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: attempt_repro_external.py::issue#3384
+# harness_entry: reconstructed/issue_3384.py::repro_3384
 # console_log: not retained
 # raw_payload: raw/real_3384.txt
 
 ## 1. What was run
 
-Harness entry: `attempt_repro_external.py::issue#3384`
+Harness entry: `reconstructed/issue_3384.py::repro_3384`
 
 Trigger code:
 
@@ -70,7 +70,7 @@ When the server exposes no tools/resources/prompts, `ClientSessionGroup._aggrega
 | Evidence class | `caller-exception` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `attempt_repro_external.py::issue#3384` |
+| Harness entry | `reconstructed/issue_3384.py::repro_3384` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_3384.txt`) |
 

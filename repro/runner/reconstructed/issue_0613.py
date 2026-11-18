@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+"""Reconstructed reproduction for issue #0613 (SSE endpoint returns HTTP CODE).
+RECONSTRUCTED from the capture's recorded trigger; original repro_sse.py was
+never released. A local HTTP server returns CODE on /sse; the real mcp 2.2.0
+sse_client is connected to it. Transport: sse."""
+import asyncio, threading, time
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from mcp.client.sse import sse_client
+
+
+class _H(BaseHTTPRequestHandler):
+    def do_GET(self):
+        body = b"not found"
+        self.send_response(401)
+        self.send_header("Content-Type", "text/plain")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+    def log_message(self, *a): pass
+
+
+def repro_0613():
+    srv = HTTPServer(("127.0.0.1", 9298), _H)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    async def run():
+        try:
+            async with sse_client("http://127.0.0.1:9298/sse") as (r, w):
+                return "connected (bug not reproduced)"
+        except BaseException as e:
+            return "%s: %s" % (type(e).__name__, str(e)[:90])
+    try:
+        res = asyncio.run(run())
+    finally:
+        srv.shutdown()
+    return res
+
+
+if __name__ == "__main__":
+    print(repro_0613())

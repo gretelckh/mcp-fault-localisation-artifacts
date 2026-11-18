@@ -213,28 +213,36 @@ def main():
         src = open(os.path.join(runner_dir, fname), encoding="utf-8").read()
         for name in re.findall(r"^def\s+([A-Za-z0-9_]+)\s*\(", src, re.M):
             builders.setdefault(name, fname)
+    # Reconstructed standalone scripts (repro/runner/reconstructed/issue_XXXX.py).
+    recon_dir = os.path.join(runner_dir, "reconstructed")
+    recon_scripts = sorted(f for f in os.listdir(recon_dir)
+                           if f.startswith("issue_") and f.endswith(".py")) \
+                    if os.path.isdir(recon_dir) else []
 
-    wrong_file = []       # builder exists, but the entry names the wrong file
-    open_gaps = []        # entry names a script/builder that is not in the release
+    def resolves(entry):
+        m = re.match(r"reconstructed/(issue_\d+\.py)::repro_\d+$", entry)
+        if m:
+            return m.group(1) in recon_scripts
+        m = re.search(r"::([A-Za-z0-9_]+)$", entry)
+        if m and m.group(1) in builders:
+            expected = os.path.basename(entry.split("::")[0]).lstrip("./")
+            return not expected or expected == builders[m.group(1)]
+        return False
+
+    unresolved = []
+    recon_count = 0
     for f in caps:
         s = open(os.path.join(capdir, f), encoding="utf-8").read()
         entry = next((l.partition(": ")[2].strip() for l in s.splitlines()
                       if l.startswith("# harness_entry:")), "")
-        m = re.search(r"::([A-Za-z0-9_]+)$", entry)
-        name = m.group(1) if m else None
-        if name and name in builders:
-            expected = os.path.basename(entry.split("::")[0]).lstrip("./")
-            if expected and expected != builders[name]:
-                wrong_file.append((f, entry, builders[name]))
-        else:
-            open_gaps.append((f, entry))
-    check("harness entries naming the wrong runner file", len(wrong_file), 0)
-    for f, entry, actual in wrong_file:
-        print("      %s -> %s (builder in %s)" % (f, entry, actual))
-    # Entries that name an unreleased script or a builder with no definition are
-    # genuine reproducibility gaps, enumerated in data/broken_harness_entries.csv.
-    print("      (%d harness entries still name an unreleased script/builder; "
-          "see data/broken_harness_entries.csv)" % len(open_gaps))
+        if "reconstructed/" in entry:
+            recon_count += 1
+        if not resolves(entry):
+            unresolved.append((f, entry))
+    check("capture harness entries that fail to resolve", len(unresolved), 0)
+    for f, entry in unresolved:
+        print("      %s -> %s" % (f, entry))
+    check("harness entries pointing at a reconstructed script", recon_count, 23)
 
     print("\n== 11. Reproducibility: per-bug transport recorded ==")
     tpath = os.path.join(ROOT, "data", "transport_72.csv")

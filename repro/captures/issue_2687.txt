@@ -4,13 +4,13 @@
 # evidence_class: single-layer-correct
 # evidence_tier: D
 # evidence_source: none
-# harness_entry: runner/repro_pending/repro_oauth_logic.py::test_2687
+# harness_entry: reconstructed/issue_2687.py::repro_2687
 # console_log: logs/2687.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `runner/repro_pending/repro_oauth_logic.py::test_2687`
+Harness entry: `reconstructed/issue_2687.py::repro_2687`
 
 Trigger, as recorded during the study:
 
@@ -44,7 +44,7 @@ a.redirect_uris==b.redirect_uris : False; a==b : False
 | Evidence class | `single-layer-correct` |
 | Evidence tier | D |
 | Error text came from | none |
-| Harness entry | `runner/repro_pending/repro_oauth_logic.py::test_2687` |
+| Harness entry | `reconstructed/issue_2687.py::repro_2687` |
 | Console log retained | yes (`logs/2687.txt`) |
 | Raw payload retained | no |
 

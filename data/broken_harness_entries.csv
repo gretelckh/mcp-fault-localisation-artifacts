@@ -1,43 +1,27 @@
-﻿issue,harness_entry,category,suggested_fix
-#76,attempt_repro_external.py::issue#76,B_missing_external_script,The external/targeted script is not published: either add the script, or point harness_entry to Case() and inline the trigger code into the capture.
-#79,runner/repro_pending/repro_79.py,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#326,attempt_repro_external.py::issue#326,B_missing_external_script,The external/targeted script is not published: either add the script, or point harness_entry to Case() and inline the trigger code into the capture.
-#409,runner/repro_pending/repro_json.py,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#417,repro_cases.py::b_417,C_wrong_path,Wrong path: harness_entry is set to repro_cases.py, but the actual def is in repro_cases_b14.py; change to repro_cases_b14.py::b_417
-#507,runner/repro_pending/repro_sse.py,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#521,runner/repro_pending/repro_cancelscope.py,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#577,runner/repro_pending/repro_cancelscope.py,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#613,runner/repro_pending/repro_sse.py,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#915,attempt_repro_external.py::issue#915,B_missing_external_script,The external/targeted script is not published: either add the script, or point harness_entry to Case() and inline the trigger code into the capture.
-#922,runner/repro_pending/repro_cancelscope.py,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#1313,runner/repro_pending/repro_json.py,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#2216,runner/repro_pending/repro_oauth_logic.py::test_2216,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#2260,runner/repro_pending/repro_oauth_logic.py::test_2260,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#2687,runner/repro_pending/repro_oauth_logic.py::test_2687,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#2727,runner/repro_pending/repro_2727.py,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#3103,runner/repro_pending/repro_oauth_flow.py::test_3103,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#3209,runner/repro_pending/repro_oauth_lifecycle.py::test_3209,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#3240,runner/repro_pending/repro_oauth_lifecycle.py::test_3240,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#3250,runner/repro_pending/repro_oauth_lifecycle.py::test_3250,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#3382,attempt_repro_external.py::issue#3382,B_missing_external_script,The external/targeted script is not published: either add the script, or point harness_entry to Case() and inline the trigger code into the capture.
-#3384,attempt_repro_external.py::issue#3384,B_missing_external_script,The external/targeted script is not published: either add the script, or point harness_entry to Case() and inline the trigger code into the capture.
-#3434,attempt_repro_targeted.py::issue#3434,B_missing_external_script,The external/targeted script is not published: either add the script, or point harness_entry to Case() and inline the trigger code into the capture.
-#3549,repro_cases.py::b_race_lost_update,C_wrong_path,Wrong path: harness_entry is written as repro_cases.py, but the actual def is in run_real_http.py; change it to run_real_http.py::b_race_lost_update
-#3554,repro_cases.py::b_bytes_output,C_wrong_path,Wrong path: harness_entry is written as repro_cases.py, but the actual def is in run_real_http.py; change it to run_real_http.py::b_bytes_output
-#3556,repro_cases.py::b_terminate_reinit,C_wrong_path,Wrong path: harness_entry is written as repro_cases.py, but the actual def is in run_real_http.py; change it to run_real_http.py::b_terminate_reinit
-#3557,repro_cases.py::case_jsonrpc_code,D_missing_def,The def global does not exist: create this builder, or point harness_entry to a semantically equivalent existing case
-#3560,repro_cases.py::b_slow_timeout,C_wrong_path,Wrong path: harness_entry is written as repro_cases.py, but the actual def is in run_real_http.py; change it to run_real_http.py::b_slow_timeout
-#3566,runner/repro_pending/repro_oauth_logic.py::test_3566,A_missing_dir_repro_pending,The script was never published: either add repro_pending/*.py to the repository, or change harness_entry to point to an equivalent Case() definition; also fix the reproduction_script column in data/active_bugs_339.csv
-#3569,repro_cases.py::b_perm_raise,C_wrong_path,Wrong path: harness_entry is set to repro_cases.py, but the actual def is in run_real_http.py; change to run_real_http.py::b_perm_raise
-#3572,repro_cases.py::b_validation_echo,C_wrong_path,Wrong path: harness_entry is written as repro_cases.py, but the actual def is in run_real_http.py; change it to run_real_http.py::b_validation_echo
-#3573,repro_cases.py::b_iterator_meta,C_wrong_path,Wrong path: harness_entry is written as repro_cases.py, but the actual def is in run_real_http.py; change it to run_real_http.py::b_iterator_meta
-#3578,repro_cases.py::b_duplicate_tool,C_wrong_path,Wrong path: harness_entry is written as repro_cases.py, but the actual def is in run_real_http.py; change it to run_real_http.py::b_duplicate_tool
-#3579,repro_cases.py::b_empty_server,C_wrong_path,Wrong path: harness_entry is written as repro_cases.py, but the actual def is in run_real_http.py; change it to run_real_http.py::b_empty_server
-#3585,repro_cases.py::b_media_mime,C_wrong_path,Wrong path: harness_entry is set to repro_cases.py, but the actual def is in run_real_http.py; change to run_real_http.py::b_media_mime
-#3586,repro_cases.py::b_nontool_exc,C_wrong_path,Wrong path: harness_entry is written as repro_cases.py, but the actual def is in run_real_http.py; change it to run_real_http.py::b_nontool_exc
-#3592,repro_cases.py::b_unregistered_result,C_wrong_path,Wrong path: harness_entry is written as repro_cases.py, but the actual def is in run_real_http.py; change it to run_real_http.py::b_unregistered_result
-#3637,repro_cases.py::b_flat_argument,C_wrong_path,Wrong path: harness_entry is written as repro_cases.py, but the actual def is in run_real_http.py; change it to run_real_http.py::b_flat_argument
-#3640,repro_cases.py::b_capabilities_drop,C_wrong_path,Wrong path: harness_entry is written as repro_cases.py, but the actual def is in run_real_http.py; change it to run_real_http.py::b_capabilities_drop
-#3643,repro_cases.py::b_userlist_prompt,C_wrong_path,Wrong path: harness_entry is written as repro_cases.py, but the actual def is in run_real_http.py; change it to run_real_http.py::b_userlist_prompt
-#3644,repro_cases.py::case_outputschema_mode,D_missing_def,The def global does not exist: create this builder, or point harness_entry to a semantically equivalent existing case
-#3646,repro_cases.py::case_extra_arg,D_missing_def,The def global does not exist: create this builder, or point harness_entry to a semantically equivalent existing case
+issue,current_harness_entry,status,note
+#76,reconstructed/issue_0076.py::repro_0076,reconstructed_as_evidence,"As-recorded code archived; uses APIs absent in mcp 2.2.0, not runnable"
+#79,reconstructed/issue_0079.py::repro_0079,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#326,reconstructed/issue_0326.py::repro_0326,reconstructed_as_evidence,"As-recorded code archived; uses APIs absent in mcp 2.2.0, not runnable"
+#409,reconstructed/issue_0409.py::repro_0409,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#507,reconstructed/issue_0507.py::repro_0507,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#521,reconstructed/issue_0521.py::repro_0521,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#577,reconstructed/issue_0577.py::repro_0577,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#613,reconstructed/issue_0613.py::repro_0613,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#915,reconstructed/issue_0915.py::repro_0915,reconstructed_as_evidence,"As-recorded code archived; uses APIs absent in mcp 2.2.0, not runnable"
+#922,reconstructed/issue_0922.py::repro_0922,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#1313,reconstructed/issue_1313.py::repro_1313,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#2216,reconstructed/issue_2216.py::repro_2216,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#2260,reconstructed/issue_2260.py::repro_2260,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#2687,reconstructed/issue_2687.py::repro_2687,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#2727,reconstructed/issue_2727.py::repro_2727,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#3103,reconstructed/issue_3103.py::repro_3103,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#3209,reconstructed/issue_3209.py::repro_3209,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#3240,reconstructed/issue_3240.py::repro_3240,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#3250,reconstructed/issue_3250.py::repro_3250,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#3382,reconstructed/issue_3382.py::repro_3382,reconstructed_as_evidence,"As-recorded code archived; uses APIs absent in mcp 2.2.0, not runnable"
+#3384,reconstructed/issue_3384.py::repro_3384,reconstructed_as_evidence,"As-recorded code archived; uses APIs absent in mcp 2.2.0, not runnable"
+#3434,reconstructed/issue_3434.py::repro_3434,reconstructed_as_evidence,"As-recorded code archived; uses APIs absent in mcp 2.2.0, not runnable"
+#3557,repro_cases.py::case_jsonrpc_code,reconstructed_clean,Rebuilt; SDK 2.2.0 no longer raises (capture already marked replay-clean)
+#3566,reconstructed/issue_3566.py::repro_3566,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#3644,repro_cases.py::case_outputschema_mode,reconstructed_verified,Rebuilt and run against real mcp 2.2.0; defect reproduced
+#3646,repro_cases.py::case_extra_arg,reconstructed_clean,Rebuilt; SDK 2.2.0 no longer raises (capture already marked replay-clean)

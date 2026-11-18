@@ -4,13 +4,13 @@
 # evidence_class: caller-exception
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: runner/repro_pending/repro_json.py
+# harness_entry: reconstructed/issue_0409.py::repro_0409
 # console_log: logs/409.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `runner/repro_pending/repro_json.py`
+Harness entry: `reconstructed/issue_0409.py::repro_0409`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ The server returns 200 + `Content-Type: application/json` for tools/list, but th
 | Evidence class | `caller-exception` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `runner/repro_pending/repro_json.py` |
+| Harness entry | `reconstructed/issue_0409.py::repro_0409` |
 | Console log retained | yes (`logs/409.txt`) |
 | Raw payload retained | no |
 

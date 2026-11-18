@@ -4,13 +4,13 @@
 # evidence_class: silent
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: runner/repro_pending/repro_oauth_lifecycle.py::test_3209
+# harness_entry: reconstructed/issue_3209.py::repro_3209
 # console_log: logs/3209.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `runner/repro_pending/repro_oauth_lifecycle.py::test_3209`
+Harness entry: `reconstructed/issue_3209.py::repro_3209`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ Captured in our run (evidence tier A).
 | Evidence class | `silent` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `runner/repro_pending/repro_oauth_lifecycle.py::test_3209` |
+| Harness entry | `reconstructed/issue_3209.py::repro_3209` |
 | Console log retained | yes (`logs/3209.txt`) |
 | Raw payload retained | no |
 

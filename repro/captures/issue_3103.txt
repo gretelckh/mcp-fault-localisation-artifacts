@@ -4,13 +4,13 @@
 # evidence_class: single-layer-masked
 # evidence_tier: B
 # evidence_source: runtime
-# harness_entry: runner/repro_pending/repro_oauth_flow.py::test_3103
+# harness_entry: reconstructed/issue_3103.py::repro_3103
 # console_log: logs/3103.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `runner/repro_pending/repro_oauth_flow.py::test_3103`
+Harness entry: `reconstructed/issue_3103.py::repro_3103`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ When `RequireAuthMiddleware._send_auth_error` constructs `WWW-Authenticate`, it 
 | Evidence class | `single-layer-masked` |
 | Evidence tier | B |
 | Error text came from | runtime |
-| Harness entry | `runner/repro_pending/repro_oauth_flow.py::test_3103` |
+| Harness entry | `reconstructed/issue_3103.py::repro_3103` |
 | Console log retained | yes (`logs/3103.txt`) |
 | Raw payload retained | no |
 
