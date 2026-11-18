@@ -247,8 +247,8 @@ def main():
         known = {"sse", "stdio", "streamable-http", "unknown"}
         check("transport values drawn from the allowed set",
               sum(1 for r in trows if r["transport"] not in known), 0)
-        check("transport rows with high/medium confidence",
-              sum(1 for r in trows if r["confidence"] in ("high", "medium")), 60)
+        check("transport rows with a recorded transport",
+              sum(1 for r in trows if r["transport"] != "unknown"), 60)
         check("transport rows honestly marked unknown",
               sum(1 for r in trows if r["transport"] == "unknown"), 12)
 

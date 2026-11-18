@@ -1,73 +1,73 @@
-issue,transport,confidence,evidence,harness_entry
-#76,stdio,high,external script uses stdio_client,attempt_repro_external.py::issue#76
-#79,unknown,low,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_79.py
-#110,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_110
-#234,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_234
-#244,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_244
-#326,stdio,high,external script uses stdio_client,attempt_repro_external.py::issue#326
-#348,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_348
-#409,streamable-http,high,trigger: streamable-http (StreamableHttpParameters//mcp),runner/repro_pending/repro_json.py
-#417,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_417
-#507,sse,high,script repro_sse.py + trigger,runner/repro_pending/repro_sse.py
-#521,unknown,low,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_cancelscope.py
-#577,unknown,low,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_cancelscope.py
-#613,sse,high,script repro_sse.py + trigger,runner/repro_pending/repro_sse.py
-#698,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_698
-#743,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_743
-#891,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_891
-#915,streamable-http,high,trigger: streamable-http (StreamableHttpParameters//mcp),attempt_repro_external.py::issue#915
-#922,unknown,low,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_cancelscope.py
-#1060,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1060
-#1313,streamable-http,high,trigger: streamable-http (StreamableHttpParameters//mcp),runner/repro_pending/repro_json.py
-#1361,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1361
-#1579,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1579
-#1702,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1702
-#1974,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1974
-#2057,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_proto
-#2114,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2114
-#2153,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2153
-#2216,unknown,low,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_logic.py::test_2216
-#2260,unknown,low,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_logic.py::test_2260
-#2386,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2386
-#2422,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2422
-#2431,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2431
-#2539,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2539
-#2618,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_proto
-#2687,unknown,low,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_logic.py::test_2687
-#2727,streamable-http,high,trigger: streamable-http (StreamableHttpParameters//mcp),runner/repro_pending/repro_2727.py
-#2741,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2741
-#2770,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2770
-#3067,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3067
-#3099,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3099
-#3103,unknown,low,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_flow.py::test_3103
-#3209,streamable-http,high,trigger: streamable-http (StreamableHttpParameters//mcp),runner/repro_pending/repro_oauth_lifecycle.py::test_3209
-#3240,unknown,low,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_lifecycle.py::test_3240
-#3250,unknown,low,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_lifecycle.py::test_3250
-#3266,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3266
-#3341,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3341
-#3342,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3342
-#3351,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3351
-#3382,streamable-http,high,trigger: streamable-http (StreamableHttpParameters//mcp),attempt_repro_external.py::issue#3382
-#3384,unknown,low,repro_pending script missing + no transport recorded in capture,attempt_repro_external.py::issue#3384
-#3385,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3385
-#3434,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,attempt_repro_targeted.py::issue#3434
-#3549,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_race_lost_update
-#3554,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_bytes_output
-#3556,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_terminate_reinit
-#3557,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::case_jsonrpc_code
-#3560,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_slow_timeout
-#3566,unknown,low,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_logic.py::test_3566
-#3569,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_perm_raise
-#3572,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_validation_echo
-#3573,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_iterator_meta
-#3578,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_duplicate_tool
-#3579,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_empty_server
-#3585,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_media_mime
-#3586,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_nontool_exc
-#3592,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_unregistered_result
-#3637,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_flat_argument
-#3640,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_capabilities_drop
-#3643,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_userlist_prompt
-#3644,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::case_outputschema_mode
-#3646,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::case_extra_arg
-#3656,streamable-http,medium,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3656
+issue,transport,evidence,harness_entry
+#76,stdio,external script uses stdio_client,attempt_repro_external.py::issue#76
+#79,unknown,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_79.py
+#110,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_110
+#234,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_234
+#244,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_244
+#326,stdio,external script uses stdio_client,attempt_repro_external.py::issue#326
+#348,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_348
+#409,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),runner/repro_pending/repro_json.py
+#417,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_417
+#507,sse,script repro_sse.py + trigger,runner/repro_pending/repro_sse.py
+#521,unknown,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_cancelscope.py
+#577,unknown,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_cancelscope.py
+#613,sse,script repro_sse.py + trigger,runner/repro_pending/repro_sse.py
+#698,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_698
+#743,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_743
+#891,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_891
+#915,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),attempt_repro_external.py::issue#915
+#922,unknown,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_cancelscope.py
+#1060,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1060
+#1313,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),runner/repro_pending/repro_json.py
+#1361,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1361
+#1579,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1579
+#1702,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1702
+#1974,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1974
+#2057,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_proto
+#2114,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2114
+#2153,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2153
+#2216,unknown,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_logic.py::test_2216
+#2260,unknown,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_logic.py::test_2260
+#2386,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2386
+#2422,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2422
+#2431,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2431
+#2539,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2539
+#2618,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_proto
+#2687,unknown,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_logic.py::test_2687
+#2727,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),runner/repro_pending/repro_2727.py
+#2741,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2741
+#2770,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_2770
+#3067,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3067
+#3099,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3099
+#3103,unknown,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_flow.py::test_3103
+#3209,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),runner/repro_pending/repro_oauth_lifecycle.py::test_3209
+#3240,unknown,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_lifecycle.py::test_3240
+#3250,unknown,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_lifecycle.py::test_3250
+#3266,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3266
+#3341,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3341
+#3342,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3342
+#3351,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3351
+#3382,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),attempt_repro_external.py::issue#3382
+#3384,unknown,repro_pending script missing + no transport recorded in capture,attempt_repro_external.py::issue#3384
+#3385,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3385
+#3434,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,attempt_repro_targeted.py::issue#3434
+#3549,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_race_lost_update
+#3554,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_bytes_output
+#3556,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_terminate_reinit
+#3557,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::case_jsonrpc_code
+#3560,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_slow_timeout
+#3566,unknown,repro_pending script missing + no transport recorded in capture,runner/repro_pending/repro_oauth_logic.py::test_3566
+#3569,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_perm_raise
+#3572,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_validation_echo
+#3573,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_iterator_meta
+#3578,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_duplicate_tool
+#3579,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_empty_server
+#3585,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_media_mime
+#3586,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_nontool_exc
+#3592,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_unregistered_result
+#3637,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_flat_argument
+#3640,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_capabilities_drop
+#3643,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_userlist_prompt
+#3644,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::case_outputschema_mode
+#3646,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::case_extra_arg
+#3656,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3656
