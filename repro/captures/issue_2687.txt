@@ -15,12 +15,12 @@ Harness entry: `runner/repro_pending/repro_oauth_logic.py::test_2687`
 Trigger, as recorded during the study:
 
 ```text
-OAuthClientInformationFull(redirect_uris=[AnyUrl('https://x/cb')]) 与 [AnyHttpUrl('https://x/cb')] 比较
+OAuthClientInformationFull(redirect_uris=[AnyUrl('https://x/cb')]) compared with [AnyHttpUrl('https://x/cb')]
 ```
 
 ## 2. What the reporter described
 
-redirect_uris 声明为 list[AnyUrl]，但传入 pydantic 的 AnyHttpUrl 子类型时相等性比较失败（AnyUrl != AnyHttpUrl），破坏 round-trip
+redirect_uris is declared as list[AnyUrl], but when a pydantic AnyHttpUrl subtype is passed in, the equality comparison fails (AnyUrl != AnyHttpUrl), breaking the round-trip
 
 ## 3. What we captured
 
@@ -33,7 +33,7 @@ a.redirect_uris==b.redirect_uris : False; a==b : False
 
 ## 4. Why it happens
 
-`OAuthClientInformationFull.redirect_uris` 声明为 `list[AnyUrl]`，但传入 pydantic 的 `AnyHttpUrl`子类型时相等性比较失败（`AnyUrl('https://x') != AnyHttpUrl('https://x')`），破坏 round-trip 与下游判定，属 single-layer 逻辑缺陷。
+`OAuthClientInformationFull.redirect_uris` is declared as `list[AnyUrl]`, but equality comparison fails when a pydantic `AnyHttpUrl` subtype is passed in (`AnyUrl('https://x') != AnyHttpUrl('https://x')`), breaking round-trip and downstream checks — a single-layer logic defect.
 
 ## 5. Provenance
 

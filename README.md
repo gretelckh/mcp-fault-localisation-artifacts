@@ -69,7 +69,7 @@ One row per bug, 25 columns. The columns that matter for the paper:
 | `reproduction_status` | `reproduced` / `not_reproduced__error_text_present` / `not_reproduced__no_error_text` |
 | `not_reproduced_reason` | for the 267: the concrete obstacle that blocked reproduction |
 | `observed_output` | for the 72: the return value or exception the run actually produced |
-| `analyst_note`, `defect_description` | the analyst's free-text note for that bug (Chinese; see §5) |
+| `analyst_note`, `defect_description` | the analyst's free-text note for that bug (English; see §5) |
 
 `data/evidence_class_339.csv` is the compact per-bug classification: issue, origin layer, evidence
 class, evidence tier, and the one-line reason for the class.
@@ -171,10 +171,12 @@ The framework prints the same three things the captures record: the return objec
 
 ## 5. Known limitations of the released files
 
-1. **Free-text analyst notes are in Chinese.** The fields `defect_description`, `analyst_note`,
-   `observed_output` and `not_reproduced_reason` were written by the analysts during the study and
-   are released unedited apart from redaction. Every machine-readable label they support
-   (`origin_layer`, `exposure_channel_raw`, `evidence_tier`, `reproduction_status`) is in English.
+1. **Free-text analyst notes are in English.** The fields `defect_description`, `analyst_note`,
+   `observed_output` and `not_reproduced_reason` were written by the analysts during the study;
+   they were originally in Chinese and have been translated into English for this release, with
+   identifiers, error messages and code preserved verbatim. Every machine-readable label they
+   support (`origin_layer`, `exposure_channel_raw`, `evidence_tier`, `reproduction_status`) is also
+   in English.
 2. **Issue bodies are truncated.** Reports are capped at 800 characters (screening table) and
    6,000 characters (live dataset); the model input in Study B at 4,000 characters. The full text
    is one click away at the URL in each row, and `data/gh_issues_raw_2026-11-09.xlsx` carries the

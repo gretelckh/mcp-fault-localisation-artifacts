@@ -34,7 +34,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-ulist', 'version': ''
 
 ## 4. Why it happens
 
-prompt handler 返回 UserList 被渲染成单条字符串化消息（is_error=False）。结果结构错误被当作成功，属静默失效。
+The prompt handler returns a UserList, which is rendered as a single stringified message (is_error=False). The erroneous result structure is treated as a success — a silent failure.
 
 ## 5. Provenance
 

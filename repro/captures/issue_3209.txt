@@ -15,12 +15,12 @@ Harness entry: `runner/repro_pending/repro_oauth_lifecycle.py::test_3209`
 Trigger, as recorded during the study:
 
 ```text
-同一 OAuthClientProvider 上并发 3 个 GET /mcp（/mcp 各 sleep 0.3s）
+Concurrently issue 3 GET /mcp requests on the same OAuthClientProvider (/mcp each sleeps 0.3s)
 ```
 
 ## 2. What the reporter described
 
-context.lock(anyio.Lock) 在 _auth_flow 中包住整个流程，包括 `response = yield request`，直到响应返回才释放；并发请求被完全串行化，长连接 SSE 流会独占锁并阻塞其它请求，且不抛任何错误
+context.lock(anyio.Lock) wraps the entire flow in _auth_flow, including `response = yield request`, and is released only after the response returns; concurrent requests are fully serialised, and long-lived SSE streams monopolise the lock and block other requests, without throwing any error
 
 ## 3. What we captured
 
@@ -32,7 +32,7 @@ Captured in our run (evidence tier A).
 
 ## 4. Why it happens
 
-`_auth_flow` 用 `async with self.context.lock`（anyio.Lock）包住整个流程，包括 `response = yield request`，锁要等响应返回才释放；同一 provider 上的并发请求被完全串行化（实测 3 并发 0.62/0.94/1.25s），长连接 SSE 流会独占锁阻塞其它请求，且不抛任何异常，属静默失效。
+`_auth_flow` wraps the entire flow in `async with self.context.lock` (anyio.Lock), including `response = yield request`, so the lock is not released until the response returns; concurrent requests on the same provider are fully serialized (measured 3 concurrent at 0.62/0.94/1.25s), and a long-lived SSE stream monopolizes the lock and blocks other requests without throwing any exception — a silent failure.
 
 ## 5. Provenance
 

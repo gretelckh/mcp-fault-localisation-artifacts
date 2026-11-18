@@ -38,7 +38,7 @@ On instance['result']:
 
 ## 4. Why it happens
 
-工具返回非有限浮点数 `nan`，结构化内容校验失败（`None is not of type number`）。报在 Server 层（正确），是输出 schema 校验问题。
+The tool returns a non-finite float `nan`, and structured content validation fails (`None is not of type number`). Reported at the Server layer (correct); it is an output schema validation issue.
 
 ## 5. Provenance
 

@@ -33,7 +33,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3067', 'version': ''}
 
 ## 4. Why it happens
 
-`call_tool(add,{a:1,b:2,typo:9})` 返回 3 无报错，拼错的额外参数被静默丢弃（extra=ignore）。输入错误被无声吞掉，属静默失效。
+`call_tool(add,{a:1,b:2,typo:9})` returns 3 with no error; the misspelled extra argument is silently discarded (extra=ignore). The input error is silently swallowed — a silent failure.
 
 ## 5. Provenance
 

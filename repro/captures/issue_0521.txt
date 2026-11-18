@@ -15,12 +15,12 @@ Harness entry: `runner/repro_pending/repro_cancelscope.py`
 Trigger, as recorded during the study:
 
 ```text
-4个Client连接后,每个Client在独立asyncio任务中exit
+After 4 Clients connect, each Client exits in an independent asyncio task
 ```
 
 ## 2. What the reporter described
 
-多个 MCPClient 跨任务 entry/exit，transport 的 cancel scope 跨任务管理失效，抛 CancelledError: Cancelled by cancel scope
+Multiple MCPClients perform entry/exit across tasks, the transport's cancel scope management across tasks fails, throwing CancelledError: Cancelled by cancel scope
 
 ## 3. What we captured
 
@@ -32,7 +32,7 @@ RUN EXC: CancelledError: Cancelled by cancel scope
 
 ## 4. Why it happens
 
-多个 MCPClient 跨任务 entry/exit，transport 的 cancel scope 归属错乱，抛出 `CancelledError: Cancelled by cancel scope`。以裸异常暴露在调用方，属 caller-exception。
+When multiple MCPClients perform cross-task entry/exit, the transport's cancel scope ownership gets confused and `CancelledError: Cancelled by cancel scope` is thrown. Exposed to the caller as a bare exception — a caller-exception.
 
 ## 5. Provenance
 

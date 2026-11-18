@@ -33,7 +33,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3646', 'version': ''}
 
 ## 4. Why it happens
 
-Host 传入的未知额外工具参数被静默接受（无 opt-in 拒绝），is_error=False。参数错误被无声吞掉，属静默失效。
+Unknown extra tool arguments passed in by the Host are silently accepted (no opt-in rejection), is_error=False. Argument errors are silently swallowed, which is a silent failure.
 
 ## 5. Provenance
 

@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
 ## 2. What the reporter described
 
-机械重放 issue 正文 python 片段 -> 命中该 issue 自身报错
+Mechanically replaying the python snippet in the issue body -> hits the issue's own error
 
 ## 3. What we captured
 
@@ -64,7 +64,7 @@ lize
 
 ## 4. Why it happens
 
-`env` 设为非 None（如 `{}`）时子进程丢失 PATH，npx 起不来，SDK 只在 `jsonrpc_dispatcher.send_raw_request` 抛 `MCPError: Connection closed`，真实原因（子进程启动失败）被吞掉。症状可复现，根因是 env 覆盖整份环境，属 caller-exception。
+When `env` is set to non-None (e.g. `{}`), the child process loses PATH, npx fails to start, and the SDK only throws `MCPError: Connection closed` at `jsonrpc_dispatcher.send_raw_request`, swallowing the real cause (child process startup failure). The symptom is reproducible, and the root cause is that env overrides the entire environment — a caller-exception.
 
 ## 5. Provenance
 

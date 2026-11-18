@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
 ## 2. What the reporter described
 
-机械重放 issue 正文 python 片段 -> 命中该 issue 自身报错
+Mechanically replaying the python snippet in the issue body -> hits the issue's own error
 
 ## 3. What we captured
 
@@ -63,7 +63,7 @@ A re-run of the same trigger with the endpoint closing the connection mid-respon
 
 ## 4. Why it happens
 
-远程 streamable-http 服务端不可用时，`ClientSessionGroup` 未正确处理连接失败，cancel scope 归属错乱，抛 `RuntimeError: Attempted to exit cancel scope in a different task than it was entered in`。与 #922 同源，属 caller-exception（会话组的 cancel-scope 生命周期缺陷）。
+When the remote streamable-http server is unavailable, `ClientSessionGroup` does not handle the connection failure correctly, cancel scope ownership gets confused, and it throws `RuntimeError: Attempted to exit cancel scope in a different task than it was entered in`. Same origin as #922 — a caller-exception (the session group's cancel-scope lifecycle defect).
 
 ## 5. Provenance
 

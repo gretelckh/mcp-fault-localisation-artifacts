@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-234', 'version': ''}}
 
 ## 4. Why it happens
 
-工具不存在时报错类型不精准：期望 `is_error=False` 却返回 True，属错误分类粒度问题。报在 Server 层（正确），但异常类型语义不准。
+When a tool does not exist, the error type is imprecise: `is_error=False` is expected but True is returned — an error-classification granularity problem. Reported at the Server layer (correct), but the exception type is semantically inaccurate.
 
 ## 5. Provenance
 

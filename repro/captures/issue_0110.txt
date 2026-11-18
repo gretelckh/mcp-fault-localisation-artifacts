@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-110', 'version': ''}}
 
 ## 4. Why it happens
 
-Server 返回非 UTF-8 字节，客户端 JSON 解码失败，但真实根因（字节解码错误）被 SDK 通用化成 `Error executing tool bad` 在 Server 工具分派层报出。源是 Client 层，报告层却是 Server，属层错位。
+The Server returns non-UTF-8 bytes, the client's JSON decoding fails, but the true root cause (a byte decoding error) is generalised by the SDK into `Error executing tool bad`, reported at the Server tool dispatch layer. It originates in the Client layer but is reported at the Server layer, a layer mismatch.
 
 ## 5. Provenance
 

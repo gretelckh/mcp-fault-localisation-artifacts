@@ -32,7 +32,7 @@ RAISED:ExceptionGroup:unhandled errors in a TaskGroup (1 sub-exception)
 
 ## 4. Why it happens
 
-客户端把 404（死会话）当作终结而非重新初始化，抛出 `ExceptionGroup`（裸异常）。Transport 层错误以调用方裸异常暴露，属调用方裸抛通道。
+The client treats 404 (dead session) as terminal rather than reinitialising, throwing an `ExceptionGroup` (bare exception). A Transport-layer error is exposed as a bare exception to the caller — a bare-exception-to-caller channel.
 
 ## 5. Provenance
 

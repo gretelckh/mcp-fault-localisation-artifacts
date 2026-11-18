@@ -15,12 +15,12 @@ Harness entry: `runner/repro_pending/repro_oauth_lifecycle.py::test_3240`
 Trigger, as recorded during the study:
 
 ```text
-授权服务器挂在路径下(http://127.0.0.1:9999/auth)，进程重启、尚未发现 metadata 时触发 refresh
+The authorization server is mounted under the path (http://127.0.0.1:9999/auth); a refresh is triggered when the process restarts and metadata has not yet been discovered.
 ```
 
 ## 2. What the reporter described
 
-refresh 端点只认 oauth_metadata.token_endpoint，否则退回 urljoin(origin, '/token')；重启后 metadata 尚未发现，于是 refresh POST 打到根路径 /token（应为 /auth/token），404 刷新失败并把裸 HTTP 404 泄漏给调用方
+Refresh endpoint resolution only recognizes oauth_metadata.token_endpoint, otherwise it falls back to urljoin(origin, '/token'); after a restart, metadata has not yet been discovered, so the refresh POST hits the root path /token (it should be /auth/token), the 404 causes the refresh to fail and the bare HTTP 404 is leaked to the caller.
 
 ## 3. What we captured
 
@@ -32,7 +32,7 @@ AS mounted under /auth; refresh POST hit '/token' (expected '/auth/token'); fina
 
 ## 4. Why it happens
 
-refresh 端点解析只认 `oauth_metadata.token_endpoint`，否则退回 `urljoin(origin, '/token')`；进程重启、metadata 尚未发现时，授权服务器挂在 `/auth` 路径下的 refresh 被打到根路径 `/token`，404 刷新失败并把裸 HTTP 404 直接泄漏给调用方，属 caller-exception（端点解析缺陷）。
+Refresh endpoint resolution only recognizes `oauth_metadata.token_endpoint`, otherwise it falls back to `urljoin(origin, '/token')`; after a process restart, when metadata has not yet been discovered, a refresh that the authorization server mounts under the `/auth` path is sent to the root path `/token`, the 404 causes the refresh to fail and the bare HTTP 404 is leaked directly to the caller — a caller-exception (endpoint resolution defect).
 
 ## 5. Provenance
 

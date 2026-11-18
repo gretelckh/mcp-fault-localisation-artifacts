@@ -15,12 +15,12 @@ Harness entry: `runner/repro_pending/repro_oauth_lifecycle.py::test_3250`
 Trigger, as recorded during the study:
 
 ```text
-storage 预置已过期 token(expires_in=-3600)+refresh_token，模拟进程重启后发第一个请求
+storage pre-seeds an expired token (expires_in=-3600) + refresh_token, simulating the first request after a process restart
 ```
 
 ## 2. What the reporter described
 
-_initialize() 只从 storage 恢复 current_tokens/client_info，从不调用 update_token_expiry()，token_expiry_time 保持 None；is_token_valid() 因 `not self.token_expiry_time` 把过期 token 判为有效，于是直接发出陈旧 Bearer，且全程 0 次 refresh —— 透明刷新在重启后失效
+_initialize() only restores current_tokens/client_info from storage and never calls update_token_expiry(), so token_expiry_time stays None; is_token_valid() treats an expired token as valid because of `not self.token_expiry_time`, and so a stale Bearer is emitted directly, with 0 refreshes throughout — transparent refresh fails after a restart.
 
 ## 3. What we captured
 
@@ -32,7 +32,7 @@ after _initialize: token_expiry_time=None; is_token_valid()=True (token expired 
 
 ## 4. Why it happens
 
-进程重启后 `OAuthClientProvider._initialize()` 只从 storage 恢复 `current_tokens`/`client_info`，从不调用 `update_token_expiry()`，`token_expiry_time` 保持 None；`is_token_valid()` 因 `not self.token_expiry_time` 把早已过期的 token 判为有效，于是发出陈旧 Bearer 且 0 次 refresh。陈旧凭据的失效没有任何报错标志，属静默失效（透明刷新失效）。
+After a process restart, `OAuthClientProvider._initialize()` only restores `current_tokens`/`client_info` from storage and never calls `update_token_expiry()`, so `token_expiry_time` stays None; `is_token_valid()` treats a long-expired token as valid because of `not self.token_expiry_time`, and so a stale Bearer is emitted with 0 refreshes. The failure of the stale credential has no error signal at all — a silent failure (transparent refresh failure).
 
 ## 5. Provenance
 

@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-2422', 'version': ''}
 
 ## 4. Why it happens
 
-工具不存在时应抛专用 `ToolNotFoundError`，实际抛笼统 `ToolError`，错误分类粒度不足。报在 Server 层（正确），但异常类型不精准。
+When a tool does not exist, a dedicated `ToolNotFoundError` should be thrown, but a generic `ToolError` is thrown instead — the error classification granularity is insufficient. Reported at the Server layer (correct), but the exception type is imprecise.
 
 ## 5. Provenance
 

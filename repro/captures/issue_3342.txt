@@ -32,7 +32,7 @@ RAISED:MCPError:Internal server error
 
 ## 4. Why it happens
 
-prompt 校验错误被压成笼统 `MCPError: Internal server error`，真实校验细节丢失。报在 Server 层（正确），但错误信息被简化。
+The prompt validation error is compressed into a generic `MCPError: Internal server error`, and the real validation details are lost. Reported at the Server layer (correct), but the error message is simplified.
 
 ## 5. Provenance
 

@@ -32,7 +32,7 @@ RAISED:ExceptionGroup:unhandled errors in a TaskGroup (1 sub-exception)
 
 ## 4. Why it happens
 
-慢工具无默认超时，阻塞调用方，抛出 `ExceptionGroup`。Transport 层超时以调用方裸异常暴露，属调用方裸抛通道。
+Slow tools have no default timeout, blocking the caller and throwing `ExceptionGroup`. Transport-layer timeouts are exposed as bare exceptions to the caller, which is a bare-exception-to-caller channel.
 
 ## 5. Provenance
 

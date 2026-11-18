@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-1060', 'version': ''}
 
 ## 4. Why it happens
 
-Image 类型触发 PydanticSchemaGenerationError 被通用化成 `Error executing tool img`。报在 Server 层，但根因被掩蔽。
+The Image type triggers PydanticSchemaGenerationError, which is generalised into `Error executing tool img`. Reported at the Server layer, but the root cause is masked.
 
 ## 5. Provenance
 

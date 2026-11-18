@@ -15,12 +15,12 @@ Harness entry: `runner/repro_pending/repro_json.py`
 Trigger, as recorded during the study:
 
 ```text
-自定义 streamable-http 服务器对 tools/list 返回 200 + Content-Type:application/json 但 body 非 JSON（'Error: type error in handler'）
+A custom streamable-http server returns 200 + Content-Type:application/json for tools/list but the body is not JSON ('Error: type error in handler')
 ```
 
 ## 2. What the reporter described
 
-客户端解析 marked application/json 但实际非 JSON 的响应体，抛出 MCPError: Failed to parse JSON response（原 issue 为裸 SyntaxError，2.2.0 已包装为 MCPError）
+The client parses a response body marked application/json that is actually not JSON, throwing MCPError: Failed to parse JSON response (the original issue was a bare SyntaxError, which has been wrapped as MCPError in 2.2.0)
 
 ## 3. What we captured
 
@@ -32,7 +32,7 @@ list_tools RAISED:MCPError:Failed to parse JSON response: 1 validation error ...
 
 ## 4. Why it happens
 
-服务器对 tools/list 返回 200 + `Content-Type: application/json`，但 body 实际非 JSON（`Error: type error in handler`）。客户端解析失败，2.2.0 下包装为 `MCPError: Failed to parse JSON response`（原 issue 为裸 SyntaxError）。非 JSON 响应体引发客户端解析错误，暴露在调用方，属 caller-exception。
+The server returns 200 + `Content-Type: application/json` for tools/list, but the body is actually non-JSON (`Error: type error in handler`). Client parsing fails and is wrapped as `MCPError: Failed to parse JSON response` in 2.2.0 (the original issue was a bare SyntaxError). The non-JSON response body causes a client-side parsing error that is exposed to the caller — a caller-exception.
 
 ## 5. Provenance
 

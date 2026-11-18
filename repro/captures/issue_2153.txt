@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-2153', 'version': ''}
 
 ## 4. Why it happens
 
-handler 应抛异常但异常值被吞，报 `Error executing tool boom`。报在 Server 层，但根因被掩蔽。
+The handler should throw an exception but the exception value is swallowed, reporting `Error executing tool boom`. Reported at the Server layer, but the root cause is masked.
 
 ## 5. Provenance
 

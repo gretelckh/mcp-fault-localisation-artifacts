@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-flag', 'version': ''}
 
 ## 4. Why it happens
 
-服务端返回 stale-cache-fallback 标记作为成功结果（is_error 与真实状态不匹配），is_error=False。状态错配被当作成功，属静默失效。
+The server returns a stale-cache-fallback marker as a success result (is_error does not match the real state), with is_error=False. The state mismatch is treated as a success — a silent failure.
 
 ## 5. Provenance
 

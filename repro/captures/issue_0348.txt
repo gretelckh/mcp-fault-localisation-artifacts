@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-348', 'version': ''}}
 
 ## 4. Why it happens
 
-任意工具结果无法置 isError=True；真实错误（如 PydanticSchemaGenerationError）被通用化成 `Error executing tool img`。报在 Server 层，但真实根因被掩蔽。
+Any tool result cannot set isError=True; the real error (such as PydanticSchemaGenerationError) is generalised into `Error executing tool img`. Reported at the Server layer, but the root cause is masked.
 
 ## 5. Provenance
 

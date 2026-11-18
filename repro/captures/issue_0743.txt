@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-743', 'version': ''}}
 
 ## 4. Why it happens
 
-工具根因未被正确记录，报 `Error executing tool boom`。报在 Server 层，但根因被掩蔽。
+The tool's root cause is not correctly logged, reporting `Error executing tool boom`. Reported at the Server layer, but the root cause is masked.
 
 ## 5. Provenance
 

@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-flat', 'version': ''}
 
 ## 4. Why it happens
 
-Host 传扁平参数 dict（期望 Pydantic model 被 flatten），但 Server 侧未 flatten，按缺失字段报校验错误`Error executing tool summarize`（is_error=True）。源是 Host，报告层是 Server，属层错位。
+The Host passes a flat parameter dict (expecting the Pydantic model to be flattened), but the Server side does not flatten it and reports a validation error for missing fields: `Error executing tool summarize` (is_error=True). The source is the Host, but the reported layer is Server — a layer mismatch.
 
 ## 5. Provenance
 

@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3351', 'version': ''}
 
 ## 4. Why it happens
 
-输入校验时丢弃 jsonschema 字段信息，报 `Error executing tool f: 1 validation error`。报在 Server 层（正确），但校验细节不完整。
+During input validation, jsonschema field information is discarded, reporting `Error executing tool f: 1 validation error`. Reported at the Server layer (correct), but the validation details are incomplete.
 
 ## 5. Provenance
 

@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-2386', 'version': ''}
 
 ## 4. Why it happens
 
-CWE-209 敏感信息（password=abc）被清洗，真实 ValueError 被通用化成 `Error executing tool boom`。报在 Server 层，但敏感根因被掩蔽。
+CWE-209 sensitive information (password=abc) is sanitised, and the real ValueError is generalised into `Error executing tool boom`. Reported at the Server layer, but the sensitive root cause is masked.
 
 ## 5. Provenance
 

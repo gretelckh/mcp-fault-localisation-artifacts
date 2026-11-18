@@ -36,7 +36,7 @@ anyio.run(main)
 
 ## 2. What the reporter described
 
-机械重放 issue 正文 python 片段 -> 命中该 issue 自身报错
+Mechanically replaying the python snippet in the issue body -> hits the issue's own error
 
 ## 3. What we captured
 
@@ -59,7 +59,7 @@ recent call last):
 
 ## 4. Why it happens
 
-服务器不暴露任何 tools/resources/prompts 时，`ClientSessionGroup._aggregate_components` 对未注册的 session 执行 `del self._session_exit_stacks[session]`，抛 `KeyError: <ClientSession object>`（session_group.py:420）。属 caller-exception（空组件注册路径缺陷）。
+When the server exposes no tools/resources/prompts, `ClientSessionGroup._aggregate_components` executes `del self._session_exit_stacks[session]` on an unregistered session, throwing `KeyError: <ClientSession object>` (session_group.py:420). This is a caller-exception (empty component registration path defect).
 
 ## 5. Provenance
 

@@ -1924,9 +1924,9 @@ BATCHES = {
 # standalone). Each maps issue -> Case with the real trigger that was used.
 # These are the 18 confirmed-reproducible bugs (mcp 2.2.0 + streamable-HTTP).
 #
-# ⚠️【溯源索引 · 18 条 VERIFIED 的代码位置 —— 下次直接看这里，勿再找不到】
-#   每条 verified 的复现代码都标注了【文件::函数】。证据文件在 repro/captures/ 与 repro/transcripts/，
-#   索引在 repro/evidence_matrix.csv。这些是数据重构前(run_real_http*.py)已复现的 18 条去重 issue。
+# ⚠️【Provenance index · 18 VERIFIED code locations — check here directly next time, don't lose them again】
+#   Each verified reproduction is annotated with [file::function]. Evidence files are in repro/captures/ and repro/transcripts/,
+#   The index is in repro/evidence_matrix.csv. These are the 18 deduplicated issues already reproduced before the data refactoring (run_real_http*.py).
 #   - #3549  Server   run_real_http2.py::case_race        call_tool(inc)         -> real_r_race_lost_update.txt
 #   - #3637  Host     run_real_http2.py::case_flat        call_tool(summarize)  -> real_r_flat_argument.txt
 #   - #3643  Server   run_real_http2.py::case_userlist    call_tool(greet)      -> real_r_userlist_prompt.txt

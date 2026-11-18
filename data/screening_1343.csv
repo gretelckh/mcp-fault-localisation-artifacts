@@ -382,8 +382,8 @@ When a tool includes client-side logging with, the client seems to hang.
 204,Is there a follow-up SSE client?,closed,2025-02-12T09:37:16Z,QUESTION,QUESTION,https://github.com/modelcontextprotocol/python-sdk/issues/204,"clients/simple-chatbot 
 
 I'm exploring the functionality of SSE. I found the SSE server in the examples, but there is no SSE client. Will there be one in the future?"
-208,MCP Go SDK,closed,2025-02-14T09:16:49Z,OTHER,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/208,"我想知道 接下来会推出Go 语言的sdk吗？如果要推出的话大概会在什么时间推出呢？
-如果暂时没有推出计划的话，我愿意开发一个Go的sdk，请问有什么需要我注意的或者能为我提供一些帮助呢？"
+208,MCP Go SDK,closed,2025-02-14T09:16:49Z,OTHER,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/208,"I'd like to know, will an SDK for the Go language be released in the future? If so, roughly when will it be released?
+If there are no plans to release one for now, I'd be willing to develop a Go SDK myself. Is there anything I need to be aware of, or any help you could offer?"
 209,MCP GO SDK,closed,2025-02-14T09:17:34Z,QUESTION,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/209,"Do I want to know if there will be an SDK for Go language released next? If it is to be launched, when will it be released?
 If there are no plans to launch it temporarily, I am willing to develop a Go"
 210,opentelemetry instrumentation,closed,2025-02-15T03:25:00Z,OTHER,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/210,I am a developer on [Phoenix](https://github.com/Arize-ai/phoenix) and [OpenInference](https://github.com/Arize-ai/openinference) building observability tools for AI developers. I am wondering if ther
@@ -507,11 +507,12 @@ More specifically, It would be great to have a leaky interface, that can act as 
 import os
 import pymysql
 import logging
-from dotenv import load_dotenv  # 引入dotenv模块
+from dotenv import load_dotenv  # import the dotenv module
 from mcp.server.fastmcp import FastMCP
 
 # Configure logging
-logging.basicConfig("
+logging.basicConfig(
+"
 259,difficulty to  run tools,closed,2025-03-11T13:50:23Z,OTHER,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/259,"Hi, I am trying out the simple-chatbot example examples/clients/simple-chatbot/mcp_simple_chatbot . I have created approx 4 servers and included them in server_config.json. Each server has approx 2 to"
 261,sse client read progress notification,closed,2025-03-12T02:50:55Z,QUESTION,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/261,"When the Python SSE (Server-Sent Events) server sends a send_notification message (e.g., ""notifications/progress""), the client-side call_tool function gets stuck/hangs.
 
@@ -544,7 +545,8 @@ npm ERR! cb.apply is not a function
 
 npm ERR! A complete log of this run can be found in:
 npm ERR!     /root/.npm/_logs/2025-03-13T03_54_28_042Z-debug.log
-安装 [ '@modelcontextproto"
+Installing [ '@modelcontextproto
+"
 279,Return resources as structured JSON instead of text?,closed,2025-03-13T21:39:55Z,QUESTION,QUESTION,https://github.com/modelcontextprotocol/python-sdk/issues/279,"Is it possible to resources as structured JSON instead of text?
 
 Here's a minimal example:
@@ -620,14 +622,14 @@ from mcp.server.fastmcp import"
 
 "
 316,"Input should be a valid string [type=string_type, input_value=123, input_type=int]",closed,2025-03-19T09:02:22Z,OTHER,FEATURE,https://github.com/modelcontextprotocol/python-sdk/issues/316,"MCP Server tools code:
-`@mcp.tool(description=""查询物流信息"")
+`@mcp.tool(description=""Query logistics information"")
 async def query_logistics(order_id: str) -> str:
-  """"""查询物流信息。当用户需要根据订单号查询物流信息时，调用此工具
+  """"""Query logistics information. Call this tool when the user needs to look up logistics information by order number.
 
   Args:
-      order_id: 订单号
+      order_id: order number
   Returns:
-      物流信息的字符串描述
+      a string description of the logistics information
   "
 317,"when i run   mcp dev server.py ,successfully launched the service,but python server.py did not respond at all.",closed,2025-03-19T10:51:04Z,OTHER,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/317,"1. mcp dev mcp_server.py
 ```
@@ -990,8 +992,8 @@ When using the `sse_client` function to connect to a remote MCP server, if the M
 
 Is it possible to read the headers of the request being sent to call a tool? The client is passing in some headers that I can use to auth. I've looked through the Context cla"
 454,Error getting the version from source `uv-dynamic-versioning`: This does not appear to be a Git project,closed,2025-04-08T12:23:35Z,BUG,BUG,https://github.com/modelcontextprotocol/python-sdk/issues/454,"Executing uv add ""mcp[cli]"" will result in this error. How can I resolve it?   
-python-version：3.12
-Windows 11 专业版
+python-version: 3.12
+Windows 11 Pro
 
 `PS E:\MCP\python-sdk-main\mcp-server-demo> uv add ""mcp[cli]""
 Using CPython 3.12.9 i"
@@ -1078,11 +1080,11 @@ Steps to reproduce the behavior:
 import asyncio
 from typing import Any
 from mcp.serv"
-490,SSE MCP server fails when URL contains subpaths,closed,2025-04-11T09:10:38Z,BUG,BUG,https://github.com/modelcontextprotocol/python-sdk/issues/490,"### 问题描述
-当SSE MCP服务器的URL包含子路径时（例如：a.com/mcp/a/sse），使用Cline或Cherry Studio客户端会报错：""error posting to endpoint http 404 could not find session""。仅使用域名（不含子路径）时工作正常。
+490,SSE MCP server fails when URL contains subpaths,closed,2025-04-11T09:10:38Z,BUG,BUG,https://github.com/modelcontextprotocol/python-sdk/issues/490,"### Problem Description
+When the SSE MCP server's URL contains subpaths (e.g. a.com/mcp/a/sse), using Cline or Cherry Studio clients results in error: ""error posting to endpoint http 404 could not find session"". Works fine with domain-only URLs (no subpaths).
 
-### 重现步骤
-1. 部署一个SSE MCP服务器，配置子路径（如/mcp/a/"
+### Reproduction Steps
+1. Deploy an SSE MCP server with subpath (e.g. /mcp/a/"
 491,subscribe_resource return NotImplementedError,closed,2025-04-11T16:32:20Z,BUG,BUG,https://github.com/modelcontextprotocol/python-sdk/issues/491,"```
 class Event:
     def __new__(cls) -> Event:
@@ -1111,10 +1113,10 @@ mcp = FastMCP(""Test"")"
 And I've run into a problem that Claude Desktop doesn't stack, how does this happen and why?
 
 I mean both there and there is 1 mcp server connected, bu"
-497,SSE 路径带上key，messages/接口如何获取到这个key，进行message消息里的auth认证,closed,2025-04-12T06:45:14Z,QUESTION,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/497,"http://127.0.0.1:8020/sse?key=123456
+497,The SSE path carries a key; how the messages/ interface obtains this key to perform auth authentication within the message,closed,2025-04-12T06:45:14Z,QUESTION,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/497,"http://127.0.0.1:8020/sse?key=123456
 
-我想生成这样一个sse server 
-message 接口里能获取到key，进行鉴权，如何实现"
+I want to generate an sse server like this.
+How can I obtain the key in the message endpoint to perform authentication?"
 498,How do python clients and servers use prompt,closed,2025-04-12T14:08:52Z,QUESTION,QUESTION,https://github.com/modelcontextprotocol/python-sdk/issues/498,"How does the client call and how does the server use the mcp.prompt wrapped function
 
 eg
@@ -1464,7 +1466,7 @@ With using official python-sdk, it seems work well, however
 I want to check the request and the response are formatted as JSON-RPC-2."
 671,MCP Tool execution hangs indefinitely in stdio mode when calling external Python scripts,closed,2025-05-09T06:17:05Z,BUG,BUG,https://github.com/modelcontextprotocol/python-sdk/issues/671,"**Describe the bug**
 When using FastMCP in stdio transport mode, any tool that attempts to execute an external Python script will hang indefinitely until timeout, without returning any result or error"
-672,MCP如何调用外部工具,closed,2025-05-09T09:32:14Z,OTHER,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/672,"import os
+672,How MCP calls external tools,closed,2025-05-09T09:32:14Z,OTHER,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/672,"import os
 from langchain_core.tools import tool
 from langchain_deepseek import ChatDeepSeek
 import interface
@@ -1728,15 +1730,16 @@ from fake_database import Database  # Replace with your"
 
 When using the client SDK to connect MCP server behind an `API gateway` that adds a deployment-specific prefix (e.g., `/gateway_pref"
 796,Session always close after a few minutes.,closed,2025-05-23T23:37:59Z,OTHER,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/796,"Hi, I created two functions to call the MCP server, following the official examples. I even specifically set `sse_read_timeout=None` for the SSE connection. However, both functions end up throwing `Se"
-803,"执行uv add ""mcp[cli]""，报错： No solution found when resolving dependencies for split (python_full_version == '3.9.*')",closed,2025-05-26T06:29:38Z,BUG,FEATURE,https://github.com/modelcontextprotocol/python-sdk/issues/803,"**Describe the bug**
+803,"Running uv add ""mcp[cli]"" gives the error: No solution found when resolving dependencies for split (python_full_version == '3.9.*')",closed,2025-05-26T06:29:38Z,BUG,FEATURE,https://github.com/modelcontextprotocol/python-sdk/issues/803,"**Describe the bug**
 A clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
-1.执行pip install uv
-2.执行uv init mcp-server-demo
+1. Run pip install uv
+2. Run uv init mcp-server-demo
 cd mcp-server-demo
-3.执行uv add"
+3. Run uv add
+"
 804,'uv run mcp' command does not work ! It gives me this [see screenshot],closed,2025-05-26T06:32:55Z,BUG,BUG,https://github.com/modelcontextprotocol/python-sdk/issues/804,"**Describe the bug**
 A clear and concise description of what the bug is.
 
@@ -2766,13 +2769,14 @@ I'm hoping you might be able to offer some guidance. I'm trying to use the Pytho
 Current fastmcp server implementations, both high-level and low-level, present fundamental challenges for writing scalable and modular, multi-file applications.
 
 The high-level fastmc"
-1282,怎么实现类似https://open.bigmodel.cn/api/mcp/web_search/sse?Authorization= YOUR API Key 这样的授权功能,closed,2025-08-19T02:22:55Z,QUESTION,QUESTION,https://github.com/modelcontextprotocol/python-sdk/issues/1282,"### Question
+1282,How can I implement an authorization feature like https://open.bigmodel.cn/api/mcp/web_search/sse?Authorization= YOUR API Key,closed,2025-08-19T02:22:55Z,QUESTION,QUESTION,https://github.com/modelcontextprotocol/python-sdk/issues/1282,"### Question
 
-怎么实现类似https://open.bigmodel.cn/api/mcp/web_search/sse?Authorization= YOUR API Key 这样的授权功能，怎么获取到这个key?
+How can I implement an authorization feature like https://open.bigmodel.cn/api/mcp/web_search/sse?Authorization= YOUR API Key, and how can I obtain this key?
 
 ### Additional Context
 
-_No response_"
+_No response_
+"
 1283,Potential memory leak in StreamableHTTPSessionManager due to idle sessions not being cleaned up,closed,2025-08-19T04:39:05Z,OTHER,BUG,https://github.com/modelcontextprotocol/python-sdk/issues/1283,"### Initial Checks
 
 - [x] I confirm that I'm using the latest version of MCP Python SDK
@@ -2952,7 +2956,7 @@ in MCP server calling below is also added , still it"
 I’m running a FastAPI application on Azure Web App (Linux, containerized) using Gunicorn + Uvicorn workers.
 
 The app is an MCP (Model Context Protocol) server that conne"
-1351,通过 mcp tools 查询数据表，返回结果和实际数据不符。,closed,2025-09-08T10:10:12Z,OTHER,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/1351,"### Initial Checks
+1351,Querying a data table via mcp tools returns results that do not match the actual data.,closed,2025-09-08T10:10:12Z,OTHER,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/1351,"### Initial Checks
 
 - [x] I confirm that I'm using the latest version of MCP Python SDK
 - [x] I confirm that I searched for my issue in https://github.com/modelcontextprotocol/python-sdk/issues before"
@@ -4045,7 +4049,7 @@ PR #1720 added automatic type coercion for JSON-RPC response IDs, allowing strin
 
 - [x] I confirm that I'm using the latest version of MCP Python SDK
 - [x] I confirm that I searched for my issue in https://github.com/modelcontextprotocol/python-sdk/issues before"
-1797,1.24.0出现报错,closed,2025-12-17T15:37:00Z,OTHER,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/1797,"### Initial Checks
+1797,An error occurs in 1.24.0,closed,2025-12-17T15:37:00Z,OTHER,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/1797,"### Initial Checks
 
 - [x] I confirm that I'm using the latest version of MCP Python SDK
 - [x] I confirm that I searched for my issue in https://github.com/modelcontextprotocol/python-sdk/issues before"
@@ -4083,7 +4087,7 @@ When using granian with multiple event loops in one process then mcp errors out.
 1814,Does anyone know what the problem is,closed,2025-12-23T11:56:24Z,BUG,BUG,https://github.com/modelcontextprotocol/python-sdk/issues/1814,"### Question
 
 ```
-2025-12-23 18:46:40.736 | ERROR    | app.tool.mcp_tool - mcp_tool.py:106 - MCP工具初始化失败:   + Exception Group Traceback (most recent call last):
+2025-12-23 18:46:40.736 | ERROR    | app.tool.mcp_tool - mcp_tool.py:106 - MCP tool initialisation failed:   + Exception Group Traceback (most recent call last):
   |   File ""/app/salessoptask/app/tool/m"
 1820,Multiple mcp servers on different routes but same server,closed,2025-12-31T12:50:27Z,FEATURE,OTHER,https://github.com/modelcontextprotocol/python-sdk/issues/1820,"### Description
 

@@ -15,12 +15,12 @@ Harness entry: `runner/repro_pending/repro_2727.py`
 Trigger, as recorded during the study:
 
 ```text
-Client(http://127.0.0.1:9200/mcp, mode='auto') 连接一个校验Origin头的服务器
+Client(http://127.0.0.1:9200/mcp, mode='auto') connects to a server that validates the Origin header
 ```
 
 ## 2. What the reporter described
 
-streamable_http 客户端不发送 Origin 头，被符合规范的（跨域保护）服务器拒绝(403)，客户端得到 MCPError: Server returned an error response
+The streamable_http client does not send the Origin header and is rejected (403) by a spec-compliant (cross-origin protection) server, and the client gets MCPError: Server returned an error response
 
 ## 3. What we captured
 
@@ -33,7 +33,7 @@ seen Origin headers on requests: [None, None]
 
 ## 4. Why it happens
 
-streamable-http 客户端请求未设置 `Origin` 头（`_prepare_headers` 只含 accept/content-type/session-id/protocol-version），符合规范的跨域保护服务器以 403 拒绝，客户端得到 `MCPError: Server returned an error response`。源是 Transport（HTTP 头缺失），以裸异常暴露在调用方，属 caller-exception。
+The streamable-http client request does not set the `Origin` header (`_prepare_headers` only includes accept/content-type/session-id/protocol-version), and a spec-compliant cross-origin-protection server rejects it with 403, so the client gets `MCPError: Server returned an error response`. The source is Transport (missing HTTP header), exposed to the caller as a bare exception — a caller-exception.
 
 ## 5. Provenance
 

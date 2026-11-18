@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-1361', 'version': ''}
 
 ## 4. Why it happens
 
-Client 层 `call_tool` 抛出的异常被 Server 吞掉并重报为 `Error executing tool boom`（is_error=True），真实异常值丢失。源是 Client，报告层是 Server，属层错位 + 通用化掩蔽。
+The exception thrown by `call_tool` at the Client layer is swallowed by the Server and re-reported as `Error executing tool boom` (is_error=True), with the real exception value lost. It originates in Client but is reported at the Server layer, a layer mismatch + masked by generalisation.
 
 ## 5. Provenance
 

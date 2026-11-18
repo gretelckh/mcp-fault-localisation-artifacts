@@ -34,7 +34,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-race', 'version': ''}
 
 ## 4. Why it happens
 
-20 个并发调用共享状态导致丢失更新（final=1，应=20），is_error=False。并发竞态结果错误但无报错，属静默失效。
+20 concurrent calls share state, causing lost updates (final=1, should be 20), is_error=False. The concurrent race produces wrong results but no error, which is a silent failure.
 
 ## 5. Provenance
 

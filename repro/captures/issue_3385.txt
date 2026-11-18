@@ -38,7 +38,7 @@ On instance['result']:
 
 ## 4. Why it happens
 
-工具返回非有限浮点数 `inf` 导致 text content 无效 JSON，结构化校验失败。报在 Server 层（正确），是输出序列化/校验问题。
+The tool returns a non-finite float `inf`, causing the text content to be invalid JSON and structured validation to fail. Reported at the Server layer (correct); it is an output serialisation/validation problem.
 
 ## 5. Provenance
 

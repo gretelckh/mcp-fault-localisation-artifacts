@@ -15,12 +15,12 @@ Harness entry: `runner/repro_pending/repro_cancelscope.py`
 Trigger, as recorded during the study:
 
 ```text
-在task group中创建4个Client session,然后在4个独立task中分别close
+Create 4 Client sessions in a task group, then close each in 4 separate tasks
 ```
 
 ## 2. What the reporter described
 
-在一个 task group 创建多个 client session、在独立任务里关闭时，cancel scope 归属错乱，抛 RuntimeError: Attempted to exit cancel scope in a different task
+When multiple client sessions are created in a task group and closed in separate tasks, cancel scope ownership becomes confused, throwing RuntimeError: Attempted to exit cancel scope in a different task
 
 ## 3. What we captured
 
@@ -32,7 +32,7 @@ RAISED:RuntimeError:Attempted to exit cancel scope in a different task than it w
 
 ## 4. Why it happens
 
-在一个 task group 创建多个 client session、在独立任务里关闭时，cancel scope 归属错乱，抛出 `RuntimeError: Attempted to exit cancel scope in a different task than it was entered in`。以裸异常暴露在调用方，属 caller-exception。
+When multiple client sessions are created in a task group and closed in separate tasks, cancel scope ownership gets confused and `RuntimeError: Attempted to exit cancel scope in a different task than it was entered in` is thrown. Exposed to the caller as a bare exception — a caller-exception.
 
 ## 5. Provenance
 

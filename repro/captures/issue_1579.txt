@@ -32,7 +32,7 @@ RAISED:MCPError:Unknown resource: data://missing
 
 ## 4. Why it happens
 
-`read_resource` 找不到资源时返回错误码不对（应是特定 JSON-RPC code，实际返回其他）。报在 Server 层（正确），但错误码不符规范。
+The error code returned by `read_resource` when a resource is not found is wrong (it should be a specific JSON-RPC code, but another is returned). Reported at the Server layer (correct), but the error code does not conform to the spec.
 
 ## 5. Provenance
 

@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-1702', 'version': ''}
 
 ## 4. Why it happens
 
-工具输出未过 outputSchema 校验，被通用化成 `Error executing tool get_name`，隐藏 schema 细节。报在 Server 层，但根因被掩蔽。
+The tool output does not pass outputSchema validation and is generalised into `Error executing tool get_name`, hiding schema details. Reported at the Server layer, but the root cause is masked.
 
 ## 5. Provenance
 

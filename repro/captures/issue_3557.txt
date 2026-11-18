@@ -33,7 +33,7 @@ status=400
 
 ## 4. Why it happens
 
-畸形的非 JSON-RPC body 被回答为 `-32602`（应 `-32600`），HTTP 400 裸异常。错误码规范问题，以调用方裸异常暴露。
+A malformed non-JSON-RPC body is answered with `-32602` (should be `-32600`), a bare HTTP 400 exception. It is an error-code spec issue, exposed as a bare exception to the caller.
 
 ## 5. Provenance
 

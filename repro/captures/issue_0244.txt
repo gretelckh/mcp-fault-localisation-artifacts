@@ -32,7 +32,7 @@ RAISED-AT-REG:ValueError:Resource 'data://r' has no URI template variables, but 
 
 ## 4. Why it happens
 
-`resource()` 不接受 `ctx: Context`，server 注册时抛 ValueError（URI 模板变量缺失）。注册期错误：server 无法构建，属另一类难定位根因。
+`resource()` does not accept `ctx: Context`, and the server throws ValueError during registration (URI template variable missing). Registration-time error: the server cannot be built, which is another type of root cause that is difficult to locate.
 
 ## 5. Provenance
 

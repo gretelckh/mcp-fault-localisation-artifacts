@@ -60,7 +60,7 @@ async def main():
 
 ## 2. What the reporter described
 
-机械重放 issue 正文 python 片段 -> 命中该 issue 自身报错
+Mechanically replaying the python snippet in the issue body -> hits the issue's own error
 
 ## 3. What we captured
 
@@ -85,7 +85,7 @@ RuntimeError: Attempted to acquire an already held Lock
 
 ## 4. Why it happens
 
-`OAuthClientProvider.async_auth_flow` 用 `async with self.context.lock` 跨 `yield` 持锁，httpx 在另一 task 关闭 flow 时释放锁失败，锁被永久毒化，后续请求抛 `RuntimeError: Attempted to acquire an already held Lock`。属 caller-exception（认证锁生命周期缺陷）。
+`OAuthClientProvider.async_auth_flow` holds the lock with `async with self.context.lock` across `yield`; when httpx closes the flow in another task, releasing the lock fails, the lock is permanently poisoned, and subsequent requests throw `RuntimeError: Attempted to acquire an already held Lock`. This is a caller-exception (authentication lock lifecycle defect).
 
 ## 5. Provenance
 

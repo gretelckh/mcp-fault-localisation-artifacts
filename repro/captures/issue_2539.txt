@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-2539', 'version': ''}
 
 ## 4. Why it happens
 
-可选的 `None` 字段被序列化为 JSON `null`，返回 `{"text": null}`，is_error=False。错误的结果结构被当作成功返回，属静默失效。
+An optional `None` field is serialised as JSON `null`, returning `{"text": null}` with is_error=False. An erroneous result structure is returned as a success — a silent failure.
 
 ## 5. Provenance
 

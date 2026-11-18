@@ -33,7 +33,7 @@ HTTP 202
 
 ## 4. Why it happens
 
-`id:null` 的 JSON-RPC 消息被当作 notification 静默接受（HTTP 202），未按规范拒绝。逻辑错误无任何报错标志，属静默失效。
+A JSON-RPC message with `id:null` is silently accepted as a notification (HTTP 202) rather than being rejected per the spec. The logic defect has no error flag of any kind — a silent failure.
 
 ## 5. Provenance
 

@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-2114', 'version': ''}
 
 ## 4. Why it happens
 
-`call_tool` 内部异常被 `ExceptionGroup` 包裹，展开后仍只剩 `Error executing tool boom`，真实根因被通用化掩蔽；源是 Client，报告层是 Server。
+The internal exception of `call_tool` is wrapped by `ExceptionGroup`, and after unwrapping only `Error executing tool boom` remains, with the real root cause masked by generalisation; it originates in Client but is reported at the Server layer.
 
 ## 5. Provenance
 

@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-2741', 'version': ''}
 
 ## 4. Why it happens
 
-有状态 Streamable HTTP 会话内的异常被掩蔽为通用 `Error executing tool boom`（is_error=True），真实 cause 只在独立的 `Session crashed` 日志中。源是 Transport，报告层是 Server，属层错位 + 掩蔽。
+An exception inside a stateful Streamable HTTP session is masked as a generic `Error executing tool boom` (is_error=True), with the real cause only in a separate `Session crashed` log. The source is Transport, but the reported layer is Server — a layer mismatch plus masking.
 
 ## 5. Provenance
 

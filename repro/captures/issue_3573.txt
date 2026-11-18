@@ -34,7 +34,7 @@ If you got this error by calling ha
 
 ## 4. Why it happens
 
-`-> Iterator` 注解触发 PydanticSchemaGenerationError，注册时失败。注册期错误：server 无法构建。
+The `-> Iterator` annotation triggers PydanticSchemaGenerationError, failing at registration. A registration-phase error: the server cannot be built.
 
 ## 5. Provenance
 

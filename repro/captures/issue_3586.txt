@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-exc', 'version': ''}}
 
 ## 4. Why it happens
 
-handler 抛非 ToolError，客户端暴露不清晰，报 `Error executing tool fragile`。报在 Server 层，但根因被掩蔽。
+The handler throws a non-ToolError, which the client exposes unclearly, reporting `Error executing tool fragile`. Reported at the Server layer, but the root cause is masked.
 
 ## 5. Provenance
 

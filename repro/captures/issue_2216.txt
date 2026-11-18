@@ -20,7 +20,7 @@ OAuthClientInformationFull(client_id='c', scope=None).validate_scope('read')
 
 ## 2. What the reporter described
 
-validate_scope 在客户端未注册任何 scope（None）时，会误拒绝任何请求：validate_scope(None, 'read') 抛 InvalidScopeError: Client was not registered with scope read
+validate_scope incorrectly rejects any request when the client has no registered scope (None): validate_scope(None, 'read') throws InvalidScopeError: Client was not registered with scope read.
 
 ## 3. What we captured
 
@@ -32,7 +32,7 @@ validate_scope(scope=None, req='read') -> RAISED InvalidScopeError: Client was n
 
 ## 4. Why it happens
 
-`validate_scope` 在客户端未注册任何 scope（None）时误拒绝任何请求：`validate_scope(None, 'read')` 抛 `InvalidScopeError: Client was not registered with scope read`。无 required scopes 时应放行，此逻辑缺陷导致正常请求被拒，属 single-layer 逻辑缺陷。
+`validate_scope` incorrectly rejects any request when the client has no registered scope (None): `validate_scope(None, 'read')` throws `InvalidScopeError: Client was not registered with scope read`. When there are no required scopes, the request should be allowed; this logic defect causes legitimate requests to be rejected — a single-layer logic defect.
 
 ## 5. Provenance
 

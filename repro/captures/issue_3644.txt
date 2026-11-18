@@ -37,7 +37,7 @@ Failed validating 'requ
 
 ## 4. Why it happens
 
-outputSchema 处于 validation 模式但内容按 alias 序列化，导致 schema 不匹配，抛 RuntimeError。报在 Server 层（正确），是输出 schema 校验问题。
+outputSchema is in validation mode but the content is serialised by alias, causing a schema mismatch and throwing RuntimeError. Reported at the Server layer (correct), it is an output schema validation issue.
 
 ## 5. Provenance
 

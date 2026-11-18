@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-dup', 'version': ''}}
 
 ## 4. Why it happens
 
-同名工具重复注册时静默保留第一个版本（shadow），第二个被忽略，返回 2 无报错。注册冲突被无声吞掉，属静默失效。
+When a tool with the same name is registered twice, the first version is silently kept (shadow) and the second is ignored, returning 2 with no error. The registration conflict is silently swallowed, which is a silent failure.
 
 ## 5. Provenance
 

@@ -32,7 +32,7 @@ RAISED-AT-REG:AttributeError:'Handler' object has no attribute '__name__'
 
 ## 4. Why it happens
 
-`find_context_parameter` 对 callable class 失败，注册时抛 AttributeError（Handler 无 __name__）。注册期错误：server 无法构建。
+`find_context_parameter` fails for a callable class, throwing AttributeError during registration (Handler has no __name__). Registration-time error: the server cannot be built.
 
 ## 5. Provenance
 

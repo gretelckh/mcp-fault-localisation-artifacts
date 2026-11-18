@@ -33,7 +33,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-media', 'version': ''
 
 ## 4. Why it happens
 
-`format=` 输出未注册的 MIME 类型 `image/jpg`，is_error=False。非规范媒体类型被静默接受，属静默失效。
+`format=` outputs an unregistered MIME type `image/jpg`, with is_error=False. A non-standard media type is silently accepted — a silent failure.
 
 ## 5. Provenance
 

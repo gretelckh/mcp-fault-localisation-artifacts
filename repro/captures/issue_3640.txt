@@ -34,7 +34,7 @@ advertised_capabilities=experimental=None logging=None prompts=PromptsCapability
 
 ## 4. Why it happens
 
-未知的 ServerCapabilities key 在广播能力时被静默丢弃（is_error=False）。能力信息丢失但无报错，属静默失效。
+An unknown ServerCapabilities key is silently discarded when advertising capabilities (is_error=False). Capability information is lost with no error reported — a silent failure.
 
 ## 5. Provenance
 

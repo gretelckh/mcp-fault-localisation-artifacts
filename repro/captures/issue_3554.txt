@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-bytes', 'version': ''
 
 ## 4. Why it happens
 
-非 UTF-8 字节输出崩溃，报 `Error executing tool get_bytes`。报在 Server 层，但根因被掩蔽。
+Non-UTF-8 byte output crashes, reporting `Error executing tool get_bytes`. Reported at the Server layer, but the root cause is masked.
 
 ## 5. Provenance
 

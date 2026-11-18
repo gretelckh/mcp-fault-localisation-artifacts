@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-perm', 'version': ''}
 
 ## 4. Why it happens
 
-工具抛非 ToolError，被通用化成 `Error executing tool fragile2`。报在 Server 层，但根因被掩蔽。
+The tool throws a non-ToolError, which is generalised into `Error executing tool fragile2`. Reported at the Server layer, but the root cause is masked.
 
 ## 5. Provenance
 

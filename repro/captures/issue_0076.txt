@@ -51,7 +51,7 @@ if __name__ == "__main__":
 
 ## 2. What the reporter described
 
-机械重放 issue 正文 python 片段 -> 命中该 issue 自身报错
+Mechanically replaying the python snippet in the issue body -> hits the issue's own error
 
 ## 3. What we captured
 
@@ -81,7 +81,7 @@ For the complete traceback of this bug see `../transcripts/issue_0076.txt`.
 
 ## 4. Why it happens
 
-传 `env={GITHUB_PERSONAL_ACCESS_TOKEN: os.getenv(...)}` 时值为 None，`StdioServerParameters` 的严格 Pydantic 校验直接抛 `ValidationError: env.GITHUB_PERSONAL_ACCESS_TOKEN Input should be a valid string`。配置错误本可给出可读提示，却以底层校验异常裸抛给调用方，属 caller-exception。
+When passing `env={GITHUB_PERSONAL_ACCESS_TOKEN: os.getenv(...)}` the value is None, and `StdioServerParameters`'s strict Pydantic validation directly throws `ValidationError: env.GITHUB_PERSONAL_ACCESS_TOKEN Input should be a valid string`. A configuration error could have given a readable message, but instead the low-level validation exception is thrown bare to the caller — a caller-exception.
 
 ## 5. Provenance
 

@@ -15,12 +15,12 @@ Harness entry: `runner/repro_pending/repro_sse.py`
 Trigger, as recorded during the study:
 
 ```text
-sse_client('http://127.0.0.1:9211/sse') 连接返回401的SSE端点
+sse_client('http://127.0.0.1:9211/sse') connects to an SSE endpoint that returns 401
 ```
 
 ## 2. What the reporter described
 
-SSE 连接时端点返回 401（认证失败），mcp sse_client 抛出 HTTPStatusError，连接建立失败
+When connecting via SSE, the endpoint returns 401 (authentication failed), mcp sse_client throws HTTPStatusError, and connection establishment fails
 
 ## 3. What we captured
 
@@ -32,7 +32,7 @@ RAISED:HTTPStatusError:Client error '401 Unauthorized' for url 'http://127.0.0.1
 
 ## 4. Why it happens
 
-SSE 客户端连接建立时端点返回 401（认证失败），客户端直接抛 `HTTPStatusError` 而非触发认证/转为 MCP 错误，以裸异常暴露在调用方，属 Transport/HTTP 认证缺陷。
+When the SSE client connection is being established, the endpoint returns 401 (authentication failure); the client directly throws `HTTPStatusError` instead of triggering authentication / converting to an MCP error, exposing a bare exception to the caller, a Transport/HTTP authentication defect.
 
 ## 5. Provenance
 

@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-698', 'version': ''}}
 
 ## 4. Why it happens
 
-工具抛异常后真实异常值被吞，只剩 `Error executing tool boom`。报在 Server 层，但根因被掩蔽。
+After the tool throws an exception, the real exception value is swallowed, leaving only `Error executing tool boom`. Reported at the Server layer, but the root cause is masked.
 
 ## 5. Provenance
 

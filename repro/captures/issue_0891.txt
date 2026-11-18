@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-891', 'version': ''}}
 
 ## 4. Why it happens
 
-`dict+str` 非法操作的真实 TypeError 被通用化成 `Error executing tool f`。报在 Server 层，但根因被掩蔽。
+The real TypeError from the illegal `dict+str` operation is generalised into `Error executing tool f`. Reported at the Server layer, but the root cause is masked.
 
 ## 5. Provenance
 

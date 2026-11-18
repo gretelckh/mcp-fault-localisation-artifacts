@@ -33,7 +33,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-empty', 'version': ''
 
 ## 4. Why it happens
 
-Host 向一个无组件的 server 请求未知工具，报 `Unknown tool`（is_error=True）。源是 Host 的请求，报告层是 Server，属层错位。
+The Host requests an unknown tool from a component-less server, reporting `Unknown tool` (is_error=True). It originates in the Host's request but is reported at the Server layer — a layer mismatch.
 
 ## 5. Provenance
 

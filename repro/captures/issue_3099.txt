@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3099', 'version': ''}
 
 ## 4. Why it happens
 
-Field(alias) 在 schema 中但非法 Python 关键字，报 `Error executing tool ext`。报在 Server 层，但根因被掩蔽。
+Field(alias) is in the schema but is an illegal Python keyword, reporting `Error executing tool ext`. Reported at the Server layer, but the root cause is masked.
 
 ## 5. Provenance
 

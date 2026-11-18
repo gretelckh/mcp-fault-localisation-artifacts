@@ -35,7 +35,7 @@ data: {"jsonrpc":"2.0","id":1,"result":{"capabilities":{"experimental":{},"promp
 
 ## 4. Why it happens
 
-`MCP-Protocol-Version` header 与 body 的 `protocolVersion` 不一致，但服务端按 body 协商返回 HTTP 200，未校验 header。协议错配被静默接受，属静默失效。
+The `MCP-Protocol-Version` header is inconsistent with the `protocolVersion` in the body, but the server negotiates according to the body and returns HTTP 200 without validating the header. The protocol mismatch is silently accepted, a silent failure.
 
 ## 5. Provenance
 

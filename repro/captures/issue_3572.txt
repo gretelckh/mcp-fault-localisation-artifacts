@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-val', 'version': ''}}
 
 ## 4. Why it happens
 
-Host 传错参数类型（数字而非字符串），Server 校验错误回显了被拒绝的值 `Error executing tool lookup`。源是 Host，报告层是 Server，属层错位（校验错误被推到 Server 层）。
+The Host passes the wrong parameter type (a number instead of a string), and the Server validation error echoes the rejected value `Error executing tool lookup`. It originates in Host but is reported at the Server layer, a layer mismatch (the validation error is pushed to the Server layer).
 
 ## 5. Provenance
 

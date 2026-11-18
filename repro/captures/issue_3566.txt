@@ -15,12 +15,12 @@ Harness entry: `runner/repro_pending/repro_oauth_logic.py::test_3566`
 Trigger, as recorded during the study:
 
 ```text
-union_scopes('read','read,write') 及 validate_scope(scope='read,write', req='read')
+union_scopes('read','read,write') and validate_scope(scope='read,write', req='read')
 ```
 
 ## 2. What the reporter described
 
-RFC 6749 用空格分隔 scope，但真实授权服务器（如 Linear）返回逗号分隔。union_scopes/validate_scope 按空格 split，把 'read,write' 当成单个 scope，导致校验失败
+RFC 6749 separates scopes with spaces, but real authorization servers (such as Linear) return them comma-separated. union_scopes/validate_scope split by spaces, treating 'read,write' as a single scope, causing validation to fail
 
 ## 3. What we captured
 
@@ -32,7 +32,7 @@ union_scopes('read','read,write') -> 'read read,write' (Expected 'read write'); 
 
 ## 4. Why it happens
 
-RFC 6749 用空格分隔 scope，但真实授权服务器（如 Linear）返回逗号分隔。`union_scopes`/`validate_scope` 按空格 split，把 `read,write` 当成单个 scope，导致校验失败/合并错误，属 single-layer 逻辑缺陷。
+RFC 6749 separates scopes with spaces, but real authorization servers (e.g. Linear) return them comma-separated. `union_scopes`/`validate_scope` split on spaces, treating `read,write` as a single scope, which causes validation failures/merge errors — a single-layer logic defect.
 
 ## 5. Provenance
 

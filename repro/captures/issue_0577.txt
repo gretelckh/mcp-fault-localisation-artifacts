@@ -15,12 +15,12 @@ Harness entry: `runner/repro_pending/repro_cancelscope.py`
 Trigger, as recorded during the study:
 
 ```text
-4个Client连接后,乱序跨任务清理,顺序[2,0,3,1]非LIFO
+After 4 Clients connect, cleanup occurs out of order across tasks, with sequence [2,0,3,1] not LIFO
 ```
 
 ## 2. What the reporter described
 
-多个 MCPClient 实例乱序清理时，transport 的 cancel scope 跨任务管理失效，抛 CancelledError: Cancelled by cancel scope
+When multiple MCPClient instances are cleaned up out of order, the transport's cancel scope management across tasks fails, throwing CancelledError: Cancelled by cancel scope
 
 ## 3. What we captured
 
@@ -32,7 +32,7 @@ RUN EXC: CancelledError: Cancelled by cancel scope
 
 ## 4. Why it happens
 
-多个 MCPClient 实例乱序跨任务清理（顺序非 LIFO），cancel scope 归属错乱，抛出 `CancelledError: Cancelled by cancel scope`。以裸异常暴露在调用方，属 caller-exception。
+Multiple MCPClient instances are cleaned up out of order across tasks (order not LIFO), cancel scope ownership becomes confused, throwing `CancelledError: Cancelled by cancel scope`. Exposed to the caller as a bare exception, a caller-exception.
 
 ## 5. Provenance
 

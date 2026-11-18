@@ -15,24 +15,24 @@ Harness entry: `runner/repro_pending/repro_oauth_flow.py::test_3103`
 Trigger, as recorded during the study:
 
 ```text
-检查 mcp.server.auth.middleware.bearer_auth._send_auth_error 构造 WWW-Authenticate
+Check that mcp.server.auth.middleware.bearer_auth._send_auth_error constructs WWW-Authenticate
 ```
 
 ## 2. What the reporter described
 
-RequireAuthMiddleware 的 _send_auth_error 构造 WWW-Authenticate 时只含 error/error_description(可选 resource_metadata)，从不含 RFC 6750 要求的 scope= 参数，导致客户端无法据挑战限定重新授权所需 scope
+When RequireAuthMiddleware's _send_auth_error constructs WWW-Authenticate, it includes only error/error_description (optionally resource_metadata) and never the scope= parameter required by RFC 6750, so the client cannot determine the scope required for re-authorization from the challenge.
 
 ## 3. What we captured
 
 Captured in our run (evidence tier B).
 
 ```
-_send_auth_error: www_auth_parts=[error, error_description(, resource_metadata)] -> Bearer ...; scope= 参数缺失
+_send_auth_error: www_auth_parts=[error, error_description(, resource_metadata)] -> Bearer ...; the scope= parameter is missing
 ```
 
 ## 4. Why it happens
 
-`RequireAuthMiddleware._send_auth_error` 构造 `WWW-Authenticate` 时只含 error/error_description（可选 resource_metadata），从不含 RFC 6750 §3 要求的 `scope=` 参数；客户端据挑战重授权时无法得知所需 scope，step-up 授权范围被降级。报在 Server 层（层面正确），但挑战信息被降级，属 single-layer 泛化/掩蔽。
+When `RequireAuthMiddleware._send_auth_error` constructs `WWW-Authenticate`, it includes only error/error_description (optionally resource_metadata) and never the `scope=` parameter required by RFC 6750 §3; the client cannot learn the required scope when re-authorizing from the challenge, so the step-up authorization scope is downgraded. It is reported at the Server layer (the correct layer), but the challenge information is downgraded — a single-layer generalization/masking.
 
 ## 5. Provenance
 

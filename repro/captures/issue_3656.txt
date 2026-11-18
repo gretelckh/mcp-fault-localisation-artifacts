@@ -32,7 +32,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-3656', 'version': ''}
 
 ## 4. Why it happens
 
-`Audio(data=b"")` 抛异常而 `Image(data=b"")` 正常，报 `Error executing tool a`。报在 Server 层，但根因被掩蔽。
+`Audio(data=b"")` throws an exception while `Image(data=b"")` works fine, reporting `Error executing tool a`. Reported at the Server layer, but the root cause is masked.
 
 ## 5. Provenance
 
