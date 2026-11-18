@@ -4,13 +4,13 @@
 # evidence_class: registration-time
 # evidence_tier: A
 # evidence_source: issue text
-# harness_entry: repro_cases.py::b_iterator_meta
+# harness_entry: run_real_http.py::b_iterator_meta
 # console_log: not retained
 # raw_payload: raw/real_r_iterator_meta_fail.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_iterator_meta`
+Harness entry: `run_real_http.py::b_iterator_meta`
 
 Trigger, as recorded during the study:
 
@@ -45,7 +45,7 @@ If you got this error by calling ha
 | Evidence class | `registration-time` |
 | Evidence tier | A |
 | Error text came from | issue text |
-| Harness entry | `repro_cases.py::b_iterator_meta` |
+| Harness entry | `run_real_http.py::b_iterator_meta` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_r_iterator_meta_fail.txt`) |
 

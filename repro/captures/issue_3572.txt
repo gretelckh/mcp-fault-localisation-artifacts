@@ -4,13 +4,13 @@
 # evidence_class: pushed-to-server
 # evidence_tier: A
 # evidence_source: issue text
-# harness_entry: repro_cases.py::b_validation_echo
+# harness_entry: run_real_http.py::b_validation_echo
 # console_log: not retained
 # raw_payload: raw/real_r_validation_echo_input.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_validation_echo`
+Harness entry: `run_real_http.py::b_validation_echo`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ Host 传错参数类型（数字而非字符串），Server 校验错误回显�
 | Evidence class | `pushed-to-server` |
 | Evidence tier | A |
 | Error text came from | issue text |
-| Harness entry | `repro_cases.py::b_validation_echo` |
+| Harness entry | `run_real_http.py::b_validation_echo` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_r_validation_echo_input.txt`) |
 

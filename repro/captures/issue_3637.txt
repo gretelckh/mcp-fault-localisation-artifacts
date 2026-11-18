@@ -4,13 +4,13 @@
 # evidence_class: pushed-to-server
 # evidence_tier: B
 # evidence_source: issue text
-# harness_entry: repro_cases.py::b_flat_argument
+# harness_entry: run_real_http.py::b_flat_argument
 # console_log: not retained
 # raw_payload: raw/real_r_flat_argument.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_flat_argument`
+Harness entry: `run_real_http.py::b_flat_argument`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ Host 传扁平参数 dict（期望 Pydantic model 被 flatten），但 Server �
 | Evidence class | `pushed-to-server` |
 | Evidence tier | B |
 | Error text came from | issue text |
-| Harness entry | `repro_cases.py::b_flat_argument` |
+| Harness entry | `run_real_http.py::b_flat_argument` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_r_flat_argument.txt`) |
 

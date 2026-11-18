@@ -4,13 +4,13 @@
 # evidence_class: silent
 # evidence_tier: D
 # evidence_source: none
-# harness_entry: repro_cases.py::b_media_mime
+# harness_entry: run_real_http.py::b_media_mime
 # console_log: not retained
 # raw_payload: raw/real_r_media_unregistered_mime.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_media_mime`
+Harness entry: `run_real_http.py::b_media_mime`
 
 Trigger, as recorded during the study:
 
@@ -44,7 +44,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-media', 'version': ''
 | Evidence class | `silent` |
 | Evidence tier | D |
 | Error text came from | none |
-| Harness entry | `repro_cases.py::b_media_mime` |
+| Harness entry | `run_real_http.py::b_media_mime` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_r_media_unregistered_mime.txt`) |
 

@@ -4,13 +4,13 @@
 # evidence_class: single-layer-masked
 # evidence_tier: B
 # evidence_source: runtime
-# harness_entry: repro_cases.py::b_417
+# harness_entry: repro_cases_b14.py::b_417
 # console_log: not retained
 # raw_payload: raw/real_417.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_417`
+Harness entry: `repro_cases_b14.py::b_417`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-417', 'version': ''}}
 | Evidence class | `single-layer-masked` |
 | Evidence tier | B |
 | Error text came from | runtime |
-| Harness entry | `repro_cases.py::b_417` |
+| Harness entry | `repro_cases_b14.py::b_417` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_417.txt`) |
 

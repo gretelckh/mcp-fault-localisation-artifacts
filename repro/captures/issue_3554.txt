@@ -4,13 +4,13 @@
 # evidence_class: single-layer-masked
 # evidence_tier: A
 # evidence_source: issue text
-# harness_entry: repro_cases.py::b_bytes_output
+# harness_entry: run_real_http.py::b_bytes_output
 # console_log: not retained
 # raw_payload: raw/real_r_bytes_output_crash.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_bytes_output`
+Harness entry: `run_real_http.py::b_bytes_output`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-bytes', 'version': ''
 | Evidence class | `single-layer-masked` |
 | Evidence tier | A |
 | Error text came from | issue text |
-| Harness entry | `repro_cases.py::b_bytes_output` |
+| Harness entry | `run_real_http.py::b_bytes_output` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_r_bytes_output_crash.txt`) |
 

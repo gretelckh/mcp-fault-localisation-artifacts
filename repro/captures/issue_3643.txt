@@ -4,13 +4,13 @@
 # evidence_class: silent
 # evidence_tier: D
 # evidence_source: none
-# harness_entry: repro_cases.py::b_userlist_prompt
+# harness_entry: run_real_http.py::b_userlist_prompt
 # console_log: not retained
 # raw_payload: raw/real_r_userlist_prompt.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_userlist_prompt`
+Harness entry: `run_real_http.py::b_userlist_prompt`
 
 Trigger, as recorded during the study:
 
@@ -45,7 +45,7 @@ prompt handler 返回 UserList 被渲染成单条字符串化消息（is_error=F
 | Evidence class | `silent` |
 | Evidence tier | D |
 | Error text came from | none |
-| Harness entry | `repro_cases.py::b_userlist_prompt` |
+| Harness entry | `run_real_http.py::b_userlist_prompt` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_r_userlist_prompt.txt`) |
 

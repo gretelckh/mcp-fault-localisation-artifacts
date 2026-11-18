@@ -4,13 +4,13 @@
 # evidence_class: single-layer-masked
 # evidence_tier: A
 # evidence_source: issue text
-# harness_entry: repro_cases.py::b_nontool_exc
+# harness_entry: run_real_http.py::b_nontool_exc
 # console_log: not retained
 # raw_payload: raw/real_r_non_tool_error_silent.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_nontool_exc`
+Harness entry: `run_real_http.py::b_nontool_exc`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ handler 抛非 ToolError，客户端暴露不清晰，报 `Error executing tool 
 | Evidence class | `single-layer-masked` |
 | Evidence tier | A |
 | Error text came from | issue text |
-| Harness entry | `repro_cases.py::b_nontool_exc` |
+| Harness entry | `run_real_http.py::b_nontool_exc` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_r_non_tool_error_silent.txt`) |
 

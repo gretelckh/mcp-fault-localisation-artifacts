@@ -4,13 +4,13 @@
 # evidence_class: caller-exception
 # evidence_tier: A
 # evidence_source: issue text
-# harness_entry: repro_cases.py::b_terminate_reinit
+# harness_entry: run_real_http.py::b_terminate_reinit
 # console_log: not retained
 # raw_payload: raw/real_r_session_reinit_404.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_terminate_reinit`
+Harness entry: `run_real_http.py::b_terminate_reinit`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ RAISED:ExceptionGroup:unhandled errors in a TaskGroup (1 sub-exception)
 | Evidence class | `caller-exception` |
 | Evidence tier | A |
 | Error text came from | issue text |
-| Harness entry | `repro_cases.py::b_terminate_reinit` |
+| Harness entry | `run_real_http.py::b_terminate_reinit` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_r_session_reinit_404.txt`) |
 

@@ -204,6 +204,54 @@ def main():
               if int(re.search(r"# stack: complete, (\d+) frames", s).group(1))
               != len(re.findall(r'File ".+", line \d+', s))), 0)
 
+    print("\n== 10. Reproducibility: harness entries resolve ==")
+    # Build the set of builders actually defined in the released runner files.
+    runner_dir = os.path.join(ROOT, "repro", "runner")
+    runner_files = sorted(f for f in os.listdir(runner_dir) if f.endswith(".py"))
+    builders = {}  # name -> file that defines it
+    for fname in runner_files:
+        src = open(os.path.join(runner_dir, fname), encoding="utf-8").read()
+        for name in re.findall(r"^def\s+([A-Za-z0-9_]+)\s*\(", src, re.M):
+            builders.setdefault(name, fname)
+
+    wrong_file = []       # builder exists, but the entry names the wrong file
+    open_gaps = []        # entry names a script/builder that is not in the release
+    for f in caps:
+        s = open(os.path.join(capdir, f), encoding="utf-8").read()
+        entry = next((l.partition(": ")[2].strip() for l in s.splitlines()
+                      if l.startswith("# harness_entry:")), "")
+        m = re.search(r"::([A-Za-z0-9_]+)$", entry)
+        name = m.group(1) if m else None
+        if name and name in builders:
+            expected = os.path.basename(entry.split("::")[0]).lstrip("./")
+            if expected and expected != builders[name]:
+                wrong_file.append((f, entry, builders[name]))
+        else:
+            open_gaps.append((f, entry))
+    check("harness entries naming the wrong runner file", len(wrong_file), 0)
+    for f, entry, actual in wrong_file:
+        print("      %s -> %s (builder in %s)" % (f, entry, actual))
+    # Entries that name an unreleased script or a builder with no definition are
+    # genuine reproducibility gaps, enumerated in data/broken_harness_entries.csv.
+    print("      (%d harness entries still name an unreleased script/builder; "
+          "see data/broken_harness_entries.csv)" % len(open_gaps))
+
+    print("\n== 11. Reproducibility: per-bug transport recorded ==")
+    tpath = os.path.join(ROOT, "data", "transport_72.csv")
+    check("transport table present", os.path.exists(tpath), True)
+    if os.path.exists(tpath):
+        trows = load("data/transport_72.csv")
+        check("transport rows", len(trows), 72)
+        check("transport table covers the 72 reproduced bugs",
+              {r["issue"] for r in trows} == {"#%d" % n for n in hdr}, True)
+        known = {"sse", "stdio", "streamable-http", "unknown"}
+        check("transport values drawn from the allowed set",
+              sum(1 for r in trows if r["transport"] not in known), 0)
+        check("transport rows with high/medium confidence",
+              sum(1 for r in trows if r["confidence"] in ("high", "medium")), 60)
+        check("transport rows honestly marked unknown",
+              sum(1 for r in trows if r["transport"] == "unknown"), 12)
+
     print()
     if FAIL:
         print("FAILED %d check(s): %s" % (len(FAIL), ", ".join(FAIL)))

@@ -4,13 +4,13 @@
 # evidence_class: silent
 # evidence_tier: B
 # evidence_source: issue text
-# harness_entry: repro_cases.py::b_unregistered_result
+# harness_entry: run_real_http.py::b_unregistered_result
 # console_log: not retained
 # raw_payload: raw/real_r_fallback_success_flag.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_unregistered_result`
+Harness entry: `run_real_http.py::b_unregistered_result`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-flag', 'version': ''}
 | Evidence class | `silent` |
 | Evidence tier | B |
 | Error text came from | issue text |
-| Harness entry | `repro_cases.py::b_unregistered_result` |
+| Harness entry | `run_real_http.py::b_unregistered_result` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_r_fallback_success_flag.txt`) |
 

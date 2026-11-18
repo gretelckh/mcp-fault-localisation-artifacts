@@ -4,13 +4,13 @@
 # evidence_class: silent
 # evidence_tier: C
 # evidence_source: none
-# harness_entry: repro_cases.py::b_race_lost_update
+# harness_entry: run_real_http.py::b_race_lost_update
 # console_log: not retained
 # raw_payload: raw/real_r_race_lost_update.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_race_lost_update`
+Harness entry: `run_real_http.py::b_race_lost_update`
 
 Trigger, as recorded during the study:
 
@@ -45,7 +45,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-race', 'version': ''}
 | Evidence class | `silent` |
 | Evidence tier | C |
 | Error text came from | none |
-| Harness entry | `repro_cases.py::b_race_lost_update` |
+| Harness entry | `run_real_http.py::b_race_lost_update` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_r_race_lost_update.txt`) |
 

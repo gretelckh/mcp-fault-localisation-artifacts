@@ -4,13 +4,13 @@
 # evidence_class: silent
 # evidence_tier: D
 # evidence_source: none
-# harness_entry: repro_cases.py::b_capabilities_drop
+# harness_entry: run_real_http.py::b_capabilities_drop
 # console_log: not retained
 # raw_payload: raw/real_r_capabilities_drop.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_capabilities_drop`
+Harness entry: `run_real_http.py::b_capabilities_drop`
 
 Trigger, as recorded during the study:
 
@@ -45,7 +45,7 @@ advertised_capabilities=experimental=None logging=None prompts=PromptsCapability
 | Evidence class | `silent` |
 | Evidence tier | D |
 | Error text came from | none |
-| Harness entry | `repro_cases.py::b_capabilities_drop` |
+| Harness entry | `run_real_http.py::b_capabilities_drop` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_r_capabilities_drop.txt`) |
 

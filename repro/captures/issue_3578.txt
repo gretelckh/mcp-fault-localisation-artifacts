@@ -4,13 +4,13 @@
 # evidence_class: silent
 # evidence_tier: A
 # evidence_source: issue text
-# harness_entry: repro_cases.py::b_duplicate_tool
+# harness_entry: run_real_http.py::b_duplicate_tool
 # console_log: not retained
 # raw_payload: raw/real_r_duplicate_tool_shadow.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_duplicate_tool`
+Harness entry: `run_real_http.py::b_duplicate_tool`
 
 Trigger, as recorded during the study:
 
@@ -43,7 +43,7 @@ meta={'io.modelcontextprotocol/serverInfo': {'name': 'real-dup', 'version': ''}}
 | Evidence class | `silent` |
 | Evidence tier | A |
 | Error text came from | issue text |
-| Harness entry | `repro_cases.py::b_duplicate_tool` |
+| Harness entry | `run_real_http.py::b_duplicate_tool` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_r_duplicate_tool_shadow.txt`) |
 

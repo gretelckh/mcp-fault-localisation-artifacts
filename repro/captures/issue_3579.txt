@@ -4,13 +4,13 @@
 # evidence_class: pushed-to-server
 # evidence_tier: D
 # evidence_source: none
-# harness_entry: repro_cases.py::b_empty_server
+# harness_entry: run_real_http.py::b_empty_server
 # console_log: not retained
 # raw_payload: raw/real_r_empty_server_components.txt
 
 ## 1. What was run
 
-Harness entry: `repro_cases.py::b_empty_server`
+Harness entry: `run_real_http.py::b_empty_server`
 
 Trigger, as recorded during the study:
 
@@ -44,7 +44,7 @@ Host 向一个无组件的 server 请求未知工具，报 `Unknown tool`（is_e
 | Evidence class | `pushed-to-server` |
 | Evidence tier | D |
 | Error text came from | none |
-| Harness entry | `repro_cases.py::b_empty_server` |
+| Harness entry | `run_real_http.py::b_empty_server` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_r_empty_server_components.txt`) |
 
