@@ -9,10 +9,10 @@ things the manuscript promises in its data-availability statement, and nothing e
 | 1 | Issue-screening workbook over all 1,343 pure issues | `data/screening_1343.csv`, `data/screening_funnel.csv` |
 | 1a | The same pull, raw, exactly as the GitHub API returned it (1,373 issues, 14 API fields, no analysis columns) | `data/gh_issues_raw_2026-11-09.xlsx` |
 | 2 | The live dataset: 339 rows | `data/active_bugs_339.csv`, `data/evidence_class_339.csv` |
-| 3 | The 72 reproduction scripts and the output captured from each run | `repro/runner/`, `repro/captures/`, `repro/transcripts/` |
+| 3 | The 72 capture records and associated runner sources | `repro/runner/`, `repro/captures/`, `repro/transcripts/` |
 | 4 | Per-bug evidence classification | `data/evidence_class_339.csv`, `repro/evidence_matrix.csv`, `data/blocking_gaps_83.csv` |
 | 5 | LLM prompts and raw answers | `llm/prompts.md`, `llm/outputs/` |
-| 6 | A script that recomputes every number in the paper | `scripts/verify_numbers.py` |
+| 6 | A script that checks the released counts and scores | `scripts/verify_numbers.py` |
 
 Nothing here is synthetic. Every row is traceable to a public GitHub issue in
 `modelcontextprotocol/python-sdk`, a run that was actually executed, or a model response that was
@@ -29,9 +29,7 @@ git clone <this-repo> mcp-artefacts && cd mcp-artefacts
 python scripts/verify_numbers.py
 ```
 
-The script recomputes **every dataset-level number in the paper** from the files in this repository
-and prints each value next to the one printed in the manuscript — 98 checks, all of which should
-read `ok`. The last line reads `All checks passed ...` if the artefact and the paper agree.
+The verifier checks counts and model scores from the released tables. It also checks capture metadata, referenced runner symbols, and arithmetic in the archived census figure. See the linked provenance notes for the scope of these checks.
 
 If you only want to look at one thing, open `data/active_bugs_339.csv` in Excel or pandas and
 filter the column `reproduction_status`.
@@ -111,11 +109,9 @@ raised in the client or at the HTTP boundary, and 8 wrong-result cases where no 
 `llm/outputs/studyA_arms_72.json` — Study A: three arms (`baseline`, `ruleclue`, `analyst`) over
 the 72 reproduced bugs, each with the predicted layer, the ranked layers and the raw scores.
 
-`llm/outputs/studyB_247.jsonl` — Study B: one JSON object per bug (247 bugs), with the issue text
-that was shown to the model, the model's JSON answer, and the true layer joined in.
+The [current Study B archive](llm/STUDY_B_339.md) covers 339 inputs and 338 scored single-layer bugs. The older 247-case files are retained as historical Study B records.
 
-`llm/outputs/studyB_scores_247.csv` — the same, flattened to one row per bug for counting:
-`true_origin_layer`, `model_reporter_claim`, `model_origin_layer`, `correct`.
+The [Study A label-only control](llm/STUDY_A_CONTROL.md) contains both archived repeats and the hints used to build the Study A prompt conditions.
 
 `llm/outputs/clues_72.json` — the six fixed, layer-blind guidance paragraphs used by the `ruleclue`
 arm, one per evidence class.
@@ -139,7 +135,7 @@ arm, one per evidence class.
 | Why 83 evidence-poor reports are blocked | 16 / 7 / 14 / 15 / 9 / 19 / 3 | `data/blocking_gaps_83.csv` |
 | Study A, baseline | 41/72 = 56.9 %, non-Server 3/34 = 8.8 % | `llm/outputs/studyA_arms_72.json` |
 | Study A, rule-based clue | 46/72 = 63.9 %, non-Server 8/34 = 23.5 % | same |
-| Study B, issue text only | 119/247 = 48.2 %, non-Server 51/172 = 29.7 % | `llm/outputs/studyB_scores_247.csv` |
+| Study B, issue-report text | 154/338 = 45.6%; non-Server 66/240 = 27.5% | `llm/outputs/studyB_scores_339.csv` |
 
 ---
 
@@ -204,6 +200,10 @@ Terms of Service for the purpose of review.
 The authors' identity is not concealed by this repository. A permanent DOI will be minted after
 acceptance.
 
-### Study A serverInfo experiment
+## 7. Study A serverInfo experiment
 
 The [serverInfo experiment](llm/serverinfo_ablation/README.md) includes the exact Study A input text, the baseline prompt, the 648 archived responses, and an offline verifier.
+
+## 8. Census figure and reproduction provenance
+
+See [census aggregate provenance](data/FIGURE_CENSUS.md) and [capture and runner provenance](repro/PROVENANCE.md).

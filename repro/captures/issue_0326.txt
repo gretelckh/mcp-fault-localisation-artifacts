@@ -4,13 +4,13 @@
 # evidence_class: caller-exception
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: issue_0326.py::repro_0326
+# harness_entry: issue_0326.py::run
 # console_log: not retained
 # raw_payload: raw/real_326.txt
 
 ## 1. What was run
 
-Harness entry: `issue_0326.py::repro_0326`
+Harness entry: `issue_0326.py::run`
 
 Trigger code:
 
@@ -75,7 +75,7 @@ When `env` is set to non-None (e.g. `{}`), the child process loses PATH, npx fai
 | Evidence class | `caller-exception` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `issue_0326.py::repro_0326` |
+| Harness entry | `issue_0326.py::run` |
 | Console log retained | no |
 | Raw payload retained | yes (`raw/real_326.txt`) |
 

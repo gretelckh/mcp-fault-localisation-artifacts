@@ -4,13 +4,13 @@
 # evidence_class: caller-exception
 # evidence_tier: A
 # evidence_source: runtime
-# harness_entry: issue_3382.py::repro_3382
+# harness_entry: issue_3382.py::main
 # console_log: logs/3382.txt
 # raw_payload: not retained
 
 ## 1. What was run
 
-Harness entry: `issue_3382.py::repro_3382`
+Published reconstruction: `issue_3382.py::main` (incomplete source fragment; no runnable entry point is archived).
 
 Trigger code:
 
@@ -96,7 +96,7 @@ RuntimeError: Attempted to acquire an already held Lock
 | Evidence class | `caller-exception` |
 | Evidence tier | A |
 | Error text came from | runtime |
-| Harness entry | `issue_3382.py::repro_3382` |
+| Harness entry | `issue_3382.py::main` |
 | Console log retained | yes (`logs/3382.txt`) |
 | Raw payload retained | no |
 

@@ -1,0 +1,10 @@
+origin_layer,status,total,names_file_and_exception,generic_message,neighbouring_layer,silent,hang,never_started
+Transport,reproduced,8,0,1,6,1,0,0
+Transport,unreproduced,97,8,45,20,6,6,12
+Server,reproduced,38,11,18,1,8,0,0
+Server,unreproduced,60,41,0,2,6,0,11
+Client,reproduced,21,4,4,10,3,0,0
+Client,unreproduced,63,28,5,9,14,5,2
+Host,reproduced,5,0,3,1,1,0,0
+Host,unreproduced,46,2,12,11,0,3,18
+multi,unreproduced,1,0,1,0,0,0,0

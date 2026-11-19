@@ -1,5 +1,5 @@
 seq,case_id,issue,url,title,issue_state,created_at,origin_layer,exposure_channel_raw,label_source,review_flag,reproduction_status,evidence_tier,evidence_source,not_reproduced_reason,reproduction_script,defect_description,trigger_snippet,observed_output,analyst_note,issue_error_excerpt,archived_llm_layer,l2_path_layer,l2_confidence,related_pr
-1,BUG-0076,#76,https://github.com/modelcontextprotocol/python-sdk/issues/76,GitHub MCP server doesn't work in Python SDK,closed,2024-11-27T09:51:12Z,Server,caller-exception,expert,,reproduced,A,runtime,,issue_0076.py::repro_0076,Mechanically replaying the python snippet in the issue body -> hits the issue's own error,"import os
+1,BUG-0076,#76,https://github.com/modelcontextprotocol/python-sdk/issues/76,GitHub MCP server doesn't work in Python SDK,closed,2024-11-27T09:51:12Z,Server,caller-exception,expert,,reproduced,A,runtime,,issue_0076.py::main,Mechanically replaying the python snippet in the issue body -> hits the issue's own error,"import os
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 import dotenv
@@ -325,7 +325,7 @@ def write_markdown_file(directory_path: str, filename: str, content: str) -> str
  Args:
  directory_path: The directory path whe",Server,unresolved,,
 36,BUG-0320,#320,https://github.com/modelcontextprotocol/python-sdk/issues/320,Python client not working with mcp/puppeteer,closed,2025-03-19T16:58:05Z,Server,not_exercised_not_inferable,expert,,not_reproduced__no_error_text,C,none,"observation/scenario-specific: defect is client/host-side, cross-server, or needs a custom endpoint/external service; single tool call runs clean",,,,,,Python client not working with mcp/puppeteer,,unresolved,,
-37,BUG-0326,#326,https://github.com/modelcontextprotocol/python-sdk/issues/326,MCP client with npx not working when env parameter of StdioServerParameters is set,closed,2025-03-20T02:53:13Z,Host,caller-exception,expert,,reproduced,A,runtime,,issue_0326.py::repro_0326,Mechanically replaying the python snippet in the issue body -> hits the issue's own error,"from mcp import ClientSession, StdioServerParameters
+37,BUG-0326,#326,https://github.com/modelcontextprotocol/python-sdk/issues/326,MCP client with npx not working when env parameter of StdioServerParameters is set,closed,2025-03-20T02:53:13Z,Host,caller-exception,expert,,reproduced,A,runtime,,issue_0326.py::run,Mechanically replaying the python snippet in the issue body -> hits the issue's own error,"from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
 server_params = StdioServerParameters(
@@ -919,7 +919,7 @@ and call_tool not return or exception!!!
 
 code:
  logging.info(f""call_too",Transport,unresolved,,
-128,BUG-0915,#915,https://github.com/modelcontextprotocol/python-sdk/issues/915,Exception in `ClientSessionGroup` if `streamable_http` MCP server is not available,open,2025-06-10T09:49:49Z,Client,caller-exception,expert,Y,reproduced,A,runtime,,issue_0915.py::repro_0915,Mechanically replaying the python snippet in the issue body -> hits the issue's own error,"import asyncio
+128,BUG-0915,#915,https://github.com/modelcontextprotocol/python-sdk/issues/915,Exception in `ClientSessionGroup` if `streamable_http` MCP server is not available,open,2025-06-10T09:49:49Z,Client,caller-exception,expert,Y,reproduced,A,runtime,,issue_0915.py::main,Mechanically replaying the python snippet in the issue body -> hits the issue's own error,"import asyncio
 
 from mcp.client.session_group import ClientSessionGroup, StreamableHttpParameters
 
@@ -2196,7 +2196,7 @@ tools.0.outputSchema.properties.result
  Input should be a valid dictionary [type=dict_type, input_value=True, input_type=bool]
  For further information visit https",Client,Transport,1,3354
 300,BUG-3356,#3356,https://github.com/modelcontextprotocol/python-sdk/issues/3356,bug(client/streamable_http): prevent infinite SSE reconnect loops with bounded exponential backoff,open,2026-08-21T18:28:53Z,Transport,not_exercised_not_inferable,expert,,not_reproduced__no_error_text,D,none,no defect captured by this trigger (clean success); scenario not exercised,,,,,,bug(client/streamable_http): prevent infinite SSE reconnect loops with bounded exponential backoff,,unresolved,,
-301,BUG-3382,#3382,https://github.com/modelcontextprotocol/python-sdk/issues/3382,OAuthClientProvider auth lock is permanently poisoned when httpx closes async_auth_flow from a different task (RuntimeError: The current task is not holding this lock),open,2026-08-25T00:56:27Z,Client,caller-exception,expert,,reproduced,A,runtime,,issue_3382.py::repro_3382,Mechanically replaying the python snippet in the issue body -> hits the issue's own error,"import asyncio
+301,BUG-3382,#3382,https://github.com/modelcontextprotocol/python-sdk/issues/3382,OAuthClientProvider auth lock is permanently poisoned when httpx closes async_auth_flow from a different task (RuntimeError: The current task is not holding this lock),open,2026-08-25T00:56:27Z,Client,caller-exception,expert,,reproduced,A,runtime,,issue_3382.py::main,Mechanically replaying the python snippet in the issue body -> hits the issue's own error,"import asyncio
 import httpx2
 from mcp.client.auth.oauth2 import OAuthClientProvider
 from mcp.shared.auth import OAuthClientMetadata
@@ -2259,7 +2259,7 @@ During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
  File "".../site-packages/mcp/client/a",Client,unresolved,,
-302,BUG-3384,#3384,https://github.com/modelcontextprotocol/python-sdk/issues/3384,"ClientSessionGroup raises KeyError when a server exposes no tools, resources or prompts",open,2026-08-25T04:47:21Z,Client,caller-exception,expert,Y,reproduced,A,runtime,,issue_3384.py::repro_3384,Mechanically replaying the python snippet in the issue body -> hits the issue's own error,"import anyio
+302,BUG-3384,#3384,https://github.com/modelcontextprotocol/python-sdk/issues/3384,"ClientSessionGroup raises KeyError when a server exposes no tools, resources or prompts",open,2026-08-25T04:47:21Z,Client,caller-exception,expert,Y,reproduced,A,runtime,,issue_3384.py::main,Mechanically replaying the python snippet in the issue body -> hits the issue's own error,"import anyio
 import mcp_types as types
 from mcp.client.client import Client
 from mcp.client.session_group import ClientSessionGroup
@@ -2321,7 +2321,7 @@ SyntaxError: Unexpected token 'N', ...""stddev"":NaN,""max"":""... is not valid 
 So the same tool result is readable from a Python client and breaks a TypeScript one.
 
 What I expected: a text content block holding JSON should be parseable by any JSON parser, or the SDK",Server,unresolved,,
-304,BUG-3434,#3434,https://github.com/modelcontextprotocol/python-sdk/issues/3434,In-process callback failures break tool calls and notification sends,closed,2026-09-03T07:11:40Z,Server,pushed-to-Server,expert,,reproduced,A,runtime,,issue_3434.py::repro_3434,Mechanically replaying the python snippet in the issue body -> hits the issue's own error,"import anyio
+304,BUG-3434,#3434,https://github.com/modelcontextprotocol/python-sdk/issues/3434,In-process callback failures break tool calls and notification sends,closed,2026-09-03T07:11:40Z,Server,pushed-to-Server,expert,,reproduced,A,runtime,,issue_3434.py::main,Mechanically replaying the python snippet in the issue body -> hits the issue's own error,"import anyio
 
 from mcp import Client
 from mcp.server.mcpserver import Context, MCPServer

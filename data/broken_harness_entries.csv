@@ -1,13 +1,13 @@
 issue,harness_entry,status,note
-#76,issue_0076.py::repro_0076,recorded,Config-error validation raised bare to caller (stdio external tool)
+#76,issue_0076.py::main,recorded,Config-error validation raised bare to caller (stdio external tool)
 #79,issue_0079.py::repro_0079,reproduced,Defect reproduced on mcp 2.2.0
-#326,issue_0326.py::repro_0326,recorded,npx subprocess loses PATH when env is set (stdio external tool)
+#326,issue_0326.py::run,recorded,npx subprocess loses PATH when env is set (stdio external tool)
 #409,issue_0409.py::repro_0409,reproduced,Defect reproduced on mcp 2.2.0
 #507,issue_0507.py::repro_0507,reproduced,Defect reproduced on mcp 2.2.0
 #521,issue_0521.py::repro_0521,reproduced,Defect reproduced on mcp 2.2.0
 #577,issue_0577.py::repro_0577,reproduced,Defect reproduced on mcp 2.2.0
 #613,issue_0613.py::repro_0613,reproduced,Defect reproduced on mcp 2.2.0
-#915,issue_0915.py::repro_0915,recorded,Session group connect failure on unreachable server
+#915,issue_0915.py::main,recorded,Session group connect failure on unreachable server
 #922,issue_0922.py::repro_0922,reproduced,Defect reproduced on mcp 2.2.0
 #1313,issue_1313.py::repro_1313,reproduced,Defect reproduced on mcp 2.2.0
 #2216,issue_2216.py::repro_2216,reproduced,Defect reproduced on mcp 2.2.0
@@ -18,9 +18,9 @@ issue,harness_entry,status,note
 #3209,issue_3209.py::repro_3209,reproduced,Defect reproduced on mcp 2.2.0
 #3240,issue_3240.py::repro_3240,reproduced,Defect reproduced on mcp 2.2.0
 #3250,issue_3250.py::repro_3250,reproduced,Defect reproduced on mcp 2.2.0
-#3382,issue_3382.py::repro_3382,recorded,OAuth auth flow lock poisoning on cross-task close
-#3384,issue_3384.py::repro_3384,recorded,Session group KeyError on component-less server
-#3434,issue_3434.py::repro_3434,recorded,In-process tool callback failure surfaces as tool error
+#3382,issue_3382.py::main,incomplete_reconstruction,Published source ends in an incomplete statement and lacks a launcher
+#3384,issue_3384.py::main,recorded,Session group KeyError on component-less server
+#3434,issue_3434.py::main,recorded,In-process tool callback failure surfaces as tool error
 #3557,repro_cases.py::case_jsonrpc_code,clean_on_pinned_sdk,Malformed JSON-RPC envelope answered with -32602
 #3566,issue_3566.py::repro_3566,reproduced,Defect reproduced on mcp 2.2.0
 #3644,repro_cases.py::case_outputschema_mode,reproduced,outputSchema validation failure on structured output

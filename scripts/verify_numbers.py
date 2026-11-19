@@ -9,6 +9,7 @@ No third-party packages are required. Every check prints the value computed from
 released files next to the value printed in the manuscript; the script exits with
 status 1 if any of them disagree.
 """
+import ast
 import csv
 import glob
 import json
@@ -98,23 +99,56 @@ def main():
         check(f"arm {arm}: non-Server accuracy (%)", pct(hit_ns, len(non_srv)),
               round(100.0 * want_ns / want_ns_n, 1))
 
-    print("\n== 7. Study B: issue text only, n = 247 ==")
-    scores = load("llm/outputs/studyB_scores_247.csv")
-    ok = sum(int(r["correct"]) for r in scores)
-    check("bugs scored", len(scores), 247)
-    check("correct", ok, 119)
-    check("accuracy (%)", pct(ok, len(scores)), 48.2)
-    by = defaultdict(lambda: [0, 0])
-    for r in scores:
-        by[r["true_origin_layer"]][0] += int(r["correct"])
-        by[r["true_origin_layer"]][1] += 1
-    for k, (a, b) in [("Server", (68, 75)), ("Client", (41, 61)), ("Transport", (8, 81)), ("Host", (2, 29))]:
-        check(f"true layer {k}: correct", by[k][0], a)
-        check(f"true layer {k}: accuracy (%)", pct(by[k][0], by[k][1]), pct(a, b))
-    ns = [r for r in scores if r["true_origin_layer"] != "Server"]
-    check("non-Server correct", sum(int(r["correct"]) for r in ns), 51)
-    check("non-Server accuracy (%)", pct(sum(int(r["correct"]) for r in ns), len(ns)), 29.7)
-    check("model abstained on the reporter's claim", sum(1 for r in scores if not r["model_reporter_claim"]), 78)
+    for repeat in (2, 3):
+        path = os.path.join(ROOT, "llm", "outputs", f"studyA_label_only_r{repeat}_72.jsonl")
+        with open(path, encoding="utf-8") as stream:
+            control = list(map(json.loads, stream))
+        check(f"label-only control r{repeat}: IDs match", {r["issue"] for r in control} == {int(r["issue"].lstrip("#")) for r in repro}, True)
+        check(f"label-only control r{repeat}: correct", sum(r["prediction"] == truth[r["issue"]] for r in control), 38)
+        check(f"label-only control r{repeat}: non-Server correct",
+              sum(r["prediction"] == truth[r["issue"]] for r in control if truth[r["issue"]] != "Server"), 0)
+    check("Study A non-Server predicted Server",
+          sum(r["pred"] == "Server" for r in arms["baseline"] if truth[int(r["issue"])] != "Server"), 23)
+
+    print("\n== 7. Study B: 339 inputs, 338 single-layer scores ==")
+    scores = load("llm/outputs/studyB_scores_339.csv")
+    output_file = os.path.join(ROOT, "llm", "outputs", "studyB_339_predictions.jsonl")
+    with open(output_file, encoding="utf-8") as stream:
+        predictions = {r["issue"]: r for r in map(json.loads, stream)}
+    check("Study B output IDs match the corpus", set(predictions) == set(truth), True)
+    check("Study B input count", len(scores), 339)
+    check("Study B score IDs match the corpus", {int(r["issue"]) for r in scores} == set(truth), True)
+    check("score ground truth and predictions match the source tables",
+          all(r["ground_truth"] == truth[int(r["issue"])]
+              and r["predicted_layer"] == (predictions[int(r["issue"])]["layer"] or "")
+              and int(r["valid"]) == predictions[int(r["issue"])]["valid"]
+              and int(r["scored"]) == (r["ground_truth"] != "multi")
+              and r["correct"] == (str(int(r["ground_truth"] == r["predicted_layer"])) if r["scored"] == "1" else "")
+              for r in scores), True)
+    eligible = [r for r in scores if r["scored"] == "1"]
+    check("single-layer scores", len(eligible), 338)
+    check("correct single-layer predictions", sum(int(r["correct"]) for r in eligible), 154)
+    check("invalid predictions counted as incorrect", sum(int(r["valid"]) == 0 and r["correct"] == "0" for r in eligible), 2)
+    check("cross-layer issue and prediction",
+          [(r["issue"], r["predicted_layer"]) for r in scores if r["scored"] == "0"], [("2564", "Server")])
+    for layer, expected in {"Server": (88, 98), "Client": (50, 84), "Transport": (13, 105), "Host": (3, 51)}.items():
+        group = [r for r in eligible if r["ground_truth"] == layer]
+        check(f"Study B {layer}: correct, total", (sum(int(r["correct"]) for r in group), len(group)), expected)
+    non_server = [r for r in eligible if r["ground_truth"] != "Server"]
+    check("Study B non-Server: correct, total", (sum(int(r["correct"]) for r in non_server), len(non_server)), (66, 240))
+    check("Study B non-Server predicted Server", sum(r["predicted_layer"] == "Server" for r in non_server), 102)
+
+    print("\n== Figure census: archived aggregate consistency ==")
+    leaves = load("data/figure_census_aggregate.csv")
+    classes = ("names_file_and_exception", "generic_message", "neighbouring_layer", "silent", "hang", "never_started")
+    actual_groups = Counter((r["origin_layer"], "reproduced" if r["reproduction_status"] == "reproduced" else "unreproduced") for r in active)
+    figure_groups = {(r["origin_layer"], r["status"]): int(r["total"]) for r in leaves}
+    check("figure branch sizes match the case ledger", figure_groups == dict(actual_groups), True)
+    check("each figure group equals the sum of its leaves", all(sum(int(r[k]) for k in classes) == int(r["total"]) for r in leaves), True)
+    totals = [sum(int(r[k]) for r in leaves) for k in classes]
+    check("archived figure class totals", totals, [94, 89, 60, 39, 14, 43])
+    check("archived Localisable, C1, C2 and C3 totals",
+          [totals[0], totals[1] + totals[2], totals[3] + totals[4], totals[5]], [94, 149, 53, 43])
 
     print("\n== 8. Per-bug captured output ==")
     capdir = os.path.join(ROOT, "repro", "captures")
@@ -208,24 +242,15 @@ def main():
     # Build the set of builders actually defined in the released runner files.
     runner_dir = os.path.join(ROOT, "repro", "runner")
     runner_files = sorted(f for f in os.listdir(runner_dir) if f.endswith(".py"))
-    builders = {}  # name -> file that defines it
+    symbols = {}
     for fname in runner_files:
-        src = open(os.path.join(runner_dir, fname), encoding="utf-8").read()
-        for name in re.findall(r"^def\s+([A-Za-z0-9_]+)\s*\(", src, re.M):
-            builders.setdefault(name, fname)
-    # Per-issue standalone scripts (repro/runner/issue_XXXX.py).
-    issue_scripts = sorted(f for f in runner_files
-                           if f.startswith("issue_") and f.endswith(".py"))
+        with open(os.path.join(runner_dir, fname), encoding="utf-8") as stream:
+            symbols[fname] = {node.name for node in ast.parse(stream.read()).body
+                              if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))}
 
     def resolves(entry):
-        m = re.match(r"(issue_\d+\.py)::repro_\d+$", entry)
-        if m:
-            return m.group(1) in issue_scripts
-        m = re.search(r"::([A-Za-z0-9_]+)$", entry)
-        if m and m.group(1) in builders:
-            expected = os.path.basename(entry.split("::")[0]).lstrip("./")
-            return not expected or expected == builders[m.group(1)]
-        return False
+        filename, separator, symbol = entry.partition("::")
+        return bool(separator and symbol in symbols.get(os.path.basename(filename), set()))
 
     unresolved = []
     per_issue_count = 0

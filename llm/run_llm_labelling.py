@@ -1,22 +1,9 @@
 #!/usr/bin/env python3
-"""Reference implementation of the layer-labelling call used in the paper.
+"""Run Study A using frozen diagnostic text or Study B using the 339 issue reports.
 
-Two modes:
-
-    --mode runtime   Study A. Reads repro/captures/issue_XXXX.txt, sends the captured output
-                     with prompt P1, expects one layer token. Matches llm/outputs/studyA_arms_72.json.
-    --mode issue     Study B. Reads llm/outputs/studyB_247.jsonl, sends title + body + excerpt
-                     with prompt P4, expects a JSON object. Matches llm/outputs/studyB_247.jsonl.
-
-Any OpenAI-compatible endpoint works:
-
-    export LLM_BASE_URL="https://<host>/v1"
-    export LLM_MODEL="<model-name>"
-    export LLM_API_KEY="<key>"
-    python llm/run_llm_labelling.py --mode issue --limit 5
-
-Decoding is greedy (temperature 0), one call per bug, no system prompt, no few-shot examples —
-the same settings as the study. The prompts are reproduced verbatim in llm/prompts.md.
+Set LLM_BASE_URL, LLM_MODEL, and LLM_API_KEY to rerun either study.
+Use --mode verify-issue-inputs to check Study B prompt hashes offline.
+Study B input reconstruction requires openpyxl.
 """
 import argparse
 import json
@@ -27,19 +14,6 @@ import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LAYERS = ["Host", "Client", "Server", "Transport"]
-
-P1_HEAD = (
-    "You are diagnosing a failure in a Model Context Protocol (MCP) pipeline, which connects an LLM "
-    "(Host) to external tools (Server) via a Client and a Transport layer. Given only the raw error / "
-    "SDK output below, predict the layer at which the fault ORIGINATED (the true root cause), not where "
-    "it is merely reported.\n"
-    "Choose exactly one of: Host, Client, Server, Transport.\n"
-    "If the output shows a successful result (no error) yet you suspect a silent logical fault, still "
-    "pick the layer you believe the fault originated in; if you genuinely cannot tell, pick the layer "
-    "the message points to.\n"
-    "Reply with a single token: Host, Client, Server, or Transport.\n\n"
-    "RAW SDK OUTPUT:\n"
-)
 
 P4_HEAD = (
     "You are diagnosing a fault in a Model Context Protocol (MCP) pipeline, which connects an LLM "
@@ -85,35 +59,68 @@ def parse_json(text):
         return {}
 
 
-def study_a(limit):
-    caps = sorted(os.listdir(os.path.join(ROOT, "repro", "captures")))
-    caps = [c for c in caps if c.endswith(".txt")][: limit or None]
-    for c in caps:
-        text = open(os.path.join(ROOT, "repro", "captures", c), encoding="utf-8").read()
-        raw = text.split("## captured return value", 1)[-1].split("##", 1)[0]
-        reply = call(P1_HEAD + raw.strip(), 24)
-        print(c, "->", parse_layer(reply))
+def read_jsonl(path):
+    with open(path, encoding="utf-8") as stream:
+        return [json.loads(line) for line in stream if line.strip()]
+
+
+def study_a(limit, condition):
+    folder = os.path.join(ROOT, "llm", "serverinfo_ablation")
+    with open(os.path.join(folder, "prompt.txt"), encoding="utf-8") as stream:
+        prefix = stream.read()
+    hints = {r["issue"]: r for r in read_jsonl(os.path.join(ROOT, "llm", "outputs", "studyA_hints_72.jsonl"))}
+    for rec in read_jsonl(os.path.join(folder, "inputs.jsonl"))[:limit or None]:
+        prompt = prefix + rec["surface_text"]
+        if condition != "baseline":
+            prompt += "\n\nDIAGNOSTIC GUIDANCE (direction only, does NOT state the answer):\n" + hints[rec["issue"]][condition]
+        reply = call(prompt, 16)
+        print(json.dumps({"issue": rec["issue"], "layer": parse_layer(reply), "raw": reply}))
+
+
+def study_b_inputs():
+    import hashlib
+    from openpyxl import load_workbook
+    from study_b_excerpt import excerpt
+
+    folder = os.path.join(ROOT, "llm", "outputs")
+    manifest = {r["issue"]: r for r in read_jsonl(os.path.join(folder, "studyB_339_input_manifest.jsonl"))}
+    workbook = load_workbook(os.path.join(ROOT, "data", "gh_issues_raw_2026-11-09.xlsx"), read_only=True)
+    try:
+        rows = {r[0]: (str(r[1]), str(r[12] or "")) for r in workbook["issues_raw"].values if r[0] in manifest}
+    finally:
+        workbook.close()
+    if len(rows) != len(manifest):
+        raise ValueError("Workbook does not cover the archived Study B inputs")
+    inputs = []
+    for issue, (title, body) in sorted(rows.items()):
+        prompt = (P4_HEAD + "ISSUE TITLE:\n" + title
+                  + "\n\nISSUE BODY (up to 4000 characters):\n" + body[:4000]
+                  + "\n\nMOST ERROR-RELEVANT EXCERPT:\n" + excerpt(body))
+        if hashlib.sha256(prompt.encode("utf-8")).hexdigest() != manifest[issue]["prompt_sha256"]:
+            raise ValueError(f"Study B prompt reconstruction mismatch for issue {issue}")
+        inputs.append((issue, prompt))
+    return inputs
 
 
 def study_b(limit):
-    path = os.path.join(ROOT, "llm", "outputs", "studyB_247.jsonl")
-    with open(path, encoding="utf-8") as f:
-        recs = [json.loads(line) for line in f if line.strip()]
-    for rec in recs[: limit or None]:
-        prompt = (P4_HEAD + "ISSUE TITLE:\n" + rec["title"]
-                  + "\n\nISSUE BODY (truncated):\n" + rec["body"]
-                  + "\n\nMOST ERROR-RELEVANT EXCERPT:\n" + rec.get("snippet", ""))
+    for issue, prompt in study_b_inputs()[:limit or None]:
         reply = call(prompt, 200)
-        got = parse_json(reply)
-        print(rec["issue"], "->", got.get("our_layer"), "| truth:", rec.get("true_origin_layer"))
+        print(json.dumps({"issue": issue, "layer": parse_json(reply).get("our_layer"), "raw": reply}))
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--mode", choices=["runtime", "issue"], required=True)
+    ap.add_argument("--mode", choices=["runtime", "issue", "verify-issue-inputs"], required=True)
     ap.add_argument("--limit", type=int, default=0)  # 0 = all
+    ap.add_argument("--condition", choices=["baseline", "rule_clue", "label_only"], default="baseline")
     a = ap.parse_args()
+    if a.mode == "verify-issue-inputs":
+        print(f"Reconstructed and checked {len(study_b_inputs())} Study B prompts.")
+        sys.exit()
     for k in ("LLM_BASE_URL", "LLM_MODEL", "LLM_API_KEY"):
         if k not in os.environ:
             sys.exit("missing environment variable: " + k)
-    (study_a if a.mode == "runtime" else study_b)(a.limit)
+    if a.mode == "runtime":
+        study_a(a.limit, a.condition)
+    else:
+        study_b(a.limit)

@@ -1,4 +1,6 @@
-# Prompts, verbatim
+# Historical prompts and current entry points
+
+This file preserves the earlier prompt documentation. For the frozen Study A inputs and exact baseline prompt used by the current runner, see [Study A inputs and prompt](serverinfo_ablation/README.md). For the current 339-input Study B run and the exact P4 request reconstruction, see [Study B](STUDY_B_339.md). The 247-case results below are historical.
 
 Four prompts were used. All calls are single-turn (`user` role only), no system message, no
 few-shot examples, `temperature=0`, one call per bug. The model never sees the ground-truth layer,

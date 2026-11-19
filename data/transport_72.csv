@@ -1,10 +1,10 @@
 issue,transport,evidence,harness_entry
-#76,stdio,external script uses stdio_client,issue_0076.py::repro_0076
+#76,stdio,external script uses stdio_client,issue_0076.py::main
 #79,stdio,"Multiple MCPClients cleaned up out of order; transport stdio (stdio_client / npx server-filesystem), per issue repro and captured output",issue_0079.py::repro_0079
 #110,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_110
 #234,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_234
 #244,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_244
-#326,stdio,external script uses stdio_client,issue_0326.py::repro_0326
+#326,stdio,external script uses stdio_client,issue_0326.py::run
 #348,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_348
 #409,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),issue_0409.py::repro_0409
 #417,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_417
@@ -15,7 +15,7 @@ issue,transport,evidence,harness_entry
 #698,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_698
 #743,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_743
 #891,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_891
-#915,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),issue_0915.py::repro_0915
+#915,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),issue_0915.py::main
 #922,stdio+sse,"4 client sessions created in a task group and closed in separate tasks; transports stdio and sse, per issue repro and captured output",issue_0922.py::repro_0922
 #1060,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_1060
 #1313,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),issue_1313.py::repro_1313
@@ -47,10 +47,10 @@ issue,transport,evidence,harness_entry
 #3341,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3341
 #3342,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3342
 #3351,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3351
-#3382,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),issue_3382.py::repro_3382
-#3384,not_applicable,"in-memory Client(MCPServer(""empty"")) session group test; no network transport (capture section 1 trigger code)",issue_3384.py::repro_3384
+#3382,streamable-http,trigger: streamable-http (StreamableHttpParameters//mcp),issue_3382.py::main
+#3384,not_applicable,"in-memory Client(MCPServer(""empty"")) session group test; no network transport (capture section 1 trigger code)",issue_3384.py::main
 #3385,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_3385
-#3434,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,issue_3434.py::repro_3434
+#3434,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,issue_3434.py::main
 #3549,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_race_lost_update
 #3554,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_bytes_output
 #3556,streamable-http,inline harness case => Case.__init__ default transport=streamable-http,repro_cases.py::b_terminate_reinit
