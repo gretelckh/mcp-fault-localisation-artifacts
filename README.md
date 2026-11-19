@@ -203,3 +203,7 @@ Terms of Service for the purpose of review.
 
 The authors' identity is not concealed by this repository. A permanent DOI will be minted after
 acceptance.
+
+### Study A serverInfo experiment
+
+The [serverInfo experiment](llm/serverinfo_ablation/README.md) includes the exact Study A input text, the baseline prompt, the 648 archived responses, and an offline verifier.

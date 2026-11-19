@@ -1,0 +1,6 @@
+You are diagnosing a failure in a Model Context Protocol (MCP) pipeline, which connects an LLM (Host) to external tools (Server) via a Client and a Transport layer. Given only the raw error / SDK output below, predict the layer at which the fault ORIGINATED (the true root cause), not where it is merely reported.
+Choose exactly one of: Host, Client, Server, Transport.
+If the output shows a successful result (no error) yet you suspect a silent logical fault, still pick the layer you believe the fault originated in; if you genuinely cannot tell, pick the layer the message points to.
+Reply with a single token: Host, Client, Server, or Transport.
+
+RAW SDK OUTPUT:
