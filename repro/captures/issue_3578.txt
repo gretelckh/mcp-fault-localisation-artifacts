@@ -8,6 +8,8 @@
 # console_log: not retained
 # raw_payload: raw/real_r_duplicate_tool_shadow.txt
 
+> **Evidence mismatch.** The capture below comes from a duplicate-tool registration test. The linked GitHub issue concerns an empty-component session group and was closed as a duplicate of #3384. See the [separate validation record](../validation/issue_3578.md) for the behavior reported in the issue.
+
 ## 1. What was run
 
 Harness entry: `run_real_http.py::b_duplicate_tool`
@@ -20,7 +22,7 @@ call_tool(calc, {'x': 1})
 
 ## 2. What the reporter described
 
-duplicate tool registration silently keeps first (production-hard) [bug #3578]
+The [linked issue](https://github.com/modelcontextprotocol/python-sdk/issues/3578) reports a KeyError when ClientSessionGroup connects to a server with no registered components. The benchmark trigger and output below concern duplicate tool registration.
 
 ## 3. What we captured
 

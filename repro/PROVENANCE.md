@@ -12,3 +12,5 @@ The 72 capture records preserve the study ledger. Some linked scripts were recon
 | #3434 | issue_3434.py::main | Recorded reconstruction |
 
 Review of the linked issue and capture identified material differences in examples including #234 (the reported error flag was false and the capture flag is true), #507 (the report shows a POST failure and the capture shows a GET failure), #3578 (the report concerns an empty component set and the capture concerns duplicate tool registration), and #3579 (the report concerns resource and prompt routing and the capture concerns a missing tool). The files remain as records of the released runs and classifications. The symbol and numerical checks establish artifact consistency. Issue-level equivalence requires separate evidence.
+
+[Local validation for #3578](validation/issue_3578.md) confirms the empty-component KeyError on mcp 2.2.0. The upstream tracker identifies #3578 as a duplicate of #3384. Both IDs remain in the scored ledger, and this check adds evidence for their shared mechanism.
