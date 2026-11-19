@@ -14,7 +14,7 @@ Every bug received the same predicted layer across conditions and repeats. All n
 
 ## Files
 
-- inputs.jsonl contains the historical Study A diagnostic text used in the experiment.
+- inputs.jsonl contains the Study A diagnostic text used in the experiment.
 - prompt.txt is the exact prompt prefix. The input text is appended directly.
 - responses.jsonl contains output text, parsed labels, reported model IDs, and SHA-256 hashes of the full prompts.
 - run.py verifies the archive or submits a new run. The ground truth comes from data/active_bugs_339.csv, for scoring.

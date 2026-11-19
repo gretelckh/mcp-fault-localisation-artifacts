@@ -16,4 +16,4 @@ Install openpyxl to verify each reconstructed input without querying the model:
 
     python llm/run_llm_labelling.py --mode verify-issue-inputs
 
-To rerun the 339 requests, use mode issue with LLM_BASE_URL, LLM_API_KEY, and LLM_MODEL configured locally. The old 247-case files and results are historical.
+To rerun the 339 requests, use mode issue with LLM_BASE_URL, LLM_API_KEY, and LLM_MODEL configured locally.

@@ -106,15 +106,9 @@ raised in the client or at the HTTP boundary, and 8 wrong-result cases where no 
 
 `llm/prompts.md` — the prompts, verbatim, with model, temperature and decoding parameters.
 
-`llm/outputs/studyA_arms_72.json` — Study A: three arms (`baseline`, `ruleclue`, `analyst`) over
-the 72 reproduced bugs, each with the predicted layer, the ranked layers and the raw scores.
+[Study A](llm/STUDY_A_CONTROL.md) includes the baseline, rule-clue and label-only conditions. The input text, prompt and serverInfo experiment are described in the [Study A experiment directory](llm/serverinfo_ablation/README.md).
 
-The [current Study B archive](llm/STUDY_B_339.md) covers 339 inputs and 338 scored single-layer bugs. The older 247-case files are retained as historical Study B records.
-
-The [Study A label-only control](llm/STUDY_A_CONTROL.md) contains both archived repeats and the hints used to build the Study A prompt conditions.
-
-`llm/outputs/clues_72.json` — the six fixed, layer-blind guidance paragraphs used by the `ruleclue`
-arm, one per evidence class.
+[Study B](llm/STUDY_B_339.md) covers 339 inputs and 338 scored single-layer bugs. Its release includes per-bug predictions, scores and a prompt verification manifest.
 
 `llm/run_llm_labelling.py` — a self-contained reference implementation of the labelling call
 (OpenAI-compatible endpoint, `temperature=0`), so the experiment can be re-run on another model.
@@ -135,6 +129,7 @@ arm, one per evidence class.
 | Why 83 evidence-poor reports are blocked | 16 / 7 / 14 / 15 / 9 / 19 / 3 | `data/blocking_gaps_83.csv` |
 | Study A, baseline | 41/72 = 56.9 %, non-Server 3/34 = 8.8 % | `llm/outputs/studyA_arms_72.json` |
 | Study A, rule-based clue | 46/72 = 63.9 %, non-Server 8/34 = 23.5 % | same |
+| Study A, label-only control | 38/72 = 52.8%; non-Server 0/34 = 0.0% | `llm/outputs/studyA_label_only_r2_72.jsonl`, `llm/outputs/studyA_label_only_r3_72.jsonl` |
 | Study B, issue-report text | 154/338 = 45.6%; non-Server 66/240 = 27.5% | `llm/outputs/studyB_scores_339.csv` |
 
 ---
